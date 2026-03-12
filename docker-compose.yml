@@ -1,0 +1,17 @@
+services:
+  frontend:
+    build: ./frontend
+    platform: linux/arm64 
+    ports:
+      - "5174:5174"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+    command: npm run dev -- --host
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app
+    command: cargo run
