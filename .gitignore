@@ -1,0 +1,15 @@
+# Rust / Cargo
+target/
+**/target/
+**/target/**
+
+# Cargo incremental compilation artifacts
+**/target/debug/incremental/
+**/target/release/incremental/
+
+# MacOS 系一時ファイル
+.DS_Store
+
+# Node.js / frontend
+node_modules/
+dist/
