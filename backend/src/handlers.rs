@@ -115,20 +115,17 @@ pub async fn translate_content(
         .map(|s| (s.id.clone(), s.english_text.clone()))
         .collect();
 
-    if !untranslated.is_empty() {
-        let texts: Vec<String> = untranslated.iter().map(|(_, t)| t.clone()).collect();
-        let translations = crate::ai::translate_sentences(&texts)
+    for (sentence_id, english_text) in &untranslated {
+        let translation = crate::ai::translate_single(english_text)
             .await
             .map_err(|e| (StatusCode::SERVICE_UNAVAILABLE, e))?;
 
-        for ((sentence_id, _), translation) in untranslated.iter().zip(translations.iter()) {
-            sqlx::query("UPDATE sentences SET japanese_text = ? WHERE id = ?")
-                .bind(translation)
-                .bind(sentence_id)
-                .execute(&pool)
-                .await
-                .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
-        }
+        sqlx::query("UPDATE sentences SET japanese_text = ? WHERE id = ?")
+            .bind(&translation)
+            .bind(sentence_id)
+            .execute(&pool)
+            .await
+            .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
     }
 
     let content = fetch_content(&pool, &id)

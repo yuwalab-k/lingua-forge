@@ -8,6 +8,8 @@
   let selectedContent = $state(null);
   let showModal = $state(false);
   let editingContent = $state(null);
+  // { contentId: string, type: 'translate'|'summarize', controller: AbortController } | null
+  let globalProcessing = $state(null);
 
   const existingSources = $derived(
     [...new Set(contents.map(c => c.source).filter(Boolean))]
@@ -73,12 +75,16 @@
 
   <main class="flex-1 overflow-hidden bg-stone-50">
     {#if selectedContent}
-      <ContentView
-        content={selectedContent}
-        onDelete={deleteContent}
-        onEdit={openEdit}
-        onUpdate={(updated) => { selectedContent = updated; }}
-      />
+      {#key selectedContent.id}
+        <ContentView
+          content={selectedContent}
+          onDelete={deleteContent}
+          onEdit={openEdit}
+          onUpdate={(updated) => { selectedContent = updated; }}
+          {globalProcessing}
+          onGlobalProcessingChange={(v) => { globalProcessing = v; }}
+        />
+      {/key}
     {:else}
       <div class="flex flex-col items-center justify-center h-full text-stone-300 select-none">
         <span class="material-symbols-rounded text-[56px] mb-4">auto_stories</span>

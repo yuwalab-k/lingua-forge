@@ -45,11 +45,9 @@ async fn generate(prompt: String, timeout_secs: u64) -> Result<String, String> {
     Ok(body.response.trim().to_string())
 }
 
-pub async fn translate_sentences(sentences: &[String]) -> Result<Vec<String>, String> {
-    let mut results = Vec::new();
-    for sentence in sentences {
-        let prompt = format!(
-            r#"あなたはプロの翻訳者です。以下の英文を自然な日本語口語に翻訳してください。
+pub async fn translate_single(sentence: &str) -> Result<String, String> {
+    let prompt = format!(
+        r#"あなたはプロの翻訳者です。以下の英文を自然な日本語口語に翻訳してください。
 
 ルール：
 - 直訳ではなく、日本語として自然な表現を使う
@@ -59,19 +57,16 @@ pub async fn translate_sentences(sentences: &[String]) -> Result<Vec<String>, St
 
 英文: {}
 日本語訳:"#,
-            sentence
-        );
-        let translation = generate(prompt, 60).await?;
-        // "日本語訳:" が含まれる場合は除去
-        let clean = translation
-            .trim_start_matches("日本語訳:")
-            .trim_start_matches("「")
-            .trim_end_matches("」")
-            .trim()
-            .to_string();
-        results.push(clean);
-    }
-    Ok(results)
+        sentence
+    );
+    let translation = generate(prompt, 300).await?;
+    let clean = translation
+        .trim_start_matches("日本語訳:")
+        .trim_start_matches("「")
+        .trim_end_matches("」")
+        .trim()
+        .to_string();
+    Ok(clean)
 }
 
 pub async fn summarize(sentences: &[String]) -> Result<String, String> {
@@ -91,7 +86,7 @@ pub async fn summarize(sentences: &[String]) -> Result<String, String> {
 日本語要約:"#,
         text
     );
-    let result = generate(prompt, 180).await?;
+    let result = generate(prompt, 300).await?;
     let clean = result
         .trim_start_matches("日本語要約:")
         .trim()
