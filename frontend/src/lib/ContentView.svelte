@@ -1,16 +1,27 @@
 <script>
   import SentenceCard from './SentenceCard.svelte';
 
-  let { content, onDelete, onEdit, onUpdate } = $props();
+  let { content, onDelete, onEdit, onUpdate, globalProcessing, onGlobalProcessingChange } = $props();
+
+  // ページ復帰時にグローバル状態から処理中フラグを復元
+  const _isThisPage = () => globalProcessing?.contentId === content.id;
 
   let showJapanese = $state(true);
   let activeSentenceId = $state(null);
-  let isTranslating = $state(false);
-  let isSummarizing = $state(false);
+  let isTranslating = $state(_isThisPage() && globalProcessing?.type === 'translate');
+  let isSummarizing = $state(_isThisPage() && globalProcessing?.type === 'summarize');
   let translateTotal = $state(0);
   let aiError = $state('');
-  let translateController = $state(null);
-  let summarizeController = $state(null);
+  let translateController = $state(
+    _isThisPage() && globalProcessing?.type === 'translate' ? globalProcessing.controller : null
+  );
+  let summarizeController = $state(
+    _isThisPage() && globalProcessing?.type === 'summarize' ? globalProcessing.controller : null
+  );
+
+  const isOtherPageProcessing = $derived(
+    globalProcessing !== null && globalProcessing.contentId !== content.id
+  );
 
   // まとめはDBから復元、なければ空
   let summary = $state(content.summary ?? '');
@@ -28,10 +39,12 @@
       ? content.sentences.length
       : content.sentences.filter(s => !s.japanese_text).length;
     aiError = '';
-    translateController = new AbortController();
+    const controller = new AbortController();
+    translateController = controller;
+    onGlobalProcessingChange({ contentId: content.id, type: 'translate', controller });
     try {
       const url = `http://localhost:3001/api/contents/${content.id}/translate${force ? '?force=true' : ''}`;
-      const res = await fetch(url, { method: 'POST', signal: translateController.signal });
+      const res = await fetch(url, { method: 'POST', signal: controller.signal });
       if (!res.ok) throw new Error(await res.text() || '翻訳に失敗しました');
       onUpdate(await res.json());
     } catch (e) {
@@ -40,6 +53,7 @@
       isTranslating = false;
       translateTotal = 0;
       translateController = null;
+      onGlobalProcessingChange(null);
     }
   }
 
@@ -47,10 +61,12 @@
     if (summary && !force) { showSummary = !showSummary; return; }
     isSummarizing = true;
     aiError = '';
-    summarizeController = new AbortController();
+    const controller = new AbortController();
+    summarizeController = controller;
+    onGlobalProcessingChange({ contentId: content.id, type: 'summarize', controller });
     try {
       const url = `http://localhost:3001/api/contents/${content.id}/summary${force ? '?force=true' : ''}`;
-      const res = await fetch(url, { method: 'POST', signal: summarizeController.signal });
+      const res = await fetch(url, { method: 'POST', signal: controller.signal });
       if (!res.ok) throw new Error(await res.text() || 'まとめの生成に失敗しました');
       const updated = await res.json();
       summary = updated.summary ?? '';
@@ -61,6 +77,7 @@
     } finally {
       isSummarizing = false;
       summarizeController = null;
+      onGlobalProcessingChange(null);
     }
   }
 
@@ -70,6 +87,12 @@
   }
 
   const hasUntranslated = $derived(content.sentences.some(s => !s.japanese_text));
+  const hasAnyTranslated = $derived(content.sentences.some(s => s.japanese_text));
+
+  // 翻訳ボタンのラベル: 全未翻訳→AI翻訳 / 一部翻訳済→翻訳再開 / 全翻訳済→再翻訳
+  const translateLabel = $derived(
+    !hasUntranslated ? '再翻訳' : hasAnyTranslated ? '翻訳再開' : 'AI翻訳'
+  );
 </script>
 
 <div class="flex flex-col h-full">
@@ -86,11 +109,11 @@
       <!-- AI翻訳 -->
       <button
         onclick={() => translate(!hasUntranslated)}
-        disabled={isTranslating || isSummarizing}
+        disabled={isTranslating || isSummarizing || isOtherPageProcessing}
         class="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md border transition-colors
           {isTranslating
             ? 'bg-stone-100 text-stone-400 border-stone-200 cursor-wait'
-            : isSummarizing
+            : (isSummarizing || isOtherPageProcessing)
               ? 'bg-stone-100 text-stone-300 border-stone-200 cursor-not-allowed opacity-50'
               : 'bg-white text-stone-600 border-stone-300 hover:border-stone-500 hover:text-stone-800'}"
       >
@@ -99,7 +122,7 @@
           翻訳中...
         {:else}
           <span class="material-symbols-rounded text-[14px]">translate</span>
-          {hasUntranslated ? 'AI翻訳' : '再翻訳'}
+          {translateLabel}
         {/if}
       </button>
 
@@ -110,11 +133,11 @@
           else if (!showSummary) showSummary = true;
           else summarize(true);
         }}
-        disabled={isTranslating || isSummarizing}
+        disabled={isTranslating || isSummarizing || isOtherPageProcessing}
         class="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md border transition-colors
           {isSummarizing
             ? 'bg-stone-100 text-stone-400 border-stone-200 cursor-wait'
-            : isTranslating
+            : (isTranslating || isOtherPageProcessing)
               ? 'bg-stone-100 text-stone-300 border-stone-200 cursor-not-allowed opacity-50'
               : showSummary
                 ? 'bg-stone-800 text-white border-stone-800 hover:bg-stone-700'
@@ -155,6 +178,23 @@
       </button>
     </div>
   </div>
+
+  <!-- 別ページ処理中バナー -->
+  {#if isOtherPageProcessing}
+    <div class="px-8 py-2.5 bg-amber-50 border-b border-amber-100 flex items-center gap-2.5 shrink-0">
+      <span class="material-symbols-rounded text-[16px] text-amber-400 animate-spin">progress_activity</span>
+      <p class="text-xs text-amber-600">
+        別ページで {globalProcessing?.type === 'translate' ? 'AI翻訳' : 'まとめ生成'} 処理中のため操作できません
+      </p>
+      <button
+        onclick={() => globalProcessing?.controller?.abort()}
+        class="ml-auto flex items-center gap-1 text-xs px-2.5 py-1 rounded-md border border-amber-200 text-amber-500 hover:bg-amber-100 hover:border-amber-300 transition-colors"
+      >
+        <span class="material-symbols-rounded text-[14px]">stop_circle</span>
+        中止
+      </button>
+    </div>
+  {/if}
 
   <!-- 処理中バナー -->
   {#if isTranslating || isSummarizing}
