@@ -1,47 +1,104 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import { onMount } from 'svelte';
+  import Sidebar from './lib/Sidebar.svelte';
+  import ContentView from './lib/ContentView.svelte';
+  import RegisterModal from './lib/RegisterModal.svelte';
+
+  let contents = $state([]);
+  let selectedContent = $state(null);
+  let showModal = $state(false);
+  let editingContent = $state(null);
+
+  const existingSources = $derived(
+    [...new Set(contents.map(c => c.source).filter(Boolean))]
+  );
+
+
+  onMount(async () => {
+    await loadContents();
+  });
+
+  async function loadContents() {
+    try {
+      const res = await fetch('http://localhost:3001/api/contents');
+      contents = await res.json();
+    } catch (e) {
+      console.error('Failed to load contents', e);
+    }
+  }
+
+  async function selectContent(id) {
+    try {
+      const res = await fetch(`http://localhost:3001/api/contents/${id}`);
+      selectedContent = await res.json();
+    } catch (e) {
+      console.error('Failed to load content', e);
+    }
+  }
+
+  async function deleteContent() {
+    if (!selectedContent) return;
+    if (!confirm(`「${selectedContent.title}」を削除しますか？`)) return;
+    try {
+      await fetch(`http://localhost:3001/api/contents/${selectedContent.id}`, {
+        method: 'DELETE',
+      });
+      selectedContent = null;
+      await loadContents();
+    } catch (e) {
+      console.error('Failed to delete content', e);
+    }
+  }
+
+  function handleSave(saved) {
+    showModal = false;
+    editingContent = null;
+    loadContents();
+    selectedContent = saved;
+  }
+
+  function openEdit() {
+    editingContent = selectedContent;
+    showModal = true;
+  }
 </script>
 
-<main>
-  <div>
-    <a href="https://vite.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
+<div class="flex h-screen overflow-hidden">
+  <Sidebar
+    {contents}
+    selectedId={selectedContent?.id}
+    onSelect={selectContent}
+    onAdd={() => { editingContent = null; showModal = true; }}
+  />
 
-  <div class="card">
-    <Counter />
-  </div>
+  <main class="flex-1 overflow-hidden bg-stone-50">
+    {#if selectedContent}
+      <ContentView
+        content={selectedContent}
+        onDelete={deleteContent}
+        onEdit={openEdit}
+        onUpdate={(updated) => { selectedContent = updated; }}
+      />
+    {:else}
+      <div class="flex flex-col items-center justify-center h-full text-stone-300 select-none">
+        <span class="material-symbols-rounded text-[56px] mb-4">auto_stories</span>
+        <p class="text-sm">左のサイドバーから教材を選んでください</p>
+        <button
+          onclick={() => { editingContent = null; showModal = true; }}
+          class="mt-4 text-xs text-stone-400 hover:text-stone-600 underline underline-offset-2 transition-colors"
+        >
+          または教材を新規追加する
+        </button>
+      </div>
+    {/if}
+  </main>
+</div>
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
+{#if showModal}
+  <RegisterModal
+    {existingSources}
+    content={editingContent}
+    onClose={() => { showModal = false; editingContent = null; }}
+    onSave={handleSave}
+  />
+{/if}
