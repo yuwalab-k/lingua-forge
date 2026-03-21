@@ -1,6 +1,11 @@
 <script>
   let { contents, selectedId, onSelect, onAdd, onManageSources } = $props();
 
+  function chapterNum(title) {
+    const m = title.match(/#(\d+)/);
+    return m ? parseInt(m[1], 10) : -1;
+  }
+
   // 出典別にグループ化
   const grouped = $derived((() => {
     const groups = {};
@@ -8,6 +13,10 @@
       const key = content.source || 'その他';
       if (!groups[key]) groups[key] = [];
       groups[key].push(content);
+    }
+    // グループ内をチャプター番号の降順でソート
+    for (const items of Object.values(groups)) {
+      items.sort((a, b) => chapterNum(b.title) - chapterNum(a.title));
     }
     return Object.entries(groups).sort(([a], [b]) => {
       if (a === 'その他') return 1;

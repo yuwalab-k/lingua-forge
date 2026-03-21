@@ -76,6 +76,8 @@ pub async fn create_content(
             sentence_index: index as i64,
             english_text: english.clone(),
             japanese_text: None,
+            text_completed: false,
+            speech_completed: false,
             created_at: now.clone(),
         });
     }

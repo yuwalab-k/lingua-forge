@@ -35,6 +35,8 @@ pub struct Sentence {
     pub sentence_index: i64,
     pub english_text: String,
     pub japanese_text: Option<String>,
+    pub text_completed: bool,
+    pub speech_completed: bool,
     pub created_at: String,
 }
 
@@ -69,6 +71,8 @@ pub struct ContentWithSentences {
 #[derive(Debug, Deserialize)]
 pub struct UpdateSentenceRequest {
     pub japanese_text: Option<String>,
+    pub text_completed: Option<bool>,
+    pub speech_completed: Option<bool>,
 }
 
 #[derive(Deserialize)]

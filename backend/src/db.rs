@@ -71,6 +71,14 @@ pub async fn migrate(pool: &SqlitePool) {
         .execute(pool)
         .await;
 
+    // 練習完了フラグを追加
+    let _ = sqlx::query("ALTER TABLE sentences ADD COLUMN text_completed INTEGER NOT NULL DEFAULT 0")
+        .execute(pool)
+        .await;
+    let _ = sqlx::query("ALTER TABLE sentences ADD COLUMN speech_completed INTEGER NOT NULL DEFAULT 0")
+        .execute(pool)
+        .await;
+
     // サーバー起動時に中断されたままのフラグをリセット
     let _ = sqlx::query("UPDATE contents SET is_translating = 0")
         .execute(pool)
