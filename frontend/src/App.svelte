@@ -3,21 +3,19 @@
   import Sidebar from './lib/Sidebar.svelte';
   import ContentView from './lib/ContentView.svelte';
   import RegisterModal from './lib/RegisterModal.svelte';
+  import SourceMasterModal from './lib/SourceMasterModal.svelte';
 
   let contents = $state([]);
+  let sourceMasters = $state([]);
   let selectedContent = $state(null);
   let showModal = $state(false);
   let editingContent = $state(null);
+  let showSourceModal = $state(false);
   // { contentId: string, type: 'translate'|'summarize', controller: AbortController } | null
   let globalProcessing = $state(null);
 
-  const existingSources = $derived(
-    [...new Set(contents.map(c => c.source).filter(Boolean))]
-  );
-
-
   onMount(async () => {
-    await loadContents();
+    await Promise.all([loadContents(), loadSourceMasters()]);
   });
 
   async function loadContents() {
@@ -26,6 +24,15 @@
       contents = await res.json();
     } catch (e) {
       console.error('Failed to load contents', e);
+    }
+  }
+
+  async function loadSourceMasters() {
+    try {
+      const res = await fetch('http://localhost:3001/api/sources');
+      sourceMasters = await res.json();
+    } catch (e) {
+      console.error('Failed to load sources', e);
     }
   }
 
@@ -63,6 +70,14 @@
     editingContent = selectedContent;
     showModal = true;
   }
+
+  async function handleSourcesChanged() {
+    await Promise.all([loadSourceMasters(), loadContents()]);
+    // 表示中のコンテンツも更新
+    if (selectedContent) {
+      await selectContent(selectedContent.id);
+    }
+  }
 </script>
 
 <div class="flex h-screen overflow-hidden">
@@ -71,6 +86,7 @@
     selectedId={selectedContent?.id}
     onSelect={selectContent}
     onAdd={() => { editingContent = null; showModal = true; }}
+    onManageSources={() => { showSourceModal = true; }}
   />
 
   <main class="flex-1 overflow-hidden bg-stone-50">
@@ -102,9 +118,17 @@
 
 {#if showModal}
   <RegisterModal
-    {existingSources}
+    {sourceMasters}
     content={editingContent}
     onClose={() => { showModal = false; editingContent = null; }}
     onSave={handleSave}
+  />
+{/if}
+
+{#if showSourceModal}
+  <SourceMasterModal
+    {sourceMasters}
+    onClose={() => { showSourceModal = false; }}
+    onChanged={handleSourcesChanged}
   />
 {/if}

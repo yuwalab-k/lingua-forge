@@ -1,10 +1,28 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, sqlx::FromRow)]
+pub struct SourceMaster {
+    pub id: String,
+    pub name: String,
+    pub created_at: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct CreateSourceMasterRequest {
+    pub name: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct UpdateSourceMasterRequest {
+    pub name: String,
+}
+
+#[derive(Debug, Serialize, Deserialize, sqlx::FromRow)]
 pub struct Content {
     pub id: String,
     pub title: String,
     pub source: Option<String>,
+    pub source_master_id: Option<String>,
     pub summary: Option<String>,
     pub created_at: String,
 }
@@ -22,14 +40,14 @@ pub struct Sentence {
 #[derive(Debug, Deserialize)]
 pub struct CreateContentRequest {
     pub title: String,
-    pub source: Option<String>,
+    pub source_master_id: Option<String>,
     pub english_text: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct UpdateContentRequest {
     pub title: String,
-    pub source: Option<String>,
+    pub source_master_id: Option<String>,
     pub english_text: String,
 }
 
@@ -38,6 +56,7 @@ pub struct ContentWithSentences {
     pub id: String,
     pub title: String,
     pub source: Option<String>,
+    pub source_master_id: Option<String>,
     pub summary: Option<String>,
     pub created_at: String,
     pub sentences: Vec<Sentence>,

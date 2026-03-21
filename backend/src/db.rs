@@ -42,4 +42,22 @@ pub async fn migrate(pool: &SqlitePool) {
     let _ = sqlx::query("ALTER TABLE contents ADD COLUMN summary TEXT")
         .execute(pool)
         .await;
+
+    // 出典マスタテーブル
+    sqlx::query(
+        "CREATE TABLE IF NOT EXISTS source_masters (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL UNIQUE,
+            translate_prompt TEXT,
+            created_at TEXT NOT NULL
+        )",
+    )
+    .execute(pool)
+    .await
+    .expect("Failed to create source_masters table");
+
+    // contents に source_master_id カラムを追加（存在する場合はエラーを無視）
+    let _ = sqlx::query("ALTER TABLE contents ADD COLUMN source_master_id TEXT")
+        .execute(pool)
+        .await;
 }

@@ -1,5 +1,5 @@
 <script>
-  let { contents, selectedId, onSelect, onAdd } = $props();
+  let { contents, selectedId, onSelect, onAdd, onManageSources } = $props();
 
   // 出典別にグループ化
   const grouped = $derived((() => {
@@ -27,13 +27,22 @@
   <!-- Header -->
   <div class="px-4 py-4 border-b border-stone-200 flex items-center justify-between shrink-0">
     <h1 class="text-sm font-semibold text-stone-800 tracking-wide">Lingua Forge</h1>
-    <button
-      onclick={onAdd}
-      class="w-7 h-7 flex items-center justify-center rounded-md text-stone-500 hover:bg-stone-100 hover:text-stone-800 transition-colors"
-      title="教材を追加"
-    >
-      <span class="material-symbols-rounded text-[18px]">add</span>
-    </button>
+    <div class="flex items-center gap-0.5">
+      <button
+        onclick={onManageSources}
+        class="w-7 h-7 flex items-center justify-center rounded-md text-stone-400 hover:bg-stone-100 hover:text-stone-700 transition-colors"
+        title="出典管理"
+      >
+        <span class="material-symbols-rounded text-[16px]">category</span>
+      </button>
+      <button
+        onclick={onAdd}
+        class="w-7 h-7 flex items-center justify-center rounded-md text-stone-500 hover:bg-stone-100 hover:text-stone-800 transition-colors"
+        title="教材を追加"
+      >
+        <span class="material-symbols-rounded text-[18px]">add</span>
+      </button>
+    </div>
   </div>
 
   <!-- Content list -->
