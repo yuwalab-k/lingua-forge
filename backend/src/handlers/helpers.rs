@@ -24,7 +24,7 @@ pub async fn fetch_content(pool: &SqlitePool, id: &str) -> Result<Content, sqlx:
 
 pub async fn fetch_sentences(pool: &SqlitePool, content_id: &str) -> Result<Vec<Sentence>, StatusCode> {
     sqlx::query_as::<_, Sentence>(
-        "SELECT id, content_id, sentence_index, english_text, japanese_text, created_at FROM sentences WHERE content_id = ? ORDER BY sentence_index",
+        "SELECT id, content_id, sentence_index, english_text, japanese_text, text_completed, speech_completed, created_at FROM sentences WHERE content_id = ? ORDER BY sentence_index",
     )
     .bind(content_id)
     .fetch_all(pool)

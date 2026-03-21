@@ -78,6 +78,7 @@
 
   async function handleSubmit() {
     if (!title.trim()) { error = 'タイトルは必須です'; return; }
+    if (!sourceMasterId) { error = '出典は必須です'; return; }
     if (!englishText.trim()) { error = '英文は必須です'; return; }
     error = '';
     isSubmitting = true;
@@ -143,12 +144,12 @@
       </div>
 
       <div>
-        <label class="block text-xs font-medium text-stone-600 mb-1.5">出典</label>
+        <label class="block text-xs font-medium text-stone-600 mb-1.5">出典 *</label>
         <select
           bind:value={sourceMasterId}
           class="w-full px-3 py-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-transparent bg-white"
         >
-          <option value="">未設定</option>
+          <option value="">選択してください</option>
           {#each sourceMasters as sm (sm.id)}
             <option value={sm.id}>{sm.name}</option>
           {/each}

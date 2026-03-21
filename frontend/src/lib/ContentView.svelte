@@ -1,4 +1,5 @@
 <script>
+  import { untrack } from 'svelte';
   import { API_BASE } from './config.js';
   import SentenceCard from './SentenceCard.svelte';
 
@@ -9,20 +10,68 @@
   let showJapanese = $state(true);
   let reproductionMode = $state(false);
   let activeSentenceId = $state(null);
-  let isTranslating = $state(_isThisPage() && globalProcessing?.type === 'translate');
-  let translateTotal = $state(0);
+  let isTranslating = $state(untrack(() => _isThisPage() && globalProcessing?.type === 'translate'));
+  let translateTotal = $state(untrack(() => _isThisPage() ? (globalProcessing?.translateTotal ?? 0) : 0));
   let translateDone = $state(0);
   let aiError = $state('');
-  let translateController = $state(
+  let translateController = $state(untrack(() =>
     _isThisPage() && globalProcessing?.type === 'translate' ? globalProcessing.controller : null
-  );
-  // ユーザーが中止操作をしたか（$effect の再トリガー防止用）
+  ));
   let userCancelled = $state(false);
   let pollInterval = null;
 
   function clearPoll() {
     if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
   }
+
+  // 翻訳中は常にポーリング（通常翻訳・リロード・ページ遷移後復帰すべてに対応）
+  $effect(() => {
+    if (!isTranslating || !_isThisPage() || pollInterval !== null) return;
+
+    const initDone = globalProcessing?.initialDone ?? 0;
+    const isForce = globalProcessing?.force ?? false;
+
+    pollInterval = setInterval(async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/contents/${content.id}`);
+        const updated = await res.json();
+        onUpdate(updated);
+        const nowDone = updated.sentences.filter(s => s.japanese_text).length;
+        translateDone = Math.max(0, nowDone - (isForce ? 0 : initDone));
+        if (!updated.is_translating && !userCancelled) {
+          clearPoll();
+          isTranslating = false;
+          translateTotal = 0;
+          translateDone = 0;
+          translateController = null;
+          onGlobalProcessingChange(null);
+        }
+      } catch {}
+    }, 2000);
+
+    return () => clearPoll();
+  });
+
+  // リロード後にバックエンドで翻訳中の場合、状態を復元する
+  $effect(() => {
+    if (!content.is_translating || isTranslating || userCancelled) return;
+    const untranslated = content.sentences.filter(s => !s.japanese_text).length;
+    const alreadyDone = content.sentences.filter(s => s.japanese_text).length;
+    isTranslating = true;
+    translateTotal = untranslated;
+    onGlobalProcessingChange({
+      contentId: content.id,
+      type: 'translate',
+      controller: null,
+      translateTotal: untranslated,
+      initialDone: alreadyDone,
+      force: false,
+    });
+  });
+
+  const isOtherPageProcessing = $derived(
+    globalProcessing !== null && globalProcessing.contentId !== content.id
+  );
 
   async function cancelTranslate() {
     userCancelled = true;
@@ -36,61 +85,26 @@
     onGlobalProcessingChange(null);
   }
 
-  // リロード後にバックエンドで翻訳中の場合、ポーリングで状態を同期する
-  $effect(() => {
-    if (!content.is_translating || isTranslating || userCancelled) return;
-
-    isTranslating = true;
-    translateTotal = content.sentences.filter(s => !s.japanese_text).length;
-    onGlobalProcessingChange({ contentId: content.id, type: 'translate', controller: null });
-
-    const initialDone = content.sentences.filter(s => s.japanese_text).length;
-    const interval = setInterval(async () => {
-      try {
-        const res = await fetch(`${API_BASE}/api/contents/${content.id}`);
-        const updated = await res.json();
-        onUpdate(updated);
-        translateDone = Math.max(0, updated.sentences.filter(s => s.japanese_text).length - initialDone);
-        if (!updated.is_translating) {
-          clearInterval(interval);
-          isTranslating = false;
-          translateTotal = 0;
-          translateDone = 0;
-          onGlobalProcessingChange(null);
-        }
-      } catch {}
-    }, 2000);
-
-    return () => clearInterval(interval);
-  });
-
-  const isOtherPageProcessing = $derived(
-    globalProcessing !== null && globalProcessing.contentId !== content.id
-  );
-
   async function translate(force = false) {
     userCancelled = false;
-    isTranslating = true;
-    const initialDone = content.sentences.filter(s => s.japanese_text).length;
-    translateTotal = force
+    const initialDone = force ? 0 : content.sentences.filter(s => s.japanese_text).length;
+    const total = force
       ? content.sentences.length
       : content.sentences.filter(s => !s.japanese_text).length;
+    isTranslating = true;
+    translateTotal = total;
     translateDone = 0;
     aiError = '';
     const controller = new AbortController();
     translateController = controller;
-    onGlobalProcessingChange({ contentId: content.id, type: 'translate', controller });
-
-    // 2秒ごとにポーリングして1文ずつリアルタイム反映
-    pollInterval = setInterval(async () => {
-      try {
-        const res = await fetch(`${API_BASE}/api/contents/${content.id}`);
-        const updated = await res.json();
-        onUpdate(updated);
-        const nowDone = updated.sentences.filter(s => s.japanese_text).length;
-        translateDone = Math.max(0, nowDone - (force ? 0 : initialDone));
-      } catch {}
-    }, 2000);
+    onGlobalProcessingChange({
+      contentId: content.id,
+      type: 'translate',
+      controller,
+      translateTotal: total,
+      initialDone,
+      force,
+    });
 
     try {
       const url = `${API_BASE}/api/contents/${content.id}/translate${force ? '?force=true' : ''}`;
@@ -122,6 +136,11 @@
   const translateLabel = $derived(
     !hasUntranslated ? '再翻訳' : hasAnyTranslated ? '翻訳再開' : 'AI翻訳'
   );
+
+  const practiceTotal = $derived(content.sentences.length);
+  const practiceCompletedCount = $derived(
+    content.sentences.filter(s => s.text_completed && s.speech_completed).length
+  );
 </script>
 
 <div class="flex flex-col h-full">
@@ -147,26 +166,30 @@
     </div>
 
     <div class="flex items-center gap-2">
-      <!-- AI翻訳 -->
-      <button
-        onclick={() => translate(!hasUntranslated)}
-        disabled={isTranslating || isOtherPageProcessing}
-        class="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md border transition-colors
-          {isTranslating
-            ? 'bg-stone-100 text-stone-400 border-stone-200 cursor-wait'
-            : isOtherPageProcessing
-              ? 'bg-stone-100 text-stone-300 border-stone-200 cursor-not-allowed opacity-50'
-              : 'bg-white text-stone-600 border-stone-300 hover:border-stone-500 hover:text-stone-800'}"
-      >
-        {#if isTranslating}
-          <span class="material-symbols-rounded text-[14px] animate-spin">progress_activity</span>
-          翻訳中...
-        {:else}
-          <span class="material-symbols-rounded text-[14px]">translate</span>
-          {translateLabel}
-        {/if}
-      </button>
+      <!-- AI翻訳（練習モード中は非表示） -->
+      {#if !reproductionMode}
+        <button
+          onclick={() => translate(!hasUntranslated)}
+          disabled={isTranslating || isOtherPageProcessing}
+          class="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md border transition-colors
+            {isTranslating
+              ? 'bg-stone-100 text-stone-400 border-stone-200 cursor-wait'
+              : isOtherPageProcessing
+                ? 'bg-stone-100 text-stone-300 border-stone-200 cursor-not-allowed opacity-50'
+                : 'bg-white text-stone-600 border-stone-300 hover:border-stone-500 hover:text-stone-800'}"
+        >
+          {#if isTranslating}
+            <span class="material-symbols-rounded text-[14px] animate-spin">progress_activity</span>
+            翻訳中...
+          {:else}
+            <span class="material-symbols-rounded text-[14px]">translate</span>
+            {translateLabel}
+          {/if}
+        </button>
+      {/if}
 
+      <!-- 日本語ON/OFF（練習モード中は非表示） -->
+      {#if !reproductionMode}
       <button
         onclick={() => { showJapanese = !showJapanese; }}
         class="flex items-center gap-1 text-xs px-3 py-1.5 rounded-md border transition-colors {showJapanese
@@ -176,6 +199,7 @@
         <span class="material-symbols-rounded text-[14px]">{showJapanese ? 'visibility' : 'visibility_off'}</span>
         日本語
       </button>
+      {/if}
 
       <button
         onclick={() => { reproductionMode = !reproductionMode; }}
@@ -235,6 +259,29 @@
         <span class="material-symbols-rounded text-[14px]">stop_circle</span>
         中止
       </button>
+    </div>
+  {/if}
+
+  <!-- 練習モードプログレス -->
+  {#if reproductionMode}
+    <div class="px-8 py-2.5 bg-amber-50 border-b border-amber-100 flex items-center gap-3 shrink-0">
+      <span class="material-symbols-rounded text-[16px] text-amber-500">edit_note</span>
+      <span class="text-xs text-amber-700 font-medium">練習モード</span>
+      <div class="flex items-center gap-2 ml-auto">
+        <span class="text-xs text-amber-600">{practiceCompletedCount} / {practiceTotal} 完了</span>
+        <div class="w-32 h-1.5 bg-amber-100 rounded-full overflow-hidden">
+          <div
+            class="h-full bg-emerald-400 rounded-full transition-all duration-500"
+            style="width: {practiceTotal > 0 ? (practiceCompletedCount / practiceTotal) * 100 : 0}%"
+          ></div>
+        </div>
+        {#if practiceCompletedCount === practiceTotal && practiceTotal > 0}
+          <span class="flex items-center gap-1 text-xs font-medium text-emerald-600">
+            <span class="material-symbols-rounded text-[14px]">celebration</span>
+            全完了！
+          </span>
+        {/if}
+      </div>
     </div>
   {/if}
 

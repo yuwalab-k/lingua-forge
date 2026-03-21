@@ -10,6 +10,11 @@ target/
 # MacOS 系一時ファイル
 .DS_Store
 
+# SQLite DB
+*.db
+*.db-shm
+*.db-wal
+
 # Node.js / frontend
 node_modules/
 dist/
