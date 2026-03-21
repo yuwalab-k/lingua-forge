@@ -23,13 +23,16 @@ async fn main() {
         .allow_headers(Any);
 
     let app = Router::new()
+        .route("/api/sources", get(handlers::list_sources))
+        .route("/api/sources", post(handlers::create_source))
+        .route("/api/sources/:id", axum::routing::put(handlers::update_source))
+        .route("/api/sources/:id", delete(handlers::delete_source))
         .route("/api/contents", get(handlers::list_contents))
         .route("/api/contents", post(handlers::create_content))
         .route("/api/contents/:id", get(handlers::get_content))
         .route("/api/contents/:id", delete(handlers::delete_content))
         .route("/api/contents/:id", axum::routing::put(handlers::update_content))
         .route("/api/contents/:id/translate", post(handlers::translate_content))
-        .route("/api/contents/:id/summary", post(handlers::summarize_content))
         .route("/api/sentences/:id", axum::routing::put(handlers::update_sentence))
         .layer(cors)
         .with_state(pool);

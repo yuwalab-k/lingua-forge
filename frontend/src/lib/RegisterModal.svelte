@@ -1,31 +1,19 @@
 <script>
-  let { onClose, onSave, existingSources = [], content = null } = $props();
+  let { onClose, onSave, sourceMasters = [], content = null } = $props();
 
   const isEdit = content !== null;
 
   let title = $state(content?.title ?? '');
-  let source = $state(content?.source ?? '未登録');
+  let sourceMasterId = $state(content?.source_master_id ?? '');
   let englishText = $state('');
   let isSubmitting = $state(false);
   let error = $state('');
-  let showSourceSuggestions = $state(false);
-
-  const sourceSuggestions = $derived(
-    existingSources.filter(s =>
-      s.toLowerCase().includes(source.toLowerCase()) && s !== source
-    )
-  );
 
   $effect(() => {
     if (isEdit && content?.sentences?.length) {
       englishText = content.sentences.map(s => s.english_text).join(' ');
     }
   });
-
-  function selectSource(s) {
-    source = s;
-    showSourceSuggestions = false;
-  }
 
   async function handleSubmit() {
     if (!title.trim()) { error = 'タイトルは必須です'; return; }
@@ -43,7 +31,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: title.trim(),
-          source: source.trim() || '未登録',
+          source_master_id: sourceMasterId || null,
           english_text: englishText.trim(),
         }),
       });
@@ -92,31 +80,24 @@
         />
       </div>
 
-      <!-- 出典（カスタムサジェスト付き） -->
-      <div class="relative">
+      <!-- 出典（ドロップダウン） -->
+      <div>
         <label class="block text-xs font-medium text-stone-600 mb-1.5">出典</label>
-        <input
-          type="text"
-          bind:value={source}
-          onfocus={() => { showSourceSuggestions = true; }}
-          onblur={() => { setTimeout(() => { showSourceSuggestions = false; }, 150); }}
-          placeholder="例: NPR, BBC, The Economist..."
-          class="w-full px-3 py-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-transparent"
-        />
-        {#if showSourceSuggestions && sourceSuggestions.length > 0}
-          <ul class="absolute z-10 w-full mt-1 bg-white border border-stone-200 rounded-md shadow-lg max-h-40 overflow-y-auto">
-            {#each sourceSuggestions as s}
-              <li>
-                <button
-                  type="button"
-                  onmousedown={() => selectSource(s)}
-                  class="w-full text-left px-3 py-2 text-sm text-stone-700 hover:bg-stone-50 transition-colors"
-                >
-                  {s}
-                </button>
-              </li>
-            {/each}
-          </ul>
+        <select
+          bind:value={sourceMasterId}
+          class="w-full px-3 py-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-transparent bg-white"
+        >
+          <option value="">未設定</option>
+          {#each sourceMasters as sm (sm.id)}
+            <option value={sm.id}>{sm.name}</option>
+          {/each}
+        </select>
+        {#if sourceMasters.length === 0}
+          <p class="mt-1 text-xs text-stone-400">
+            出典はサイドバーの
+            <span class="material-symbols-rounded text-[12px] align-middle">category</span>
+            から先に作成してください
+          </p>
         {/if}
       </div>
 

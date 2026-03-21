@@ -18,7 +18,7 @@ fn ollama_url() -> String {
 }
 
 fn ollama_model() -> String {
-    std::env::var("OLLAMA_MODEL").unwrap_or_else(|_| "llama3.2:3b".to_string())
+    std::env::var("OLLAMA_MODEL").unwrap_or_else(|_| "mitmul/plamo-2-translate".to_string())
 }
 
 async fn generate(prompt: String, timeout_secs: u64) -> Result<String, String> {
@@ -46,50 +46,7 @@ async fn generate(prompt: String, timeout_secs: u64) -> Result<String, String> {
 }
 
 pub async fn translate_single(sentence: &str) -> Result<String, String> {
-    let prompt = format!(
-        r#"あなたはプロの翻訳者です。以下の英文を自然な日本語口語に翻訳してください。
-
-ルール：
-- 直訳ではなく、日本語として自然な表現を使う
-- 会話文・話し言葉の場合はそのニュアンスを保つ
-- IT・テクノロジー用語はカタカナで（例: テザリング、ノートパソコン、スマホ）
-- 日本語訳のみ出力し、説明・注釈は不要
-
-英文: {}
-日本語訳:"#,
-        sentence
-    );
-    let translation = generate(prompt, 300).await?;
-    let clean = translation
-        .trim_start_matches("日本語訳:")
-        .trim_start_matches("「")
-        .trim_end_matches("」")
-        .trim()
-        .to_string();
-    Ok(clean)
-}
-
-pub async fn summarize(sentences: &[String]) -> Result<String, String> {
-    let text: String = sentences.join(" ").chars().take(8000).collect();
-    let prompt = format!(
-        r#"あなたはプロの編集者です。以下の英語テキストの内容を日本語で詳しく要約してください。
-
-ルール：
-- 400〜500文字程度で詳しくまとめる
-- トピック・主張・具体例・結論を含める
-- 箇条書きではなく、読みやすい文章で書く
-- 日本語の要約のみ出力し、説明や前置きは不要
-
-英語テキスト:
-{}
-
-日本語要約:"#,
-        text
-    );
-    let result = generate(prompt, 300).await?;
-    let clean = result
-        .trim_start_matches("日本語要約:")
-        .trim()
-        .to_string();
-    Ok(clean)
+    // plamo-2-translate は翻訳専用モデルのためシンプルなプロンプトで動作する
+    let prompt = format!("{}", sentence);
+    generate(prompt, 300).await
 }
