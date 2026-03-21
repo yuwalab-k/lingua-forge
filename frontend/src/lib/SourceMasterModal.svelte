@@ -1,4 +1,5 @@
 <script>
+  import { API_BASE } from './config.js';
   let { sourceMasters, onClose, onChanged } = $props();
 
   let editingId = $state(null); // 編集中の出典ID
@@ -35,8 +36,8 @@
     isSaving = true;
     try {
       const url = isNew
-        ? 'http://localhost:3001/api/sources'
-        : `http://localhost:3001/api/sources/${editingId}`;
+        ? `${API_BASE}/api/sources`
+        : `${API_BASE}/api/sources/${editingId}`;
       const res = await fetch(url, {
         method: isNew ? 'POST' : 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -56,7 +57,7 @@
     if (!confirm(`「${sm.name}」を削除しますか？\n紐づく教材の出典設定は解除されます。`)) return;
     isDeleting = true;
     try {
-      await fetch(`http://localhost:3001/api/sources/${sm.id}`, { method: 'DELETE' });
+      await fetch(`${API_BASE}/api/sources/${sm.id}`, { method: 'DELETE' });
       onChanged();
       if (editingId === sm.id) cancelEdit();
     } catch {
