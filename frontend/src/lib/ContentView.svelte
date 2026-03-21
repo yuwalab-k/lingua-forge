@@ -6,6 +6,7 @@
   const _isThisPage = () => globalProcessing?.contentId === content.id;
 
   let showJapanese = $state(true);
+  let reproductionMode = $state(false);
   let activeSentenceId = $state(null);
   let isTranslating = $state(_isThisPage() && globalProcessing?.type === 'translate');
   let translateTotal = $state(0);
@@ -13,12 +14,50 @@
   let translateController = $state(
     _isThisPage() && globalProcessing?.type === 'translate' ? globalProcessing.controller : null
   );
+  // ユーザーが中止操作をしたか（$effect の再トリガー防止用）
+  let userCancelled = $state(false);
+
+  async function cancelTranslate() {
+    userCancelled = true;
+    translateController?.abort();
+    await fetch(`http://localhost:3001/api/contents/${content.id}/translate`, { method: 'DELETE' });
+    isTranslating = false;
+    translateTotal = 0;
+    translateController = null;
+    onGlobalProcessingChange(null);
+  }
+
+  // リロード後にバックエンドで翻訳中の場合、ポーリングで状態を同期する
+  $effect(() => {
+    if (!content.is_translating || isTranslating || userCancelled) return;
+
+    isTranslating = true;
+    translateTotal = content.sentences.filter(s => !s.japanese_text).length;
+    onGlobalProcessingChange({ contentId: content.id, type: 'translate', controller: null });
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`http://localhost:3001/api/contents/${content.id}`);
+        const updated = await res.json();
+        onUpdate(updated);
+        if (!updated.is_translating) {
+          clearInterval(interval);
+          isTranslating = false;
+          translateTotal = 0;
+          onGlobalProcessingChange(null);
+        }
+      } catch {}
+    }, 3000);
+
+    return () => clearInterval(interval);
+  });
 
   const isOtherPageProcessing = $derived(
     globalProcessing !== null && globalProcessing.contentId !== content.id
   );
 
   async function translate(force = false) {
+    userCancelled = false;
     isTranslating = true;
     translateTotal = force
       ? content.sentences.length
@@ -35,10 +74,12 @@
     } catch (e) {
       if (e?.name !== 'AbortError') aiError = e?.message || 'エラーが発生しました';
     } finally {
-      isTranslating = false;
-      translateTotal = 0;
-      translateController = null;
-      onGlobalProcessingChange(null);
+      if (!userCancelled) {
+        isTranslating = false;
+        translateTotal = 0;
+        translateController = null;
+        onGlobalProcessingChange(null);
+      }
     }
   }
 
@@ -60,8 +101,20 @@
   <div class="px-8 py-4 border-b border-stone-200 bg-white flex items-center justify-between shrink-0">
     <div>
       <h2 class="text-base font-semibold text-stone-800">{content.title}</h2>
-      {#if content.source}
-        <p class="text-xs text-stone-400 mt-0.5">{content.source}</p>
+      {#if content.source || content.source_url}
+        <p class="inline-flex items-center gap-0.5 text-xs text-stone-400 mt-0.5">
+          {#if content.source}{content.source}{/if}
+          {#if content.source_url}
+            <a
+              href={content.source_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-stone-400 hover:text-stone-600 underline underline-offset-2 ml-1"
+            >{content.source_url.replace(/^https?:\/\//, '').slice(0, 40)}{content.source_url.length > 47 ? '…' : ''}
+            </a>
+            <span class="material-symbols-rounded text-[8px]">open_in_new</span>
+          {/if}
+        </p>
       {/if}
     </div>
 
@@ -88,11 +141,23 @@
 
       <button
         onclick={() => { showJapanese = !showJapanese; }}
-        class="text-xs px-3 py-1.5 rounded-md border transition-colors {showJapanese
+        class="flex items-center gap-1 text-xs px-3 py-1.5 rounded-md border transition-colors {showJapanese
           ? 'bg-stone-800 text-white border-stone-800'
           : 'bg-white text-stone-600 border-stone-300 hover:border-stone-400'}"
       >
-        日本語 {showJapanese ? 'ON' : 'OFF'}
+        <span class="material-symbols-rounded text-[14px]">{showJapanese ? 'visibility' : 'visibility_off'}</span>
+        日本語
+      </button>
+
+      <button
+        onclick={() => { reproductionMode = !reproductionMode; }}
+        class="flex items-center gap-1 text-xs px-3 py-1.5 rounded-md border transition-colors {reproductionMode
+          ? 'bg-amber-500 text-white border-amber-500'
+          : 'bg-white text-stone-600 border-stone-300 hover:border-stone-400'}"
+        title="日本語訳を見て英文を書く練習"
+      >
+        <span class="material-symbols-rounded text-[14px]">edit_note</span>
+        練習
       </button>
 
       <button
@@ -119,7 +184,7 @@
       <span class="material-symbols-rounded text-[16px] text-amber-400 animate-spin">progress_activity</span>
       <p class="text-xs text-amber-600">別ページで AI翻訳 処理中のため操作できません</p>
       <button
-        onclick={() => globalProcessing?.controller?.abort()}
+        onclick={cancelTranslate}
         class="ml-auto flex items-center gap-1 text-xs px-2.5 py-1 rounded-md border border-amber-200 text-amber-500 hover:bg-amber-100 hover:border-amber-300 transition-colors"
       >
         <span class="material-symbols-rounded text-[14px]">stop_circle</span>
@@ -136,7 +201,7 @@
         AI が翻訳処理中です（{translateTotal}文）
       </p>
       <button
-        onclick={() => translateController?.abort()}
+        onclick={cancelTranslate}
         class="ml-auto flex items-center gap-1 text-xs px-2.5 py-1 rounded-md border border-blue-200 text-blue-500 hover:bg-blue-100 hover:border-blue-300 transition-colors"
       >
         <span class="material-symbols-rounded text-[14px]">stop_circle</span>
@@ -160,6 +225,7 @@
       <SentenceCard
         {sentence}
         {showJapanese}
+        {reproductionMode}
         isActive={activeSentenceId === sentence.id}
         onClick={() => { activeSentenceId = sentence.id; }}
         onUpdate={handleSentenceUpdate}

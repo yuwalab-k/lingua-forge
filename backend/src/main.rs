@@ -33,6 +33,7 @@ async fn main() {
         .route("/api/contents/:id", delete(handlers::delete_content))
         .route("/api/contents/:id", axum::routing::put(handlers::update_content))
         .route("/api/contents/:id/translate", post(handlers::translate_content))
+        .route("/api/contents/:id/translate", delete(handlers::cancel_translate))
         .route("/api/sentences/:id", axum::routing::put(handlers::update_sentence))
         .layer(cors)
         .with_state(pool);

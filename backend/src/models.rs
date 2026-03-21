@@ -24,6 +24,8 @@ pub struct Content {
     pub source: Option<String>,
     pub source_master_id: Option<String>,
     pub summary: Option<String>,
+    pub source_url: Option<String>,
+    pub is_translating: bool,
     pub created_at: String,
 }
 
@@ -41,6 +43,7 @@ pub struct Sentence {
 pub struct CreateContentRequest {
     pub title: String,
     pub source_master_id: Option<String>,
+    pub source_url: Option<String>,
     pub english_text: String,
 }
 
@@ -48,6 +51,7 @@ pub struct CreateContentRequest {
 pub struct UpdateContentRequest {
     pub title: String,
     pub source_master_id: Option<String>,
+    pub source_url: Option<String>,
     pub english_text: String,
 }
 
@@ -58,6 +62,8 @@ pub struct ContentWithSentences {
     pub source: Option<String>,
     pub source_master_id: Option<String>,
     pub summary: Option<String>,
+    pub source_url: Option<String>,
+    pub is_translating: bool,
     pub created_at: String,
     pub sentences: Vec<Sentence>,
 }

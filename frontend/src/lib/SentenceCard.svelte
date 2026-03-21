@@ -1,5 +1,25 @@
 <script>
-  let { sentence, showJapanese, isActive, onClick, onUpdate } = $props();
+  let { sentence, showJapanese, reproductionMode = false, isActive, onClick, onUpdate } = $props();
+
+  let reproInput = $state('');
+  let reproRevealed = $state(false);
+  let reproScore = $state(null);
+
+  $effect(() => {
+    if (!reproductionMode) {
+      reproInput = '';
+      reproRevealed = false;
+      reproScore = null;
+    }
+  });
+
+  function submitRepro() {
+    if (!reproInput.trim()) return;
+    const original = sentence.english_text.toLowerCase().replace(/[.,!?]/g, '').trim();
+    const input = reproInput.toLowerCase().replace(/[.,!?]/g, '').trim();
+    reproScore = calcScore(original, input);
+    reproRevealed = true;
+  }
 
   let isPlaying = $state(false);
   let speechResult = $state('');
@@ -113,53 +133,101 @@
     </span>
 
     <div class="flex-1 min-w-0">
-      <p class="text-stone-800 leading-relaxed text-[15px]">{sentence.english_text}</p>
+      {#if reproductionMode}
+        <!-- リプロダクションモード -->
+        {#if sentence.japanese_text}
+          <p class="text-stone-500 text-sm leading-relaxed mb-2">{sentence.japanese_text}</p>
+        {:else}
+          <p class="text-stone-300 text-sm mb-2">（日本語訳なし）</p>
+        {/if}
 
-      {#if showJapanese}
-        {#if isEditing}
-          <!-- インライン編集 -->
-          <div class="mt-2" onclick={(e) => e.stopPropagation()} role="presentation">
-            <textarea
-              bind:value={editText}
-              onkeydown={handleEditKeydown}
-              rows="2"
-              class="w-full px-2 py-1.5 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400 resize-none leading-relaxed text-stone-700"
-              placeholder="日本語訳を入力..."
-            ></textarea>
-            <div class="flex gap-1.5 mt-1">
-              <button
-                onclick={(e) => { e.stopPropagation(); saveEdit(); }}
-                class="text-xs px-2.5 py-1 bg-stone-800 text-white rounded-md hover:bg-stone-700 transition-colors"
-              >
-                保存
-              </button>
-              <button
-                onclick={(e) => { e.stopPropagation(); cancelEdit(); }}
-                class="text-xs px-2.5 py-1 border border-stone-300 text-stone-500 rounded-md hover:bg-stone-50 transition-colors"
-              >
-                キャンセル
-              </button>
-            </div>
-          </div>
-        {:else if sentence.japanese_text}
-          <div class="mt-1.5 flex items-start gap-1 group/jp">
-            <p class="text-stone-400 text-sm leading-relaxed flex-1">{sentence.japanese_text}</p>
+        {#if reproRevealed}
+          <!-- 回答後: 正解表示 -->
+          <p class="text-stone-800 leading-relaxed text-[15px] mb-1">{sentence.english_text}</p>
+          <div class="flex items-center gap-2 text-xs" onclick={(e) => e.stopPropagation()} role="presentation">
+            <span class="text-stone-400">あなたの回答:</span>
+            <span class="text-stone-600">{reproInput}</span>
+            {#if reproScore !== null}
+              <span class="font-semibold {reproScore >= 80 ? 'text-emerald-500' : reproScore >= 50 ? 'text-amber-500' : 'text-rose-500'}">
+                {reproScore}%
+              </span>
+            {/if}
             <button
-              onclick={(e) => { e.stopPropagation(); startEdit(); }}
-              class="shrink-0 opacity-0 group-hover/jp:opacity-100 transition-opacity mt-0.5 text-stone-300 hover:text-stone-500"
-              title="翻訳を編集"
+              onclick={(e) => { e.stopPropagation(); reproInput = ''; reproRevealed = false; reproScore = null; }}
+              class="ml-1 text-stone-400 hover:text-stone-600"
             >
-              <span class="material-symbols-rounded text-[14px]">edit</span>
+              <span class="material-symbols-rounded text-[14px]">refresh</span>
             </button>
           </div>
         {:else}
-          <button
-            onclick={(e) => { e.stopPropagation(); startEdit(); }}
-            class="mt-1.5 text-xs text-stone-300 hover:text-stone-500 transition-colors flex items-center gap-1"
-          >
-            <span class="material-symbols-rounded text-[13px]">add</span>
-            翻訳を追加
-          </button>
+          <!-- 回答前: 入力欄 -->
+          <div onclick={(e) => e.stopPropagation()} role="presentation">
+            <textarea
+              bind:value={reproInput}
+              onkeydown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitRepro(); } }}
+              rows="2"
+              placeholder="英文を入力... (Enter で答え合わせ)"
+              class="w-full px-2 py-1.5 text-sm border border-amber-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 resize-none leading-relaxed text-stone-800 bg-amber-50"
+            ></textarea>
+            <button
+              onclick={(e) => { e.stopPropagation(); submitRepro(); }}
+              disabled={!reproInput.trim()}
+              class="mt-1 text-xs px-3 py-1 bg-amber-500 text-white rounded-md hover:bg-amber-600 transition-colors disabled:opacity-40"
+            >
+              答え合わせ
+            </button>
+          </div>
+        {/if}
+      {:else}
+        <!-- 通常モード -->
+        <p class="text-stone-800 leading-relaxed text-[15px]">{sentence.english_text}</p>
+
+        {#if showJapanese}
+          {#if isEditing}
+            <!-- インライン編集 -->
+            <div class="mt-2" onclick={(e) => e.stopPropagation()} role="presentation">
+              <textarea
+                bind:value={editText}
+                onkeydown={handleEditKeydown}
+                rows="2"
+                class="w-full px-2 py-1.5 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400 resize-none leading-relaxed text-stone-700"
+                placeholder="日本語訳を入力..."
+              ></textarea>
+              <div class="flex gap-1.5 mt-1">
+                <button
+                  onclick={(e) => { e.stopPropagation(); saveEdit(); }}
+                  class="text-xs px-2.5 py-1 bg-stone-800 text-white rounded-md hover:bg-stone-700 transition-colors"
+                >
+                  保存
+                </button>
+                <button
+                  onclick={(e) => { e.stopPropagation(); cancelEdit(); }}
+                  class="text-xs px-2.5 py-1 border border-stone-300 text-stone-500 rounded-md hover:bg-stone-50 transition-colors"
+                >
+                  キャンセル
+                </button>
+              </div>
+            </div>
+          {:else if sentence.japanese_text}
+            <div class="mt-1.5 flex items-start gap-1 group/jp">
+              <p class="text-stone-400 text-sm leading-relaxed flex-1">{sentence.japanese_text}</p>
+              <button
+                onclick={(e) => { e.stopPropagation(); startEdit(); }}
+                class="shrink-0 opacity-0 group-hover/jp:opacity-100 transition-opacity mt-0.5 text-stone-300 hover:text-stone-500"
+                title="翻訳を編集"
+              >
+                <span class="material-symbols-rounded text-[14px]">edit</span>
+              </button>
+            </div>
+          {:else}
+            <button
+              onclick={(e) => { e.stopPropagation(); startEdit(); }}
+              class="mt-1.5 text-xs text-stone-300 hover:text-stone-500 transition-colors flex items-center gap-1"
+            >
+              <span class="material-symbols-rounded text-[13px]">add</span>
+              翻訳を追加
+            </button>
+          {/if}
         {/if}
       {/if}
 

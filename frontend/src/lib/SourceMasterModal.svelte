@@ -1,23 +1,30 @@
 <script>
   let { sourceMasters, onClose, onChanged } = $props();
 
-  let selected = $state(null);
-  let isNew = $state(false);
+  let editingId = $state(null); // 編集中の出典ID
+  let isNew = $state(false);    // 新規追加モード
   let name = $state('');
   let isSaving = $state(false);
   let isDeleting = $state(false);
   let error = $state('');
 
-  function selectSource(sm) {
-    selected = sm;
+  function startEdit(sm) {
+    editingId = sm.id;
     isNew = false;
     name = sm.name;
     error = '';
   }
 
   function startNew() {
-    selected = null;
+    editingId = null;
     isNew = true;
+    name = '';
+    error = '';
+  }
+
+  function cancelEdit() {
+    editingId = null;
+    isNew = false;
     name = '';
     error = '';
   }
@@ -29,16 +36,15 @@
     try {
       const url = isNew
         ? 'http://localhost:3001/api/sources'
-        : `http://localhost:3001/api/sources/${selected.id}`;
+        : `http://localhost:3001/api/sources/${editingId}`;
       const res = await fetch(url, {
         method: isNew ? 'POST' : 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name.trim() }),
       });
       if (!res.ok) throw new Error('保存に失敗しました');
-      const saved = await res.json();
       onChanged();
-      selectSource(saved);
+      cancelEdit();
     } catch (e) {
       error = e?.message || 'エラーが発生しました';
     } finally {
@@ -46,16 +52,13 @@
     }
   }
 
-  async function handleDelete() {
-    if (!selected) return;
-    if (!confirm(`「${selected.name}」を削除しますか？\n紐づく教材の出典設定は解除されます。`)) return;
+  async function handleDelete(sm) {
+    if (!confirm(`「${sm.name}」を削除しますか？\n紐づく教材の出典設定は解除されます。`)) return;
     isDeleting = true;
     try {
-      await fetch(`http://localhost:3001/api/sources/${selected.id}`, { method: 'DELETE' });
+      await fetch(`http://localhost:3001/api/sources/${sm.id}`, { method: 'DELETE' });
       onChanged();
-      selected = null;
-      isNew = false;
-      name = '';
+      if (editingId === sm.id) cancelEdit();
     } catch {
       error = '削除に失敗しました';
     } finally {
@@ -87,60 +90,99 @@
     </div>
 
     <!-- List -->
-    <div class="px-6 py-4 space-y-1 max-h-60 overflow-y-auto">
-      {#each sourceMasters as sm (sm.id)}
-        <button
-          onclick={() => selectSource(sm)}
-          class="w-full text-left px-3 py-2 rounded-md text-sm transition-colors {selected?.id === sm.id && !isNew
-            ? 'bg-stone-100 text-stone-900 font-medium'
-            : 'text-stone-600 hover:bg-stone-50'}"
-        >
-          {sm.name}
-        </button>
-      {/each}
+    <div class="px-6 py-4 space-y-1 max-h-72 overflow-y-auto">
       {#if sourceMasters.length === 0 && !isNew}
         <p class="text-xs text-stone-400 text-center py-4">出典がありません</p>
       {/if}
+
+      {#each sourceMasters as sm (sm.id)}
+        <div class="group">
+          {#if editingId === sm.id}
+            <!-- インライン編集 -->
+            <div class="flex gap-2 py-1">
+              <input
+                type="text"
+                bind:value={name}
+                onkeydown={(e) => { if (e.key === 'Enter') handleSave(); if (e.key === 'Escape') cancelEdit(); }}
+                class="flex-1 px-3 py-1.5 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400"
+              />
+              <button
+                onclick={handleSave}
+                disabled={isSaving || !name.trim()}
+                class="px-3 py-1.5 text-xs bg-stone-800 text-white rounded-md hover:bg-stone-700 transition-colors disabled:opacity-40"
+              >
+                {isSaving ? '保存中...' : '保存'}
+              </button>
+              <button
+                onclick={cancelEdit}
+                class="px-3 py-1.5 text-xs border border-stone-200 text-stone-500 rounded-md hover:bg-stone-50 transition-colors"
+              >
+                キャンセル
+              </button>
+            </div>
+          {:else}
+            <!-- 通常表示 -->
+            <div class="flex items-center px-3 py-2 rounded-md hover:bg-stone-50 transition-colors">
+              <span class="flex-1 text-sm text-stone-700">{sm.name}</span>
+              <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  onclick={() => startEdit(sm)}
+                  class="w-7 h-7 flex items-center justify-center rounded text-stone-400 hover:text-stone-700 hover:bg-stone-200 transition-colors"
+                  title="編集"
+                >
+                  <span class="material-symbols-rounded text-[15px]">edit</span>
+                </button>
+                <button
+                  onclick={() => handleDelete(sm)}
+                  disabled={isDeleting}
+                  class="w-7 h-7 flex items-center justify-center rounded text-stone-400 hover:text-rose-500 hover:bg-rose-50 transition-colors disabled:opacity-40"
+                  title="削除"
+                >
+                  <span class="material-symbols-rounded text-[15px]">delete</span>
+                </button>
+              </div>
+            </div>
+          {/if}
+        </div>
+      {/each}
+
+      <!-- 新規追加フォーム -->
+      {#if isNew}
+        <div class="flex gap-2 pt-1">
+          <input
+            type="text"
+            bind:value={name}
+            placeholder="新しい出典名"
+            onkeydown={(e) => { if (e.key === 'Enter') handleSave(); if (e.key === 'Escape') cancelEdit(); }}
+            class="flex-1 px-3 py-1.5 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400"
+          />
+          <button
+            onclick={handleSave}
+            disabled={isSaving || !name.trim()}
+            class="px-3 py-1.5 text-xs bg-stone-800 text-white rounded-md hover:bg-stone-700 transition-colors disabled:opacity-40"
+          >
+            {isSaving ? '追加中...' : '追加'}
+          </button>
+          <button
+            onclick={cancelEdit}
+            class="px-3 py-1.5 text-xs border border-stone-200 text-stone-500 rounded-md hover:bg-stone-50 transition-colors"
+          >
+            キャンセル
+          </button>
+        </div>
+      {/if}
     </div>
 
-    <!-- Form -->
-    <div class="px-6 pb-6 border-t border-stone-100 pt-4 space-y-3">
-      <div class="flex gap-2">
-        <input
-          type="text"
-          bind:value={name}
-          placeholder={isNew ? '新しい出典名' : '出典名を編集'}
-          class="flex-1 px-3 py-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-transparent"
-        />
-        <button
-          onclick={handleSave}
-          disabled={isSaving || !name.trim()}
-          class="px-4 py-2 text-sm bg-stone-800 text-white rounded-md hover:bg-stone-700 transition-colors disabled:opacity-40"
-        >
-          {isSaving ? '保存中...' : (isNew ? '追加' : '保存')}
-        </button>
-      </div>
-
-      <div class="flex items-center justify-between">
-        <button
-          onclick={startNew}
-          class="flex items-center gap-1 text-xs text-stone-400 hover:text-stone-600 transition-colors"
-        >
-          <span class="material-symbols-rounded text-[14px]">add</span>
-          新規追加
-        </button>
-        {#if selected && !isNew}
-          <button
-            onclick={handleDelete}
-            disabled={isDeleting}
-            class="flex items-center gap-1 text-xs text-rose-400 hover:text-rose-600 transition-colors disabled:opacity-50"
-          >
-            <span class="material-symbols-rounded text-[14px]">delete</span>
-            削除
-          </button>
-        {/if}
-      </div>
-
+    <!-- Footer -->
+    <div class="px-6 py-4 border-t border-stone-100 flex items-center justify-between">
+      <button
+        onclick={startNew}
+        disabled={isNew}
+        class="flex items-center gap-1 text-xs text-stone-500 hover:text-stone-800 transition-colors disabled:opacity-40"
+      >
+        <span class="material-symbols-rounded text-[14px]">add</span>
+        新規追加
+      </button>
       {#if error}
         <p class="text-xs text-rose-500">{error}</p>
       {/if}
