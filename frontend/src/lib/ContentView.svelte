@@ -1,4 +1,5 @@
 <script>
+  import { API_BASE } from './config.js';
   import SentenceCard from './SentenceCard.svelte';
 
   let { content, onDelete, onEdit, onUpdate, globalProcessing, onGlobalProcessingChange } = $props();
@@ -10,19 +11,27 @@
   let activeSentenceId = $state(null);
   let isTranslating = $state(_isThisPage() && globalProcessing?.type === 'translate');
   let translateTotal = $state(0);
+  let translateDone = $state(0);
   let aiError = $state('');
   let translateController = $state(
     _isThisPage() && globalProcessing?.type === 'translate' ? globalProcessing.controller : null
   );
   // ユーザーが中止操作をしたか（$effect の再トリガー防止用）
   let userCancelled = $state(false);
+  let pollInterval = null;
+
+  function clearPoll() {
+    if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+  }
 
   async function cancelTranslate() {
     userCancelled = true;
+    clearPoll();
     translateController?.abort();
-    await fetch(`http://localhost:3001/api/contents/${content.id}/translate`, { method: 'DELETE' });
+    await fetch(`${API_BASE}/api/contents/${content.id}/translate`, { method: 'DELETE' });
     isTranslating = false;
     translateTotal = 0;
+    translateDone = 0;
     translateController = null;
     onGlobalProcessingChange(null);
   }
@@ -35,19 +44,22 @@
     translateTotal = content.sentences.filter(s => !s.japanese_text).length;
     onGlobalProcessingChange({ contentId: content.id, type: 'translate', controller: null });
 
+    const initialDone = content.sentences.filter(s => s.japanese_text).length;
     const interval = setInterval(async () => {
       try {
-        const res = await fetch(`http://localhost:3001/api/contents/${content.id}`);
+        const res = await fetch(`${API_BASE}/api/contents/${content.id}`);
         const updated = await res.json();
         onUpdate(updated);
+        translateDone = Math.max(0, updated.sentences.filter(s => s.japanese_text).length - initialDone);
         if (!updated.is_translating) {
           clearInterval(interval);
           isTranslating = false;
           translateTotal = 0;
+          translateDone = 0;
           onGlobalProcessingChange(null);
         }
       } catch {}
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
   });
@@ -59,24 +71,40 @@
   async function translate(force = false) {
     userCancelled = false;
     isTranslating = true;
+    const initialDone = content.sentences.filter(s => s.japanese_text).length;
     translateTotal = force
       ? content.sentences.length
       : content.sentences.filter(s => !s.japanese_text).length;
+    translateDone = 0;
     aiError = '';
     const controller = new AbortController();
     translateController = controller;
     onGlobalProcessingChange({ contentId: content.id, type: 'translate', controller });
+
+    // 2秒ごとにポーリングして1文ずつリアルタイム反映
+    pollInterval = setInterval(async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/contents/${content.id}`);
+        const updated = await res.json();
+        onUpdate(updated);
+        const nowDone = updated.sentences.filter(s => s.japanese_text).length;
+        translateDone = Math.max(0, nowDone - (force ? 0 : initialDone));
+      } catch {}
+    }, 2000);
+
     try {
-      const url = `http://localhost:3001/api/contents/${content.id}/translate${force ? '?force=true' : ''}`;
+      const url = `${API_BASE}/api/contents/${content.id}/translate${force ? '?force=true' : ''}`;
       const res = await fetch(url, { method: 'POST', signal: controller.signal });
       if (!res.ok) throw new Error(await res.text() || '翻訳に失敗しました');
       onUpdate(await res.json());
     } catch (e) {
       if (e?.name !== 'AbortError') aiError = e?.message || 'エラーが発生しました';
     } finally {
+      clearPoll();
       if (!userCancelled) {
         isTranslating = false;
         translateTotal = 0;
+        translateDone = 0;
         translateController = null;
         onGlobalProcessingChange(null);
       }
@@ -198,7 +226,7 @@
     <div class="px-8 py-2.5 bg-blue-50 border-b border-blue-100 flex items-center gap-2.5 shrink-0">
       <span class="material-symbols-rounded text-[16px] text-blue-400 animate-spin">progress_activity</span>
       <p class="text-xs text-blue-600">
-        AI が翻訳処理中です（{translateTotal}文）
+        AI が翻訳処理中です（{translateDone}/{translateTotal}文）
       </p>
       <button
         onclick={cancelTranslate}

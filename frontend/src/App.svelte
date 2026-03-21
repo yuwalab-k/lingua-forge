@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { API_BASE } from './lib/config.js';
   import Sidebar from './lib/Sidebar.svelte';
   import ContentView from './lib/ContentView.svelte';
   import RegisterModal from './lib/RegisterModal.svelte';
@@ -20,7 +21,7 @@
 
   async function loadContents() {
     try {
-      const res = await fetch('http://localhost:3001/api/contents');
+      const res = await fetch(`${API_BASE}/api/contents`);
       contents = await res.json();
     } catch (e) {
       console.error('Failed to load contents', e);
@@ -29,7 +30,7 @@
 
   async function loadSourceMasters() {
     try {
-      const res = await fetch('http://localhost:3001/api/sources');
+      const res = await fetch(`${API_BASE}/api/sources`);
       sourceMasters = await res.json();
     } catch (e) {
       console.error('Failed to load sources', e);
@@ -38,7 +39,7 @@
 
   async function selectContent(id) {
     try {
-      const res = await fetch(`http://localhost:3001/api/contents/${id}`);
+      const res = await fetch(`${API_BASE}/api/contents/${id}`);
       selectedContent = await res.json();
     } catch (e) {
       console.error('Failed to load content', e);
@@ -49,7 +50,7 @@
     if (!selectedContent) return;
     if (!confirm(`「${selectedContent.title}」を削除しますか？`)) return;
     try {
-      await fetch(`http://localhost:3001/api/contents/${selectedContent.id}`, {
+      await fetch(`${API_BASE}/api/contents/${selectedContent.id}`, {
         method: 'DELETE',
       });
       selectedContent = null;

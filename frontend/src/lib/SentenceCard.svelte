@@ -1,4 +1,5 @@
 <script>
+  import { API_BASE } from './config.js';
   let { sentence, showJapanese, reproductionMode = false, isActive, onClick, onUpdate } = $props();
 
   let reproInput = $state('');
@@ -39,7 +40,7 @@
 
   async function saveEdit() {
     try {
-      const res = await fetch(`http://localhost:3001/api/sentences/${sentence.id}`, {
+      const res = await fetch(`${API_BASE}/api/sentences/${sentence.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ japanese_text: editText.trim() || null }),

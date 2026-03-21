@@ -1,4 +1,5 @@
 <script>
+  import { API_BASE, TRANSCRIBE_BASE } from './config.js';
   let { onClose, onSave, sourceMasters = [], content = null } = $props();
 
   const isEdit = content !== null;
@@ -42,7 +43,7 @@
     try {
       let res;
       if (transcribeUrl) {
-        res = await fetch('http://localhost:3003/transcribe/url', {
+        res = await fetch(`${TRANSCRIBE_BASE}/transcribe/url`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ url: transcribeUrl }),
@@ -51,7 +52,7 @@
       } else {
         const formData = new FormData();
         formData.append('file', selectedFile);
-        res = await fetch('http://localhost:3003/transcribe/file', {
+        res = await fetch(`${TRANSCRIBE_BASE}/transcribe/file`, {
           method: 'POST',
           body: formData,
           signal: controller.signal,
@@ -83,8 +84,8 @@
 
     try {
       const url = isEdit
-        ? `http://localhost:3001/api/contents/${content.id}`
-        : 'http://localhost:3001/api/contents';
+        ? `${API_BASE}/api/contents/${content.id}`
+        : `${API_BASE}/api/contents`;
 
       const res = await fetch(url, {
         method: isEdit ? 'PUT' : 'POST',
