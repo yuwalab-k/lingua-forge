@@ -1,4 +1,6 @@
+# Lingua Forge
 
+ローカルで動く英語学習ツール。英文を登録して AI 翻訳・学習できます。
 
 ## 構成
 
@@ -7,6 +9,7 @@
 | フロントエンド | Svelte + Vite |
 | バックエンド | Rust / Axum |
 | 翻訳エンジン | PLaMo-2-translate (Ollama 経由) |
+| 文字起こし | Whisper medium (faster-whisper) |
 | DB | SQLite |
 
 ## セットアップ
@@ -17,11 +20,10 @@
 docker compose up --build
 ```
 
-
-### 2. 別ターミナルでモデルをダウンロード（初回のみ・数分かかる）
+### 2. 翻訳モデルをダウンロード（初回のみ）
 
 ```bash
 docker compose exec ollama ollama pull mitmul/plamo-2-translate
 ```
 
-http://localhost:5174
+URL:http://localhost:5174 

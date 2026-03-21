@@ -23,6 +23,15 @@ services:
       - ollama
     command: cargo run
 
+  transcription:
+    build: ./transcription
+    ports:
+      - "3003:3003"
+    volumes:
+      - whisper_cache:/root/.cache/huggingface
+    environment:
+      - WHISPER_MODEL=medium
+
   ollama:
     image: ollama/ollama
     ports:
@@ -32,3 +41,4 @@ services:
 
 volumes:
   ollama_data:
+  whisper_cache:

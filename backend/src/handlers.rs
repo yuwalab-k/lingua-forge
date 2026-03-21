@@ -104,7 +104,7 @@ pub async fn list_contents(
     State(pool): State<SqlitePool>,
 ) -> Result<Json<Vec<Content>>, StatusCode> {
     let contents = sqlx::query_as::<_, Content>(
-        "SELECT id, title, source, source_master_id, summary, created_at FROM contents ORDER BY created_at DESC",
+        "SELECT id, title, source, source_master_id, summary, source_url, is_translating, created_at FROM contents ORDER BY created_at DESC",
     )
     .fetch_all(&pool)
     .await
@@ -131,12 +131,13 @@ pub async fn create_content(
     let source_name = resolve_source_name(&pool, req.source_master_id.as_deref()).await;
 
     sqlx::query(
-        "INSERT INTO contents (id, title, source, source_master_id, created_at) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO contents (id, title, source, source_master_id, source_url, created_at) VALUES (?, ?, ?, ?, ?, ?)",
     )
     .bind(&content_id)
     .bind(&req.title)
     .bind(&source_name)
     .bind(&req.source_master_id)
+    .bind(&req.source_url)
     .bind(&now)
     .execute(&pool)
     .await
@@ -175,6 +176,8 @@ pub async fn create_content(
         source: source_name,
         source_master_id: req.source_master_id,
         summary: None,
+        source_url: req.source_url,
+        is_translating: false,
         created_at: now,
         sentences: saved_sentences,
     }))
@@ -198,37 +201,67 @@ pub async fn translate_content(
     Path(id): Path<String>,
     Query(query): Query<ForceQuery>,
 ) -> Result<Json<ContentWithSentences>, (StatusCode, String)> {
-    let sentences = fetch_sentences(&pool, &id)
+    // 翻訳開始フラグをセット
+    sqlx::query("UPDATE contents SET is_translating = 1 WHERE id = ?")
+        .bind(&id)
+        .execute(&pool)
         .await
-        .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, "DBエラー".to_string()))?;
+        .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
 
-    let untranslated: Vec<(String, String)> = sentences
-        .iter()
-        .filter(|s| query.force || s.japanese_text.is_none())
-        .map(|s| (s.id.clone(), s.english_text.clone()))
-        .collect();
-
-    for (sentence_id, english_text) in &untranslated {
-        let translation = crate::ai::translate_single(english_text)
+    let result = async {
+        let sentences = fetch_sentences(&pool, &id)
             .await
-            .map_err(|e| (StatusCode::SERVICE_UNAVAILABLE, e))?;
+            .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, "DBエラー".to_string()))?;
 
-        sqlx::query("UPDATE sentences SET japanese_text = ? WHERE id = ?")
-            .bind(&translation)
-            .bind(sentence_id)
-            .execute(&pool)
+        let untranslated: Vec<(String, String)> = sentences
+            .iter()
+            .filter(|s| query.force || s.japanese_text.is_none())
+            .map(|s| (s.id.clone(), s.english_text.clone()))
+            .collect();
+
+        for (sentence_id, english_text) in &untranslated {
+            // キャンセルされていたらループを抜ける
+            let still_translating: bool = sqlx::query_scalar(
+                "SELECT is_translating FROM contents WHERE id = ?",
+            )
+            .bind(&id)
+            .fetch_one(&pool)
             .await
-            .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+            .unwrap_or(false);
+            if !still_translating {
+                break;
+            }
+
+            let translation = crate::ai::translate_single(english_text)
+                .await
+                .map_err(|e| (StatusCode::SERVICE_UNAVAILABLE, e))?;
+
+            sqlx::query("UPDATE sentences SET japanese_text = ? WHERE id = ?")
+                .bind(&translation)
+                .bind(sentence_id)
+                .execute(&pool)
+                .await
+                .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+        }
+
+        let content = fetch_content(&pool, &id)
+            .await
+            .map_err(|_| (StatusCode::NOT_FOUND, "教材が見つかりません".to_string()))?;
+        let updated_sentences = fetch_sentences(&pool, &id)
+            .await
+            .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, "DBエラー".to_string()))?;
+
+        Ok(Json(to_response(content, updated_sentences)))
     }
+    .await;
 
-    let content = fetch_content(&pool, &id)
-        .await
-        .map_err(|_| (StatusCode::NOT_FOUND, "教材が見つかりません".to_string()))?;
-    let updated_sentences = fetch_sentences(&pool, &id)
-        .await
-        .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, "DBエラー".to_string()))?;
+    // 成功・失敗にかかわらずフラグをリセット
+    let _ = sqlx::query("UPDATE contents SET is_translating = 0 WHERE id = ?")
+        .bind(&id)
+        .execute(&pool)
+        .await;
 
-    Ok(Json(to_response(content, updated_sentences)))
+    result
 }
 
 pub async fn update_content(
@@ -239,11 +272,12 @@ pub async fn update_content(
     let source_name = resolve_source_name(&pool, req.source_master_id.as_deref()).await;
 
     sqlx::query(
-        "UPDATE contents SET title = ?, source = ?, source_master_id = ?, summary = NULL WHERE id = ?",
+        "UPDATE contents SET title = ?, source = ?, source_master_id = ?, source_url = ?, summary = NULL WHERE id = ?",
     )
     .bind(&req.title)
     .bind(&source_name)
     .bind(&req.source_master_id)
+    .bind(&req.source_url)
     .bind(&id)
     .execute(&pool)
     .await
@@ -273,6 +307,17 @@ pub async fn update_content(
     let content = fetch_content(&pool, &id).await.map_err(|_| StatusCode::NOT_FOUND)?;
     let sentences = fetch_sentences(&pool, &id).await?;
     Ok(Json(to_response(content, sentences)))
+}
+
+pub async fn cancel_translate(
+    State(pool): State<SqlitePool>,
+    Path(id): Path<String>,
+) -> StatusCode {
+    let _ = sqlx::query("UPDATE contents SET is_translating = 0 WHERE id = ?")
+        .bind(&id)
+        .execute(&pool)
+        .await;
+    StatusCode::NO_CONTENT
 }
 
 pub async fn update_sentence(
@@ -312,7 +357,7 @@ async fn resolve_source_name(pool: &SqlitePool, source_master_id: Option<&str>) 
 
 async fn fetch_content(pool: &SqlitePool, id: &str) -> Result<Content, sqlx::Error> {
     sqlx::query_as::<_, Content>(
-        "SELECT id, title, source, source_master_id, summary, created_at FROM contents WHERE id = ?",
+        "SELECT id, title, source, source_master_id, summary, source_url, is_translating, created_at FROM contents WHERE id = ?",
     )
     .bind(id)
     .fetch_one(pool)
@@ -336,6 +381,8 @@ fn to_response(content: Content, sentences: Vec<Sentence>) -> ContentWithSentenc
         source: content.source,
         source_master_id: content.source_master_id,
         summary: content.summary,
+        source_url: content.source_url,
+        is_translating: content.is_translating,
         created_at: content.created_at,
         sentences,
     }

@@ -60,4 +60,19 @@ pub async fn migrate(pool: &SqlitePool) {
     let _ = sqlx::query("ALTER TABLE contents ADD COLUMN source_master_id TEXT")
         .execute(pool)
         .await;
+
+    // is_translating フラグを追加
+    let _ = sqlx::query("ALTER TABLE contents ADD COLUMN is_translating INTEGER NOT NULL DEFAULT 0")
+        .execute(pool)
+        .await;
+
+    // source_url カラムを追加（参照元URL）
+    let _ = sqlx::query("ALTER TABLE contents ADD COLUMN source_url TEXT")
+        .execute(pool)
+        .await;
+
+    // サーバー起動時に中断されたままのフラグをリセット
+    let _ = sqlx::query("UPDATE contents SET is_translating = 0")
+        .execute(pool)
+        .await;
 }

@@ -5,15 +5,75 @@
 
   let title = $state(content?.title ?? '');
   let sourceMasterId = $state(content?.source_master_id ?? '');
+  let sourceUrl = $state(content?.source_url ?? '');
   let englishText = $state('');
   let isSubmitting = $state(false);
   let error = $state('');
+
+  // 文字起こし
+  let transcribeUrl = $state('');
+  let selectedFile = $state(null);
+  let isTranscribing = $state(false);
+  let transcribeError = $state('');
+  let transcribeController = $state(null);
+  let fileInput;
 
   $effect(() => {
     if (isEdit && content?.sentences?.length) {
       englishText = content.sentences.map(s => s.english_text).join(' ');
     }
   });
+
+
+  function handleClose() {
+    if (isTranscribing) {
+      if (!confirm('文字起こし中です。中止してモーダルを閉じますか？')) return;
+      transcribeController?.abort();
+    }
+    onClose();
+  }
+
+  async function handleTranscribe() {
+    if (!transcribeUrl && !selectedFile) return;
+    isTranscribing = true;
+    transcribeError = '';
+    const controller = new AbortController();
+    transcribeController = controller;
+    try {
+      let res;
+      if (transcribeUrl) {
+        res = await fetch('http://localhost:3003/transcribe/url', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: transcribeUrl }),
+          signal: controller.signal,
+        });
+      } else {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        res = await fetch('http://localhost:3003/transcribe/file', {
+          method: 'POST',
+          body: formData,
+          signal: controller.signal,
+        });
+      }
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.detail || '文字起こしに失敗しました');
+      }
+      const data = await res.json();
+      englishText = data.text;
+      if (data.title && !title.trim()) title = data.title;
+      if (transcribeUrl && !sourceUrl.trim()) sourceUrl = transcribeUrl;
+      transcribeUrl = '';
+      selectedFile = null;
+    } catch (e) {
+      if (e?.name !== 'AbortError') transcribeError = e?.message || 'エラーが発生しました';
+    } finally {
+      isTranscribing = false;
+      transcribeController = null;
+    }
+  }
 
   async function handleSubmit() {
     if (!title.trim()) { error = 'タイトルは必須です'; return; }
@@ -32,6 +92,7 @@
         body: JSON.stringify({
           title: title.trim(),
           source_master_id: sourceMasterId || null,
+          source_url: sourceUrl.trim() || null,
           english_text: englishText.trim(),
         }),
       });
@@ -48,7 +109,7 @@
 
 <div
   class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-  onclick={onClose}
+  onclick={handleClose}
   role="dialog"
   aria-modal="true"
 >
@@ -62,7 +123,7 @@
         {isEdit ? '教材を編集' : '教材を追加'}
       </h2>
       <button
-        onclick={onClose}
+        onclick={handleClose}
         class="w-7 h-7 flex items-center justify-center rounded-md text-stone-400 hover:bg-stone-100 transition-colors"
       >
         <span class="material-symbols-rounded text-[18px]">close</span>
@@ -80,7 +141,6 @@
         />
       </div>
 
-      <!-- 出典（ドロップダウン） -->
       <div>
         <label class="block text-xs font-medium text-stone-600 mb-1.5">出典</label>
         <select
@@ -92,14 +152,73 @@
             <option value={sm.id}>{sm.name}</option>
           {/each}
         </select>
-        {#if sourceMasters.length === 0}
-          <p class="mt-1 text-xs text-stone-400">
-            出典はサイドバーの
-            <span class="material-symbols-rounded text-[12px] align-middle">category</span>
-            から先に作成してください
-          </p>
-        {/if}
       </div>
+
+      <div>
+        <label class="block text-xs font-medium text-stone-600 mb-1.5">参照元URL</label>
+        <input
+          type="url"
+          bind:value={sourceUrl}
+          placeholder="https://..."
+          class="w-full px-3 py-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400 focus:border-transparent"
+        />
+      </div>
+
+      <!-- 文字起こし -->
+      {#if !isEdit}
+        <div class="rounded-lg border border-stone-200 p-3 space-y-2 bg-stone-50">
+          <p class="text-xs font-medium text-stone-500">文字起こしで英文を入力</p>
+          <div class="flex gap-2">
+            <input
+              type="url"
+              bind:value={transcribeUrl}
+              placeholder="YouTube / Podcast URL"
+              disabled={isTranscribing || !!selectedFile}
+              class="flex-1 px-3 py-1.5 text-xs border border-stone-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-stone-400 disabled:opacity-50"
+              oninput={() => { selectedFile = null; }}
+            />
+            <span class="text-xs text-stone-300 self-center">または</span>
+            <input
+              type="file"
+              accept="audio/*,video/*,.mp3,.mp4,.m4a,.wav"
+              class="hidden"
+              bind:this={fileInput}
+              onchange={(e) => { selectedFile = e.currentTarget.files?.[0] ?? null; transcribeUrl = ''; }}
+            />
+            <button
+              type="button"
+              onclick={() => fileInput.click()}
+              disabled={isTranscribing || !!transcribeUrl}
+              class="text-xs px-3 py-1.5 rounded-md border border-stone-300 bg-white text-stone-600 hover:border-stone-400 transition-colors disabled:opacity-50 whitespace-nowrap"
+            >
+              {selectedFile ? selectedFile.name.slice(0, 12) + '…' : 'MP3 / 動画'}
+            </button>
+            <button
+              type="button"
+              onclick={handleTranscribe}
+              disabled={isTranscribing || (!transcribeUrl && !selectedFile)}
+              class="flex items-center gap-1 text-xs px-3 py-1.5 rounded-md border transition-colors whitespace-nowrap
+                {isTranscribing
+                  ? 'bg-stone-100 text-stone-400 border-stone-200 cursor-wait'
+                  : 'bg-stone-800 text-white border-stone-800 hover:bg-stone-700 disabled:opacity-40'}"
+            >
+              {#if isTranscribing}
+                <span class="material-symbols-rounded text-[13px] animate-spin">progress_activity</span>
+                処理中...
+              {:else}
+                <span class="material-symbols-rounded text-[13px]">mic</span>
+                文字起こし
+              {/if}
+            </button>
+          </div>
+          {#if isTranscribing}
+            <p class="text-xs text-stone-400">長い音声は数分かかります...</p>
+          {/if}
+          {#if transcribeError}
+            <p class="text-xs text-rose-500">{transcribeError}</p>
+          {/if}
+        </div>
+      {/if}
 
       <div>
         <label class="block text-xs font-medium text-stone-600 mb-1.5">英文 *</label>
@@ -130,7 +249,7 @@
 
     <div class="px-6 py-4 border-t border-stone-200 flex justify-end gap-2">
       <button
-        onclick={onClose}
+        onclick={handleClose}
         class="px-4 py-2 text-sm text-stone-600 hover:bg-stone-100 rounded-md transition-colors"
       >
         キャンセル
