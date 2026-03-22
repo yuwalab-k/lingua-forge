@@ -18,3 +18,7 @@ target/
 # Node.js / frontend
 node_modules/
 dist/
+
+# 環境変数（.env.example はコミット対象）
+.env
+.env.local

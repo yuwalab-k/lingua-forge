@@ -45,7 +45,17 @@ async fn generate(prompt: String, timeout_secs: u64) -> Result<String, String> {
     Ok(body.response.trim().to_string())
 }
 
+pub fn is_local_llm_enabled() -> bool {
+    std::env::var("USE_LOCAL_LLM")
+        .unwrap_or_else(|_| "true".to_string())
+        .to_lowercase()
+        == "true"
+}
+
 pub async fn translate_single(sentence: &str) -> Result<String, String> {
+    if !is_local_llm_enabled() {
+        return Err("ローカルLLMが無効です（USE_LOCAL_LLM=false）".to_string());
+    }
     // plamo-2-translate は翻訳専用モデルのためシンプルなプロンプトで動作する
     let prompt = format!("{}", sentence);
     generate(prompt, 300).await

@@ -29,12 +29,15 @@ async fn main() {
         .route("/api/sources/:id", delete(handlers::delete_source))
         .route("/api/contents", get(handlers::list_contents))
         .route("/api/contents", post(handlers::create_content))
+        .route("/api/contents/bulk-delete", post(handlers::bulk_delete_contents))
         .route("/api/contents/:id", get(handlers::get_content))
         .route("/api/contents/:id", delete(handlers::delete_content))
         .route("/api/contents/:id", axum::routing::put(handlers::update_content))
         .route("/api/contents/:id/translate", post(handlers::translate_content))
         .route("/api/contents/:id/translate", delete(handlers::cancel_translate))
         .route("/api/sentences/:id", axum::routing::put(handlers::update_sentence))
+        .route("/api/export/contents.csv", get(handlers::export_contents_csv))
+        .route("/api/import/contents", post(handlers::import_contents_csv))
         .layer(cors)
         .with_state(pool);
 

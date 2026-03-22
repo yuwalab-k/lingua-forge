@@ -5,6 +5,7 @@
   import ContentView from './lib/ContentView.svelte';
   import RegisterModal from './lib/RegisterModal.svelte';
   import SourceMasterModal from './lib/SourceMasterModal.svelte';
+  import DataManager from './lib/DataManager.svelte';
 
   let contents = $state([]);
   let sourceMasters = $state([]);
@@ -12,6 +13,7 @@
   let showModal = $state(false);
   let editingContent = $state(null);
   let showSourceModal = $state(false);
+  let showDataManager = $state(false);
   // { contentId: string, type: 'translate'|'summarize', controller: AbortController } | null
   let globalProcessing = $state(null);
 
@@ -88,6 +90,7 @@
     onSelect={selectContent}
     onAdd={() => { editingContent = null; showModal = true; }}
     onManageSources={() => { showSourceModal = true; }}
+    onManageData={() => { showDataManager = true; }}
   />
 
   <main class="flex-1 overflow-hidden bg-stone-50">
@@ -131,5 +134,11 @@
     {sourceMasters}
     onClose={() => { showSourceModal = false; }}
     onChanged={handleSourcesChanged}
+  />
+{/if}
+
+{#if showDataManager}
+  <DataManager
+    onClose={async () => { showDataManager = false; await loadContents(); }}
   />
 {/if}

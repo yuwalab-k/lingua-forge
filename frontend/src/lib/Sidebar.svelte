@@ -1,5 +1,5 @@
 <script>
-  let { contents, selectedId, onSelect, onAdd, onManageSources } = $props();
+  let { contents, selectedId, onSelect, onAdd, onManageSources, onManageData } = $props();
 
   function chapterNum(title) {
     const m = title.match(/#(\d+)/);
@@ -37,6 +37,13 @@
   <div class="px-4 py-4 border-b border-stone-200 flex items-center justify-between shrink-0">
     <h1 class="text-sm font-semibold text-stone-800 tracking-wide">Lingua Forge</h1>
     <div class="flex items-center gap-0.5">
+      <button
+        onclick={onManageData}
+        class="w-7 h-7 flex items-center justify-center rounded-md text-stone-400 hover:bg-stone-100 hover:text-stone-700 transition-colors"
+        title="データ管理（CSV）"
+      >
+        <span class="material-symbols-rounded text-[16px]">table</span>
+      </button>
       <button
         onclick={onManageSources}
         class="w-7 h-7 flex items-center justify-center rounded-md text-stone-400 hover:bg-stone-100 hover:text-stone-700 transition-colors"

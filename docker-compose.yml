@@ -16,15 +16,17 @@ services:
       - "3001:3001"
     volumes:
       - ./backend:/app
+    env_file:
+      - .env
     environment:
-      - OLLAMA_URL=http://ollama:11434
-      - OLLAMA_MODEL=mitmul/plamo-2-translate
-    depends_on:
-      - ollama
+      - OLLAMA_URL=${OLLAMA_URL:-http://ollama:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-mitmul/plamo-2-translate}
+      - USE_LOCAL_LLM=${USE_LOCAL_LLM:-true}
     command: cargo run
 
   transcription:
     build: ./transcription
+    profiles: ["local-llm"]
     ports:
       - "3003:3003"
     volumes:
@@ -34,6 +36,7 @@ services:
 
   ollama:
     image: ollama/ollama
+    profiles: ["local-llm"]
     ports:
       - "11434:11434"
     volumes:
