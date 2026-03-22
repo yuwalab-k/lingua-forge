@@ -138,6 +138,29 @@
       alert(e?.message || '保存に失敗しました');
     }
   }
+
+  // --- 英文インライン編集 ---
+  let isEditingEn = $state(false);
+  let editEnText = $state('');
+
+  function startEditEn() { editEnText = sentence.english_text; isEditingEn = true; }
+  function cancelEditEn() { isEditingEn = false; }
+
+  async function saveEditEn() {
+    if (!editEnText.trim()) return;
+    try {
+      const res = await fetch(`${API_BASE}/api/sentences/${sentence.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ english_text: editEnText.trim() }),
+      });
+      if (!res.ok) throw new Error('保存に失敗しました');
+      onUpdate(await res.json());
+      isEditingEn = false;
+    } catch (e) {
+      alert(e?.message || '保存に失敗しました');
+    }
+  }
 </script>
 
 <div
@@ -268,7 +291,32 @@
 
       {:else}
         <!-- ===== 通常モード ===== -->
-        <p class="text-stone-800 leading-relaxed text-[15px]">{sentence.english_text}</p>
+        {#if isEditingEn}
+          <div onclick={(e) => e.stopPropagation()} role="presentation">
+            <textarea
+              bind:value={editEnText}
+              onkeydown={(e) => { if (e.key === 'Escape') cancelEditEn(); }}
+              rows="2"
+              class="w-full px-2 py-1.5 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400 resize-none leading-relaxed text-stone-800"
+              placeholder="英文を入力..."
+            ></textarea>
+            <div class="flex gap-1.5 mt-1">
+              <button onclick={(e) => { e.stopPropagation(); saveEditEn(); }} class="text-xs px-2.5 py-1 bg-stone-800 text-white rounded-md hover:bg-stone-700 transition-colors">保存</button>
+              <button onclick={(e) => { e.stopPropagation(); cancelEditEn(); }} class="text-xs px-2.5 py-1 border border-stone-300 text-stone-500 rounded-md hover:bg-stone-50 transition-colors">キャンセル</button>
+            </div>
+          </div>
+        {:else}
+          <div class="flex items-start gap-1 group/en">
+            <p class="text-stone-800 leading-relaxed text-[15px] flex-1">{sentence.english_text}</p>
+            <button
+              onclick={(e) => { e.stopPropagation(); startEditEn(); }}
+              class="shrink-0 opacity-0 group-hover/en:opacity-100 transition-opacity mt-0.5 text-stone-300 hover:text-stone-500"
+              title="英文を編集"
+            >
+              <span class="material-symbols-rounded text-[14px]">edit</span>
+            </button>
+          </div>
+        {/if}
 
         {#if showJapanese}
           {#if isEditing}

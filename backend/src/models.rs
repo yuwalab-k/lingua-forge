@@ -70,6 +70,7 @@ pub struct ContentWithSentences {
 
 #[derive(Debug, Deserialize)]
 pub struct UpdateSentenceRequest {
+    pub english_text: Option<String>,
     pub japanese_text: Option<String>,
     pub text_completed: Option<bool>,
     pub speech_completed: Option<bool>,

@@ -100,7 +100,7 @@ pub async fn export_contents_csv(
     }
 
     let mut wtr = csv::WriterBuilder::new().from_writer(vec![]);
-    wtr.write_record(["title", "source", "source_url", "english_text", "japanese_text"])
+    wtr.write_record(["id", "title", "source", "source_url", "english_text", "japanese_text"])
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
     for id in &content_order {
@@ -114,6 +114,7 @@ pub async fn export_contents_csv(
                 .collect::<Vec<_>>()
                 .join(" ");
             wtr.write_record([
+                id.as_str(),
                 title.as_str(),
                 source.as_deref().unwrap_or(""),
                 source_url.as_deref().unwrap_or(""),
@@ -147,13 +148,28 @@ pub async fn export_contents_csv(
 #[derive(Deserialize)]
 pub struct ImportRequest {
     pub csv_text: String,
+    #[serde(default)]
+    pub confirmed: bool,
+}
+
+#[derive(serde::Serialize)]
+pub struct PendingUpdate {
+    pub line: usize,
+    pub id: String,
+    pub existing_title: String,
+    pub new_title: String,
 }
 
 #[derive(serde::Serialize)]
 pub struct ImportResult {
     pub imported: usize,
+    pub updated: usize,
     pub skipped: usize,
     pub errors: Vec<String>,
+    /// confirmed=false のときのみ: 新規追加件数（まだDB未反映）
+    pub to_create: usize,
+    /// confirmed=false のときのみ: 更新候補
+    pub pending_updates: Vec<PendingUpdate>,
 }
 
 pub async fn import_contents_csv(
@@ -174,6 +190,7 @@ pub async fn import_contents_csv(
         headers.iter().position(|h| h.trim() == name)
     }
 
+    let col_id = col_index(&headers, "id");
     let col_title = col_index(&headers, "title");
     let col_english = col_index(&headers, "english_text");
     let col_source = col_index(&headers, "source");
@@ -182,7 +199,10 @@ pub async fn import_contents_csv(
     if col_title.is_none() || col_english.is_none() {
         return Ok(Json(ImportResult {
             imported: 0,
+            updated: 0,
             skipped: 0,
+            to_create: 0,
+            pending_updates: vec![],
             errors: vec![format!(
                 "ヘッダーに必須カラムがありません（必須: title, english_text / 検出されたヘッダー: {}）",
                 headers.iter().collect::<Vec<_>>().join(", ")
@@ -193,112 +213,243 @@ pub async fn import_contents_csv(
     let col_title = col_title.unwrap();
     let col_english = col_english.unwrap();
 
-    // ── 行ごとにインポート ─────────────────────────────────────────────────────
-    let mut imported = 0usize;
-    let mut skipped = 0usize;
-    let mut errors: Vec<String> = Vec::new();
+    // ── 全行パース ─────────────────────────────────────────────────────────────
+    struct ParsedRow {
+        line: usize,
+        id: Option<String>,
+        title: String,
+        english_text: String,
+        source_name: String,
+        source_url: String,
+    }
+
+    let mut parsed_rows: Vec<ParsedRow> = Vec::new();
+    let mut parse_errors: Vec<String> = Vec::new();
+    let mut parse_skipped = 0usize;
 
     for (i, result) in rdr.records().enumerate() {
-        let line = i + 2; // 1行目=ヘッダーなので2始まり
+        let line = i + 2;
         let record = match result {
             Ok(r) => r,
             Err(e) => {
-                errors.push(format!("行 {line}: CSVパースエラー: {e}"));
-                skipped += 1;
+                parse_errors.push(format!("行 {line}: CSVパースエラー: {e}"));
+                parse_skipped += 1;
                 continue;
             }
         };
 
+        let id = col_id
+            .and_then(|c| record.get(c))
+            .map(|s| s.trim().to_string())
+            .filter(|s| !s.is_empty());
         let title = record.get(col_title).unwrap_or("").trim().to_string();
         let english_text = record.get(col_english).unwrap_or("").trim().to_string();
-        let source_name = col_source
-            .and_then(|c| record.get(c))
-            .unwrap_or("")
-            .trim()
-            .to_string();
-        let source_url = col_source_url
-            .and_then(|c| record.get(c))
-            .unwrap_or("")
-            .trim()
-            .to_string();
+        let source_name = col_source.and_then(|c| record.get(c)).unwrap_or("").trim().to_string();
+        let source_url = col_source_url.and_then(|c| record.get(c)).unwrap_or("").trim().to_string();
 
         if title.is_empty() {
-            errors.push(format!("行 {line}: title が空のためスキップ"));
-            skipped += 1;
+            parse_errors.push(format!("行 {line}: title が空のためスキップ"));
+            parse_skipped += 1;
             continue;
         }
         if english_text.is_empty() {
-            errors.push(format!("行 {line}: english_text が空のためスキップ"));
-            skipped += 1;
+            parse_errors.push(format!("行 {line}: english_text が空のためスキップ"));
+            parse_skipped += 1;
             continue;
         }
 
+        parsed_rows.push(ParsedRow { line, id, title, english_text, source_name, source_url });
+    }
+
+    // ── プレビューモード（confirmed=false）────────────────────────────────────
+    if !req.confirmed {
+        let mut to_create = 0usize;
+        let mut pending_updates: Vec<PendingUpdate> = Vec::new();
+        let mut errors = parse_errors;
+
+        for row in &parsed_rows {
+            match &row.id {
+                None => {
+                    to_create += 1;
+                }
+                Some(id) => {
+                    let existing = sqlx::query_scalar::<_, String>(
+                        "SELECT title FROM contents WHERE id = ?",
+                    )
+                    .bind(id)
+                    .fetch_optional(&pool)
+                    .await
+                    .unwrap_or(None);
+
+                    match existing {
+                        Some(existing_title) => {
+                            pending_updates.push(PendingUpdate {
+                                line: row.line,
+                                id: id.clone(),
+                                existing_title,
+                                new_title: row.title.clone(),
+                            });
+                        }
+                        None => {
+                            errors.push(format!(
+                                "行 {}: ID「{}」はDBに存在しません（スキップされます）",
+                                row.line, id
+                            ));
+                        }
+                    }
+                }
+            }
+        }
+
+        return Ok(Json(ImportResult {
+            imported: 0,
+            updated: 0,
+            skipped: parse_skipped,
+            to_create,
+            pending_updates,
+            errors,
+        }));
+    }
+
+    // ── 実行モード（confirmed=true）───────────────────────────────────────────
+    let mut imported = 0usize;
+    let mut updated = 0usize;
+    let mut skipped = parse_skipped;
+    let mut errors = parse_errors;
+
+    for row in &parsed_rows {
         // 出典マスタの解決
-        let source_master_id: Option<String> = if source_name.is_empty() {
+        let source_master_id: Option<String> = if row.source_name.is_empty() {
             None
         } else {
             let found = sqlx::query_scalar::<_, String>(
                 "SELECT id FROM source_masters WHERE name = ?",
             )
-            .bind(&source_name)
+            .bind(&row.source_name)
             .fetch_optional(&pool)
             .await
             .unwrap_or(None);
 
             if found.is_none() {
                 errors.push(format!(
-                    "行 {line}: 出典「{source_name}」は出典マスタに存在しないため未紐付けで登録"
+                    "行 {}: 出典「{}」は出典マスタに存在しないため未紐付けで登録",
+                    row.line, row.source_name
                 ));
             }
             found
         };
 
         let resolved_source = resolve_source_name(&pool, source_master_id.as_deref()).await;
-        let content_id = Uuid::new_v4().to_string();
         let now = Utc::now().to_rfc3339();
 
-        let insert_result = sqlx::query(
-            "INSERT INTO contents (id, title, source, source_master_id, source_url, created_at) VALUES (?, ?, ?, ?, ?, ?)",
-        )
-        .bind(&content_id)
-        .bind(&title)
-        .bind(&resolved_source)
-        .bind(&source_master_id)
-        .bind(if source_url.is_empty() { None } else { Some(source_url.clone()) })
-        .bind(&now)
-        .execute(&pool)
-        .await;
+        match &row.id {
+            // ── 新規追加 ──────────────────────────────────────────────────────
+            None => {
+                let content_id = Uuid::new_v4().to_string();
 
-        if let Err(e) = insert_result {
-            errors.push(format!("行 {line}: DB挿入エラー: {e}"));
-            skipped += 1;
-            continue;
-        }
+                let insert_result = sqlx::query(
+                    "INSERT INTO contents (id, title, source, source_master_id, source_url, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+                )
+                .bind(&content_id)
+                .bind(&row.title)
+                .bind(&resolved_source)
+                .bind(&source_master_id)
+                .bind(if row.source_url.is_empty() { None } else { Some(row.source_url.clone()) })
+                .bind(&now)
+                .execute(&pool)
+                .await;
 
-        let sentences = split_sentences(&english_text);
-        if sentences.is_empty() {
-            errors.push(format!("行 {line}: 文の分割結果が0件です（english_text を確認してください）"));
-        }
-        for (index, sentence) in sentences.iter().enumerate() {
-            if let Err(e) = sqlx::query(
-                "INSERT INTO sentences (id, content_id, sentence_index, english_text, japanese_text, created_at) VALUES (?, ?, ?, ?, NULL, ?)",
-            )
-            .bind(Uuid::new_v4().to_string())
-            .bind(&content_id)
-            .bind(index as i64)
-            .bind(sentence)
-            .bind(&now)
-            .execute(&pool)
-            .await
-            {
-                errors.push(format!("行 {line}: 文({index})の挿入エラー: {e}"));
+                if let Err(e) = insert_result {
+                    errors.push(format!("行 {}: DB挿入エラー: {e}", row.line));
+                    skipped += 1;
+                    continue;
+                }
+
+                let sentences = split_sentences(&row.english_text);
+                if sentences.is_empty() {
+                    errors.push(format!("行 {}: 文の分割結果が0件です", row.line));
+                }
+                for (index, sentence) in sentences.iter().enumerate() {
+                    if let Err(e) = sqlx::query(
+                        "INSERT INTO sentences (id, content_id, sentence_index, english_text, japanese_text, created_at) VALUES (?, ?, ?, ?, NULL, ?)",
+                    )
+                    .bind(Uuid::new_v4().to_string())
+                    .bind(&content_id)
+                    .bind(index as i64)
+                    .bind(sentence)
+                    .bind(&now)
+                    .execute(&pool)
+                    .await
+                    {
+                        errors.push(format!("行 {}: 文({index})の挿入エラー: {e}", row.line));
+                    }
+                }
+                imported += 1;
+            }
+
+            // ── 更新 ──────────────────────────────────────────────────────────
+            Some(id) => {
+                let exists = sqlx::query_scalar::<_, i64>("SELECT COUNT(*) FROM contents WHERE id = ?")
+                    .bind(id)
+                    .fetch_one(&pool)
+                    .await
+                    .unwrap_or(0);
+
+                if exists == 0 {
+                    errors.push(format!("行 {}: ID「{id}」はDBに存在しないためスキップ", row.line));
+                    skipped += 1;
+                    continue;
+                }
+
+                if let Err(e) = sqlx::query(
+                    "UPDATE contents SET title=?, source=?, source_master_id=?, source_url=? WHERE id=?",
+                )
+                .bind(&row.title)
+                .bind(&resolved_source)
+                .bind(&source_master_id)
+                .bind(if row.source_url.is_empty() { None } else { Some(row.source_url.clone()) })
+                .bind(id)
+                .execute(&pool)
+                .await
+                {
+                    errors.push(format!("行 {}: DB更新エラー: {e}", row.line));
+                    skipped += 1;
+                    continue;
+                }
+
+                // sentences を削除して再挿入
+                if let Err(e) = sqlx::query("DELETE FROM sentences WHERE content_id = ?")
+                    .bind(id)
+                    .execute(&pool)
+                    .await
+                {
+                    errors.push(format!("行 {}: sentences削除エラー: {e}", row.line));
+                    skipped += 1;
+                    continue;
+                }
+
+                let sentences = split_sentences(&row.english_text);
+                for (index, sentence) in sentences.iter().enumerate() {
+                    if let Err(e) = sqlx::query(
+                        "INSERT INTO sentences (id, content_id, sentence_index, english_text, japanese_text, created_at) VALUES (?, ?, ?, ?, NULL, ?)",
+                    )
+                    .bind(Uuid::new_v4().to_string())
+                    .bind(id)
+                    .bind(index as i64)
+                    .bind(sentence)
+                    .bind(&now)
+                    .execute(&pool)
+                    .await
+                    {
+                        errors.push(format!("行 {}: 文({index})の挿入エラー: {e}", row.line));
+                    }
+                }
+                updated += 1;
             }
         }
-
-        imported += 1;
     }
 
-    Ok(Json(ImportResult { imported, skipped, errors }))
+    Ok(Json(ImportResult { imported, updated, skipped, errors, to_create: 0, pending_updates: vec![] }))
 }
 
 // ── Bulk Delete ───────────────────────────────────────────────────────────────

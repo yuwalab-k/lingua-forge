@@ -109,6 +109,8 @@
   let fileInput = $state(null);
   let importing = $state(false);
   let importResult = $state(null);
+  let pendingImport = $state(null);  // プレビュー結果
+  let pendingCsvText = $state('');   // 確認後に再送するCSVテキスト
 
   async function handleFileChange(e) {
     const file = e.target.files[0];
@@ -116,26 +118,61 @@
 
     importing = true;
     importResult = null;
+    pendingImport = null;
     try {
       const text = await file.text();
+      pendingCsvText = text;
       const res = await fetch(`${API_BASE}/api/import/contents`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ csv_text: text }),
+        body: JSON.stringify({ csv_text: text, confirmed: false }),
       });
       if (!res.ok) {
-        importResult = { imported: 0, skipped: 0, errors: [`サーバーエラー: HTTP ${res.status}`] };
+        importResult = { imported: 0, updated: 0, skipped: 0, errors: [`サーバーエラー: HTTP ${res.status}`] };
+      } else {
+        const data = await res.json();
+        if (data.to_create > 0 || data.pending_updates.length > 0) {
+          pendingImport = data;
+        } else {
+          // エラーのみの場合はそのまま表示
+          importResult = { ...data, imported: 0, updated: 0 };
+        }
+      }
+    } catch {
+      importResult = { imported: 0, updated: 0, skipped: 0, errors: ['インポートに失敗しました（サーバーに接続できません）'] };
+    } finally {
+      importing = false;
+      if (fileInput) fileInput.value = '';
+    }
+  }
+
+  async function executeImport() {
+    if (!pendingCsvText) return;
+    importing = true;
+    try {
+      const res = await fetch(`${API_BASE}/api/import/contents`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ csv_text: pendingCsvText, confirmed: true }),
+      });
+      if (!res.ok) {
+        importResult = { imported: 0, updated: 0, skipped: 0, errors: [`サーバーエラー: HTTP ${res.status}`] };
       } else {
         importResult = await res.json();
         await loadContents();
       }
     } catch {
-      importResult = { imported: 0, skipped: 0, errors: ['インポートに失敗しました（サーバーに接続できません）'] };
+      importResult = { imported: 0, updated: 0, skipped: 0, errors: ['インポートに失敗しました'] };
     } finally {
       importing = false;
-      // ファイル選択をリセット
-      if (fileInput) fileInput.value = '';
+      pendingImport = null;
+      pendingCsvText = '';
     }
+  }
+
+  function cancelImport() {
+    pendingImport = null;
+    pendingCsvText = '';
   }
 
   // ── 初期化 ────────────────────────────────────────────────────────────────
@@ -170,7 +207,7 @@
         <p class="text-xs text-stone-400 mb-3">
           CSV ファイルから教材を一括登録します。1行目はヘッダー行として扱われます。<br />
           必須カラム：<code class="bg-stone-100 px-1 rounded">title</code>、<code class="bg-stone-100 px-1 rounded">english_text</code>
-          ／任意：<code class="bg-stone-100 px-1 rounded">source</code>、<code class="bg-stone-100 px-1 rounded">source_url</code>
+          ／任意：<code class="bg-stone-100 px-1 rounded">id</code>（指定時は既存データを更新）、<code class="bg-stone-100 px-1 rounded">source</code>、<code class="bg-stone-100 px-1 rounded">source_url</code>
         </p>
         <label class="flex items-center gap-2 cursor-pointer">
           <input
@@ -189,10 +226,70 @@
           </span>
         </label>
 
+        <!-- 確認ダイアログ -->
+        {#if pendingImport}
+          <div class="mt-3 rounded-md border border-amber-200 bg-amber-50 p-3 text-xs">
+            <p class="font-semibold text-amber-800 mb-2">インポート内容を確認してください</p>
+            <ul class="text-amber-700 space-y-0.5 mb-3">
+              {#if pendingImport.to_create > 0}
+                <li>・新規追加：{pendingImport.to_create} 件</li>
+              {/if}
+              {#if pendingImport.pending_updates.length > 0}
+                <li>・更新：{pendingImport.pending_updates.length} 件</li>
+              {/if}
+            </ul>
+            {#if pendingImport.pending_updates.length > 0}
+              <div class="border border-amber-200 rounded overflow-hidden mb-3">
+                <div class="flex gap-3 px-3 py-1.5 bg-amber-100 text-amber-700 font-medium">
+                  <span class="w-6 shrink-0">行</span>
+                  <span class="flex-1">現在のタイトル</span>
+                  <span class="flex-1">新しいタイトル</span>
+                </div>
+                <div class="max-h-40 overflow-y-auto divide-y divide-amber-100">
+                  {#each pendingImport.pending_updates as u}
+                    <div class="flex gap-3 px-3 py-1.5 text-amber-700">
+                      <span class="w-6 shrink-0">{u.line}</span>
+                      <span class="flex-1 truncate text-stone-500">{u.existing_title}</span>
+                      <span class="flex-1 truncate font-medium">{u.new_title}</span>
+                    </div>
+                  {/each}
+                </div>
+              </div>
+            {/if}
+            {#if pendingImport.errors.length > 0}
+              <ul class="text-amber-600 space-y-0.5 mb-3">
+                {#each pendingImport.errors as err}
+                  <li>{err}</li>
+                {/each}
+              </ul>
+            {/if}
+            <div class="flex gap-2">
+              <button
+                onclick={executeImport}
+                disabled={importing}
+                class="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-stone-700 text-white rounded-md hover:bg-stone-600 disabled:opacity-50 transition-colors"
+              >
+                <span class="material-symbols-rounded text-[16px]">check</span>
+                {importing ? '実行中...' : '確認して実行'}
+              </button>
+              <button
+                onclick={cancelImport}
+                disabled={importing}
+                class="px-3 py-1.5 text-sm text-stone-500 hover:text-stone-700 transition-colors"
+              >
+                キャンセル
+              </button>
+            </div>
+          </div>
+        {/if}
+
         {#if importResult}
           <div class="mt-3 text-xs rounded-md p-3 {importResult.errors.length > 0 ? 'bg-amber-50 border border-amber-200' : 'bg-green-50 border border-green-200'}">
             <p class="font-medium {importResult.errors.length > 0 ? 'text-amber-700' : 'text-green-700'}">
-              {importResult.imported} 件インポート完了
+              {#if importResult.imported > 0}新規追加 {importResult.imported} 件{/if}
+              {#if importResult.imported > 0 && importResult.updated > 0}／{/if}
+              {#if importResult.updated > 0}更新 {importResult.updated} 件{/if}
+              {#if importResult.imported === 0 && importResult.updated === 0}インポート完了（0件）{/if}
               {#if importResult.skipped > 0}／{importResult.skipped} 件スキップ{/if}
             </p>
             {#if importResult.errors.length > 0}
