@@ -12,6 +12,14 @@ pub async fn update_sentence(
     Path(id): Path<String>,
     Json(req): Json<UpdateSentenceRequest>,
 ) -> Result<Json<Sentence>, StatusCode> {
+    if let Some(english_text) = &req.english_text {
+        sqlx::query("UPDATE sentences SET english_text = ? WHERE id = ?")
+            .bind(english_text)
+            .bind(&id)
+            .execute(&pool)
+            .await
+            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    }
     if let Some(japanese_text) = &req.japanese_text {
         sqlx::query("UPDATE sentences SET japanese_text = ? WHERE id = ?")
             .bind(japanese_text)
