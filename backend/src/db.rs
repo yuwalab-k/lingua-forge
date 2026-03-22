@@ -14,73 +14,14 @@ pub async fn create_pool(database_url: &str) -> SqlitePool {
 }
 
 pub async fn migrate(pool: &SqlitePool) {
-    sqlx::query(
-        r#"
-        CREATE TABLE IF NOT EXISTS contents (
-            id TEXT PRIMARY KEY,
-            title TEXT NOT NULL,
-            source TEXT,
-            created_at TEXT NOT NULL
-        );
-
-        CREATE TABLE IF NOT EXISTS sentences (
-            id TEXT PRIMARY KEY,
-            content_id TEXT NOT NULL,
-            sentence_index INTEGER NOT NULL,
-            english_text TEXT NOT NULL,
-            japanese_text TEXT,
-            created_at TEXT NOT NULL,
-            FOREIGN KEY (content_id) REFERENCES contents(id) ON DELETE CASCADE
-        );
-        "#,
-    )
-    .execute(pool)
-    .await
-    .expect("Failed to run migrations");
-
-    // summary カラムを既存テーブルに追加（存在する場合はエラーを無視）
-    let _ = sqlx::query("ALTER TABLE contents ADD COLUMN summary TEXT")
-        .execute(pool)
-        .await;
-
-    // 出典マスタテーブル
-    sqlx::query(
-        "CREATE TABLE IF NOT EXISTS source_masters (
-            id TEXT PRIMARY KEY,
-            name TEXT NOT NULL UNIQUE,
-            translate_prompt TEXT,
-            created_at TEXT NOT NULL
-        )",
-    )
-    .execute(pool)
-    .await
-    .expect("Failed to create source_masters table");
-
-    // contents に source_master_id カラムを追加（存在する場合はエラーを無視）
-    let _ = sqlx::query("ALTER TABLE contents ADD COLUMN source_master_id TEXT")
-        .execute(pool)
-        .await;
-
-    // is_translating フラグを追加
-    let _ = sqlx::query("ALTER TABLE contents ADD COLUMN is_translating INTEGER NOT NULL DEFAULT 0")
-        .execute(pool)
-        .await;
-
-    // source_url カラムを追加（参照元URL）
-    let _ = sqlx::query("ALTER TABLE contents ADD COLUMN source_url TEXT")
-        .execute(pool)
-        .await;
-
-    // 練習完了フラグを追加
-    let _ = sqlx::query("ALTER TABLE sentences ADD COLUMN text_completed INTEGER NOT NULL DEFAULT 0")
-        .execute(pool)
-        .await;
-    let _ = sqlx::query("ALTER TABLE sentences ADD COLUMN speech_completed INTEGER NOT NULL DEFAULT 0")
-        .execute(pool)
-        .await;
+    sqlx::migrate!("./migrations")
+        .run(pool)
+        .await
+        .expect("Failed to run migrations");
 
     // サーバー起動時に中断されたままのフラグをリセット
-    let _ = sqlx::query("UPDATE contents SET is_translating = 0")
+    sqlx::query("UPDATE contents SET is_translating = 0")
         .execute(pool)
-        .await;
+        .await
+        .expect("Failed to reset is_translating flags");
 }
