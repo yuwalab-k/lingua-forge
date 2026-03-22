@@ -14,7 +14,7 @@
 
 ## セットアップ
 
-### 1. コンテナ起動
+### 1. コンテナ起動ß
 
 ```bash
 docker compose up --build
@@ -26,4 +26,27 @@ docker compose up --build
 docker compose exec ollama ollama pull mitmul/plamo-2-translate
 ```
 
-URL:http://localhost:5174 
+URL:http://localhost:5174
+
+## データベース
+
+SQLite を使用しています。DBファイルは `backend/data/lingua.db` に自動生成されます。
+
+マイグレーションファイルは `backend/migrations/` に管理されており、サーバー起動時に自動で適用されます。
+
+
+### 手動で適用する場合
+
+`sqlx-cli` を使うと手動でマイグレーションを管理できます。
+
+```bash
+# sqlx-cli のインストール
+cargo install sqlx-cli --no-default-features --features sqlite
+
+# マイグレーション適用
+cd backend
+sqlx migrate run --database-url sqlite:./data/lingua.db
+
+# 適用状況の確認
+sqlx migrate info --database-url sqlite:./data/lingua.db
+```
