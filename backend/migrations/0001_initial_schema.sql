@@ -1,4 +1,4 @@
-CREATE TABLE contents (
+CREATE TABLE IF NOT EXISTS contents (
     id TEXT PRIMARY KEY,
     title TEXT NOT NULL,
     source TEXT,
@@ -9,7 +9,7 @@ CREATE TABLE contents (
     source_url TEXT
 );
 
-CREATE TABLE sentences (
+CREATE TABLE IF NOT EXISTS sentences (
     id TEXT PRIMARY KEY,
     content_id TEXT NOT NULL,
     sentence_index INTEGER NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE sentences (
     FOREIGN KEY (content_id) REFERENCES contents(id) ON DELETE CASCADE
 );
 
-CREATE TABLE source_masters (
+CREATE TABLE IF NOT EXISTS source_masters (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
     translate_prompt TEXT,
