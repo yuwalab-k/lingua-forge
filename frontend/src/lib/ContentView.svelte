@@ -3,7 +3,7 @@
   import { API_BASE } from './config.js';
   import SentenceCard from './SentenceCard.svelte';
 
-  let { content, onDelete, onEdit, onUpdate, globalProcessing, onGlobalProcessingChange } = $props();
+  let { content, onDelete, onEdit, onUpdate, globalProcessing, onGlobalProcessingChange, aiEnabled = false } = $props();
 
   const _isThisPage = () => globalProcessing?.contentId === content.id;
 
@@ -206,8 +206,8 @@
     </div>
 
     <div class="flex items-center gap-2">
-      <!-- AI翻訳（練習モード中は非表示） -->
-      {#if !reproductionMode}
+      <!-- AI翻訳（練習モード中・AI無効時は非表示） -->
+      {#if !reproductionMode && aiEnabled}
         <button
           onclick={() => translate(!hasUntranslated)}
           disabled={isTranslating || isOtherPageProcessing}

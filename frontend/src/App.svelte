@@ -16,10 +16,19 @@
   let showDataManager = $state(false);
   // { contentId: string, type: 'translate'|'summarize', controller: AbortController } | null
   let globalProcessing = $state(null);
+  let aiEnabled = $state(true);
 
   onMount(async () => {
-    await Promise.all([loadContents(), loadSourceMasters()]);
+    await Promise.all([loadContents(), loadSourceMasters(), loadConfig()]);
   });
+
+  async function loadConfig() {
+    try {
+      const res = await fetch(`${API_BASE}/api/config`);
+      const cfg = await res.json();
+      aiEnabled = cfg.ai_enabled;
+    } catch {}
+  }
 
   async function loadContents() {
     try {
@@ -103,6 +112,7 @@
           onUpdate={(updated) => { selectedContent = updated; }}
           {globalProcessing}
           onGlobalProcessingChange={(v) => { globalProcessing = v; }}
+          {aiEnabled}
         />
       {/key}
     {:else}
