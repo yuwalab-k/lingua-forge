@@ -205,9 +205,9 @@
       <section class="border border-stone-200 rounded-lg p-4">
         <h3 class="text-sm font-semibold text-stone-700 mb-1">インポート</h3>
         <p class="text-xs text-stone-400 mb-3">
-          CSV ファイルから教材を一括登録します。1行目はヘッダー行として扱われます。<br />
-          必須カラム：<code class="bg-stone-100 px-1 rounded">title</code>、<code class="bg-stone-100 px-1 rounded">english_text</code>
-          ／任意：<code class="bg-stone-100 px-1 rounded">id</code>（指定時は既存データを更新）、<code class="bg-stone-100 px-1 rounded">source</code>、<code class="bg-stone-100 px-1 rounded">source_url</code>
+          CSV ファイルから教材を一括登録します。センテンス1行ずつのフォーマットです。<br />
+          必須カラム：<code class="bg-stone-100 px-1 rounded">content_title</code>、<code class="bg-stone-100 px-1 rounded">english_text</code>
+          ／任意：<code class="bg-stone-100 px-1 rounded">content_id</code>（指定時は既存データを更新）、<code class="bg-stone-100 px-1 rounded">sentence_index</code>、<code class="bg-stone-100 px-1 rounded">japanese_text</code>、<code class="bg-stone-100 px-1 rounded">source</code>、<code class="bg-stone-100 px-1 rounded">source_url</code>
         </p>
         <label class="flex items-center gap-2 cursor-pointer">
           <input
