@@ -1,6 +1,74 @@
+<script module>
+  const dictCache = new Map();
+</script>
+
 <script>
   import { API_BASE } from './config.js';
   import { ttsRate } from './stores.js';
+
+  // --- 単語辞書ホバー ---
+  let tooltip = $state(null);
+  let hoverTimer;
+
+  function splitWords(text) {
+    const parts = [];
+    const regex = /([a-zA-Z']+)|([^a-zA-Z']+)/g;
+    let m;
+    while ((m = regex.exec(text)) !== null) {
+      if (m[1]) parts.push({ token: m[1], isWord: true });
+      else parts.push({ token: m[2], isWord: false });
+    }
+    return parts;
+  }
+
+  async function fetchDefinition(word) {
+    const clean = word.toLowerCase().replace(/[^a-z]/g, '');
+    if (clean.length < 2) return null;
+    if (dictCache.has(clean)) return dictCache.get(clean);
+    try {
+      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${clean}`);
+      if (!res.ok) { dictCache.set(clean, null); return null; }
+      const [entry] = await res.json();
+      const defs = entry.meanings.slice(0, 2).map(m => ({
+        pos: m.partOfSpeech,
+        def: m.definitions[0].definition,
+      }));
+      // MyMemory で定義文をまとめて日本語翻訳
+      try {
+        const defsText = defs.map(d => d.def).join('\n');
+        const transRes = await fetch(
+          `https://api.mymemory.translated.net/get?q=${encodeURIComponent(defsText)}&langpair=en|ja`
+        );
+        if (transRes.ok) {
+          const transData = await transRes.json();
+          const lines = (transData.responseData?.translatedText || '').split('\n');
+          defs.forEach((d, i) => { if (lines[i]) d.def = lines[i]; });
+        }
+      } catch {}
+      const result = { phonetic: entry.phonetic || '', defs };
+      dictCache.set(clean, result);
+      return result;
+    } catch {
+      dictCache.set(clean, null);
+      return null;
+    }
+  }
+
+  async function onWordEnter(e, word) {
+    clearTimeout(hoverTimer);
+    const rect = e.currentTarget.getBoundingClientRect();
+    hoverTimer = setTimeout(async () => {
+      const def = await fetchDefinition(word);
+      if (!def) return;
+      const x = Math.min(Math.max(rect.left + rect.width / 2, 120), window.innerWidth - 120);
+      tooltip = { word, x, y: rect.bottom, ...def };
+    }, 400);
+  }
+
+  function onWordLeave() {
+    clearTimeout(hoverTimer);
+    hoverTimer = setTimeout(() => { tooltip = null; }, 150);
+  }
   let { sentence, showJapanese, reproductionMode = false, isActive, onClick, onUpdate, onDelete } = $props();
 
   const PASS_THRESHOLD = 70;
@@ -314,7 +382,17 @@
           </div>
         {:else}
           <div class="flex items-start gap-1 group/en">
-            <p class="text-stone-800 leading-relaxed text-[15px] flex-1">{sentence.english_text}</p>
+            <p class="text-stone-800 leading-relaxed text-[15px] flex-1">
+              {#each splitWords(sentence.english_text) as part}
+                {#if part.isWord}
+                  <span
+                    class="rounded cursor-help hover:bg-amber-100 hover:text-amber-800 transition-colors duration-100"
+                    onmouseenter={(e) => onWordEnter(e, part.token)}
+                    onmouseleave={onWordLeave}
+                  >{part.token}</span>
+                {:else}{part.token}{/if}
+              {/each}
+            </p>
             <button
               onclick={(e) => { e.stopPropagation(); startEditEn(); }}
               class="shrink-0 opacity-0 group-hover/en:opacity-100 transition-opacity mt-0.5 text-stone-300 hover:text-stone-500"
@@ -385,3 +463,22 @@
     {/if}
   </div>
 </div>
+
+{#if tooltip}
+  <div
+    class="fixed z-50 pointer-events-none bg-stone-800 text-white rounded-lg shadow-xl px-3 py-2.5 max-w-[260px] text-xs"
+    style="left: {tooltip.x}px; top: {tooltip.y + 8}px; transform: translateX(-50%)"
+  >
+    <p class="font-semibold mb-1">
+      {tooltip.word}
+      {#if tooltip.phonetic}
+        <span class="font-normal text-stone-400 ml-1">{tooltip.phonetic}</span>
+      {/if}
+    </p>
+    {#each tooltip.defs as d}
+      <p class="text-stone-300 leading-snug mb-0.5">
+        <span class="text-amber-400 italic mr-1">{d.pos}</span>{d.def}
+      </p>
+    {/each}
+  </div>
+{/if}
