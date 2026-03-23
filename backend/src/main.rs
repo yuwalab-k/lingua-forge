@@ -23,6 +23,7 @@ async fn main() {
         .allow_headers(Any);
 
     let app = Router::new()
+        .route("/api/config", get(handlers::get_config))
         .route("/api/sources", get(handlers::list_sources))
         .route("/api/sources", post(handlers::create_source))
         .route("/api/sources/:id", axum::routing::put(handlers::update_source))
