@@ -1,6 +1,6 @@
 <script>
   import { API_BASE } from './config.js';
-  let { sentence, showJapanese, reproductionMode = false, isActive, onClick, onUpdate } = $props();
+  let { sentence, showJapanese, reproductionMode = false, isActive, onClick, onUpdate, onDelete } = $props();
 
   const PASS_THRESHOLD = 70;
 
@@ -366,6 +366,13 @@
           title="音声再生"
         >
           <span class="material-symbols-rounded text-[18px]">{isPlaying ? 'stop' : 'play_arrow'}</span>
+        </button>
+        <button
+          onclick={(e) => { e.stopPropagation(); if (confirm('このセンテンスを削除しますか？')) onDelete?.(sentence.id); }}
+          class="w-8 h-8 flex items-center justify-center rounded-md text-stone-300 hover:bg-rose-50 hover:text-rose-400 transition-colors"
+          title="削除"
+        >
+          <span class="material-symbols-rounded text-[18px]">delete</span>
         </button>
       </div>
     {/if}

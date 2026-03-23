@@ -53,7 +53,7 @@ pub struct UpdateContentRequest {
     pub title: String,
     pub source_master_id: Option<String>,
     pub source_url: Option<String>,
-    pub english_text: String,
+    pub english_text: Option<String>,
 }
 
 #[derive(Debug, Serialize)]
@@ -74,6 +74,12 @@ pub struct UpdateSentenceRequest {
     pub japanese_text: Option<String>,
     pub text_completed: Option<bool>,
     pub speech_completed: Option<bool>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct InsertSentenceRequest {
+    pub insert_at: i64,
+    pub english_text: String,
 }
 
 #[derive(Deserialize)]

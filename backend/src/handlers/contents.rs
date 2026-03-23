@@ -203,25 +203,27 @@ pub async fn update_content(
     .await
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
-    sqlx::query("DELETE FROM sentences WHERE content_id = ?")
-        .bind(&id)
-        .execute(&pool)
-        .await
-        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    if let Some(english_text) = &req.english_text {
+        sqlx::query("DELETE FROM sentences WHERE content_id = ?")
+            .bind(&id)
+            .execute(&pool)
+            .await
+            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
-    let now = Utc::now().to_rfc3339();
-    for (index, english) in split_sentences(&req.english_text).iter().enumerate() {
-        sqlx::query(
-            "INSERT INTO sentences (id, content_id, sentence_index, english_text, japanese_text, created_at) VALUES (?, ?, ?, ?, NULL, ?)",
-        )
-        .bind(Uuid::new_v4().to_string())
-        .bind(&id)
-        .bind(index as i64)
-        .bind(english)
-        .bind(&now)
-        .execute(&pool)
-        .await
-        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+        let now = Utc::now().to_rfc3339();
+        for (index, english) in split_sentences(english_text).iter().enumerate() {
+            sqlx::query(
+                "INSERT INTO sentences (id, content_id, sentence_index, english_text, japanese_text, created_at) VALUES (?, ?, ?, ?, NULL, ?)",
+            )
+            .bind(Uuid::new_v4().to_string())
+            .bind(&id)
+            .bind(index as i64)
+            .bind(english)
+            .bind(&now)
+            .execute(&pool)
+            .await
+            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+        }
     }
 
     let content = fetch_content(&pool, &id).await.map_err(|_| StatusCode::NOT_FOUND)?;
