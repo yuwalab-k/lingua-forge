@@ -4,10 +4,10 @@
 
   const PASS_THRESHOLD = 70;
 
-  // ふりがな: 世界《せかい》→ <ruby>世界<rt>せかい</rt></ruby>
+  // ふりがな: 《世界|せかい》→ <ruby>世界<rt>せかい</rt></ruby>
   function toRubyHtml(text) {
     if (!text) return '';
-    return text.replace(/([^《》\s]+)《([^》]+)》/g, '<ruby>$1<rt>$2</rt></ruby>');
+    return text.replace(/《([^|》]+)\|([^》]+)》/g, '<ruby>$1<rt>$2</rt></ruby>');
   }
 
   // --- リプロダクション（テキスト） ---
