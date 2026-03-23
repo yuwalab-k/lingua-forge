@@ -36,6 +36,8 @@ async fn main() {
         .route("/api/contents/:id/translate", post(handlers::translate_content))
         .route("/api/contents/:id/translate", delete(handlers::cancel_translate))
         .route("/api/sentences/:id", axum::routing::put(handlers::update_sentence))
+        .route("/api/sentences/:id", delete(handlers::delete_sentence))
+        .route("/api/contents/:id/sentences", post(handlers::insert_sentence))
         .route("/api/export/contents.csv", get(handlers::export_contents_csv))
         .route("/api/import/contents", post(handlers::import_contents_csv))
         .layer(cors)

@@ -130,6 +130,46 @@
     onUpdate({ ...content, sentences });
   }
 
+  async function handleSentenceDelete(id) {
+    try {
+      const res = await fetch(`${API_BASE}/api/sentences/${id}`, { method: 'DELETE' });
+      if (!res.ok) return;
+      onUpdate(await res.json());
+    } catch {}
+  }
+
+  let insertingAt = $state(null);
+  let insertText = $state('');
+  let inserting = $state(false);
+
+  function openInsert(index) {
+    insertingAt = index;
+    insertText = '';
+  }
+
+  function closeInsert() {
+    insertingAt = null;
+    insertText = '';
+  }
+
+  async function submitInsert() {
+    if (!insertText.trim() || inserting) return;
+    inserting = true;
+    try {
+      const res = await fetch(`${API_BASE}/api/contents/${content.id}/sentences`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ insert_at: insertingAt, english_text: insertText.trim() }),
+      });
+      if (!res.ok) throw new Error();
+      onUpdate(await res.json());
+      closeInsert();
+    } catch {
+    } finally {
+      inserting = false;
+    }
+  }
+
   const hasUntranslated = $derived(content.sentences.some(s => !s.japanese_text));
   const hasAnyTranslated = $derived(content.sentences.some(s => s.japanese_text));
 
@@ -295,7 +335,41 @@
     </div>
   {/if}
 
+  {#snippet InsertRow(index)}
+    {#if insertingAt === index}
+      <div class="px-8 py-2 flex items-center gap-2 bg-stone-50 border-b border-stone-200">
+        <input
+          autofocus
+          type="text"
+          bind:value={insertText}
+          onkeydown={(e) => { if (e.key === 'Enter') submitInsert(); if (e.key === 'Escape') closeInsert(); }}
+          placeholder="追加するセンテンスを入力..."
+          class="flex-1 text-sm px-3 py-1.5 rounded border border-stone-300 focus:outline-none focus:border-stone-500 bg-white"
+        />
+        <button
+          onclick={submitInsert}
+          disabled={inserting || !insertText.trim()}
+          class="text-xs px-3 py-1.5 rounded border border-stone-300 bg-white text-stone-600 hover:border-stone-500 hover:text-stone-800 disabled:opacity-40 transition-colors"
+        >追加</button>
+        <button
+          onclick={closeInsert}
+          class="text-stone-400 hover:text-stone-600"
+        ><span class="material-symbols-rounded text-[16px]">close</span></button>
+      </div>
+    {:else}
+      <div class="group flex justify-center py-0.5">
+        <button
+          onclick={() => openInsert(index)}
+          class="opacity-0 group-hover:opacity-100 transition-opacity w-5 h-5 flex items-center justify-center rounded-full bg-sky-100 border border-sky-300 text-sky-500 hover:bg-sky-200 hover:border-sky-400"
+        ><span class="material-symbols-rounded text-[12px]">add</span></button>
+      </div>
+    {/if}
+  {/snippet}
+
   <div class="flex-1 overflow-y-auto">
+    {#if !reproductionMode}
+      {@render InsertRow(0)}
+    {/if}
     {#each content.sentences as sentence (sentence.id)}
       <SentenceCard
         {sentence}
@@ -304,7 +378,11 @@
         isActive={activeSentenceId === sentence.id}
         onClick={() => { activeSentenceId = sentence.id; }}
         onUpdate={handleSentenceUpdate}
+        onDelete={handleSentenceDelete}
       />
+      {#if !reproductionMode}
+        {@render InsertRow(sentence.sentence_index + 1)}
+      {/if}
     {/each}
   </div>
 </div>
