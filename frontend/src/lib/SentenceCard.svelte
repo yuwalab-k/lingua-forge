@@ -4,6 +4,12 @@
 
   const PASS_THRESHOLD = 70;
 
+  // ふりがな: 世界《せかい》→ <ruby>世界<rt>せかい</rt></ruby>
+  function toRubyHtml(text) {
+    if (!text) return '';
+    return text.replace(/([^《》\s]+)《([^》]+)》/g, '<ruby>$1<rt>$2</rt></ruby>');
+  }
+
   // --- リプロダクション（テキスト） ---
   let reproInput = $state('');
   let reproRevealed = $state(false);
@@ -183,7 +189,7 @@
         <div class="flex items-start justify-between gap-2 mb-3" onclick={(e) => e.stopPropagation()} role="presentation">
           <div class="flex-1">
             {#if sentence.japanese_text}
-              <p class="text-stone-600 text-sm leading-relaxed">{sentence.japanese_text}</p>
+              <p class="text-stone-600 text-sm leading-relaxed">{@html toRubyHtml(sentence.japanese_text)}</p>
             {:else}
               <p class="text-stone-300 text-sm">（日本語訳なし）</p>
             {/if}
@@ -335,7 +341,7 @@
             </div>
           {:else if sentence.japanese_text}
             <div class="mt-1.5 flex items-start gap-1 group/jp">
-              <p class="text-stone-400 text-sm leading-relaxed flex-1">{sentence.japanese_text}</p>
+              <p class="text-stone-400 text-sm leading-relaxed flex-1">{@html toRubyHtml(sentence.japanese_text)}</p>
               <button
                 onclick={(e) => { e.stopPropagation(); startEdit(); }}
                 class="shrink-0 opacity-0 group-hover/jp:opacity-100 transition-opacity mt-0.5 text-stone-300 hover:text-stone-500"
