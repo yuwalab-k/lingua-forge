@@ -1,5 +1,6 @@
 <script>
   import { API_BASE } from './config.js';
+  import { ttsRate } from './stores.js';
   let { sentence, showJapanese, reproductionMode = false, isActive, onClick, onUpdate, onDelete } = $props();
 
   const PASS_THRESHOLD = 70;
@@ -115,7 +116,7 @@
     ) || voices.find(v => v.lang.startsWith('en')) || null;
     const utterance = new SpeechSynthesisUtterance(sentence.english_text);
     utterance.lang = 'en-US';
-    utterance.rate = 0.9;
+    utterance.rate = $ttsRate;
     if (voice) utterance.voice = voice;
     utterance.onend = () => { isPlaying = false; };
     utterance.onerror = () => { isPlaying = false; };

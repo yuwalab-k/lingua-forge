@@ -2,6 +2,7 @@
   import { untrack } from 'svelte';
   import { API_BASE } from './config.js';
   import SentenceCard from './SentenceCard.svelte';
+  import { ttsRate } from './stores.js';
 
   let { content, onDelete, onEdit, onUpdate, globalProcessing, onGlobalProcessingChange, aiEnabled = false } = $props();
 
@@ -251,6 +252,21 @@
         <span class="material-symbols-rounded text-[14px]">edit_note</span>
         練習
       </button>
+
+      <!-- 読み上げ速度 -->
+      <label class="flex items-center gap-1.5 text-xs text-stone-500">
+        <span class="material-symbols-rounded text-[14px]">speed</span>
+        <input
+          type="range"
+          min="0.3"
+          max="1.5"
+          step="0.1"
+          bind:value={$ttsRate}
+          class="w-20 accent-stone-600"
+          title="読み上げ速度: {$ttsRate.toFixed(1)}x"
+        />
+        <span class="w-6 text-right">{$ttsRate.toFixed(1)}</span>
+      </label>
 
       <button
         onclick={onEdit}
