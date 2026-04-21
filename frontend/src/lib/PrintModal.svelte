@@ -5,6 +5,7 @@
 
   let fontSizeKey = $state('large');
   let showJapanese = $state(true);
+  let holePunch = $state(false);
 
   const sizeOptions = [
     { key: 'normal',  label: '小',  basePt: 6,  titlePt: 11, gap: 12 },
@@ -30,6 +31,7 @@
   function doPrint() {
     const s = currentSize;
     const jpnPt = Math.round(s.basePt * 0.65);
+    const pageMargin = holePunch ? '20mm 20mm 20mm 30mm' : '20mm';
 
     const sentencesHtml = content.sentences.map((sentence) => {
       const eng = escapeHtml(sentence.english_text);
@@ -41,14 +43,15 @@
         </div>`;
     }).join('');
 
-    const title = escapeHtml(content.title);
-    const source = content.source ? `<p style="font-size:${Math.round(s.basePt * 0.75)}pt; color:#666; margin:0 0 ${s.basePt}pt;">${escapeHtml(content.source)}</p>` : '';
+    const titleText = content.source
+      ? `【${escapeHtml(content.source)}】${escapeHtml(content.title)}`
+      : escapeHtml(content.title);
 
     const html = `<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>${title}</title>
+  <title>${titleText}</title>
   <style>
     @font-face {
       font-family: 'BIZUDP';
@@ -56,7 +59,7 @@
     }
     @page {
       size: A4;
-      margin: 18mm 30mm;
+      margin: ${pageMargin};
       @bottom-center {
         font-family: 'BIZUDP', sans-serif;
         font-size: 8pt;
@@ -71,19 +74,19 @@
       -webkit-print-color-adjust: exact;
     }
     h1 {
-      font-size: ${s.titlePt}pt;
-      margin: 0 0 ${Math.round(s.basePt * 0.6)}pt;
+      font-size: ${s.basePt + 2}pt;
+      margin: 0 0 ${Math.round(s.basePt * 1.2)}pt;
       padding-bottom: ${Math.round(s.basePt * 0.4)}pt;
-      border-bottom: 2px solid #ccc;
+      border-bottom: 1px solid #ccc;
       line-height: 1.4;
+      font-weight: bold;
     }
     ruby { ruby-align: center; }
     rt { font-size: 0.52em; }
   </style>
 </head>
 <body>
-  <h1>${title}</h1>
-  ${source}
+  <h1>${titleText}</h1>
   ${sentencesHtml}
 </body>
 </html>`;
@@ -93,7 +96,10 @@
     win.document.write(html);
     win.document.close();
     win.addEventListener('load', () => {
-      win.document.fonts.ready.then(() => win.print());
+      win.document.fonts.ready.then(() => {
+        win.print();
+        win.close();
+      });
     });
   }
 </script>
@@ -104,7 +110,6 @@
   role="dialog"
   aria-modal="true"
 >
-  <div class="absolute inset-0" onclick={onClose}></div>
 
   <!-- Panel -->
   <div class="relative bg-white rounded-2xl shadow-2xl w-[380px] overflow-hidden">
@@ -143,20 +148,32 @@
         </div>
       </div>
 
-      <!-- Japanese toggle -->
-      <div>
-        <p class="text-xs font-medium text-stone-500 mb-2.5">内容</p>
-        <div class="flex gap-2">
+      <!-- Toggles -->
+      <div class="space-y-3">
+        <!-- Japanese toggle -->
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-stone-700">日本語訳を表示</span>
           <button
-            onclick={() => { showJapanese = false; }}
-            class="flex-1 py-2.5 rounded-xl border-2 text-sm transition-all
-              {!showJapanese ? 'border-stone-700 bg-stone-50 font-medium text-stone-800' : 'border-stone-200 hover:border-stone-400 text-stone-500'}"
-          >英語のみ</button>
+            onclick={() => { showJapanese = !showJapanese; }}
+            class="relative w-11 h-6 rounded-full transition-colors {showJapanese ? 'bg-stone-700' : 'bg-stone-300'}"
+            role="switch"
+            aria-checked={showJapanese}
+          >
+            <span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform {showJapanese ? 'translate-x-5' : 'translate-x-0'}"></span>
+          </button>
+        </div>
+
+        <!-- Hole punch toggle -->
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-stone-700">穴あけ用レイアウト（左余白30mm）</span>
           <button
-            onclick={() => { showJapanese = true; }}
-            class="flex-1 py-2.5 rounded-xl border-2 text-sm transition-all
-              {showJapanese ? 'border-stone-700 bg-stone-50 font-medium text-stone-800' : 'border-stone-200 hover:border-stone-400 text-stone-500'}"
-          >英語＋日本語</button>
+            onclick={() => { holePunch = !holePunch; }}
+            class="relative w-11 h-6 rounded-full transition-colors {holePunch ? 'bg-stone-700' : 'bg-stone-300'}"
+            role="switch"
+            aria-checked={holePunch}
+          >
+            <span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform {holePunch ? 'translate-x-5' : 'translate-x-0'}"></span>
+          </button>
         </div>
       </div>
 
