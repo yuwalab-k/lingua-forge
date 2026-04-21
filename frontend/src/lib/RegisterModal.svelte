@@ -110,7 +110,6 @@
 
 <div
   class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-  onclick={handleClose}
   role="dialog"
   aria-modal="true"
 >
