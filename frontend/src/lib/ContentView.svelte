@@ -2,6 +2,7 @@
   import { untrack } from 'svelte';
   import { API_BASE } from './config.js';
   import SentenceCard from './SentenceCard.svelte';
+  import PrintModal from './PrintModal.svelte';
   import { ttsRate } from './stores.js';
 
   let { content, onDelete, onEdit, onUpdate, globalProcessing, onGlobalProcessingChange, aiEnabled = false } = $props();
@@ -182,6 +183,10 @@
   const practiceCompletedCount = $derived(
     content.sentences.filter(s => s.text_completed && s.speech_completed).length
   );
+
+  const showRetranslate = import.meta.env.VITE_SHOW_RETRANSLATE === 'true';
+
+  let showPrintModal = $state(false);
 </script>
 
 <div class="flex flex-col h-full">
@@ -208,7 +213,7 @@
 
     <div class="flex items-center gap-2">
       <!-- AI翻訳（練習モード中・AI無効時は非表示） -->
-      {#if !reproductionMode && aiEnabled}
+      {#if !reproductionMode && aiEnabled && (hasUntranslated || showRetranslate)}
         <button
           onclick={() => translate(!hasUntranslated)}
           disabled={isTranslating || isOtherPageProcessing}
@@ -267,6 +272,14 @@
         />
         <span class="w-6 text-right">{$ttsRate.toFixed(1)}</span>
       </label>
+
+      <button
+        onclick={() => { showPrintModal = true; }}
+        class="w-8 h-8 flex items-center justify-center rounded-md border border-stone-200 text-stone-400 hover:border-stone-400 hover:text-stone-700 transition-colors"
+        title="印刷"
+      >
+        <span class="material-symbols-rounded text-[16px]">print</span>
+      </button>
 
       <button
         onclick={onEdit}
@@ -381,6 +394,10 @@
       </div>
     {/if}
   {/snippet}
+
+  {#if showPrintModal}
+    <PrintModal {content} onClose={() => { showPrintModal = false; }} />
+  {/if}
 
   <div class="flex-1 overflow-y-auto">
     {#if !reproductionMode}
