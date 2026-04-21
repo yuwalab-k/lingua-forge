@@ -56,7 +56,7 @@
     }
     @page {
       size: A4;
-      margin: 18mm 20mm;
+      margin: 18mm 30mm;
       @bottom-center {
         font-family: 'BIZUDP', sans-serif;
         font-size: 8pt;
@@ -183,10 +183,6 @@
 
     <!-- Footer -->
     <div class="px-6 pb-5 space-y-3">
-      <p class="text-[11px] text-stone-400 leading-relaxed">
-        <span class="font-medium text-stone-500">日付・URLを消すには：</span>
-        印刷ダイアログ →「詳細設定」→「ヘッダーとフッター」をオフ（一度設定すれば記憶されます）
-      </p>
       <button
         onclick={doPrint}
         class="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-stone-800 text-white text-sm font-medium hover:bg-stone-700 active:bg-stone-900 transition-colors"
