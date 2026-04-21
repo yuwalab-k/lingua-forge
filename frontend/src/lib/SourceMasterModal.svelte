@@ -81,7 +81,17 @@
   >
     <!-- Header -->
     <div class="px-6 py-4 border-b border-stone-200 flex items-center justify-between">
-      <h2 class="text-base font-semibold text-stone-800">出典管理</h2>
+      <div class="flex items-center gap-3">
+        <h2 class="text-base font-semibold text-stone-800">出典管理</h2>
+        <button
+          onclick={startNew}
+          disabled={isNew}
+          class="flex items-center gap-1 text-xs text-stone-500 hover:text-stone-800 transition-colors disabled:opacity-40"
+        >
+          <span class="material-symbols-rounded text-[14px]">add</span>
+          新規追加
+        </button>
+      </div>
       <button
         onclick={onClose}
         class="w-7 h-7 flex items-center justify-center rounded-md text-stone-400 hover:bg-stone-100 transition-colors"
@@ -174,19 +184,10 @@
       {/if}
     </div>
 
-    <!-- Footer -->
-    <div class="px-6 py-4 border-t border-stone-100 flex items-center justify-between">
-      <button
-        onclick={startNew}
-        disabled={isNew}
-        class="flex items-center gap-1 text-xs text-stone-500 hover:text-stone-800 transition-colors disabled:opacity-40"
-      >
-        <span class="material-symbols-rounded text-[14px]">add</span>
-        新規追加
-      </button>
-      {#if error}
+    {#if error}
+      <div class="px-6 py-3 border-t border-stone-100">
         <p class="text-xs text-rose-500">{error}</p>
-      {/if}
-    </div>
+      </div>
+    {/if}
   </div>
 </div>

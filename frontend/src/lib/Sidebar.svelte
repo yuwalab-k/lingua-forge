@@ -25,10 +25,10 @@
     });
   })());
 
-  let collapsed = $state({});
+  let expanded = $state({});
 
   function toggleGroup(key) {
-    collapsed[key] = !collapsed[key];
+    expanded[key] = !expanded[key];
   }
 </script>
 
@@ -75,7 +75,7 @@
           onclick={() => toggleGroup(source)}
           class="w-full flex items-center gap-1 px-4 py-1.5 text-left hover:bg-stone-50 transition-colors"
         >
-          <span class="material-symbols-rounded text-[14px] text-stone-400 transition-transform {collapsed[source] ? '' : 'rotate-90'}">
+          <span class="material-symbols-rounded text-[14px] text-stone-400 transition-transform {expanded[source] ? 'rotate-90' : ''}">
             chevron_right
           </span>
           <span class="text-xs font-medium text-stone-400 uppercase tracking-wider truncate">{source}</span>
@@ -83,7 +83,7 @@
         </button>
 
         <!-- Group items -->
-        {#if !collapsed[source]}
+        {#if expanded[source]}
           <nav class="mb-1">
             {#each items as content (content.id)}
               <button
