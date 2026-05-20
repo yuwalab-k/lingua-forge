@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lingua Forge</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+                   "Yu Gothic UI", sans-serif;
+      background: #fafaf9;
+      color: #1c1917;
+      min-height: 100svh;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #fff;
+      border-bottom: 1px solid #e7e5e4;
+      padding: 14px 16px 12px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      color: #292524;
+      flex: 1;
+    }
+
+    #total { font-size: 12px; color: #a8a29e; }
+
+    #search {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #d6d3d1;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #fafaf9;
+      outline: none;
+      transition: border-color .15s;
+    }
+    #search:focus { border-color: #78716c; background: #fff; }
+
+    #filter-source {
+      width: 100%;
+      margin-top: 8px;
+      padding: 7px 10px;
+      border: 1px solid #d6d3d1;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #57534e;
+      background: #fff;
+      outline: none;
+      cursor: pointer;
+    }
+    #filter-source:focus { border-color: #78716c; }
+
+    main { padding: 0 16px 32px; }
+
+    .section { margin-top: 20px; }
+    .section.hidden { display: none; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 0 8px;
+      border-bottom: 1px solid #e7e5e4;
+      margin-bottom: 2px;
+    }
+
+    .section-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: #a8a29e;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      flex: 1;
+    }
+
+    .section-count { font-size: 11px; color: #d6d3d1; }
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f4;
+    }
+    .item.hidden { display: none; }
+
+    .item-title {
+      flex: 1;
+      font-size: 14px;
+      color: #1c1917;
+      line-height: 1.4;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .item-meta { font-size: 11px; color: #a8a29e; flex-shrink: 0; }
+
+    .item-link {
+      flex-shrink: 0;
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: #f5f5f4;
+      color: #57534e;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .item-link:hover { background: #e7e5e4; }
+
+    #empty {
+      display: none;
+      text-align: center;
+      padding: 48px 16px;
+      color: #a8a29e;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <h1>Lingua Forge</h1>
+      <span id="total"></span>
+    </div>
+    <input type="search" id="search" placeholder="タイトルで絞り込み..." autocomplete="off">
+    <select id="filter-source"></select>
+  </header>
+
+  <main id="main"></main>
+  <div id="empty">教材が見つかりませんでした</div>
+
+  <script>
+    const DATA = {"contents":[{"id":"drippy-disc01/01","title":"#01","source":"DRIPPY DISC01","source_url":null,"sentence_count":29},{"id":"drippy-disc01/02","title":"#02","source":"DRIPPY DISC01","source_url":null,"sentence_count":27},{"id":"drippy-disc01/03","title":"#03","source":"DRIPPY DISC01","source_url":null,"sentence_count":25},{"id":"drippy-disc01/04","title":"#04","source":"DRIPPY DISC01","source_url":null,"sentence_count":17},{"id":"drippy-disc01/05","title":"#05","source":"DRIPPY DISC01","source_url":null,"sentence_count":16},{"id":"drippy-disc01/06","title":"#06","source":"DRIPPY DISC01","source_url":null,"sentence_count":21},{"id":"drippy-disc01/07","title":"#07","source":"DRIPPY DISC01","source_url":null,"sentence_count":37},{"id":"drippy-disc01/08","title":"#08","source":"DRIPPY DISC01","source_url":null,"sentence_count":24},{"id":"drippy-disc02/01","title":"#01","source":"DRIPPY DISC02","source_url":null,"sentence_count":26},{"id":"drippy-disc02/02","title":"#02","source":"DRIPPY DISC02","source_url":null,"sentence_count":39},{"id":"drippy-disc02/03","title":"#03","source":"DRIPPY DISC02","source_url":null,"sentence_count":77},{"id":"drippy-disc02/04","title":"#04","source":"DRIPPY DISC02","source_url":null,"sentence_count":27},{"id":"drippy-disc02/05","title":"#05","source":"DRIPPY DISC02","source_url":null,"sentence_count":23},{"id":"drippy-disc02/06","title":"#06","source":"DRIPPY DISC02","source_url":null,"sentence_count":45},{"id":"drippy-disc02/07","title":"#07","source":"DRIPPY DISC02","source_url":null,"sentence_count":34},{"id":"drippy-disc03/01","title":"#01","source":"DRIPPY DISC03","source_url":null,"sentence_count":30},{"id":"drippy-disc03/02","title":"#02","source":"DRIPPY DISC03","source_url":null,"sentence_count":35},{"id":"drippy-disc03/03","title":"#03","source":"DRIPPY DISC03","source_url":null,"sentence_count":29},{"id":"drippy-disc03/04","title":"#04","source":"DRIPPY DISC03","source_url":null,"sentence_count":24},{"id":"drippy-disc03/05","title":"#05","source":"DRIPPY DISC03","source_url":null,"sentence_count":19},{"id":"drippy-disc03/06","title":"#06","source":"DRIPPY DISC03","source_url":null,"sentence_count":16},{"id":"drippy-disc03/07","title":"#07","source":"DRIPPY DISC03","source_url":null,"sentence_count":49},{"id":"drippy-disc03/08","title":"#08","source":"DRIPPY DISC03","source_url":null,"sentence_count":31},{"id":"drippy-disc04/01","title":"#01","source":"DRIPPY DISC04","source_url":null,"sentence_count":54},{"id":"drippy-disc04/02","title":"#02","source":"DRIPPY DISC04","source_url":null,"sentence_count":35},{"id":"drippy-disc04/03","title":"#03","source":"DRIPPY DISC04","source_url":null,"sentence_count":53},{"id":"drippy-disc04/04","title":"#04","source":"DRIPPY DISC04","source_url":null,"sentence_count":49},{"id":"drippy-disc04/05","title":"#05","source":"DRIPPY DISC04","source_url":null,"sentence_count":36},{"id":"drippy-disc04/06","title":"#06","source":"DRIPPY DISC04","source_url":null,"sentence_count":60},{"id":"drippy-disc05/01","title":"#01","source":"DRIPPY DISC05","source_url":null,"sentence_count":49},{"id":"drippy-disc05/02","title":"#02","source":"DRIPPY DISC05","source_url":null,"sentence_count":32},{"id":"drippy-disc05/03","title":"#03","source":"DRIPPY DISC05","source_url":null,"sentence_count":19},{"id":"drippy-disc05/04","title":"#04","source":"DRIPPY DISC05","source_url":null,"sentence_count":18},{"id":"drippy-disc05/05","title":"#05","source":"DRIPPY DISC05","source_url":null,"sentence_count":22},{"id":"drippy-disc05/06","title":"#06","source":"DRIPPY DISC05","source_url":null,"sentence_count":39},{"id":"drippy-disc05/07","title":"#07","source":"DRIPPY DISC05","source_url":null,"sentence_count":22},{"id":"drippy-disc06/01","title":"#01","source":"DRIPPY DISC06","source_url":null,"sentence_count":27},{"id":"drippy-disc06/02","title":"#02","source":"DRIPPY DISC06","source_url":null,"sentence_count":24},{"id":"drippy-disc06/03","title":"#03","source":"DRIPPY DISC06","source_url":null,"sentence_count":41},{"id":"drippy-disc06/04","title":"#04","source":"DRIPPY DISC06","source_url":null,"sentence_count":21},{"id":"drippy-disc06/05","title":"#05","source":"DRIPPY DISC06","source_url":null,"sentence_count":62},{"id":"drippy-disc06/06","title":"#06","source":"DRIPPY DISC06","source_url":null,"sentence_count":20},{"id":"drippy-disc06/07","title":"#07","source":"DRIPPY DISC06","source_url":null,"sentence_count":28},{"id":"drippy-disc07/01","title":"#01","source":"DRIPPY DISC07","source_url":null,"sentence_count":20},{"id":"drippy-disc07/02","title":"#02","source":"DRIPPY DISC07","source_url":null,"sentence_count":44},{"id":"drippy-disc07/03","title":"#03","source":"DRIPPY DISC07","source_url":null,"sentence_count":44},{"id":"drippy-disc07/04","title":"#04","source":"DRIPPY DISC07","source_url":null,"sentence_count":35},{"id":"drippy-disc07/05","title":"#05","source":"DRIPPY DISC07","source_url":null,"sentence_count":40},{"id":"drippy-disc07/06","title":"#06","source":"DRIPPY DISC07","source_url":null,"sentence_count":50},{"id":"drippy-disc07/07","title":"#07","source":"DRIPPY DISC07","source_url":null,"sentence_count":31},{"id":"drippy-disc08/01","title":"#01","source":"DRIPPY DISC08","source_url":null,"sentence_count":27},{"id":"drippy-disc08/02","title":"#02","source":"DRIPPY DISC08","source_url":null,"sentence_count":27},{"id":"drippy-disc08/03","title":"#03","source":"DRIPPY DISC08","source_url":null,"sentence_count":34},{"id":"drippy-disc08/04","title":"#04","source":"DRIPPY DISC08","source_url":null,"sentence_count":24},{"id":"drippy-disc08/05","title":"#05","source":"DRIPPY DISC08","source_url":null,"sentence_count":19},{"id":"drippy-disc08/06","title":"#06","source":"DRIPPY DISC08","source_url":null,"sentence_count":25},{"id":"drippy-disc09/01","title":"#01","source":"DRIPPY DISC09","source_url":null,"sentence_count":26},{"id":"drippy-disc09/02","title":"#02","source":"DRIPPY DISC09","source_url":null,"sentence_count":28},{"id":"drippy-disc09/03","title":"#03","source":"DRIPPY DISC09","source_url":null,"sentence_count":43},{"id":"drippy-disc09/04","title":"#04","source":"DRIPPY DISC09","source_url":null,"sentence_count":24},{"id":"drippy-disc09/05","title":"#05","source":"DRIPPY DISC09","source_url":null,"sentence_count":29},{"id":"drippy-disc09/06","title":"#06","source":"DRIPPY DISC09","source_url":null,"sentence_count":20},{"id":"drippy-disc09/07","title":"#07","source":"DRIPPY DISC09","source_url":null,"sentence_count":25},{"id":"drippy-disc09/08","title":"#08","source":"DRIPPY DISC09","source_url":null,"sentence_count":25},{"id":"drippy-disc10/01","title":"#01","source":"DRIPPY DISC10","source_url":null,"sentence_count":34},{"id":"drippy-disc10/02","title":"#02","source":"DRIPPY DISC10","source_url":null,"sentence_count":31},{"id":"drippy-disc10/03","title":"#03","source":"DRIPPY DISC10","source_url":null,"sentence_count":24},{"id":"drippy-disc10/04","title":"#04","source":"DRIPPY DISC10","source_url":null,"sentence_count":31},{"id":"drippy-disc10/05","title":"#05","source":"DRIPPY DISC10","source_url":null,"sentence_count":37},{"id":"drippy-disc10/06","title":"#06","source":"DRIPPY DISC10","source_url":null,"sentence_count":39},{"id":"drippy-disc10/07","title":"#07","source":"DRIPPY DISC10","source_url":null,"sentence_count":40},{"id":"drippy-disc10/08","title":"#08","source":"DRIPPY DISC10","source_url":null,"sentence_count":29},{"id":"drippy-disc11/01","title":"#01","source":"DRIPPY DISC11","source_url":null,"sentence_count":26},{"id":"drippy-disc11/02","title":"#02","source":"DRIPPY DISC11","source_url":null,"sentence_count":34},{"id":"drippy-disc11/03","title":"#03","source":"DRIPPY DISC11","source_url":null,"sentence_count":13},{"id":"drippy-disc11/04","title":"#04","source":"DRIPPY DISC11","source_url":null,"sentence_count":27},{"id":"drippy-disc11/05","title":"#05","source":"DRIPPY DISC11","source_url":null,"sentence_count":25},{"id":"drippy-disc11/06","title":"#06","source":"DRIPPY DISC11","source_url":null,"sentence_count":56},{"id":"drippy-disc11/07","title":"#07","source":"DRIPPY DISC11","source_url":null,"sentence_count":31},{"id":"drippy-disc12/01","title":"#01","source":"DRIPPY DISC12","source_url":null,"sentence_count":16},{"id":"drippy-disc12/02","title":"#02","source":"DRIPPY DISC12","source_url":null,"sentence_count":26},{"id":"drippy-disc12/03","title":"#03","source":"DRIPPY DISC12","source_url":null,"sentence_count":42},{"id":"drippy-disc12/04","title":"#04","source":"DRIPPY DISC12","source_url":null,"sentence_count":21},{"id":"drippy-disc12/05","title":"#05","source":"DRIPPY DISC12","source_url":null,"sentence_count":57},{"id":"drippy-disc12/06","title":"#06","source":"DRIPPY DISC12","source_url":null,"sentence_count":28},{"id":"drippy-disc12/07","title":"#07","source":"DRIPPY DISC12","source_url":null,"sentence_count":22},{"id":"syntax/0980","title":"#980 AI Coding Explained","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=8jbQZxMgIVs","sentence_count":806},{"id":"syntax/0987","title":"#987 Remote Coding Agents","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=S916GQVhRb8","sentence_count":732},{"id":"syntax/0988","title":"#988 Cloudflare’s Next.js Slop Fork","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=h39oZb2-7Xo","sentence_count":888},{"id":"syntax/0992","title":"#992 Migrating Legacy Code Just Got Easier","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=AOBbD7YJLIc","sentence_count":355},{"id":"syntax/0993","title":"#993 It’s Been A Hell Of Week","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=SbrLYkh8Ppw","sentence_count":563},{"id":"syntax/0994","title":"#994 AI Sucks At CSS","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=5dEp1ZpYDUg","sentence_count":810},{"id":"syntax/0995","title":"#995 Next.js Vendor Lock-in No More","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=UCveltYOQIs","sentence_count":835},{"id":"syntax/0996","title":"#996 10 New CSS and HTML APIs","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=unqPqGeJMck","sentence_count":443},{"id":"syntax/0997","title":"#997 Rating and Roasting Your Projects","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=9O0lQBEPL2U","sentence_count":757},{"id":"syntax/0998","title":"#998 How to Fix Vibe Coding","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=LSq485DvILM","sentence_count":659},{"id":"syntax/0999","title":"#999 Writing Maintainable CSS","source":"SYNTAX","source_url":"https://www.youtube.com/watch?v=mbGbPVMSnAQ","sentence_count":692}]};
+    let activeSource = '__all__';
+
+    (function init() {
+      const { contents } = DATA;
+      document.getElementById('total').textContent = contents.length + ' 教材';
+
+      const sources = ['__all__', ...new Set(contents.map(c => c.source || 'その他'))];
+      const sel = document.getElementById('filter-source');
+      sources.forEach(src => {
+        const opt = document.createElement('option');
+        opt.value = src;
+        opt.textContent = src === '__all__' ? '全カテゴリ' : src;
+        sel.appendChild(opt);
+      });
+      sel.addEventListener('change', () => {
+        activeSource = sel.value;
+        applyFilter();
+      });
+
+      const groups = {};
+      for (const c of contents) {
+        const key = c.source || 'その他';
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(c);
+      }
+
+      const mainEl = document.getElementById('main');
+      for (const [source, items] of Object.entries(groups)) {
+        items.sort((a, b) => {
+          const na = parseInt((a.title.match(/#(d+)/) || [])[1] || 0);
+          const nb = parseInt((b.title.match(/#(d+)/) || [])[1] || 0);
+          return nb - na;
+        });
+
+        const section = document.createElement('section');
+        section.className = 'section';
+        section.dataset.source = source;
+        section.innerHTML = `
+          <div class="section-header">
+            <span class="section-name">${esc(source)}</span>
+            <span class="section-count">${items.length}</span>
+          </div>
+        `;
+
+        for (const c of items) {
+          const div = document.createElement('div');
+          div.className = 'item';
+          div.dataset.title = c.title.toLowerCase();
+          div.dataset.source = source;
+          div.innerHTML = `
+            <span class="item-title">${esc(c.title)}</span>
+            <span class="item-meta">${c.sentence_count}文</span>
+            <a class="item-link" href="./${c.id}.html">開く</a>
+          `;
+          section.appendChild(div);
+        }
+        mainEl.appendChild(section);
+      }
+
+      applyFilter();
+    })();
+
+    function applyFilter() {
+      const query = document.getElementById('search').value.toLowerCase().trim();
+      let anyVisible = false;
+      document.querySelectorAll('.section').forEach(sec => {
+        const srcMatch = activeSource === '__all__' || sec.dataset.source === activeSource;
+        if (!srcMatch) { sec.classList.add('hidden'); return; }
+        let secHasVisible = false;
+        sec.querySelectorAll('.item').forEach(item => {
+          const ok = !query || item.dataset.title.includes(query);
+          item.classList.toggle('hidden', !ok);
+          if (ok) secHasVisible = true;
+        });
+        sec.classList.toggle('hidden', !secHasVisible);
+        if (secHasVisible) anyVisible = true;
+      });
+      document.getElementById('empty').style.display = anyVisible ? 'none' : 'block';
+    }
+
+    document.getElementById('search').addEventListener('input', applyFilter);
+
+    function esc(s) {
+      return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+  </script>
+</body>
+</html>

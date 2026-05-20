@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>【SYNTAX】#996 10 New CSS and HTML APIs</title>
+  <style>
+    @font-face {
+      font-family: 'BIZUDP';
+      src: url('../assets/BIZUDPGothic-Regular.ttf') format('truetype');
+    }
+    @page { size: A4; margin: 20mm; }
+    body {
+      font-family: 'BIZUDP', "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+                   "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      margin: 0; padding: 0; color: #111;
+    }
+    @media screen {
+      body { padding: 28px 32px; max-width: 800px; margin: 0 auto; }
+    }
+    h1 {
+      font-size: 15pt;
+      margin: 0 0 16pt;
+      padding-bottom: 5pt;
+      border-bottom: 1px solid #ccc;
+      line-height: 1.4;
+      font-weight: bold;
+    }
+    ruby { ruby-align: center; }
+    rt { font-size: 0.52em; }
+  </style>
+</head>
+<body>
+  <h1>【SYNTAX】#996 10 New CSS and HTML APIs</h1>
+  
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Welcome to Syntax.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">構文解析へようこそ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Today, we are talking about a bunch of new stuff in CSS and HTML.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">今日はCSSとHTMLの最新機能についていくつかご紹介します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There has been some big things added and some small things added, some nice quality of life things, and some really exciting things that you cannot use just yet, but you can play around with.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">大きな新機能がいくつか追加され、いくつかの細かな利便性向上要素も実装されました。現時点ではまだ完全には利用できないものの、実験的に試せる興味深い機能も用意されています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There is just like an onslaught of new stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">まるで新しいものばかりが溢れているようだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So we've collected a handful of these things and are gonna be sharing with you today.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで私たちはこれらのアイテムをいくつか集め、今日皆さんと共有することにしました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I didn't even know that this was gonna be a thing.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これが実際に行われるなんて全く知らなかったよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I didn't even know this was an option.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これが選択肢にあることさえ知らなかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And now It showed up out of nowhere.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして突然、どこからともなく現れた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Was opened up to me.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私に開かれました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Scott, my brain has been opened up by some of these demos for this, so I I'm stoked to get into that too.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">スコット、これらのデモのいくつかで私の脳は刺激されたから、こっちも深く掘り下げていくのが楽しみだよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So stay tuned, folks.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">皆さん、引き続き注目していてください。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We're gonna be talking about what the heck HTML in Canvas is and why it's going to allow for crazy stuff going on on the web.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これから、CanvasにおけるHTMLの本質と、ウェブ上で実現可能になる驚くべき機能について掘り下げていきます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So so the very first one I wanna get into is something that has been long awaited in CSS, which is the CSS masonry API, aka the actual name for this thing is CSS grid lanes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">まず最初に取り上げたいのは、CSSで長らく待ち望まれていた「マソンリーAPI」、正式名称は「グリッドレイアウト機能」です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's a display property, display grid lanes, and then you can specify using grid template columns, those types of things in GAP, the CSS properties that we know and love.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">表示プロパティ、ディスプレイグリッドレーンがあり、さらにCSSでお馴染みのgrid-template-columnsなどの設定が可能です。これらは私たちが慣れ親しんだHTMLのレイアウト属性です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The only difference is is that the content actually filters in in the classic masonry Pinterest style layout.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">唯一の違いは、コンテンツが実際にクラシックなMasonryスタイルのPinterest風レイアウトで表示される点です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This can be useful for all kinds of things beyond just your classic photo grids or things like that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは標準的な写真グリッドや類似の用途にとどまらず、さまざまな場面で活用できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I saw it being used for, like, footer, links to have the footer links all shuffle correctly.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">フッターのリンクが正しく表示されるなど、様々な用途で使用されている場面を目撃しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is kind of the the best possible thing we could be adding as an implementation for the masonry style layouts in CSS.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは、CSSのマソンリースタイルレイアウトを実装する上で考えられる最良の解決策と言えるでしょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's going to allow for the shuffling of elements in such a great way where, in the past, we had CSS columns that warp things went like one, two, three down vertically before going into the next column.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これにより、要素の配置方法が大幅に改善され、従来のように垂直方向に1列（例：1,2,3）と並んだ後、次のカラムに移動するといった処理が極めて効率的に行えるようになります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is actually going to do the opposite where things will fill in kind of where they fit in left to right.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは実際には逆の効果をもたらし、要素は左から右へと自然に配置されるようになります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They will just kind of fit and and you can actually do it right to left or up to down, left to right.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは基本的に左から右、上から下、または左揃えで配置することができます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You could you can change all of that as well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これらすべても変更できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But if you just want a straight up masonry style layout, man, display grid lanes, can it, like, get any more simple than that?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">でも、純粋にレンガ積み風のシンプルなレイアウトが欲しいだけなら、これ以上シンプルにできるかな？ってくらいシンプルだよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It is
+
+really super cool.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">本当に超かっこいいです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それで終わりです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's nothing to learn here.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここには学ぶべきものはない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's simply just display grid lanes, and now you can have multiple like like, a Pinterest style layout, which is something that we have been trying to do forever.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは単にグリッドレーンを表示する機能に過ぎず、今やPinterestのようなスタイルのレイアウトを実現できます。これまで長年実現を目指してきたものです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And we've had like, in in we had what?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私たちはこれまでに、例えば何があったでしょうか？？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, box pack fit in CSS grid, but it never was perfect, and and it didn't go the way you wanted, and it had to have a fixed height.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ボックスパックはCSSグリッドシステムに対応してはいるものの、完全に思い通りに動作するわけではなく、常に固定の高さを設定する必要がありました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's always gotchas with this type of thing.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この手のものにはいつも落とし穴があるものだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And now we have it, and I am so happy that we can finally have this type of layout.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてついに実現しました。このようなレイアウトがついに可能になったことを、心から嬉しく思います。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's gonna make doing these types of websites
+
+so much easier.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">こうしたタイプのウェブサイト作成が格段に簡単になるでしょう！</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like, also, like, it opens up new creative use cases as well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてさらに、新たな創造的な活用事例も切り開いてくれるんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Super cool stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">超クールなものだね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So we we'll we'll link up a Wes kit post.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで私たちはウェスキットの投稿にリンクを貼ることにします。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is available right now in the, as of Safari version 26.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは現在、Safariバージョン26以降で利用可能です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">4, and it is behind a flag in Chrome and Firefox.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">4. Google ChromeとFirefoxでは旗のアイコンが表示されます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So
+
+Scott long off here.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だからスコットはここで長くは続かないだろう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Really stoked about this one.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これ本当にワクワクするよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Alright.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Next, we have this HTML in Canvas API, and I had zero idea that this was coming.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">次に、Canvas APIでこのHTMLコードが登場しましたが、これが表示されるとは全く予想していませんでした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's an experimental API, meaning that, like, it might not ever come, but it sort of solves one problem we have with Canvas, which is you you cannot draw HTML to Canvas.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは実験的なAPIであり、つまり将来的に実装されない可能性もあります。現在Canvasで抱えている問題の一つを解決するもので、具体的にはHTMLコンテンツを直接キャンバスに描画できないという制約を解消します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And the other problem is that when you make UI in Canvas, if if you wanna, like, add effects or whatever with Canvas, then it's it's very hard to make accessible.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">もう一つの問題は、CanvasでUIを作成する場合、エフェクトなどの追加機能を実装しようとするとアクセシビリティを確保することが非常に困難になるという点です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So this new UI will allow you to simply just put elements inside of a canvas.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この新しいUIでは、要素をキャンバス内に簡単に配置できるようになります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, I got my dev tools open right here.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ほら、ここに開発ツール開いてるでしょ？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is literally a canvas element.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは文字通りキャンバス要素です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then inside of that, you can just put regular HTML.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてその内部には通常のHTMLコードを直接記述できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then there's some JavaScript APIs that will allow you to paint that HTML to the Sanity.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">さらに、HTMLをSanityにレンダリングするためのJavaScriptインターフェースも用意されています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Now why would you want to do that?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ではなぜそんなことをしたいのでしょうか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, there are so many different effects that you can do with Canvas that you you can put a canvas in front of HTML.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">CanvasではHTML要素の前面に配置できる多様な効果を実現できます。例えば、以下のようなことが可能です：</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can use SVG Wes there's some tricks where you can put HTML inside of an SVG, and now it's an image, and then you can paint that to canvas, but there's a whole bunch of limitations.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">HTMLをSVG内に埋め込む方法はいくつか存在します（例えば特定の手法を使えば可能ですが、多くの制約があります）。ただし、この方法には重大な制限事項がいくつかあります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's actually how we use on the SynHax platform.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは実際にSynhaXプラットフォームで採用している方法です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But this is simply just you can put most HTML inside of a Canvas element and then apply any shaders or any any whatever things that you want to the canvas element.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ただし、これは基本的にCanvas要素内に任意のHTMLコンテンツを配置し、必要に応じてシェーダーやその他の処理をキャンバスエレメントに適用できるということを意味しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So here, I've got pixelization, and I can just go ahead and, like, type in it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここではピクセル化効果が得られますので、そのまま文字を入力できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, this Deno, this is totally unreadable for people who are not watching this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">例えばこのDenoみたいに、これを見てない人には全く理解できないでしょ？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's a completely form input.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">完全にフォーム入力です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">HTML
+
+in here.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">HTML
+
+ここに挿入します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's it's obviously a stupid example, but it's just showing how, like, this is live
+
+HTML.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは明らかに馬鹿げた例ですが、まさにこれがリアルタイムで起こっている様子です：
+
+<html lang="ja">
+<head>
+    <title>ライブデモ</title>
+</head>
+<body>
+    <h1>ようこそ！</h1>
+    <p>こんにちは、世界。</p>
+</body>
+</html>
+````</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like, I don't know.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてまあ、よくわからないけど。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, if you backed it off a little bit, that kinda looks kinda cool.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">例えば、ちょっと控えめにやると、ちょっとカッコよく見えるんだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I got a question about that, Wes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ウェス、その件で質問があるんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If you just had the HTML inside of the canvas, would it just render as normally, or do you have to, tell it to render the HTML?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">canvas 内に単にHTMLコードを配置した場合、通常どおりに表示されますか、それとも明示的にレンダリングするよう指示する必要がありますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There is a, like, a request drawing API on it where you have to explicitly tell it to to draw.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこには、明示的に描画を指示する必要があるリクエストドローAPIが実装されています。つまり、「ここに描け」と指定しなければならないのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm curious about what would happen if you're not.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでない場合にどうなるかも興味深いですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I have a whole bunch of demos in here, but I I assume it would probably fall back, but maybe not, because maybe that's not what you want.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここにはたくさんのデモ音源が入っていますが、おそらくデフォルト設定に戻るでしょう。ただし、それが必ずしもご希望ではないかもしれません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I need some hand holding sometimes in these demos.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これらのデモでは、時々指導が必要なんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I look through them, and I'm like, what is required here?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それらを見て、「ここで求められているのは何だろう？」と考えます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What is not required?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">必須ではないものは何ですか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So here here's another example where I made a magnifying glass for a website.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">次に、ウェブサイト用に拡大鏡ウィジェットを実装した別の例をご紹介します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">This is it.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And because the HTML is is being drawn to it right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてHTMLが直接描画されているんですよね？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, you can see I'm I'm just typing into this input here.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">例えば、ここでこの入力欄に文字を入力しているのがわかりますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Uh-huh.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">うん。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But and I'm I'm using a magnifying glass to to make that bigger and and slightly distort it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しかし私は、拡大鏡を使ってそれを大きくし、さらにわずかに歪ませています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Another one is frosted.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">もう一つのものは霜が降りている。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So here you can see, like, this is just text.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、これは単なるテキストデータです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm Can you describe what you're doing, Wes, for the audio?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ウェス、音声の説明をしてもらえますか？今何をしているのか詳しく教えてください。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sorry.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">すみません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is, creating, like, a a frosted effect on a window.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはつまり、窓に霜が降りたような効果を作り出す技法です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know, if you're blow on a window on, like, a a cold, warm day and then use your finger to wipe the frost away, I'm I'm doing that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ほら、寒い日に窓ガラスが曇ってる時、指で霜を拭き取るみたいにするだろ？ まさにそれをやってるんだよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and this, again, you could have kind of done this before Wes you could put a canvas in front of the HTML, but what I'm doing here is I'm literally, I'm blurring the stuff that is behind the canvas.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれも以前ウェスがやっていた方法ですが、HTML要素の前にキャンバスを配置することは可能です。ただし私がここで行っているのは、文字通りcanvasより後ろにあるコンテンツをぼかしているのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたは知っていますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then as you use your finger to move the frost out of the way, it becomes less blurred.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして指で霜をよけながら動かすと、徐々にぼやけが解消されていきます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's a little random every single time.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">毎回ちょっとランダムな感じだね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's some other really cool demos from here we go.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここからさらに素晴らしいデモがいくつか登場します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Matt Rothenberg had a cool demo where he's look at this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">マット・ロスバーグが披露したデモでは、彼がこのコンセプトを見事に表現していました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And if you pause it really quickly, you'll see What is happening now, Wes, for the Oh my gosh.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして素早く一時停止すると、ウェス、今まさに何が起きているかがわかります――「うわっ！」という感じです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm so sorry, audio listeners.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">音声で聴いているリスナーの皆さん、本当に申し訳ありません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">He has two things.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">彼には二つのものがある。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">One is when you have an input, you have, like, a kind of a cool box that's following around the currently focused input, and that is just rendering out a cool border hover effect around each of the inputs, which you could have done that previously with Canvas in some work, but I think it's a a lot easier now.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">1つ目は、現在フォーカスされている入力フィールドに追従するクールなボックスがある場合です。この効果は以前ならCanvasを使って実現していましたが、今ではもっと簡単に実装できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then the other thing is that when you submit it, there's, like, scan ESLint goes down through the form and sort of, like like, wipes it off the page.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてもう一つ重要なのは、フォームを送信すると、スキャン機能がページ全体を下方向に移動しながらエラーをチェックしてくれる点です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But part of the wipe is you'll see that the the wording is getting slightly stretched and blurred as it's being wiped off.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ただし、拭き取る過程で文字が少しずつ引き伸ばされ、ぼやけていく様子が確認できる。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I thought that was such a cool effect.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">とてもかっこいい効果だと思ったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Even, like you Node, on iOS, when you bring up, like, Siri on Bos, where you Mhmm.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたのようなノードでさえ、iOSでSiriを起動するとき――例えばBos上でMhmと入力するような場合でも同じです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It slightly does, like, a gradient border around your phone.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">電話機の周囲にグラデーション状の境界線が少しついている感じです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Or when you do your volume up and down on iOS, it actually pushes in the content that is on the screen.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">また、iOSで音量を上げたり下げたりする操作を行うと、画面上のコンテンツが実際に押し込まれるようになっています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's not just overlapping the volume slider.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">音量スライダーを重ねるだけではありません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The volume slider is literally pushing the content over, and it slightly warps it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ボリュームスライダーが文字通りコンテンツをはみ出しており、わずかに歪んでいます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I think, like, that kind of stuff is so cool that you can have control over how the pixels are painted in the DOM.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして思うのですが、ピクセル単位でHTML要素を操作できるというのは、本当に素晴らしいことだと思います。DOM上でどのように描画されるかを完全に制御できるという点が。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Whatever is simply falling behind this volume slider, I wanna simply push that Vercel, and that is something that you have not been able to do.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このボリュームスライダーの背後にあるものは何でも、単にVercelを押したいだけなんです。これまでできなかったことですから。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You've been able to, like, have SVG filters on top of things, but in actually having full control over how the pixels are rendered on the screen without having to give up or move to something or give up a whole bunch of accessibility and whatnot.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これまではベクター画像にフィルター効果を適用することはできましたが、その一方で、アクセシビリティ機能の多くを犠牲にしたり、別のものに完全に移行したりする必要がありました。しかし今では、ピクセル単位で画面表示を完全に制御しつつ、こうした制約から解放されるようになったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You just regular HTML inside of a canvas element.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">canvas要素内に通常のHTMLコードを記述するだけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So It's I don't know if Sony make it or not.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だからソニーがこれを発売するかどうかはわからないんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's so cool, though.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">でも本当にかっこいいですよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's so cool.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">とてもかっこいい。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The just jelly slider right here?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このすぐそばにあるゼリースライダー？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, we saw this demo on on Twitter a couple years ago or a couple weeks ago.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">例えば、2年前か1ヶ月前くらいにTwitterでこのデモを見たことがあるんですよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Couple it feels like years ago at this point.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">今となっては何年も前のことのように思える。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If I inspect element on this jelly slider,
+
+it is simply just an input.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このジェリースライダーの要素を検査してみると、
+
+実際にはただの入力フィールドであることがわかります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's the best part, folks, because people who might not know is the moment you get into any of this Canvas stuff, you're you're having to write so much, interactivity code or in the case of inputs, forget about it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここが一番の見どころです。Canvasについて知らない人たちにとって、この種のことに取り組む際には、膨大な量のインタラクティブなコードを書く必要があります - 入力要素に関しては、完全に無視して構いません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかりますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like so having the actual DOM elements, and then you don't lose accessibility in Canvas based sites too.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このように実際のDOM要素を保持しておけば、Canvasベースのサイトでもアクセシビリティを損なうことがありません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's it's really just what a what a powerhouse of an API this is.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは本当に、実に強力なAPIです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So here's another one from Jake Archibald
+
+Wes like, if you wanted, like like, a old CRT TV Wes things are slightly what do you call that shape that the the CRT TV has, you know, where it's it's not perfectly square, but there's a bit of an arch to it?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">さて、ジェイク・アーチボルドからの新たな投稿です：
+
+ウェス、例えば古いCRTテレビのように、画面が完全な正方形ではなく、わずかに湾曲した形状をしているものがあるでしょう？あの独特のカーブを描いたフォルムのことなんですが？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's, Scott
+
+kinda
+
+that's Convex.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それはスコットだ
+
+ちょっと凸状になってるよ</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Something like that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そんな感じです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Whew.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ふう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So cool.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">すごくかっこいい。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like, the again, this is just regular old HTML.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれも同様、これは単なる通常のHTMLです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I can inspect element on it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その要素を検査できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたは知っていますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I can change some of the text inside of that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そのテキストの一部を変更できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I can use all of the stuff that I'm used to in HTML, and it's just updated any any effects you have.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">HTMLで使い慣れたすべての要素を使用でき、さらに最新機能も自由に活用できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I'm gonna I'm building out some more demos with this because this is right down my alley.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だからこのテーマでもっとデモを作っていくつもりだ。これはまさに得意分野だから。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It you know what?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたが何を知っているの？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It kind of feels like it would give the, the stuff that we wanted to do with Houdini Node now you could kind of do.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはHoudiniノードでやりたかったことがある程度実現できそうな感じですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You could do all kinds of custom rendering.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">さまざまなカスタムレンダリングが可能でした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">はい。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Really stoked about this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これ本当にワクワクするよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">A lot of the Houdini stuff, like, never panned out.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">『Houdini』の多くは、結局うまくいかなかったものばかりだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We and pnpm ended up making its way via things like like text align center or or no. What is it?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私たちと npm（現在は pnpm）は最終的に、text-align:center; や display:none;、あるいは単に非表示にするなどの方法にたどり着きました。結局どれを選んだのでしょうか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Text wrap balance.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">テキストの折り返しバランスを調整します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかりますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">App wrap balance.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">アプリラップ残高。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But I think that this is another one of those APIs where, yeah, just render out the HTML to a canvas element, and then you've got the pixels.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しかしこれは、HTMLをcanvas要素に直接レンダリングすれば、ピクセルデータが得られるタイプのAPIだと思います。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You could do whatever you want.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたは好きなことを何でもすることができた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can put shaders on it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">シェーダーを適用できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can tweak it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">微調整できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can morph it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">変形させることができます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Whatever you want.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">何でも好きなものを。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I hope this works in.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">うまく機能してくれるといいのですが。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's behind a flag in Chrome right Node.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Chromeのノードで旗マークのある場所にありますよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, obviously, you can't use this on any website, but everybody who saw this is like, yes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、当然ながらあらゆるウェブサイトで使えるわけではありませんが、これを見た人は皆、「これは素晴らしい」と思うでしょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I absolutely need this thing for, making next gen interfaces.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">次世代インターフェースの開発には絶対にこれが必要だ！</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Nice.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">素敵ですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I have one that you might not have seen here, and this one kinda flew underneath the radar.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここでまだご覧になっていないかもしれない作品が1つあって、これはちょっと注目されていなかったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Firefox Node forty nine, Chrome one forty eight, and, the same version of Safari that brings was it 26.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Mozilla Firefox 49、Google Chrome 68、およびSafariの同じバージョン（26）です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">4 that brought grid lanes, are are bringing container queries that you don't have to specify the actual query part of the container query.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">グリッドレーンを導入することで、コンテナクエリで実際の問い合わせ部分を具体的に指定する必要がなくなります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can just specify the name.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">名前だけを指定するだけで済みます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So the way you would do this is you would on a wrapper, you would give your container name property a name, so container name sidebar.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">具体的には、ラッパー要素内でコンテナ名プロパティに名前を指定します。例えば「container-name-sidebar」といった具合です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Then you could just use the at container sidebar, and that would scope the CSS to that container specifically, giving you basically another way of doing, scoped CSS that is baked into the platform.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この場合、atコンテナサイドバーを使用するだけで、その特定のコンテキストにCSSを限定でき、プラットフォーム自体が提供するスコープ付きスタイルシートと同様の効果が得られます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because right now, all the scoped CSS solutions are adding a bunch of classes to scope.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">現在のスコープ付きCSSソリューションはいずれも、要素に大量のクラスを追加することで対応しているからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And this is, again, just another way that we could have native scoping in CSS because, typically, with container queries, you're specifying, like, a style query.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはCSSでネイティブなスコープ機能を実現するもう一つの方法です。通常、コンテナクエリではスタイル条件を指定しますが、これも一種の「style-query」と言えます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Okay.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかりました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Apply this CSS when this value is equal to this or apply this CSS when the container width or size is this or this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この値が指定された値と等しい場合に適用するか、コンテナの幅またはサイズがこの数値に達したときにCSSを適用します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But this is basically just saying, apply this CSS inside of this container, but it does scope it so that way you could use more generic specifiers inside of that and scope it to that container itself.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ただしこれは基本的に「このコンテナ要素内でのみ、このCSSを適用する」という意味であり、より一般的なセレクタを使用しても、その範囲をその特定の容器自体に限定できるという利点があります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oh,
+
+man.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ああ、
+
+男。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think that that is awesome because like, we have at scope in CSS Node, and I I ended up I tried using this for a project I was working on the other day, and, like, it just didn't feel right.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは素晴らしいアイデアだと思います。CSSのスコープ機能を使えば、先日取り組んでいたプロジェクトで試してみたんですが、どうもしっくりこなかったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mhmm.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Hmm-hm.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Really?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">本当に？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And you can at scope, you can give it a selector, but and then you can also donut scope, which is really cool.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">スコープ内で使用する際にはセレクタを指定できますが、さらに「donut-scope」機能も利用可能です。これは非常に便利な機能です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So you can start the Scott, and you can tell it to end at a specific thing, which that's great as well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このようにスコットを開始し、特定の時点まで再生するように指示することも可能です。これは非常に便利な機能です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And this is this is widely supported as well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれも広くサポートされています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But the ability to make, like, named scopes, like sidebar, that's great, and you're simply just using container queries for that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しかし、サイドバーのような名前付きスコープを作成できる機能は素晴らしいですし、実際にはコンテナクエリをその目的で使用しているだけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And very likely, you also want to do things with your container queries as well, and then those are not two separate APIs.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">さらに、コンテナクエリに対しても同様の操作を行いたい場合が多く、これらは別々のAPIとして実装されるべきではありません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is simply just the container spec.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは単にコンテナ仕様を定義しているだけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And now and then their style queries JS welcome into container queries.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして時折、彼らのスタイルクエリはコンテナーサイズに応じたメディアクエリにも対応している。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I am in.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は賛成です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That that is awesome.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それは素晴らしいですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So that's just called name only container queries.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、これは名前だけのコンテナクエリーと呼ばれるものです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's hard to actually find anything about this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これについて実際に情報を見つけるのは難しい。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I saw it because Chris Coyier had a tweet, and then Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">クリス・コイラーがツイートしていたのを見て、それから確かにそうだった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Front end masters had a post on it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">フロントエンドのマスターには投稿がありました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I'm Scott looking for what the support is, and I can only find it in GitHub issues and stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてサポート情報を探すと、結局 GitHub Issues（問題追跡システム）でしか見つけられないんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, one of those things that was hard to track down what the support is, but really neat.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、サポートを見つけるのは難しかったけれど、とても興味深いものでした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">According to Anthony Ferner on Blue Sky, he says it's in Firefox one forty nine, Chrome one forty eight, and now Safari 24 or 26.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">アンソニー・フェナー氏（BlueSky社）によると、Firefoxではバージョン1.49、Chromeは28または30以降で動作し、Safariについては最新のVer.24か26に対応しているとのことです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">4, 24.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">4, 24.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">6, one of the 26.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">六、26のうちの一つ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">4.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">4.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">はい。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There we go.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これでいいでしょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Okay.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかりました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And if you want to see all of the errors in your application, you'll want to check out Sanity at sentry.io/syntax.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">アプリケーション内のすべてのエラーを確認したい場合は、sentry.io/docs/error-tracking を参照してください。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You don't want a production application out there that, well, you have no visibility into in case something is blowing up, and you might not even know it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">本番環境で稼働するアプリケーションでは、問題が発生しても検知できず、気づかないまま放置されるリスクは避けなければなりません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So head on to century.io/syntax.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">century.io/構文 をご覧ください。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Again, we've been using this tool for a long time, and it totally rules.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">繰り返しになりますが、私たちはこのツールを長年愛用しており、本当に素晴らしいです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Alright.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Man, I am in.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">やばい、やられた！</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's so much of CSS that doesn't get the, like, props that it needs to.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">CSSには本来与えられるべき評価を受けていない要素が実にたくさんある。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I attribute that to people being obsessed with AI right now.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは今みんながAIに夢中になっているからだと思うんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたは知っていますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's there's not a lot of time to to spend on new CSS stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">新しいCSSの学習に割ける時間はあまりありません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Or, like, everybody's just cranking out Tailwind left and right, and, like, lot of this new stuff is not supported in Tailwind at all.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あるいは、みんながTailwindを次々と生成していて、この新しい機能の多くがまったくサポートされていないのが現状です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So it's kinda hard, but there's so much cool stuff added to CSS that is super powerful.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だからちょっと難しい面もあるけど、CSSには驚くほど強力な機能がたくさん追加されているんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Couple other ones.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">他にもいくつかあります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Safari, again, cranking on all of these things.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">再びサファリでこれらすべてを処理している。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">First of all, a couple episodes ago, we talked about the ability to use haptic feedback in the browser in in iOS now, which means, like, if you have your phone and you want to, like, slightly vibrate it to the user to tell them that something has happened, there was a a trick Wes if you have an input type of checkbox and you give it a switch attribute, which is only supported in Safari Mhmm.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">まず前回のエピソードでは、iOSブラウザで触覚フィードバックを使用できる機能について触れました。つまり、スマートフォンを持っていて、何かが発生したことをユーザーに知らせるために軽く振動させたい場合、Safariでは特定の入力タイプを持つチェックボックスにswitch属性を指定できるようになりました（これはMhmというバージョンからサポートされています）。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It will when you you you turn a switch on and off, it would do a little vibration.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">スイッチのオン・オフ時に小さな振動が発生します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So people figured out that you can programmatically turn a switch on and off many times, and you'd be able to get haptic feedback in the web.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで人々は、スイッチをプログラムで何度もオン/オフできることに気づき、ウェブ上で触覚フィードバックを得られるようになったのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Apparently, I went back in the, like, WebKit GitHub repo and and and the WebKit docs.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">どうやらWebkitのGitリポジトリとドキュメントを調べたらしい。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Apparently, it was only ever supposed to be associated with a user interaction, like, same thing, like, opening up a pop up window or playing audio.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">どうやら本来は、ポップアップウィンドウの表示や音声再生など、ユーザー操作と直接結びついた用途を想定して設計された機能だったようです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Those things always have to be associated with, like, a click or some sort of user interaction.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">こうした機能は常に、クリック操作や何らかのユーザーインタラクションと結びつけて設計する必要があります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You just can't fire them off willy nilly.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">適当に撃ちまくるわけにはいかないんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I think I think that was just a regression in Safari for one version that people figured out.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれは、あるバージョンのSafariで一時的に発生した不具合だったのではないかと推測しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can do that because it's been fixed, and you can no longer use haptic feedback on the web.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは修正済みの問題であり、ウェブ上ではもはや触覚フィードバックを使用できなくなったためです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So
+
+thanks, Safari.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だからさ、Safariありがとう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Fuck.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">クソッ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Safari.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">サファリ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But, yeah, it's one of those APIs that, like, the navigator.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">でもまあ、これはナビゲーターのような機能を持つAPIの一つだね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Vibrate.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">振動する。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, Safari, it's just one of those ones that, like, adds more fuel to the fire that, Apple intentionally, like, limits the browser APIs.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Safariと同様、これはAppleが意図的にブラウザAPIを制限している典型的な例だ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because what?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">なぜですか？何が？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They don't want people, like
+
+abusing it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">彼らは人々にそれを濫用してほしくないのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">People abusing it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それを悪用する人々。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Node.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ノード。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But you're not gonna tell that to the native developers.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">でもそれをネイティブ開発者には言わないでしょ？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We don't want you abusing it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それを濫用してほしくない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, come on.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ほら、早くしてよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because they don't have to be abuses it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">なぜなら彼らはそれを悪用する必要がないからだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If you scroll through people's stories, every time, like, a friend likes that story as well, it goes, dude, it's so annoying.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">他人のストーリーをスクロールするたびに、友達がその投稿に「いいね」すると、「うわー、これ本当にウザいんだよな」</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I I see why, but that shouldn't that shouldn't stop us.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だから理解できるけど、それで私たちが諦める理由にはならない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You should be able to turn it off, like like webcam access or anything else.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ウェブカメラへのアクセスなど、他の機能と同様に無効化できるはずです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Do you want this page to be able to vibrate?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このページを振動させる機能を有効にしますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't know if that requires permission or not, but that's frustrating.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それが許可を必要とするかどうかはわかりませんが、イライラしますね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">One cool thing Safari did give us is random.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Safariが提供してくれた一つの優れた機能は「ランダム」モードです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So CSS random random zero one hundred two will choose an even number between zero and one hundred.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">したがって、CSSのランダム関数で0から100までの範囲内で偶数を選ぶと、結果は2番目になります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is so cool because I every time I need randomness in CSS, I have to go into my, like, my view layer and, like, pass in a CSS variable that has been programmatically calculated as random.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは本当に素晴らしい機能です。CSSでランダム性が必要な時はいつでも、ビューレイヤーに移動して、プログラム的に計算された乱数として処理されるJavaScriptの変数を渡さなければならないからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I also have to make something seeded random because if you're doing server client rehydration, it needs to be the same amount of random, on the server and on the client.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">さらに、サーバーとクライアント間で再初期化を行う場合、ランダム値の生成量も完全に一致させる必要があります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So then you have to get into seeded random, so it's you know, it's it's not as random.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまりシード付き乱数を使わなければならないわけで、完全にランダムとは言えないわけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's the same amount of same value you get on both sides.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">両側で同じ価値のものが得られる。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But this is something is a straight up CSS API where you can randomize your values, which is gonna be great for Awesome.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しかしこれは純粋なCSSのAPIであり、値をランダム化できるため、Awesomeな機能となるでしょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't know.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかりません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It it even just like rotating values on a page, I very often will rotate cards, and I'll have to, like on the mad CSS website, I have to programmatically go in and give every single value a random random one.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ページ上の値を回転させる場合も同様で、madCSSウェブサイトのように、すべての要素に対してランダムな数値プログラム的に設定しなければならないことが頻繁にあります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm in.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は賛成です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Neat.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">きれいだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I have a Node here which is search text, which is a new pseudo selector.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここに「search_text」というノードがあり、これは新しい疑似セレクタです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So colon colon search hyphen text.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">コロンとハイフンで囲まれたテキストを検索します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Or there's a what what do they call it when there's a double, pseudo selector?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あるいは、ダブルセレクタ（疑似セレクター）のことを何と言うのでしょうか？正式名称は何ですか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because you can do colon colon search hyphen text colon current as well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">なぜなら、コロン、ハイフン付きテキスト、および現在の行も検索対象にできるからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So it's like a a second layer to it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、これは第二のレイヤーのようなものです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I guess that's pseudo class.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">擬似クラスのことかな。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So those are just that's just stacking pseudo classes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これらは単にスタックされた疑似クラスに過ぎません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's not Oh, yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それは違うよ、うん。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その通りです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You're right.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたの言う通りです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Active and hover.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">アクティブ時とホバー状態。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's so funny to see that in action.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それが実際に動いているのを見るなんて、とても面白い。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It looks like something entirely new, but it's not at all.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">全く新しいもののように見えるが、実はそうではない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So there's search search text in current.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">現在の検索テキストは次のとおりです：</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So search text is allowing you to style, like, the when you do command f in a browser and you start searching, it allows you to style the way that that text is highlighted on the page, matching the rest of your CSS for for searching.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、検索テキストを使用すると、ブラウザでコマンド「f」（Find）を実行して探索を開始すると、ページ上でその文字列がどのようにハイライト表示されるかをCSSの他の部分と統一したスタイルで表示できるようになります。これにより、検索結果が視覚的に一貫性のある形で表現されます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But the coolest thing is the the colon current on here because you can, the you know, when you do, like, next or next and next to find the current iteration, you can now style that however the heck you want Oh.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">最も素晴らしいのは、この「現在位置インジケーター」機能です。次/前ページに移動して現行項目を表示させる際に、自由にスタイルを設定できるんです。すごいでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Which is really super neat.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは本当に素晴らしいですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So you could have some, really to to really match the the theme of your site to make the current one look interesting.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">サイトのテーマに合わせてカスタマイズすれば、現在のものをより魅力的に演出できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかりますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I think I think there's all kinds of different ways you could make that look nicer than just putting a stupid highlight on it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あのさ、ただアホみたいなハイライト入れるより、もっといろんな方法で見栄え良くできると思うんだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's great.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それは素晴らしいですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I like that a lot because yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それがすごく好きなんだ、なぜならね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How how does a browser know that
+
+yellow or whatever is going to be the best version for you?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ブラウザはどうやって、あなたに最適なバージョンが黄色（あるいは他の色）が最適だと判断するのでしょうか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So this will allow you to highlight them.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これにより、それらをハイライト表示できるようになります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's such a simple API, and I'm so glad we have it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは本当にシンプルなAPIで、実装できて本当に良かったです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I do wish you know what I one thing that grinds my gears is that if you have, like, a search going, and this is on tweets as well where I'm looking for a specific reply or a specific word in, like, people replying to a tweet.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">本当に腹が立つのは、検索をかけている時に、特にツイート内で特定の返信や「tweet」内で使われている具体的な単語を探している時なんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I'll search for, like, syntax, and then I'll scroll through some replies.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だから構文を調べて、いくつかの回答をスクロールして確認するんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And as Twitter loads in more, you know, it's lazy loading the values, the browser search doesn't update.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてTwitterがさらに読み込まれるにつれ、値が徐々に表示されるものの、ブラウザの検索バーは更新されません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I have to, like, go back to my search, like, push space and then push back space, and then it, then it applies to the markup on the page.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり検索をやり直して、スペースキーを押してからもう一度バックスラッシュを押す必要があり、その後マークアップに反映されるわけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I wish that the browser would say, ah, I have changed the markup on the page.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ブラウザが「ああ、ページのマークアップを変更したんだな」と認識してくれたらいいのだが。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Therefore, I will rehighlight
+
+what is going on on the page.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">したがって、ページ上で実際に起こっていることを改めて強調したいと思います。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Do you think it's a just a virtualization issue, or is it, like,
+
+always just the DOM not having the Well, like, in that case, like, it would be nice if the browser like, if the website would just use, like, the there's there is native APIs that allow you to, like, not render things, but still maintain the search.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは単なる仮想化の問題だと思いますか？それとももっと根本的な、例えば...
+
+常に DOM（Document Object Model）自体に問題があるのでしょうか？その場合、そのウェブサイトが単にレンダリングを行わず、それでいて検索機能だけは保持するようなネイティブAPIがあれば理想的だと思いますが。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">In that way, you can you can find it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そのようにすれば、それを見つけることができます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But in many cases, like, Twitter doesn't wanna send a thousand replies on a single endpoint to to the thing.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しかし多くの場合、例えばTwitterでは、単一のエンドポイントに対して1,000件もの返信を送信することは望ましくないとされています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So you need to be, like, live searching every single time the DOM updates.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、ドキュメントオブジェクトが更新されるたびにリアルタイムで検索を行う必要があるわけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Word.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">単語。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sticky both ways.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">両面粘着テープ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oh.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Ah, I see.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Una had a post the other day where Chrome one forty eight sticky positioning now works on a per access basis.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">先日の投稿で、Chrome 48ではアクセスごとに異なる位置でスティッキー機能が動作するようになったと報告されていました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So sticky headers in CSS, when you scroll, you're able to stick them to the top or or offset them certain amount, but it previously has only worked in one access, meaning that, like, you can scroll left to right or top to bottom.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">CSSのstickyヘッダー機能を使えば、スクロール時に要素を固定表示させたり、一定距離オフセットさせたりできますが、これまでは単一方向（左右または上下）でしか動作しませんでした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And now they work in in both directions, which is awesome for specifically for, like, conference layouts.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして現在では双方向に機能するため、特に会議用レイアウトなどにおいて非常に有用です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Or if you've got, like, a big tournament where there's, I don't know, three different places that people are playing and you wanna figure out where they are, tables is one of the hardest things to do well on mobile, and this will certainly improve that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あるいは、複数の会場で行われる大規模な大会で、参加者がどこにいるかを把握したい場合、モバイル環境で正確に位置を特定するのは最も困難な課題のひとつです。この点において、この技術は確実に性能を向上させるでしょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I think this is dope.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはイケてると思う。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Again, just more more stuff that we,
+
+more stuff that we need here.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">再び、これは私たちが必要とするさらなるアイテムです：
+
+ここに追加すべきさらに多くの物品です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's just little paper cuts that are are being solved.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">解決されているのはほんの些細な問題ばかりです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Paper cuts.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">紙で指を切る。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Another one with little paper cuts here is this multi column fixes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">もう一つの小さな改善点として、複数列レイアウトの修正があります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So we all know multi column CSS sucks, but there is new column wrap properties as well as a new column height that Node, basically, even if you were to specify how many columns before, it would just continue to make them horizontal.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">マルチカラムCSSが使いにくいのは周知の事実ですが、新たに追加されたcolumn-wrapプロパティや列の高さ設定機能を使えば、たとえ事前に何段にするかを指定しても、結局は横並び表示になってしまいます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But now what it does is if you have too much text for the amount of columns you specify, if you specify a height, it puts them on the the next line.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ただし、指定した列数に対してテキスト量が過剰な場合、高さを指定すると、それらは次の行に配置されます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The reason why you would use this over something like Flexbox is because this is breaking up a single, like, paragraph full of text instead of, like Okay.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Flexボックスをフレックスコンテナーの代わりに使う理由は、単一の段落テキストを複数行に分割する必要がある場合などです。例えば...。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Having divs where you're say, segmenting the text into different divs.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">div要素を使用してテキストを異なるセクションに分割する場合を考えてみましょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So this would be one long paragraph full of text, and you want it to be in three columns.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、テキストがぎっしり詰まった1つの段落を3列レイアウトにしたいということですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then if there's too much text for three columns, then it's gonna wrap onto another line.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして3列分のテキストが多すぎる場合、別行に折り返されます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So just giving you that flexibility and freedom.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、そうした柔軟性と自由を与えるということです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is an API again that I I I pretty much avoid using, but it definitely has its use case, and and happy to see that it does in fact, ESLint, and and and, like, working in a way that probably should have worked from the start.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは再び、私がほとんど使わないAPIですが、確かに用途は存在しますし、そして実際に最初から期待通りに動作していたのを見て嬉しく思います。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I agree.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は賛成です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The columns has always been, like, kinda not great.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このチームは昔から、まあ正直言ってあまり良くない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたは知っていますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It it works okay, but here and there.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">うまく動くけど、ところどころで。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And you you have to think, like, a lot anytime we show any demos like this, people are always like, oh, I don't see where you would wanna use that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">こうしたデモを見せるたびに、人々はいつも「そんなのどこで役に立つんだ？」と疑問に思います。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like, guarantee, there's somebody who is like, oh, I work in publishing, and we lay everything out in HTML and CSS, and, we need, like, this weird print style sheet hack to make it work, and, like, finally, this is gonna they're gonna work well for you.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして例えば、「出版業界で働いているんですが、すべてをHTMLとCSSで構築していて、うまく動作させるためには特殊な印刷用スタイルシートのハックが必要で、これでようやく見栄えが良くなるんです」といったケースです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So just because your single one website doesn't need this doesn't mean that it doesn't it shouldn't be added to the web platform because people use the web in many different ways in many weird ways.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">したがって、単一のウェブサイトがこの機能を必要としないからといって、ウェブプラットフォームに追加すべきでないというわけではありません。人々はさまざまな奇妙な方法でインターネットを利用しているからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Border shape, another one from Oona.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ボーダーの形状、オーナから届いたもう一つのデザイン。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Border shape can handle both insets and outsets, so you can do this is so cool.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">境界線の形状は内側余白と外側突出部の両方に対応していますので、非常に洗練されたデザインが可能です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can make, like, breadcrumbs that are like chevrons, and then the focus wrap will follow that along, which is super cool.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">例えば、シェブロン型のパンくずリストを作成でき、フォーカスが移動するとそれに追従します。これは非常に便利な機能です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The border shape stuff has been so fun to work with.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">境界線の形状を扱う作業はとても楽しかったです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">On the mad CSS website, I used it for both for these ones right here.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">madCSSウェブサイトでは、これら2つのケースで両方とも使用しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You see these little cutouts Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ほら、こういう切り抜きがあるでしょ？ そう、それ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">On the the tickets?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">チケットについて？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I, like, I replicated, like, what a ticket would look like, and then I used border shape to cut out the corners.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで私は、チケットのデザインを模倣し、角を切り取るためにボーダー形状を使いました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and that's been doable before with, you could use, like, a mask image.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれは以前も可能だった手法で、マスク画像を使用することで実現できました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that's what I'm falling back to.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それが今の私の現状だ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But this, like, where the border follows the border shape, that was not really doable with with masking previously.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ただし以前のマスク処理では、境界線が境界形状に沿って正確に追従させることは不可能でした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So this the red inset value here looks so cool.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この赤いインセット値がとてもかっこいいですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's not really something you could have done previously unless you, like, have, like, an image programmatically generated or you use, like, an SVG to sort of draw it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは従来、画像プログラムで動的に生成するか、例えば SVG を使用して描画する場合を除いては不可能だった手法です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And now you can simply just use regular CSS borders, and it will just bite right into them.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして今や、通常のCSSボーダーを使用するだけで、これらに直接適用できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's so many cool things about this API.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このAPIには素晴らしい点がたくさんあります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Congest.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">混雑。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Man.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">男。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Scott everybody when it first came out, everybody's like, it's squircles, and I was one of those people.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">スコットが初めて発表された時、みんな「これはスクイクルだ」って騒いでたけど、私もその一人だったわ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's squircles.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それはスクイクルです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But it's more than squircles.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しかしこれは単なる四角形以上のものです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We got all kinds of, what's it, scoop?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私たちはあらゆる種類の情報、つまり「スクープ」を手に入れた？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I we did one of these for our live we did a live CSS show, and I had a fake corner shaped property in there.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ライブでこれらの一つを実施した際、私は偽のコーナー型プロパティをその中に配置しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, just to be a little devious right now?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてちょっと意地悪な質問を一つ？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let me try.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">やってみます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let me try.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">やってみます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let me try.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">やってみます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Okay.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm not gonna look at your screen.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたの画面は見ません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Squircle, super ellipse.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">スクイクル（squircle）、超楕円。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">My god.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">なんてこった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Scoop.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">スクープ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm, like, blanking whether or not the one that I had in there was fake or not.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あの中にあったのが本物かどうか思い出せないんだよね～。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">A Vercel?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Vercelですか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yep.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes indeedy-doody!</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Am I missing one?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">何か見落としているでしょうか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Super Licks, squircle, bevel.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">スーパーリックス、スクアークル（四角形の角を丸めた形状）、ベベル加工。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oh, I'm missing one.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あ、一つ足りない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I just saw it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ちょうど今見たところです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm missing notch and round, but although it's round, it's a default one.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ノッチとラウンドは欠けていますが、丸い形状ですがデフォルトのものです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Which is probably the default.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはおそらくデフォルト設定です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Scoop Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">スクープだぜ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Bevel, notch, square,
+
+squircle, and super ellipse.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ベベル、ノッチ（切り欠き）、正方形、
+
+スクイクル、およびスーパー楕円。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Yep.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そう、その通り。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">All of these values, bevel, scoop, whatever or whatever, those are just, like, nice shorthands, and then you can literally make anything with a super ellipse.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これらの値――ベベル、スクープ、あるいはその他どんな設定であれ、単なる便利な省略表記に過ぎません。そして実際には、超楕円を使えばどんなものでも作成できるのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So it has a squircle is just a super ellipse with custom values preset on them.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、squirclesは単なる楕円にカスタム値を設定した特殊なケースなのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Big fan.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">大ファンです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Van, one thing about MDN is they gotta make their demos look cooler.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ヴァン、MDNについて一つ言えるのは、デモをもっとかっこよくしなきゃってことだよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ああ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's so hard to make a cool demo and not add a bunch of CSS that is unrelated.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">クールなデモを作るのに、無関係なCSSコードをたくさん追加せずに済ませるなんて本当に難しい。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But still That's probably what they need to do.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それでもやはり、それが彼らに必要なのだろう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But then also, like, I was looking at border image the other day where, like, CSS has this thing where you can add images for borders.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">でも最近、ボーダー画像について考えていたんです。CSSでは境界線に画像を設定できる機能がありますよね。あれってすごく便利なんですよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And let me show you.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてお見せしましょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Border image CSS.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ボーダー画像のCSS。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This all looks awful.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはすべてひどく見える。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかりますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like, I I don't think I've any ever seen anybody use border image before.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それに、ボーダー画像を使ったデザインって、今まで一度も見たことがない気がする。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I was looking it up.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私はそれを調べていた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I was like, oh, maybe I could use this type of thing.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">「あ、こういうの使えるかも」って思ったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And all all of them was look like see, that maybe is one good,
+
+but that's not even that's not even the API.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてそれらすべてが、まるで一つの良いアイデアのように見えた――
+
+しかし実はそれもAPIではない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's not even good.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それは全然良くない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I it's so funny because it's always been like that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">いつもそうだから、おかしくてたまらないんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and then what the problem is is that, like, I think people don't reach for some of these tools because they don't see it in action as being,
+
+like, good looking or useful.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">問題は、人々がこうしたツールを活用しないのは、その有用性や実用性を実感できないからです。
+
+つまり、見た目が魅力的でなかったり、実際に役立つ場面を想像しにくいためです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This JS, the cool one that I did find.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このJS、見つけた中ではかなりイケてるやつだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So this guy on CSS tricks made a Oh, yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">CSSのテクニックを紹介するサイトでこんな記事があったんだ：ああ、そうそう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, right here.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ほら、ここだよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, one of these Oh, yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ほら、こういうのとかさー、うん、そんな感じ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Paper Scott, two of these stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ペーパー・スコット、この2つの書類。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Video game style repeating border images.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ビデオゲーム風の繰り返しパターンボーダー画像。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So this next one is something that's really neat for animations in the browser, which is element scoped view transitions.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">次に紹介するのは非常に便利な機能で、ブラウザ上でアニメーションを実現する「要素スコープ付きビュー遷移」です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So you, you are able to basically give a view element name something that, is scoped to that element specifically.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、特定の要素に限定してビューエレメント名を指定できるということです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then you can have something called a view transition group contain and then a, view transition class where you can then style things for that individual animation.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その後、「ビュー遷移グループ」を作成し、その中に個別のアニメーション用にスタイル設定可能な「ビュートランジションクラス」を含めることができます。これにより、各個々の動きに対して詳細なスタイリングを適用できるようになります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Basically, with this API, you can have tightly scoped view transitions Wes in the past like, if you wanted to do the automatic view transition movement kind of stuff, Wes, you're giving everything a unique name.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">基本的に、このAPIを使えば、過去のWesleyが行っていたような厳密にスコープされたビュー遷移を実現できます。例えば、自動的な画面切り替えアニメーションのような処理を実装したい場合、すべての要素に対して一意の名前を付与するだけで済みます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You are giving everything a unique view transition name.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">すべての要素に一意なビュー遷移名を指定しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But here, you're able to have it yes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">でもここでは、それが可能なんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You're able to have them be grouped and and scoped, essentially.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これらをグループ化してスコープ設定することも可能です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It it's very just like one of those quality of life things.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはまさに生活の質に関わる問題です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Again, a lot of people are reaching for JavaScript for animations, and this gives you the ability to
+
+really control them a bit more.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">再び、多くの開発者がアニメーションにJavaScriptを採用しており、これにより以下のような高度な制御が可能になります：
+
+より精密なコントロールが可能になる。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I did this like, if you have any sort of UI where you're adding and removing cards, like, that's a very common thing to do.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは例えば、カードの追加や削除を行うUIがある場合によくあるケースです。このような操作は非常に一般的なものです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know, you got a, like, a a to do list, and you're adding and removing elements from it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、やることリストがあって、そこに項目を追加したり削除したりするような感じです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Previously, you had to give every single one, like, a unique name.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">以前は、それぞれに一意の名前を個別に付ける必要がありました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And now you can simply just say anything that is, like, an l I element, give it a view transition name, and then you can animate those in and out or or reorder them or anything like that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして現在では、単に「l i」要素のような任意のHTMLタグにビュー遷移名を指定するだけで、それらをスムーズに表示・非表示させたり、並べ替えたりといった操作が簡単に行えるようになっています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's it's true.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それは本当です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because I remember, like, the first time I got into, like, view transitions, I was just like, ah, this is a little bit limited in terms of what I wanted to do.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">初めて映像の切り替え効果を使った時のことを覚えているんだけど、「ああ、これは自分がやりたいことを表現するには限界があるな」って思ったんだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But now I this has been out for,
+
+like, a while Node, I'm pretty sure.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">でも今はもう、少なくとも数ヶ月はリリースされているはずです――おそらく。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">For element scope view transitions, it's in Chrome
+
+one forty seven.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">要素のスコープ内でビュー遷移を行う場合、これはChromeで動作します：
+
+147秒です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm not sure about the other browsers, though.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">他のブラウザについてはよくわかりません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Okay.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So that it this is new.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これが新しいものだから。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Maybe I was using it in in Chrome Canary for a while.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">もしかしたらしばらくの間Chromeカンナリで使っていたかもしれません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mhmm.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Hmm-hm.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Just living in La La Land.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ただの夢見る世界に住んでいるだけ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Work work for me, but it's just a just a fun demo.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは私の仕事用ですが、単なる楽しいデモです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So like, hopefully, soon, we'll be able to use this with It says stable by the March.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、早ければ3月には安定したバージョンで使えるようになるはずです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I believe it is stable by the time you're listening to this in Chrome, specifically.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ですから、Chromeでこの文章を読んでいる時点では、すでに安定していると考えてよいでしょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I hope you learned something new today, got excited about something.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">今日何か新しいことを学び、ワクワクしてもらえたら嬉しいです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There are so many neat stuff in CSS, stuff you can use, stuff you can't use, stuff you can progressively enhance in your code Bos today.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">CSSには実に多くの優れた機能があり、今日ではコード内で段階的に強化できる要素が数多く存在します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Which of these APIs are you the most excited about?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これらのAPIの中で最も期待しているものはどれですか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Which of them has tickled your fancy?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その中であなたの興味を引いたものはどれですか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What kinda crazy stuff are you gonna do with HTML and Canvas?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">HTMLとCanvasで一体どんなクレイジーなことするつもりなんだ？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because this one, wow.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">なぜならこれはすごいから。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Very stoked about this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これすごくワクワクしてる。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let us know down below what you think.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">以下にあなたの考えをお聞かせください。</div>
+    </div>
+</body>
+</html>

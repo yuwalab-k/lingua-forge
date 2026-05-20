@@ -1,0 +1,1783 @@
+{
+  "id": "syntax/0992",
+  "title": "#992 Migrating Legacy Code Just Got Easier",
+  "source": "SYNTAX",
+  "source_url": "https://www.youtube.com/watch?v=AOBbD7YJLIc",
+  "sentences": [
+    {
+      "sentence_index": 0,
+      "english_text": "Welcome to Syntax.",
+      "japanese_text": "構文解析へようこそ。"
+    },
+    {
+      "sentence_index": 1,
+      "english_text": "We're talking about migrating and moving languages or frameworks, moving your code to something else with the help of AI.",
+      "japanese_text": "ここで議論しているのは、言語やフレームワークの移行・移植、つまりAIを活用してコードを別のものに置き換えるプロセスについてです。"
+    },
+    {
+      "sentence_index": 2,
+      "english_text": "How do you possibly even do that?",
+      "japanese_text": "どうやってそんなことができるんだ？"
+    },
+    {
+      "sentence_index": 3,
+      "english_text": "You got a big monolith application that's been sitting around for many, many years, and you've dreamt of of moving this thing over to something else.",
+      "japanese_text": "長年使われてきた巨大なモノリシックアプリケーションがあり、これを別のアーキテクチャに移行したいとずっと考えていたとします。"
+    },
+    {
+      "sentence_index": 4,
+      "english_text": "You simply cannot just type into the box, move it to x, y, and z, move it to a different language, move it to a different framework.",
+      "japanese_text": "単にボックスに入力してx、y、z座標を指定し、別の言語に移動させたり、異なるフレームワークに移すことはできません。"
+    },
+    {
+      "sentence_index": 5,
+      "english_text": "It doesn't work that way just yet at least, but the cost of moving has never been lower with all of this stuff.",
+      "japanese_text": "少なくとも今のところはそうはいかないけれど、これだけのものが揃っている今ほど、引っ越し費用が安くなった時代はないわね。"
+    },
+    {
+      "sentence_index": 6,
+      "english_text": "So I recently moved my own course platform over from it was on Express for probably ten years, maybe twelve, and I moved it I finally moved it over to Hano, and then I also moved a whole bunch of other stuff at the same time.",
+      "japanese_text": "そこで最近、約12年間（おそらく10年）使用していたExpressベースのコースプラットフォームをHanoに移行し、さらに他の関連システムも同時に移行しました。"
+    },
+    {
+      "sentence_index": 7,
+      "english_text": "And we're going to explain, like, what the the approach is to to moving something like this over, which seems like maybe a bit of a daunting move, and how to get into it, how to test it, how to plan for it, all that good stuff.",
+      "japanese_text": "そして、このような大規模な変更をどのように進めるべきか、そのアプローチ方法や、テスト手法、計画の立て方など、実践的なポイントを詳しく説明していきます。"
+    },
+    {
+      "sentence_index": 8,
+      "english_text": "Let's get on into it.",
+      "japanese_text": "さあ、始めよう。"
+    },
+    {
+      "sentence_index": 9,
+      "english_text": "My name is Wes.",
+      "japanese_text": "私の名前はウェスです。"
+    },
+    {
+      "sentence_index": 10,
+      "english_text": "With me is Scott.",
+      "japanese_text": "私と一緒にスコットがいます。"
+    },
+    {
+      "sentence_index": 11,
+      "english_text": "How you doing?",
+      "japanese_text": "調子はどう？"
+    },
+    {
+      "sentence_index": 12,
+      "english_text": "I'm doing good, man.",
+      "japanese_text": "調子いいよ、マジで。"
+    },
+    {
+      "sentence_index": 13,
+      "english_text": "Chilling.",
+      "japanese_text": "ぞっとするよ。"
+    },
+    {
+      "sentence_index": 14,
+      "english_text": "I'm not sick.",
+      "japanese_text": "私は病気ではありません。"
+    },
+    {
+      "sentence_index": 15,
+      "english_text": "I'm not hurt.",
+      "japanese_text": "私は怪我していません。"
+    },
+    {
+      "sentence_index": 16,
+      "english_text": "I am,\n\na Yarn.",
+      "japanese_text": "私は糸です。"
+    },
+    {
+      "sentence_index": 17,
+      "english_text": "An action.",
+      "japanese_text": "行動。"
+    },
+    {
+      "sentence_index": 18,
+      "english_text": "Win.",
+      "japanese_text": "Victory!"
+    },
+    {
+      "sentence_index": 19,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 20,
+      "english_text": "I wait.",
+      "japanese_text": "私は待つ。"
+    },
+    {
+      "sentence_index": 21,
+      "english_text": "Bam, when you got when you got little kids, you're a action junkie like me, it's easy to to dive into any of those things.",
+      "japanese_text": "バン、小さい子供がいる家庭で、私のようにアクション映画中毒だと、どれも簡単にハマっちゃうんだよね。"
+    },
+    {
+      "sentence_index": 22,
+      "english_text": "So no. I'm ready to hear about this.",
+      "japanese_text": "いいえ、私はこれについて聞く準備ができています。"
+    },
+    {
+      "sentence_index": 23,
+      "english_text": "I do do a number of these things, migrating things.",
+      "japanese_text": "私はこれらの多くのことを実際に行っています。移行作業などです。"
+    },
+    {
+      "sentence_index": 24,
+      "english_text": "I I migrated an app from Tori to Electron.",
+      "japanese_text": "私はアプリをToryからElectronに移行しました。"
+    },
+    {
+      "sentence_index": 25,
+      "english_text": "It went great.",
+      "japanese_text": "とてもうまくいった。"
+    },
+    {
+      "sentence_index": 26,
+      "english_text": "So I think this is a perfect use case for AI as long as you keep a handle on how things are.",
+      "japanese_text": "つまり、状況を適切に把握できていれば、これはAIを活用するのに理想的な場面だと言えるでしょう。"
+    },
+    {
+      "sentence_index": 27,
+      "english_text": "It's a\n\nprobably a probably one of the best use cases of AI that I can think of is, like, it's very deterministic.",
+      "japanese_text": "これはおそらく私が思いつくAIの最も優れた応用例のひとつです。非常に決定論的な性質を持っているからです。"
+    },
+    {
+      "sentence_index": 28,
+      "english_text": "It can be very it tested very well, but certainly, a lot can go wrong.",
+      "japanese_text": "非常に厳密なテストが可能ですが、当然ながら多くの問題が発生する可能性があります。"
+    },
+    {
+      "sentence_index": 29,
+      "english_text": "So let let me explain it.",
+      "japanese_text": "それでは、説明しましょう。"
+    },
+    {
+      "sentence_index": 30,
+      "english_text": "So I have a course platform, which I sell courses on.",
+      "japanese_text": "私はコースプラットフォームを運営しており、そこでさまざまな講座コンテンツを提供しています。"
+    },
+    {
+      "sentence_index": 31,
+      "english_text": "I have free courses on.",
+      "japanese_text": "無料コースがあります。"
+    },
+    {
+      "sentence_index": 32,
+      "english_text": "There's, I think, 10 or so different marketing websites that are on it.",
+      "japanese_text": "おそらく10種類ほどのマーケティング関連サイトが掲載されていると思います。"
+    },
+    {
+      "sentence_index": 33,
+      "english_text": "There's a whole administration area.",
+      "japanese_text": "管理エリア全体があります。"
+    },
+    {
+      "sentence_index": 34,
+      "english_text": "There is a whole viewing experience.",
+      "japanese_text": "そこには総合的な鑑賞体験がある。"
+    },
+    {
+      "sentence_index": 35,
+      "english_text": "There's stats.",
+      "japanese_text": "統計データがあります。"
+    },
+    {
+      "sentence_index": 36,
+      "english_text": "There's an admin area.",
+      "japanese_text": "管理者用エリアがあります。"
+    },
+    {
+      "sentence_index": 37,
+      "english_text": "There's there's roles and other you know, like, there's there's everything you would expect from, like, a course platform.",
+      "japanese_text": "ロール機能やその他の標準的な要素が揃っており、コースプラットフォームとして期待されるすべてのものが備わっています。"
+    },
+    {
+      "sentence_index": 38,
+      "english_text": "And I've been been building this thing for many, many years, and I've kept the stack relatively the same.",
+      "japanese_text": "そして私は長年にわたってこのシステムを構築し続けており、スタックの構成はほぼ一貫して維持してきた。"
+    },
+    {
+      "sentence_index": 39,
+      "english_text": "I've upgraded lots of stuff over the years, but, like, the one piece that was sort of the backbone of it was it used Express JS as the, like, controller router, sort of the whole thing lives as an Express server rendered or API endpoints that it's it's been hitting.",
+      "japanese_text": "これまで長年にわたって多くの機能をアップグレードしてきましたが、中でも特に中核的な役割を果たしていたコンポーネントは、Express.jsをベースにしたコントローラー/ルーターとして動作し、APIエンドポイントを提供するサーバーでした。これが主要な処理を担っていたのです。"
+    },
+    {
+      "sentence_index": 40,
+      "english_text": "And I have wanted to move that off of Express for for many, many years.",
+      "japanese_text": "そして私は長年にわたり、この機能をExpressから移行したいと考えていました。"
+    },
+    {
+      "sentence_index": 41,
+      "english_text": "I think I had something like 60 or 70 different, like, routes and endpoints, and I've always just looked at it, and I I think this is the reason why Express is is still so popular.",
+      "japanese_text": "60～70種類もの多様なルートやエンドポイントを設計してきたが、これこそがExpressがここまで広く使われている理由だと思う。"
+    },
+    {
+      "sentence_index": 42,
+      "english_text": "I've always looked at it and go, that's a lot of work.",
+      "japanese_text": "いつもそれを見て、「これは大変な作業だな」と思っていました。"
+    },
+    {
+      "sentence_index": 43,
+      "english_text": "That's a lot of repetitive work for something that doesn't have a whole lot of benefit to me.",
+      "japanese_text": "これは私にとってほとんどメリットのない作業を繰り返すばかりで、かなり面倒です。"
+    },
+    {
+      "sentence_index": 44,
+      "english_text": "You know, like at the end of the day, I would simply just be, it would be exactly the same, but I'm at a point where I just like, I want to upgrade it because a lot of the new stuff that I wanna do is all based on web standards.",
+      "japanese_text": "つまり、一日の終わりには、結局同じ状態になるんだけど、今の私はウェブ標準に準拠した新しい技術を使いたいという気持ちが強いんです。"
+    },
+    {
+      "sentence_index": 45,
+      "english_text": "You know, like, what is that?",
+      "japanese_text": "つまり、それって何なの？"
+    },
+    {
+      "sentence_index": 46,
+      "english_text": "It's Wes and response are standardized with the fetch API.",
+      "japanese_text": "Wesとresponseはfetch APIで標準化されています。"
+    },
+    {
+      "sentence_index": 47,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 48,
+      "english_text": "And it uses fetch API, uses web streaming, uses a sync local storage, uses form.",
+      "japanese_text": "また、fetch APIを使用し、Webストリーミングを採用し、同期型ローカルストレージを利用し、さらにフォーム処理を実装しています。"
+    },
+    {
+      "sentence_index": 49,
+      "english_text": "All of these, like, web standards that we've been talking about for so many years, everything uses them.",
+      "japanese_text": "これらすべて――私たちが長年議論してきたウェブ標準規格ですが――実はあらゆるものがこれを採用しているんです。"
+    },
+    {
+      "sentence_index": 50,
+      "english_text": "Whereas Wes I first started it, everything was based on the standard of of connect, connect JS, connect middleware.",
+      "japanese_text": "Wesが最初に始めた時、すべてはconnect/expressの標準ミドルウェアである「Connect」をベースにしていました。"
+    },
+    {
+      "sentence_index": 51,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 52,
+      "english_text": "That was that was Express.",
+      "japanese_text": "それがエクスプレスでした。"
+    },
+    {
+      "sentence_index": 53,
+      "english_text": "That was what else was it built?",
+      "japanese_text": "それが他に何を建てるためだったのか？"
+    },
+    {
+      "sentence_index": 54,
+      "english_text": "Fastify uses was using that as well.",
+      "japanese_text": "Fastify も同様にそれを使用しています。"
+    },
+    {
+      "sentence_index": 55,
+      "english_text": "Several other other these frameworks were using that sort of standard, and I wanted to move off of it.",
+      "japanese_text": "他のいくつかのフレームワークも同様の標準を採用していたので、私はそこから移行したいと考えていました。"
+    },
+    {
+      "sentence_index": 56,
+      "english_text": "So that, I wanted to move off of Xpress.",
+      "japanese_text": "そこで私はXPressから移行したいと考えたのです。"
+    },
+    {
+      "sentence_index": 57,
+      "english_text": "And then along that, I was also all of these sites that I have done over the years, a lot of these courses are are deprecated.",
+      "japanese_text": "さらに、これまで長年にわたって手がけてきたさまざまなサイトの多くは、現在では非推奨となっています。"
+    },
+    {
+      "sentence_index": 58,
+      "english_text": "They're they're not used anymore, but I still wanna keep the, like, landing page up.",
+      "japanese_text": "もう使われていないけど、ランディングページ自体は残しておきたいんだよね。"
+    },
+    {
+      "sentence_index": 59,
+      "english_text": "People still wanna visit them.",
+      "japanese_text": "人々は今でも彼らに会いたがる。"
+    },
+    {
+      "sentence_index": 60,
+      "english_text": "And all of those were written as Pug, as a server template.",
+      "japanese_text": "そしてこれらすべてはPug形式で、サーバーサイドテンプレートとして記述されています。"
+    },
+    {
+      "sentence_index": 61,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 62,
+      "english_text": "So Pug is a templating language.",
+      "japanese_text": "つまり、Pugはテンプレート言語なのです。"
+    },
+    {
+      "sentence_index": 63,
+      "english_text": "It used to be called Node.",
+      "japanese_text": "以前はノードと呼ばれていました。"
+    },
+    {
+      "sentence_index": 64,
+      "english_text": "Now it's called Pug.",
+      "japanese_text": "現在は「Pug」と呼ばれています。"
+    },
+    {
+      "sentence_index": 65,
+      "english_text": "And, it's it's like a weird indentation based templating language.",
+      "japanese_text": "そしてこれは奇妙なインデントベースのテンプレート言語だ。"
+    },
+    {
+      "sentence_index": 66,
+      "english_text": "I was really into it at the time.",
+      "japanese_text": "当時は本当に夢中だった。"
+    },
+    {
+      "sentence_index": 67,
+      "english_text": "I absolutely loved it.",
+      "japanese_text": "私は完全にそれに夢中になった。"
+    },
+    {
+      "sentence_index": 68,
+      "english_text": "Thought it was so key.",
+      "japanese_text": "とても重要だと思った。"
+    },
+    {
+      "sentence_index": 69,
+      "english_text": "Script pnpm.",
+      "japanese_text": "スクリプトの実行。"
+    },
+    {
+      "sentence_index": 70,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 71,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 72,
+      "english_text": "It was it was I when I started this thing, it was all done in CoffeeScript.",
+      "japanese_text": "このプロジェクトを始めた時、すべてはCoffeeScriptで書かれていたんだ。"
+    },
+    {
+      "sentence_index": 73,
+      "english_text": "Wes talked about that maybe, like, six years ago.",
+      "japanese_text": "ウェスがそのことについて話したのは、おそらく6年くらい前だったと思います。"
+    },
+    {
+      "sentence_index": 74,
+      "english_text": "I moved from CoffeeScript to TypeScript, but I absolutely hate it Node, and I wanted to move off of it.",
+      "japanese_text": "CoffeeScriptからTypeScriptに移行したけど、正直言ってノード環境は大嫌いだし、できるだけ早く離れたいと思ってる。"
+    },
+    {
+      "sentence_index": 75,
+      "english_text": "So there's that.",
+      "japanese_text": "そういう事情です。"
+    },
+    {
+      "sentence_index": 76,
+      "english_text": "The emails Yarn written in Pug.",
+      "japanese_text": "Yarn がプグで記述したメール。"
+    },
+    {
+      "sentence_index": 77,
+      "english_text": "The viewing experience and the admin experience, that's all been a React application for probably eight or nine years now.",
+      "japanese_text": "ビューイング体験と管理者インターフェースは、おそらく8～9年前からReactアプリケーションとして構築されています。"
+    },
+    {
+      "sentence_index": 78,
+      "english_text": "And I didn't touch any of that stuff.",
+      "japanese_text": "そして私はそれらのものには一切手をつけなかった。"
+    },
+    {
+      "sentence_index": 79,
+      "english_text": "That's all gonna stay in in React.",
+      "japanese_text": "それらはすべてReact内に留まります。"
+    },
+    {
+      "sentence_index": 80,
+      "english_text": "But the the core thing of much of the server rendered templating is in Pug, and all of the logic and controllers and stuff, the API endpoints, the auth, the middlewares, everything that's all done in, in express.",
+      "japanese_text": "しかし、サーバー側でレンダリングするテンプレートの大部分はPugで実装されており、ロジックやコントローラー、APIエンドポイント、認証処理、さらにはミドルウェアなど、すべてがExpressフレームワーク内で行われています。"
+    },
+    {
+      "sentence_index": 81,
+      "english_text": "And while I needed to get a, get away for that.",
+      "japanese_text": "そしてその間、私は一時避難する必要があった。"
+    },
+    {
+      "sentence_index": 82,
+      "english_text": "So let's talk about how, how we approach, how I approach a move like this.",
+      "japanese_text": "では、このような動きをどのように考え、実践しているかについて説明しましょう。"
+    },
+    {
+      "sentence_index": 83,
+      "english_text": "So first thing is you need to make your tech choices upfront, right?",
+      "japanese_text": "まず第一に、技術的な選択は事前に決めておく必要がありますよね？"
+    },
+    {
+      "sentence_index": 84,
+      "english_text": "Investigate the possibility, is this thing even doable?",
+      "japanese_text": "その可能性について調査しよう――これは実際に実現可能なのか？"
+    },
+    {
+      "sentence_index": 85,
+      "english_text": "For the longest time, I was looking for something that would let me run like web standards, Deno routes.",
+      "japanese_text": "長い間、私はウェブ標準のような機能を持ち、かつDenoのルート処理を可能にするものを探していました。まさに「web standard」のようなものです。"
+    },
+    {
+      "sentence_index": 86,
+      "english_text": "So Hano is like, Scott of like the modern express, and it's it's super fast.",
+      "japanese_text": "つまりハノは現代のスポーツカーのようなもので、非常に速いんです。"
+    },
+    {
+      "sentence_index": 87,
+      "english_text": "You can run it anywhere.",
+      "japanese_text": "どこでも実行できます。"
+    },
+    {
+      "sentence_index": 88,
+      "english_text": "It's a really nice API.",
+      "japanese_text": "非常に使いやすいAPIです。"
+    },
+    {
+      "sentence_index": 89,
+      "english_text": "And of course, most importantly, it's it's built on web standards.",
+      "japanese_text": "そして何より重要なのは、これがウェブ標準に基づいて構築されている点です。"
+    },
+    {
+      "sentence_index": 90,
+      "english_text": "And it's similar enough to Express that I could see myself making, like, that lateral move from one to another.",
+      "japanese_text": "そしてExpressとの類似性も高いから、例えば一方からもう片方へスムーズに移行できるだろうなと感じたよ。"
+    },
+    {
+      "sentence_index": 91,
+      "english_text": "So Yeah.",
+      "japanese_text": "そう、その通り。"
+    },
+    {
+      "sentence_index": 92,
+      "english_text": "I I thought, like, yeah.",
+      "japanese_text": "私は「ああ、そうだね」と思った。"
+    },
+    {
+      "sentence_index": 93,
+      "english_text": "Okay.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 94,
+      "english_text": "The obviously, that's that's going to be the one for me.",
+      "japanese_text": "明らかに、それが私にとって最適な選択でしょう。"
+    },
+    {
+      "sentence_index": 95,
+      "english_text": "I'm not gonna move to something absolutely different.",
+      "japanese_text": "まったく異なるものに引っ越しするつもりはない。"
+    },
+    {
+      "sentence_index": 96,
+      "english_text": "A lot of people are asking, like, why didn't you move it to, like like, SvelteKit or, like, 10 stack start or or something like that?",
+      "japanese_text": "多くの人が「なぜSvelteKitや10スタックのスタートアップ、あるいはそれに類するものに移行しなかったのか？」と疑問に思っているようです。"
+    },
+    {
+      "sentence_index": 97,
+      "english_text": "And I I if you're doing a big move like this, it needs to be a lateral move, which is feature to feature parity.",
+      "japanese_text": "そしてこのような大規模な移行を行う場合、機能の同等性、つまり横方向（水平）移動であることが必須条件となります。"
+    },
+    {
+      "sentence_index": 98,
+      "english_text": "You you can't, like, also start introducing a whole bunch of new features at this point because when you try to migrate something and start to put new features in, that's just way too big of a move in my opinion, and that those types of projects never ever get shipped.",
+      "japanese_text": "この時点で一気に多数の新機能を導入し始めると、移行作業が複雑になりすぎて、私見ですが絶対にリリースできないタイプのプロジェクトになってしまいます。"
+    },
+    {
+      "sentence_index": 99,
+      "english_text": "I Node myself with AI, sometimes I get impatient\n\nand I'm like, I'm doing something and whether that is a refactor.",
+      "japanese_text": "AIと議論していると、時々イライラしてしまうことがあるよ\n\nそしてこう思うんだ - 今やってる作業がリファクタリングなのかどうかってね"
+    },
+    {
+      "sentence_index": 100,
+      "english_text": "And I wanna start working on something else and it like, as a feature or I've noticed something about the refactor that I didn't want to change again.",
+      "japanese_text": "そして別の作業に移りたいんだけど、このリファクタリングで気づいたことがあるんだ。また変更したくない部分があって...。"
+    },
+    {
+      "sentence_index": 101,
+      "english_text": "And it it takes a tremendous amount of restraint to say, no. Wait.",
+      "japanese_text": "そして「ノー」と言うには、計り知れない自制心が必要だ。待ってくれ。"
+    },
+    {
+      "sentence_index": 102,
+      "english_text": "Actually, let's get this into a stable place and then modify and then stable and then modify rather than let's take everything out of the cupboard and then try to put it back in.",
+      "japanese_text": "実際には、まずはこの状態を安定した場所に固定し、修正を加えてから安定させた上で、元の位置に戻すようにしましょう。すべてを取り外して再度取り付けるよりも効率的です。"
+    },
+    {
+      "sentence_index": 103,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 104,
+      "english_text": "Do it all at once.",
+      "japanese_text": "一気にやりなさい。"
+    },
+    {
+      "sentence_index": 105,
+      "english_text": "It's so tempting, so tempting to do, but you'd it simply just makes a Wes.",
+      "japanese_text": "とても魅力的で誘惑に駆られるけど、それをすればただのウェスになってしまうよ。"
+    },
+    {
+      "sentence_index": 106,
+      "english_text": "And it's those types of projects will never ship.",
+      "japanese_text": "そしてそのようなプロジェクトは決して完成しないだろう。"
+    },
+    {
+      "sentence_index": 107,
+      "english_text": "So I was, like, looking for a long time, like, a way that I could move this gradually.",
+      "japanese_text": "だから私はずっと、徐々に変化させていく方法をいろいろ考えていたんです。"
+    },
+    {
+      "sentence_index": 108,
+      "english_text": "Meaning that, like, I would love to have some routes in HONO and some routes in Express and sort of just move them over one at a time as I was going through it, and I never found anything like that.",
+      "japanese_text": "つまり、HONOにはいくつかのルートがあって、Expressのルーティング機能を使って、一つずつ順番に移行していきたいと思っていたんです。でも、そんな便利なツールは見つからなかったんですよね。"
+    },
+    {
+      "sentence_index": 109,
+      "english_text": "There is the opposite Wes you can run a HONO app inside of Express, I believe, but it I wanted the opposite, meaning that I wanna take all my Express routes and turn them into hono.",
+      "japanese_text": "Express内でHONOアプリを実行できる方法は確かに存在しますが、私はその逆、つまりすべての既存のエクスプレス・ルートをHonoに変換したいと考えています。"
+    },
+    {
+      "sentence_index": 110,
+      "english_text": "What I have been doing over probably over the last year, year and a half JS anytime I added new code, I tried to do it in a way that was like web standards.",
+      "japanese_text": "おそらく過去1年から1年半の間、新しいコードを追加するたびに、私はウェブ標準に準拠した方法で実装するよう心がけていました。"
+    },
+    {
+      "sentence_index": 111,
+      "english_text": "So that means instead of sticking things onto, like, in middlewares in Express, the way that you sort of hot potato data from one middleware handler to the next, Like, if you're populating a user, you might have a middleware that populates a user.",
+      "japanese_text": "つまり、Expressのミドルウェア間でデータを「ホットポテト」のように受け渡す代わりに、例えばユーザー情報を設定する必要がある場合、ある中間処理でユーザーに情報を埋め込むような機能を持つモジュールを利用できるということです。"
+    },
+    {
+      "sentence_index": 112,
+      "english_text": "The way that you do that is you stick it on the request.",
+      "japanese_text": "その方法とは、リクエストに添付するだけです。"
+    },
+    {
+      "sentence_index": 113,
+      "english_text": "So you say Wes dot locals dot user or request dot user equals, and you stick it on there.",
+      "japanese_text": "つまり、Wes_dot_locales.user_or_request.user と記述し、それを指定するわけです。"
+    },
+    {
+      "sentence_index": 114,
+      "english_text": "And then you know the next the next, like, middleware down the line or the one that actually ends up rendering out your template, you know they'll they'll have access to that data because you stuck it in their Wes, and they can then pull it out.",
+      "japanese_text": "そしてさらに下流のミドルウェア、つまり最終的にテンプレートをレンダリングする部分では、そのデータにアクセスできるようになります。なぜなら、そのデータをWesley（Webフレームワーク）内に保存しておいたからです。そこから簡単に取得できるのです。"
+    },
+    {
+      "sentence_index": 115,
+      "english_text": "I don't think they have that sort of concept in Hano.",
+      "japanese_text": "ハノイにはそういう概念はないと思います。"
+    },
+    {
+      "sentence_index": 116,
+      "english_text": "They might, but I move I've been moving everything over to using a sync local storage, which essentially is you can stick stuff in, like, a a local store, and then any function that gets called down the line will then be able to pull that out of a sync local storage.",
+      "japanese_text": "そうかもしれませんが、私はすべてのデータを同期ローカルストレージに移行しました。これは基本的に、一度「localStorage」に保存すれば、その後呼び出される任意の関数がそのデータを読み出せるようになるということです。"
+    },
+    {
+      "sentence_index": 117,
+      "english_text": "It's sort of just out of the air.",
+      "japanese_text": "それはまるで空気中から出てきたようなものだ。"
+    },
+    {
+      "sentence_index": 118,
+      "english_text": "You can just pull it up, and then you have access to the data you want.",
+      "japanese_text": "単に引き出すだけで、必要なデータにアクセスできるようになります。"
+    },
+    {
+      "sentence_index": 119,
+      "english_text": "So I've been working on using that API for over a year, and I had probably four or five things convert.",
+      "japanese_text": "そこで私は1年以上にわたってそのAPIの利用に取り組んでおり、おそらく4～5種類の異なるシステムを変換してきました。"
+    },
+    {
+      "sentence_index": 120,
+      "english_text": "Like, I rewrote my whole checkout recently.",
+      "japanese_text": "例えば、最近チェックアウト処理を全部書き直したんだ。"
+    },
+    {
+      "sentence_index": 121,
+      "english_text": "I redid a bunch of the auth stuff.",
+      "japanese_text": "認証関連のコードを大幅に修正しました。"
+    },
+    {
+      "sentence_index": 122,
+      "english_text": "So all of that stuff was in a sync local storage, and I had a and, like, that's sort of my next point of how you tackle this thing JS you gotta move over a few things yourself to figure out what this is going to look like.",
+      "japanese_text": "つまり、これらすべてのデータはローカルストレージに同期保存されており、次に私が説明したいポイントは、この問題を解決するためには、いくつかの要素を自分で検討して、どのように実装すべきかを考える必要があるということです。"
+    },
+    {
+      "sentence_index": 123,
+      "english_text": "You need a couple really clear explanations as to how the new routes should look.",
+      "japanese_text": "新しいルートの具体的な設計方法について、非常に明確な説明が必要です。"
+    },
+    {
+      "sentence_index": 124,
+      "english_text": "So I moved all of those over to sync local storage.",
+      "japanese_text": "そこですべてのデータをローカルストレージに同期するように設定を変更しました。"
+    },
+    {
+      "sentence_index": 125,
+      "english_text": "I made sure that any data that was being extracted, you know, like body, params, all of that stuff, I just made sure that it was extracted high up in the controller, meaning that you're not using any express specific APIs inside of your business logic.",
+      "japanese_text": "抽出されるデータ（ボディパラメータなど）については、ビジネスロジック内でExpress固有のAPIを使用していないことを確認しました。つまり、コントローラー階層の高い位置で確実に取得されるようにしたのです。"
+    },
+    {
+      "sentence_index": 126,
+      "english_text": "You know, you're not using like Wes Scott, I don't know, whatever the weird things are that were nonstandard.",
+      "japanese_text": "ウェス・スコットみたいな、標準的じゃない変な機材は使ってないんだろ？"
+    },
+    {
+      "sentence_index": 127,
+      "english_text": "I made sure that I wasn't using any of those, and I was just throwing them into variables before I went ahead and use them.",
+      "japanese_text": "それらのメソッドを一切使用していないことを確認し、安心して使用することにした。"
+    },
+    {
+      "sentence_index": 128,
+      "english_text": "And then other standards, form data, etcetera, etcetera.",
+      "japanese_text": "そしてその他の規格、フォームデータなど、等々。"
+    },
+    {
+      "sentence_index": 129,
+      "english_text": "I will say, like, you you kinda briefly briefly hinted at this.",
+      "japanese_text": "つまり、あなたが少し軽く触れたことについてですが。"
+    },
+    {
+      "sentence_index": 130,
+      "english_text": "Something that you pointed out in another episode is that AI does really well when you have established patterns.",
+      "japanese_text": "別のエピソードで指摘されていたように、AIは確立されたパターンがある場合に非常に効果的に機能します。"
+    },
+    {
+      "sentence_index": 131,
+      "english_text": "Yep.",
+      "japanese_text": "Yes indeedy-doody!"
+    },
+    {
+      "sentence_index": 132,
+      "english_text": "And being able to manually establish some patterns can go a long way into\n\nactually getting successful patterns in the long run.",
+      "japanese_text": "また、手動でパターンを確立できる能力は、長期的に見て非常に大きな効果を発揮します。"
+    },
+    {
+      "sentence_index": 133,
+      "english_text": "Yeah, exactly.",
+      "japanese_text": "Yes, that's right."
+    },
+    {
+      "sentence_index": 134,
+      "english_text": "I think the reason that this move was so easy for me was that I had been coding it myself.",
+      "japanese_text": "この動きが簡単にできた理由は、自分でコードを書いてきた経験があったからだと思います。"
+    },
+    {
+      "sentence_index": 135,
+      "english_text": "I have these patterns that I know this is exactly how I want it to look.",
+      "japanese_text": "私にはこのパターンがあって、これがまさに私が望む仕上がりなのです。"
+    },
+    {
+      "sentence_index": 136,
+      "english_text": "And then when I did that first prompt of, like, let's start planning and I wanna move it over, it did like a huge scan of the code base and it says, oh, I see you have already started to move several of the routes over.",
+      "japanese_text": "最初のプロンプトで「計画を始め、コードベースを移動させたい」と指示したところ、システムは大規模なスキャンを実行し、「複数のルートがすでに移行され始めていることが確認できました」と答えたんです。"
+    },
+    {
+      "sentence_index": 137,
+      "english_text": "And I was like perfect.",
+      "japanese_text": "そして私は完璧だった。"
+    },
+    {
+      "sentence_index": 138,
+      "english_text": "That's exactly that's exactly what I wanted JS I wanted to realize that some of the newer stuff that had been written recently looks exactly how we want it to look.",
+      "japanese_text": "まさに私が求めていたものです！最近書かれたコードの中には、私たちが望む通りに正確に表示されているものがあるんですね。"
+    },
+    {
+      "sentence_index": 139,
+      "english_text": "So there's that, and then also there's the the templating angle as well.",
+      "japanese_text": "さらに、テンプレート作成の側面も考慮する必要があります。"
+    },
+    {
+      "sentence_index": 140,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 141,
+      "english_text": "Like, I gotta get off of Pug.",
+      "japanese_text": "マジでPugから降りなきゃ。"
+    },
+    {
+      "sentence_index": 142,
+      "english_text": "This stuff is is really frustrating to work on.",
+      "japanese_text": "この作業は本当にイライラする。"
+    },
+    {
+      "sentence_index": 143,
+      "english_text": "So what I did, again, probably about a year ago as well, is I wrote a TSX JSX templating engine for Express, which, most bizarre thing ever.",
+      "japanese_text": "そこで約1年前にも、Express用の新しいテンプレートエンジンとしてTSX/JSXを実装したんだけど、これは本当に奇妙な試みだったよ。"
+    },
+    {
+      "sentence_index": 144,
+      "english_text": "I might be the one of the only people in the world that needed this, but I, basically, in in Express, you can have different templating languages.",
+      "japanese_text": "おそらく世界でもごく少数の特殊なケースかもしれませんが、基本的にExpressでは、異なるテンプレート言語を使い分けることができます。"
+    },
+    {
+      "sentence_index": 145,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 146,
+      "english_text": "You can have handlebars or pug or whatever.",
+      "japanese_text": "HandlebarsでもPugでも、お好きなテンプレートエンジンを使えます。"
+    },
+    {
+      "sentence_index": 147,
+      "english_text": "So I wrote a custom one that allowed me to use JSX.",
+      "japanese_text": "そこでJSXを使えるようにしたカスタムバージョンを作成しました。"
+    },
+    {
+      "sentence_index": 148,
+      "english_text": "And in fact, it actually used React as Wes, but not like the type of React that you're thinking of Wes it gets hydrated on the on the client and and whatever.",
+      "japanese_text": "そして実際には、ウェスが言及していたのはReactそのものではなく、クライアント側でhydrationされるタイプのものでした（つまり...）。"
+    },
+    {
+      "sentence_index": 149,
+      "english_text": "Simply, I just wanted to use JSX tags so that in the future, I can move this whole thing over to a React application, you know, like some sort of meta framework.",
+      "japanese_text": "要するに、将来的にこのコード全体をReactアプリケーションに移行できるようにしたかったんです。つまり、メタフレームワーク的な何かに移植できるような形でね。"
+    },
+    {
+      "sentence_index": 150,
+      "english_text": "But I wanted to at least get to a point where I could just start using JSX, TSX JS I was already using it.",
+      "japanese_text": "でも、少なくともJSXやTypeScriptのJS部分くらいは使えるようになりたかったんです。すでに使い慣れていたので。"
+    },
+    {
+      "sentence_index": 151,
+      "english_text": "And then by adding that, I was able to simply go to any template I had, rename the extension from dot pug to dot JS x, obviously, change the templating language in there, but I was able to use all the stuff that I was used to.",
+      "japanese_text": "そしてこれを追加するだけで、任意のテンプレートファイルを開き、拡張子を .pug から.jsxに変更するだけで（当然ながら）、慣れ親しんだ構文をそのまま活用できるようになったんです。"
+    },
+    {
+      "sentence_index": 152,
+      "english_text": "I would like the locals, local variables that were passed in, parameters, and as well as any other React stuff that I wanted, which was worked really, really well.",
+      "japanese_text": "ローカル変数、渡された引数、そしてその他のReact関連機能もすべてうまく扱えるようにしたかったんです。これが非常にスムーズに動作してくれました。"
+    },
+    {
+      "sentence_index": 153,
+      "english_text": "I was I was pretty happy with, that implementation.",
+      "japanese_text": "その実装にはかなり満足していました。"
+    },
+    {
+      "sentence_index": 154,
+      "english_text": "So the third step we have here JS, like, you gotta make a plan, and this JS probably took the second amount of time, most amount of time.",
+      "japanese_text": "ここでの3つ目のステップはJSです。つまり、計画を立てる必要があり、このJavaScriptはおそらく2番目に多くの時間を要したでしょう。"
+    },
+    {
+      "sentence_index": 155,
+      "english_text": "The actual writing the Node, almost nothing, but the actual planning and the the testing were the two things that took the longest.",
+      "japanese_text": "ノード自体の実装はほとんど時間がかかりませんでしたが、実際の設計とテストには最も長い時間を要しました。"
+    },
+    {
+      "sentence_index": 156,
+      "english_text": "So what I did is I made a plan.",
+      "japanese_text": "そこで私は計画を立てました。"
+    },
+    {
+      "sentence_index": 157,
+      "english_text": "I went into the LLM and I said, like, I wanna move this thing over.",
+      "japanese_text": "LLMに入って、「これを移動させたいんだけど」と言ったんです。"
+    },
+    {
+      "sentence_index": 158,
+      "english_text": "I've already done some of the moving over the controllers.",
+      "japanese_text": "コントローラーの一部はすでに移動済みです。"
+    },
+    {
+      "sentence_index": 159,
+      "english_text": "I already have a JSX TSX templating ESLint, so, like, you can kinda see that this is this is the direction I wanna go in for the rest of it.",
+      "japanese_text": "すでにJSX/TypeScript用のESlint設定があるので、この先もこの方向で進めていきたいと考えています。"
+    },
+    {
+      "sentence_index": 160,
+      "english_text": "And we need to go through every single controller, every single endpoint, every single piece of this code Bos, and and make a plan for how we're going to do it.",
+      "japanese_text": "そしてすべてのコントローラー、各エンドポイント、このコードベース全体を精査し、実装方法を詳細に検討する必要があります。ボス。"
+    },
+    {
+      "sentence_index": 161,
+      "english_text": "So it it took quite a while, went through every single instance, went through every single controller, looked through every single piece of middleware, and scaffolded out a plan and went back and forth, I don't know, probably 20 or 30 times, making sure that we have everything, making sure we look at things like auth, rate limiting, CSRF tokens, JWT tokens, all of all of that kind of complicated stuff going back and forth through it.",
+      "japanese_text": "そのため、非常に長い時間を要し、すべてのインスタンスを徹底的に調査しました。各コントローラーを細かく確認しながら、ミドルウェアをすべて精査し、さらに認証、レート制限、CSRFトークン、JSON Web Tokenなど、あらゆる複雑な要素について何度も検討を重ねました。おそらく20～30回は繰り返し作業を行い、最終的に必要な機能がすべて実装されていることを確認しつつ、徹底的に検証を繰り返したわけです。"
+    },
+    {
+      "sentence_index": 162,
+      "english_text": "Then, once I felt like it had a pretty good idea of the entire surface area of the application that needed to be moved over, I asked it to make a manual checklist for testing.",
+      "japanese_text": "その後、移行が必要なアプリケーションの大部分を把握できたと感じた段階で、手動でテスト用チェックリストを作成するよう指示しました。"
+    },
+    {
+      "sentence_index": 163,
+      "english_text": "And I think I think that this was really important because it then kicked out a list of, I think, a 150 check Bos of things that needed to be tested.",
+      "japanese_text": "そしてこれが非常に重要だったのは、最終的に150項目に及ぶテスト対象リストが作成されたことです。"
+    },
+    {
+      "sentence_index": 164,
+      "english_text": "And that was really good because I understood, okay, It understands the the surface area.",
+      "japanese_text": "この点が非常に良かったのです。つまり、表面積の重要性を理解できたからです。"
+    },
+    {
+      "sentence_index": 165,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 166,
+      "english_text": "You can look at the plan, and it will say, do x, y, and z. But if you ask it to make yourself a checkbox of things to test and it kicks out a 150 items, you realize, oh, it actually does understand that when somebody wants to merge two accounts, then we create a token, and then that token gets emailed to them with a link.",
+      "japanese_text": "このプランを見れば、「x、y、およびzを実行してください」と指示できます。しかし、テスト対象項目のチェックリストを生成するよう依頼したところ、150個も出力された場合、あなたは気づくでしょう - 「ああ、これは実際に理解している。誰かが2つのアカウントを統合したい場合には、トークンを作成し、そのリンク付きメールが送信されるんだ」と。"
+    },
+    {
+      "sentence_index": 167,
+      "english_text": "And you gotta make sure that that is then rendered in the email properly.",
+      "japanese_text": "そして、それがメール内で正しく表示されるようにする必要があります。"
+    },
+    {
+      "sentence_index": 168,
+      "english_text": "And then when somebody clicks on that link, it will render out the new template.",
+      "japanese_text": "そして誰かがそのリンクをクリックすると、新しいテンプレートが生成されて表示されます。"
+    },
+    {
+      "sentence_index": 169,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 170,
+      "english_text": "Like, there's all these little edge cases of things that need to be covered.",
+      "japanese_text": "つまり、カバーすべき細かい例外ケースがたくさんあるんだ。"
+    },
+    {
+      "sentence_index": 171,
+      "english_text": "And at that point where it made that huge list for me, I felt pretty confident in letting it rip because it it understood all of the, like, nitty gritty little pieces.",
+      "japanese_text": "そしてついにその膨大なリストが完成したとき、私は自信を持って「思い切って公開しよう」と思えたのです。なぜなら、あらゆる細部に至るまで完璧に理解できていたからです。"
+    },
+    {
+      "sentence_index": 172,
+      "english_text": "Then I, like, you let it rip, and it honestly just ran for, I don't know, maybe three or three or four hours, which is not very long considering how much code it had to move over and rewrite.",
+      "japanese_text": "それから私はコードを解放したのですが、なんと3～4時間も動き続けたのです - これは処理すべきソースコード量を考えると、驚くほど長い時間でした。"
+    },
+    {
+      "sentence_index": 173,
+      "english_text": "A lot of that was not the, like, endpoints because all of that business logic of, like, what to do mostly stayed the same, you Node?",
+      "japanese_text": "その多くはエンドポイントではなく、主にビジネスロジックの部分はほとんど変更がありませんでした。ノード？"
+    },
+    {
+      "sentence_index": 174,
+      "english_text": "Send a password, reset email, approve somebody, buy something.",
+      "japanese_text": "パスワードを送信、リセットメールを送る、ある人の承認を行う、または何かを購入する。"
+    },
+    {
+      "sentence_index": 175,
+      "english_text": "All of those endpoints, none of the business logic there changed aside from taking in request parameters, bodies, whatever, doing the business logic, and then sending back, the data.",
+      "japanese_text": "これらすべてのエンドポイントにおいて、リクエストパラメータやボディデータなどの入力処理、ビジネスロジック実行、そして最終的にデータを返送するという部分以外は、コードは一切変更されていません。"
+    },
+    {
+      "sentence_index": 176,
+      "english_text": "So very little of that actually changed.",
+      "japanese_text": "実際に変化した部分はごくわずかだった。"
+    },
+    {
+      "sentence_index": 177,
+      "english_text": "It was more just about, like, what the actual route signatures looked like and making sure all the types and everything lined up.",
+      "japanese_text": "主に実際のルート署名の外観や、各種タイプや要素がすべて整合性を保っているかを確認する作業が中心でした。"
+    },
+    {
+      "sentence_index": 178,
+      "english_text": "What did take a whole lot of time was actually testing it.",
+      "japanese_text": "実際に時間がかかったのは、実はテスト作業でした。"
+    },
+    {
+      "sentence_index": 179,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 180,
+      "english_text": "Like, you can have the unit tests and all that stuff till the cows come home, but, like, really, this type of thing is kinda Scott.",
+      "japanese_text": "ユニットテストとか基本的なことはいくらでもやれるけど、実際のところ、こういうのってちょっと退屈じゃない？"
+    },
+    {
+      "sentence_index": 181,
+      "english_text": "And Yeah.",
+      "japanese_text": "そしてそうだ。"
+    },
+    {
+      "sentence_index": 182,
+      "english_text": "We had to go through every single feature of the entire platform and just go through one by one, checking that it still worked, seeing if anything popped up.",
+      "japanese_text": "プラットフォーム全体のすべての特徴を一つ一つ徹底的に検証し、正常に動作しているかを確認する必要がありました。何か問題が発生していないか、一つずつ確認していく作業です。"
+    },
+    {
+      "sentence_index": 183,
+      "english_text": "And there was, I don't know, maybe 20 or 30 little things that popped up here and there.",
+      "japanese_text": "そしてあちこちに、20～30ほどの小さな問題が浮上してきた。"
+    },
+    {
+      "sentence_index": 184,
+      "english_text": "A lot of them were just templating problems, because moving from Pug to JSX was not as straightforward.",
+      "japanese_text": "多くの問題は単なるテンプレート関連でした。PugからJSXへの移行はそれほど単純ではなかったからです。"
+    },
+    {
+      "sentence_index": 185,
+      "english_text": "And if you want to see all of the errors in your application, you'll want to check out Sanity at century.io/syntax.",
+      "japanese_text": "アプリケーション内のすべてのエラーを確認したい場合は、century.io/syntax でサニティをチェックすることをお勧めします。"
+    },
+    {
+      "sentence_index": 186,
+      "english_text": "You don't want a production application out there that, well, you have no visibility into in case something is blowing up, and you might not even know it.",
+      "japanese_text": "本番環境で稼働するアプリケーションでは、何か問題が発生してもその原因を特定できず、気づかないまま放置されるリスクは避けなければなりません。"
+    },
+    {
+      "sentence_index": 187,
+      "english_text": "So head on over to century.io/syntax.",
+      "japanese_text": "century.io/構文定義 をご覧ください。"
+    },
+    {
+      "sentence_index": 188,
+      "english_text": "Again, we've been using this tool for a long time, and it totally rules.",
+      "japanese_text": "繰り返しになりますが、私たちはこのツールを長年愛用しており、本当に素晴らしいです。"
+    },
+    {
+      "sentence_index": 189,
+      "english_text": "Alright.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 190,
+      "english_text": "In a lot of the cases, my, like, pug templates were just huge things that covered everything, and I I didn't want that to be in my JSX.",
+      "japanese_text": "多くの場合、私のpugテンプレートは過剰な要素を含む巨大なもので、これをJSXに含めたくありませんでした。"
+    },
+    {
+      "sentence_index": 191,
+      "english_text": "I wanted to, like, convert them to to components.",
+      "japanese_text": "それらをコンポーネントに変換したかったんです。"
+    },
+    {
+      "sentence_index": 192,
+      "english_text": "So I I did make sure that a lot of it got moved into reusable components rather than just, like, partials and pug and whatnot.",
+      "japanese_text": "そこで私は、部分的なテンプレートやPugファイルだけでなく、再利用可能なコンポーネントに多くの機能を移行するようにしました。"
+    },
+    {
+      "sentence_index": 193,
+      "english_text": "So lots of work on the templating part.",
+      "japanese_text": "テンプレート関連の作業がかなり多かったですね。"
+    },
+    {
+      "sentence_index": 194,
+      "english_text": "Surprisingly, most of the, like, business logic worked really, really well.",
+      "japanese_text": "驚くべきことに、ビジネスロジックの大部分が非常にうまく機能したんだ。"
+    },
+    {
+      "sentence_index": 195,
+      "english_text": "All the auth worked really well first try, which I was pretty happy with.",
+      "japanese_text": "すべての認証プロセスは初回で完璧に動作し、非常に満足しています。"
+    },
+    {
+      "sentence_index": 196,
+      "english_text": "So it took, well, it took a couple hours for the code to go through, probably took maybe a week, week and a half to actually to get to a point, not like full time work, but just to get to a point where I felt comfortable deploying this thing.",
+      "japanese_text": "つまり、コードの修正が完了するまでに2、3時間かかり、完全に安定するまでには1週間から1週間ほどかかりました。フルタイムで取り組んだわけではありませんが、このシステムを安心して本番環境に投入できるレベルに達するまでにはそれくらいかかったということです。"
+    },
+    {
+      "sentence_index": 197,
+      "english_text": "And then on a Monday morning, I I merged the PR, let the sucker go.",
+      "japanese_text": "そして月曜日の朝、私はPRを公開し、そのまま放置した。"
+    },
+    {
+      "sentence_index": 198,
+      "english_text": "Yes.",
+      "japanese_text": "はい。"
+    },
+    {
+      "sentence_index": 199,
+      "english_text": "And then immediately the Sentry emails start coming in.",
+      "japanese_text": "そしてすぐに、センチネルからのメールが次々と届き始める。"
+    },
+    {
+      "sentence_index": 200,
+      "english_text": "And that, like, that's always the most hilarious thing is that, like, the the emails from Sentry come in so quickly, and I was able to luckily, all of the emails, all of the problems were related to progress tracking.",
+      "japanese_text": "そして最も面白いのは、Sentryから送られてくるメールが驚くほど迅速に到着することです。幸いなことに、すべての問題報告は進捗追跡に関連するものでした。"
+    },
+    {
+      "sentence_index": 201,
+      "english_text": "So as you're watching a video, there's progress that goes kinda back and forth.",
+      "japanese_text": "つまり、動画を見ている間に、進行が行ったり来たりするわけです。"
+    },
+    {
+      "sentence_index": 202,
+      "english_text": "And there were people I I think there was, like, 40 people watching videos while I deployed it.",
+      "japanese_text": "そして私がデプロイしている間に、40人くらいが動画を視聴していたんです。"
+    },
+    {
+      "sentence_index": 203,
+      "english_text": "So they were on, like, the the UI version of the old one, and it was still sending API hits to the API, like, forward slash account forward slash progress, you know, tracking their progress.",
+      "japanese_text": "つまり彼らは旧バージョンのUI版を使用しており、APIに対して「/account/progress」のような形式で進捗情報を送信し続けていたのです。つまり、彼らの進捗状況を追跡していたわけです。"
+    },
+    {
+      "sentence_index": 204,
+      "english_text": "That's why I needed to make sure that the API API endpoints stayed the same.",
+      "japanese_text": "そのため、APIのエンドポイントが変更されないようにする必要があったんです。"
+    },
+    {
+      "sentence_index": 205,
+      "english_text": "And there was something weird where it wasn't loading the progress properly, but those were relatively easy fixes.",
+      "japanese_text": "また、進捗表示が正しく行われない不具合もありましたが、これらは比較的簡単に修正できました。"
+    },
+    {
+      "sentence_index": 206,
+      "english_text": "But I was thankful to have Sanity, sentry.io forward slash syntax, to tell me what those issues were very quickly so I could fix them and not too many people lost their progress in watching their video.",
+      "japanese_text": "しかし、sentryの「sanitizer」機能のおかげで、これらの問題を即座に特定して修正できたことに感謝しています。これにより、動画を見ている視聴者が進捗を失うことなくスムーズに視聴を続けることができました。"
+    },
+    {
+      "sentence_index": 207,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 208,
+      "english_text": "Man, that's a scary migration to do in that kind of way.",
+      "japanese_text": "うわー、そんなやり方での移住はマジで怖いよな。"
+    },
+    {
+      "sentence_index": 209,
+      "english_text": "And I will say, man, I've done so many of these types of migrations by hand.",
+      "japanese_text": "そして私は思う――これまでこうしたタイプの移行作業を手作業で何度も行ってきたものだと。"
+    },
+    {
+      "sentence_index": 210,
+      "english_text": "It's scary to do it by hand too.",
+      "japanese_text": "手作業でやるのも怖いです。"
+    },
+    {
+      "sentence_index": 211,
+      "english_text": "So, having tools like that that can alert you to stuff going wrong is Yeah.",
+      "japanese_text": "つまり、問題が発生した際に警告してくれるツールがあるのは確かに有益です。"
+    },
+    {
+      "sentence_index": 212,
+      "english_text": "Important.",
+      "japanese_text": "重要です。"
+    },
+    {
+      "sentence_index": 213,
+      "english_text": "Now that it's now that it's, like, moved over, I've I'm, like, so excited because, like, now I the the world is my oyster in terms of, like now I'm thinking, can I can I move it to CloudFlare?",
+      "japanese_text": "移行が完了した今、私はとても興奮しています。なぜなら、これで世界が自分の思いのままにできるようになったからです。例えば、Cloudflareに移行できるでしょうか？"
+    },
+    {
+      "sentence_index": 214,
+      "english_text": "Can I move to Drizzle?",
+      "japanese_text": "Drizzleに移行することは可能ですか？"
+    },
+    {
+      "sentence_index": 215,
+      "english_text": "Can I, like, there's so many more options that I have available to me now, now that this thing, this move has been Node, and I feel like I can do a lot more with whatever features I wanna wanna scaffold out?",
+      "japanese_text": "この機能が導入されたことで、今では利用できる選択肢が大幅に増えました。これにより、私が構築したいさまざまなコンポーネントをより柔軟に設計できるようになったと感じています。もっと多くのことが実現できるのではないでしょうか。"
+    },
+    {
+      "sentence_index": 216,
+      "english_text": "So AI is so so good for this type of stuff.",
+      "japanese_text": "AIはまさにこのような用途に最適な技術です。"
+    },
+    {
+      "sentence_index": 217,
+      "english_text": "I was so happy with it, because I don't know if I would ever would have moved off of x. I probably eventually would have done it, but I was just I didn't wanna do it for the longest time.",
+      "japanese_text": "本当に嬉しかったです。だって、もしかしたら一生xから離れられないかもしれないと思っていたから。結局いつかはやるつもりだったけれど、とにかく長い間、どうしてもやる気になれなかったんです。"
+    },
+    {
+      "sentence_index": 218,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 219,
+      "english_text": "I didn't really didn't want to have to to do it.",
+      "japanese_text": "それをしなければならないのは本当に嫌だった。"
+    },
+    {
+      "sentence_index": 220,
+      "english_text": "Oh, one more thing I forgot to say is that I wrote, like, a a middleware that converted the express request and converted it into a standard web request.",
+      "japanese_text": "ああ、言い忘れてたけど、expressのリクエストを標準的なWeb要求形式に変換するミドルウェアも作成したんだ。"
+    },
+    {
+      "sentence_index": 221,
+      "english_text": "And that's how I was able to move a lot of the stuff over beforehand Wes I wrote like this little converter function.",
+      "japanese_text": "こうして事前に多くのデータを移行できました。ウェス、この小さな変換関数を書いたおかげです。"
+    },
+    {
+      "sentence_index": 222,
+      "english_text": "And then\n\nonce that was all done, I could delete that function from from the code Bos.",
+      "japanese_text": "そしてすべてが完了したら、コードからこの関数を削除できます。ボス。"
+    },
+    {
+      "sentence_index": 223,
+      "english_text": "How many code bases do you think are out there that could benefit from this type of thing?",
+      "japanese_text": "このような手法で改善が見込めるコードベースは、世の中にどれくらい存在すると思いますか？"
+    },
+    {
+      "sentence_index": 224,
+      "english_text": "Like, a serious process, you set up some guardrails.",
+      "japanese_text": "つまり、真剣なプロセスでは、ある程度のガイドラインを設けるわけです。"
+    },
+    {
+      "sentence_index": 225,
+      "english_text": "I think the the planning and the patterns are, like, the biggest keys to success and then the the testing and verification.",
+      "japanese_text": "計画とパターンこそが、成功への最大の鍵だと思います。そしてそれに続くテストと検証です。"
+    },
+    {
+      "sentence_index": 226,
+      "english_text": "You have all that.",
+      "japanese_text": "あなたにはそれがすべて揃っている。"
+    },
+    {
+      "sentence_index": 227,
+      "english_text": "Yep.",
+      "japanese_text": "Yes indeedy-doody!"
+    },
+    {
+      "sentence_index": 228,
+      "english_text": "You you can monitor the output.",
+      "japanese_text": "出力を監視できます。"
+    },
+    {
+      "sentence_index": 229,
+      "english_text": "You could read the code if you know what you're doing.",
+      "japanese_text": "やり方を知っていれば、そのコードを読むことは可能です。"
+    },
+    {
+      "sentence_index": 230,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 231,
+      "english_text": "And\n\nit's important to to be able to do stuff like this.",
+      "japanese_text": "そして重要なのは、こうしたことができる能力を身につけることです。"
+    },
+    {
+      "sentence_index": 232,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 233,
+      "english_text": "Like, I wonder how many people are on, like, an Angular one code Bos, or how many people are on, like, a like, still already have Sass, and they they wanna use some of the new CSS nesting features.",
+      "japanese_text": "例えば、「angular-one-codebos」を使っている人はどれくらいいるんだろう？ あるいは、すでにSassを使っていて、新しいCSSネスト機能を使いたいと思っている人たちは何人くらいいるのかな、とか。"
+    },
+    {
+      "sentence_index": 234,
+      "english_text": "Like, Sass to CSS nesting, that would be easy.",
+      "japanese_text": "SassからCSSへのネスト処理みたいに、簡単にできそうだよね。"
+    },
+    {
+      "sentence_index": 235,
+      "english_text": "That would be an easy one.",
+      "japanese_text": "それは簡単な問題だろう。"
+    },
+    {
+      "sentence_index": 236,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 237,
+      "english_text": "You'd have to plan a little bit.",
+      "japanese_text": "少し計画を立てる必要があるだろう。"
+    },
+    {
+      "sentence_index": 238,
+      "english_text": "You'd have to see which Sass features you're using, plan out what to do with those Sass features, you know, because it's not perfect one to one parity.",
+      "japanese_text": "使用しているSassの機能を確認し、それらをどう処理するか計画を立てる必要があります。完全に1対1で対応しているわけではないからです。"
+    },
+    {
+      "sentence_index": 239,
+      "english_text": "How how are you gonna tackle how are you gonna reimplement this if it's that feature JS not supported in CSS nesting?",
+      "japanese_text": "CSSのネスト機能でこの特定のJSベースの実装がサポートされていない場合、どうやって再設計するつもりですか？"
+    },
+    {
+      "sentence_index": 240,
+      "english_text": "But there's just so many different use cases where Node moving from one to another is such a easy thing.",
+      "japanese_text": "しかし、ノード間での移行が非常に簡単なケースは実に多岐にわたります。"
+    },
+    {
+      "sentence_index": 241,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 242,
+      "english_text": "Not super easy, obviously.",
+      "japanese_text": "もちろん超簡単というわけではない。"
+    },
+    {
+      "sentence_index": 243,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 244,
+      "english_text": "People have Effortless.",
+      "japanese_text": "人々は努力なしに達成できる。"
+    },
+    {
+      "sentence_index": 245,
+      "english_text": "Works first try.",
+      "japanese_text": "最初の試みで成功。"
+    },
+    {
+      "sentence_index": 246,
+      "english_text": "People have like 10 times, a 100 times bigger applications that are written in JavaScript, you Node, and you're not gonna just the one shot move that thing over, but it certainly is a viable solution versus having to try shoehorn\n\nstreaming into an application that was never built for it.",
+      "japanese_text": "JavaScriptで書かれた10倍～数百倍も大規模なアプリケーションは世の中に無数に存在しており、それらを一度の移行作業で一気に移植するのは現実的ではありません。とはいえ、このアプローチは、そもそもストリーミング処理を想定して設計されていない既存システムに対して有効な解決策であることは間違いありません。"
+    },
+    {
+      "sentence_index": 247,
+      "english_text": "Sec.",
+      "japanese_text": "秒（sec）：0.01分の単位。"
+    },
+    {
+      "sentence_index": 248,
+      "english_text": "Well, I I loved hearing your process here, and some of the stuff is gonna go along with some some topics I wanna get to you talking about soon about using more deterministic tools for ensuring things like this work because I do feel like that is the place to get.",
+      "japanese_text": "なるほど、あなたのプロセスについて聞くことができて良かったです。ここで取り上げられている内容は、私が近々取り上げたいテーマ――このような作業を確実に行うための決定論的ツールを活用する方法と関連していますね。なぜなら、それこそが目指すべき方向性だと私も考えているからです。"
+    },
+    {
+      "sentence_index": 249,
+      "english_text": "When you have a good testing suite that passes or you have these types of things that are guardrail rails for the AI writing quality or whatever it is.",
+      "japanese_text": "優れたテストスイートがあり、AIが品質基準を満たすためのガードレールとして機能している場合、あるいはそれが何らかの形で実現されている場合には。"
+    },
+    {
+      "sentence_index": 250,
+      "english_text": "I think those are the types of things that are going to get us from a place of just slop, slop, slop to maintainable systems minded.",
+      "japanese_text": "こうした取り組みこそが、単なる雑務や煩雑な業務から、持続可能なシステムへと私たちを導いてくれるものだと確信しています。"
+    },
+    {
+      "sentence_index": 251,
+      "english_text": "So yeah.",
+      "japanese_text": "そう、そんな感じ。"
+    },
+    {
+      "sentence_index": 252,
+      "english_text": "Well, thank you so much for sharing that, Wes.",
+      "japanese_text": "ウェス、その貴重な情報を共有してくれてありがとう。本当に感謝しています。"
+    },
+    {
+      "sentence_index": 253,
+      "english_text": "Let's get into sick picks and, shameless plugs.",
+      "japanese_text": "ここからはマニアックな選曲と、あからさまに宣伝っぽい話題に移ろう。"
+    },
+    {
+      "sentence_index": 254,
+      "english_text": "We haven't done shameless plugs in a while, but I've been feeling like shameless plugging something.",
+      "japanese_text": "しばらくステマ記事を書いてなかったけど、そろそろ露骨な宣伝をしたくなる気分なんだ。"
+    },
+    {
+      "sentence_index": 255,
+      "english_text": "So sick picks, I have a sick pick for you, which is WhisperFlow.",
+      "japanese_text": "素晴らしいピックばかりですが、特に注目すべきは「Whisperflow」です。ぜひお試しください。"
+    },
+    {
+      "sentence_index": 256,
+      "english_text": "I've been using a lot of voice dictation.",
+      "japanese_text": "音声入力を多用しています。"
+    },
+    {
+      "sentence_index": 257,
+      "english_text": "I had a crazy allergic this is back to me being sick about something.",
+      "japanese_text": "私は何かに対してひどくアレルギー反応を起こしていた。まるで自分が病気になったかのようだった。"
+    },
+    {
+      "sentence_index": 258,
+      "english_text": "I didn't even talk about this on this show.",
+      "japanese_text": "私はこの番組でこのことについてさえ話さなかった。"
+    },
+    {
+      "sentence_index": 259,
+      "english_text": "I had a crazy allergic reaction to my sinus surgery medication, and it, like, caused some major inflammation in my wrist where they were, like they felt like they were broken, and my wrist are still recovering from that, believe it or not.",
+      "japanese_text": "副鼻腔手術後の処方薬に対して異常なアレルギー反応が出て、手首の部分がまるで骨折したかのようにひどく腫れ上がりました。信じられないかもしれませんが、今でもその後遺症に悩まされているんです。"
+    },
+    {
+      "sentence_index": 260,
+      "english_text": "I got really bad RSI from it.",
+      "japanese_text": "その結果、重度の腱鞘炎になってしまった。"
+    },
+    {
+      "sentence_index": 261,
+      "english_text": "So I've been doing a lot.",
+      "japanese_text": "だから最近はかなり忙しくしているんだ。"
+    },
+    {
+      "sentence_index": 262,
+      "english_text": "I dude, I'm a I just yeah.",
+      "japanese_text": "私はただ...うん、そうだよ。"
+    },
+    {
+      "sentence_index": 263,
+      "english_text": "This is just my life.",
+      "japanese_text": "これはただの私の人生だ。"
+    },
+    {
+      "sentence_index": 264,
+      "english_text": "I I I've been doing a lot of voice to to text, and I was getting just so frustrated with the voice to text in Super Whisper.",
+      "japanese_text": "私は音声入力をテキストに変換する作業をたくさんやっているのですが、SuperWhisperアプリの文字起こし機能には本当にイライラさせられていました。"
+    },
+    {
+      "sentence_index": 265,
+      "english_text": "And the Super Whisper folks are great because they've reached out to me and Wes like, okay.",
+      "japanese_text": "SuperWhisperチームは素晴らしい対応をしてくれます。私やウェスに対しても、こう言ってくれたんです。「わかりました」と。"
+    },
+    {
+      "sentence_index": 266,
+      "english_text": "How can we make this better?",
+      "japanese_text": "これをさらに改善するにはどうすればよいでしょうか？"
+    },
+    {
+      "sentence_index": 267,
+      "english_text": "So I just was getting really frustrated with Super Whisper not being reliable for me.",
+      "japanese_text": "それで結局、SuperWhisperが私の用途では信頼性に欠けることにひどくイライラしていたんです。"
+    },
+    {
+      "sentence_index": 268,
+      "english_text": "I would hit the button.",
+      "japanese_text": "私はそのボタンを押すだろう。"
+    },
+    {
+      "sentence_index": 269,
+      "english_text": "Sometimes it would show show the Bos.",
+      "japanese_text": "時にはボスの姿も映っていた。"
+    },
+    {
+      "sentence_index": 270,
+      "english_text": "Sometimes it wouldn't.\n\nPeople were like, oh, if it's slow, you gotta go in and and change which model you're using.",
+      "japanese_text": "そうではなかった時もあった。\n「動作が遅いなら、使っているモデルを切り替えなきゃいけない」なんて言われることもあった。"
+    },
+    {
+      "sentence_index": 271,
+      "english_text": "It's like, I don't I don't care about models.",
+      "japanese_text": "つまりさ、モデルなんてどうでもいいって感じ。"
+    },
+    {
+      "sentence_index": 272,
+      "english_text": "I don't care about, like, settings.",
+      "japanese_text": "設定とか、そういうのどうでもいいんだよね。"
+    },
+    {
+      "sentence_index": 273,
+      "english_text": "I wanna hit my voice dictation button, and I warp it to work, and I want it to work every time.",
+      "japanese_text": "音声入力ボタンを押したとき、確実に作動するようにしたいんだ。毎回ちゃんと反応してほしいんだよね。"
+    },
+    {
+      "sentence_index": 274,
+      "english_text": "I Wes suggested WhisperFlow as being a good option, and it really checks the boxes of just works.",
+      "japanese_text": "ウェスがWhisperflowを良い選択肢として提案してくれましたが、実際に使ってみると非常に使い勝手が良いことが分かりました。"
+    },
+    {
+      "sentence_index": 275,
+      "english_text": "You hit the button, it works.",
+      "japanese_text": "ボタンを押せば、作動する。"
+    },
+    {
+      "sentence_index": 276,
+      "english_text": "The little indicator is small, it's visible, it works every time.",
+      "japanese_text": "小さな表示器は小さいですが、常にはっきりと確認できます。"
+    },
+    {
+      "sentence_index": 277,
+      "english_text": "I don't have to worry about the Node.",
+      "japanese_text": "ノードについて心配する必要はない。"
+    },
+    {
+      "sentence_index": 278,
+      "english_text": "I don't have to worry about any of that stuff.",
+      "japanese_text": "私はそのようなことを気にする必要がない。"
+    },
+    {
+      "sentence_index": 279,
+      "english_text": "It's fast, it's efficient.",
+      "japanese_text": "速くて効率的です。"
+    },
+    {
+      "sentence_index": 280,
+      "english_text": "So if you're doing voice dictation a lot, I found it to be much nicer obviously than the built in system wide one.",
+      "japanese_text": "頻繁に音声入力を行う場合、標準のシステム全体にわたる機能よりも明らかに使いやすいと感じました。"
+    },
+    {
+      "sentence_index": 281,
+      "english_text": "And\n\nin general, it's it's been very reliable for me, which is something that I abs it it has never once not triggered, not pasted, not done my text, which JS, like, that that's how it's gotta work.",
+      "japanese_text": "そして一般的に、これは私にとって非常に信頼性の高いツールです。一度も誤作動を起こしたことがなく、テキストを誤って貼り付けたこともありません。まさにそのように動作すべきものなのです。"
+    },
+    {
+      "sentence_index": 282,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 283,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 284,
+      "english_text": "Right.",
+      "japanese_text": "右です。"
+    },
+    {
+      "sentence_index": 285,
+      "english_text": "I've tried these things so many times, and I've always just go back to the built in macOS one.",
+      "japanese_text": "これまで何度も試してみたけど、結局いつも標準のMac内蔵機能に戻ってしまうんだよね。"
+    },
+    {
+      "sentence_index": 286,
+      "english_text": "And, like Yeah.",
+      "japanese_text": "そしてそう、うん。"
+    },
+    {
+      "sentence_index": 287,
+      "english_text": "The macOS one, I don't like because I would love to be able to give it a dictionary of, like, common words that I say in coding because there's super whisper and whatever.",
+      "japanese_text": "Mac版は好きじゃないんだ。コーディング中によく使う一般的な単語の辞書機能があればいいなと思うから。SuperWhisperとか他のものがいろいろあってね。"
+    },
+    {
+      "sentence_index": 288,
+      "english_text": "Those things are way better at that.",
+      "japanese_text": "それらのことはそちらの方がずっと優れている。"
+    },
+    {
+      "sentence_index": 289,
+      "english_text": "But I also I love that the built in macOS one will stream what you're saying so you can see it.",
+      "japanese_text": "でも、内蔵のMac標準機能で話している内容をそのままストリーミングできる点も気に入っています。これなら相手にも聞こえますからね。"
+    },
+    {
+      "sentence_index": 290,
+      "english_text": "I know.",
+      "japanese_text": "I do know."
+    },
+    {
+      "sentence_index": 291,
+      "english_text": "And then you can, like Node.",
+      "japanese_text": "そしてその後、例えばノードのように動作させることができます。"
+    },
+    {
+      "sentence_index": 292,
+      "english_text": "Oh, if something is wrong, you can just click where you want to go.",
+      "japanese_text": "ああ、何か問題があれば、行きたい場所をクリックするだけでいいですよ。"
+    },
+    {
+      "sentence_index": 293,
+      "english_text": "You can delete stuff, and then you can just keep talking.",
+      "japanese_text": "削除してから会話を続けられます。"
+    },
+    {
+      "sentence_index": 294,
+      "english_text": "So, like, why why do you use these things versus the built in one?",
+      "japanese_text": "じゃあ、どうして内蔵の機能じゃなくてこれを使うんだい？"
+    },
+    {
+      "sentence_index": 295,
+      "english_text": "Simply because it's more accurate.",
+      "japanese_text": "単に精度が高いからです。"
+    },
+    {
+      "sentence_index": 296,
+      "english_text": "I can say the word century, and it knows that I'm saying century and not century.",
+      "japanese_text": "私は「センチュリー」という単語を言うことができ、それがcentury（世紀）ではなくcenturyを意味することを理解しています。"
+    },
+    {
+      "sentence_index": 297,
+      "english_text": "I I it it can do my last name correctly, which isn't you Node?",
+      "japanese_text": "私は自分の姓を正しく入力できますが、あなたはどうですか？ノード？"
+    },
+    {
+      "sentence_index": 298,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 299,
+      "english_text": "My last name isn't even hard, but AI, it Scott up my last name or the, the dictation one.",
+      "japanese_text": "私の姓は難しくないんですよ、AI。単にラストネームを発音しただけか、音声入力で入力しただけです。"
+    },
+    {
+      "sentence_index": 300,
+      "english_text": "And I also just find, like, the the macOS dictation just be inaccurate enough that I kid you Node.",
+      "japanese_text": "それに、Macの音声入力は精度が十分に高くないから、冗談抜きで使い物にならないんだよね。"
+    },
+    {
+      "sentence_index": 301,
+      "english_text": "I bet there are times when I'm sending you guys messages on Slack that it has just weird words in it.",
+      "japanese_text": "きっと時々、私があなたたちに送信するスラックのメッセージに、意味のない言葉ばかり入っていることがあるんじゃないかな。"
+    },
+    {
+      "sentence_index": 302,
+      "english_text": "And those are almost a 100% of the time because I'm doing it on my phone via the the dictation that's on the phone rather than something like whisper flow or super whisper, which are getting, like, actual the actual words I'm really saying.",
+      "japanese_text": "そしてほとんどの場合、100％に近い精度で認識されます。これは「音声入力」（スマートフォンの文字起こし機能）を使用しているためです。Whisper FlowやSuper Whisperといったツールではなく、実際に話している言葉をそのまま正確に捉えているからです。"
+    },
+    {
+      "sentence_index": 303,
+      "english_text": "Interesting.",
+      "japanese_text": "興味深い。"
+    },
+    {
+      "sentence_index": 304,
+      "english_text": "Just more accurate.",
+      "japanese_text": "ただより正確です。"
+    },
+    {
+      "sentence_index": 305,
+      "english_text": "I need to I'll give them a shot again because I would like to provide a whole bunch of things that I often words that I often say, you Node?",
+      "japanese_text": "もう一度試してみる必要があるわ。よく口にする言葉がたくさんあるから、あなたにも共有したいの。ノード？"
+    },
+    {
+      "sentence_index": 306,
+      "english_text": "Or, like Yeah.",
+      "japanese_text": "あるいは、Yeahみたいな感じで。"
+    },
+    {
+      "sentence_index": 307,
+      "english_text": "You could even like, what would be cool is if you could hook it up with, like, OCR as well.",
+      "japanese_text": "さらに言えば、光学式文字認識（OCR）機能と連携できたら最高ですよね。"
+    },
+    {
+      "sentence_index": 308,
+      "english_text": "So, like, based on the app that you're on, it could, like, look at your code Bos and, like, fill it with words that it sees on screen.",
+      "japanese_text": "つまり、使用しているアプリに応じて、画面上に表示されるコードを分析し、関連するキーワードで補完してくれるんです。"
+    },
+    {
+      "sentence_index": 309,
+      "english_text": "That would be kinda cool.",
+      "japanese_text": "それはちょっとかっこいいかも。"
+    },
+    {
+      "sentence_index": 310,
+      "english_text": "And whisper whisper flow has a cursor plug in and apparently works well with coding, but I have never done that because I don't use cursor, and there there isn't, like, something for me.",
+      "japanese_text": "そして「whisper」プラグインはカーソル位置への自動挿入機能があり、コーディングとの相性も良いようですが、私はそもそもカーソル操作をしないので、これまで試したことがありません。私には適した用途が見つからなかったのです。"
+    },
+    {
+      "sentence_index": 311,
+      "english_text": "I I don't know how well I would do with that, actually coding with voice.",
+      "japanese_text": "実際のところ、音声を使ったコーディングがどの程度できるかは分かりません。"
+    },
+    {
+      "sentence_index": 312,
+      "english_text": "I did get into the accessibility.",
+      "japanese_text": "私はアクセシビリティについて理解した。"
+    },
+    {
+      "sentence_index": 313,
+      "english_text": "You like, macOS accessibility has, like, window control with voice.",
+      "japanese_text": "あなたは知っていますか？ MacOSのアクセシビリティ機能には、音声でウィンドウを操作できる便利な機能があるんです。"
+    },
+    {
+      "sentence_index": 314,
+      "english_text": "And so I was like, show numbers 42, enter.",
+      "japanese_text": "そして私は「ショーナンバー42、入場」と告げた。"
+    },
+    {
+      "sentence_index": 315,
+      "english_text": "And I'm, like, talking to my computer like that, whatever, and then dictating Yeah.",
+      "japanese_text": "そして私はコンピューターに向かってこんな風に話しかけながら、「うん、うん」と指示を出しているわけです。そんな感じでね。"
+    },
+    {
+      "sentence_index": 316,
+      "english_text": "The whisper flow.",
+      "japanese_text": "ささやきが流れる。"
+    },
+    {
+      "sentence_index": 317,
+      "english_text": "And it Wes, like, the days when my wrists were at their worst, it was very usable, but, look, definitely definitely took some getting used to.",
+      "japanese_text": "手首が一番ひどい時期には、確かに使い勝手は良かったけど、慣れるまでには時間がかかったよ。"
+    },
+    {
+      "sentence_index": 318,
+      "english_text": "I'll tell you that.",
+      "japanese_text": "それは私が言ってあげましょう。"
+    },
+    {
+      "sentence_index": 319,
+      "english_text": "I accidentally, like, archived and deleted some open code sessions because I told it the wrong number at the wrong time and stuff.",
+      "japanese_text": "誤って、間違ったタイミングで誤った番号を入力してしまったせいで、いくつかのオープン中のコードセッションをアーカイブして削除しちゃったんだよね...。"
+    },
+    {
+      "sentence_index": 320,
+      "english_text": "So Oh, no. Chaotic.",
+      "japanese_text": "そう、違う。混沌としている。"
+    },
+    {
+      "sentence_index": 321,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 322,
+      "english_text": "Alright.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 323,
+      "english_text": "I'm gonna say pick another app as well.",
+      "japanese_text": "別のアプリも選ぶつもりだよ。"
+    },
+    {
+      "sentence_index": 324,
+      "english_text": "This is called DisplayPlacer.",
+      "japanese_text": "これはDisplayPlacerと呼ばれています。"
+    },
+    {
+      "sentence_index": 325,
+      "english_text": "This is a CLI that allows you to save your display settings, and this is a problem that I have.",
+      "japanese_text": "これはディスプレイ設定を保存できるコマンドラインインターフェースですが、私にはこれが問題なのです。"
+    },
+    {
+      "sentence_index": 326,
+      "english_text": "If anyone uses a dock and a Mac, and you have multiple monitors, you may know that every time you plug into a different USB port, they ID them, all your monitors separately, and then pnpm time that they come online in a different order, they also ID them differently.",
+      "japanese_text": "ドックとMacを併用していて、複数のモニターを使用している場合、異なるUSBポートに接続するたびに各ディスプレイが個別に認識され、再起動後にオンライン復帰する際も毎回違う順序で識別されることにお気づきかもしれません。同様に、これらのデバイスは異なる方法でIDを付与します。"
+    },
+    {
+      "sentence_index": 327,
+      "english_text": "So I have this problem where every time I plug my dock in, it thinks that my monitors are always wrong, and I have to go and turn them and replace them exactly where I want.",
+      "japanese_text": "問題は、ドックを接続するたびにモニターの設定が常に誤認識され、毎回手動で正しい位置に調整しなければならないことです。"
+    },
+    {
+      "sentence_index": 328,
+      "english_text": "And then I have this, prompter, which I have off a lot of the time, and then I when I turn it on, it thinks it's a different arrangement.",
+      "japanese_text": "そしてこれがあります - プロンプターです。普段はオフにしていますが、オンにすると別の台本を読んでいるように感じます。"
+    },
+    {
+      "sentence_index": 329,
+      "english_text": "It drove me nuts.",
+      "japanese_text": "それは私をひどくイライラさせた。"
+    },
+    {
+      "sentence_index": 330,
+      "english_text": "So I Scott this little CLI called display placer, and then there's a a ray cast, like, UI for it.",
+      "japanese_text": "そこで私は「displayplacer」という小さなCLIツールを作成し、UIとしてレイキャスト機能を実装しました。"
+    },
+    {
+      "sentence_index": 331,
+      "english_text": "And basically, you can save your common things, your common layouts, which I really like because I have I have a desk at the Scott, I have a desk here, I have sometimes I have different displays on and off, sometimes I like a, like, a larger resolution, sometimes I like it zoomed a bit more up when I'm recording.",
+      "japanese_text": "基本的に、よく使う設定や共通レイアウトを保存できるのが非常に便利です。私はスコットにデスクを置いていますが、ここには時々ディスプレイの数を変えたり、録画時には解像度を少し上げて表示を拡大したい場合があります。このような柔軟な対応が可能な点が特に気に入っています。"
+    },
+    {
+      "sentence_index": 332,
+      "english_text": "So I have, like, six or seven different presets, and I can just type into it and hit presets.",
+      "japanese_text": "だから私は6つか7つの異なるプリセットを持っていて、それを選んでボタンを押すだけで設定できるんだ。"
+    },
+    {
+      "sentence_index": 333,
+      "english_text": "It's not perfect.",
+      "japanese_text": "完璧ではない。"
+    },
+    {
+      "sentence_index": 334,
+      "english_text": "It's, like, maybe once in the last couple weeks, I've had to manually go and and change it again, but it is way better than having to, like, manually go in and\n\ndo my monitors every time I plug into my dock.",
+      "japanese_text": "ここ2、3週間の間に1回くらいは、手動で設定をやり直したこともあるけど、それでもドックに接続するたびに毎回手作業で調整するよりずっとマシだよ。"
+    },
+    {
+      "sentence_index": 335,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 336,
+      "english_text": "Man, what annoying little things, Real quick before we get out of here, I do have a shameless plug.",
+      "japanese_text": "まったく、本当に厄介な奴らだな。出かける前に、一つ宣伝させてもらおう。"
+    },
+    {
+      "sentence_index": 337,
+      "english_text": "My wife started a podcast.",
+      "japanese_text": "妻がポッドキャストを始めた。"
+    },
+    {
+      "sentence_index": 338,
+      "english_text": "I've talked about it on here before, phases.fm.",
+      "japanese_text": "以前ここで触れたことがあるんですが、phases.fmについてです...。"
+    },
+    {
+      "sentence_index": 339,
+      "english_text": "Her most recent episode is growth mindset for kids, and it's really talking about how to raise resilient kids who don't give up.",
+      "japanese_text": "彼女の最新のテーマは「成長マインドセット」で、挫折しても諦めない強い子どもを育てる方法について語っています。"
+    },
+    {
+      "sentence_index": 340,
+      "english_text": "Because, man, it's really easy that, like, when kids get frustrated with stuff that they can, just quit or do something else or we wanna raise resilient kids.",
+      "japanese_text": "だって、子どもが何かに挫折したとき、すぐに諦めたり、別のことをしたりしちゃうでしょ。私たちは「困難に負けない子を育てたい」と思っているんだから。"
+    },
+    {
+      "sentence_index": 341,
+      "english_text": "So, my wife is a doctor of psychology, and she has a new podcast about making parenting topics, scientific but also fun and easy.",
+      "japanese_text": "というわけで、私の妻は心理学博士で、子育てに関する話題を科学的でありながら楽しく分かりやすく解説するポッドキャストを始めたんです。"
+    },
+    {
+      "sentence_index": 342,
+      "english_text": "So check it out @phases.fm.",
+      "japanese_text": "ぜひ@phases.fmをチェックしてみてください。"
+    },
+    {
+      "sentence_index": 343,
+      "english_text": "And it's available on all podcast players, all that stuff.",
+      "japanese_text": "そしてすべてのポッドキャストプレーヤーで利用可能です。あらゆる機能が揃っています。"
+    },
+    {
+      "sentence_index": 344,
+      "english_text": "So check it out.",
+      "japanese_text": "だからよく見てみろよ。"
+    },
+    {
+      "sentence_index": 345,
+      "english_text": "Is a great\n\nWes domain name.",
+      "japanese_text": "素晴らしいドメイン名です。"
+    },
+    {
+      "sentence_index": 346,
+      "english_text": "I can't believe you got that, phases.fm.",
+      "japanese_text": "phases.fmでそんなの手に入れたなんて信じられないよ。"
+    },
+    {
+      "sentence_index": 347,
+      "english_text": "Such a good name.",
+      "japanese_text": "なんと素晴らしい名前だろう。"
+    },
+    {
+      "sentence_index": 348,
+      "english_text": "Jumped on it so quickly.",
+      "japanese_text": "すぐに飛びついた。"
+    },
+    {
+      "sentence_index": 349,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 350,
+      "english_text": "I when I saw that that existed and the YouTube and all that, I just jumped on it as fast as possible.",
+      "japanese_text": "その存在を知ってYouTubeなどで動画を見た瞬間、私は即座に飛びつきました。できる限り早く。"
+    },
+    {
+      "sentence_index": 351,
+      "english_text": "Sick faces.",
+      "japanese_text": "不機嫌な顔。"
+    },
+    {
+      "sentence_index": 352,
+      "english_text": "Alright.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 353,
+      "english_text": "Thanks, everybody, for tuning in.",
+      "japanese_text": "皆さん、聴いてくれてありがとう。"
+    },
+    {
+      "sentence_index": 354,
+      "english_text": "Catch you later.",
+      "japanese_text": "後でね。"
+    }
+  ]
+}

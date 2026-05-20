@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>【SYNTAX】#992 Migrating Legacy Code Just Got Easier</title>
+  <style>
+    @font-face {
+      font-family: 'BIZUDP';
+      src: url('../assets/BIZUDPGothic-Regular.ttf') format('truetype');
+    }
+    @page { size: A4; margin: 20mm; }
+    body {
+      font-family: 'BIZUDP', "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+                   "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      margin: 0; padding: 0; color: #111;
+    }
+    @media screen {
+      body { padding: 28px 32px; max-width: 800px; margin: 0 auto; }
+    }
+    h1 {
+      font-size: 15pt;
+      margin: 0 0 16pt;
+      padding-bottom: 5pt;
+      border-bottom: 1px solid #ccc;
+      line-height: 1.4;
+      font-weight: bold;
+    }
+    ruby { ruby-align: center; }
+    rt { font-size: 0.52em; }
+  </style>
+</head>
+<body>
+  <h1>【SYNTAX】#992 Migrating Legacy Code Just Got Easier</h1>
+  
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Welcome to Syntax.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">構文解析へようこそ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We're talking about migrating and moving languages or frameworks, moving your code to something else with the help of AI.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここで議論しているのは、言語やフレームワークの移行・移植、つまりAIを活用してコードを別のものに置き換えるプロセスについてです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How do you possibly even do that?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">どうやってそんなことができるんだ？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You got a big monolith application that's been sitting around for many, many years, and you've dreamt of of moving this thing over to something else.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">長年使われてきた巨大なモノリシックアプリケーションがあり、これを別のアーキテクチャに移行したいとずっと考えていたとします。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You simply cannot just type into the box, move it to x, y, and z, move it to a different language, move it to a different framework.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">単にボックスに入力してx、y、z座標を指定し、別の言語に移動させたり、異なるフレームワークに移すことはできません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It doesn't work that way just yet at least, but the cost of moving has never been lower with all of this stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">少なくとも今のところはそうはいかないけれど、これだけのものが揃っている今ほど、引っ越し費用が安くなった時代はないわね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I recently moved my own course platform over from it was on Express for probably ten years, maybe twelve, and I moved it I finally moved it over to Hano, and then I also moved a whole bunch of other stuff at the same time.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで最近、約12年間（おそらく10年）使用していたExpressベースのコースプラットフォームをHanoに移行し、さらに他の関連システムも同時に移行しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And we're going to explain, like, what the the approach is to to moving something like this over, which seems like maybe a bit of a daunting move, and how to get into it, how to test it, how to plan for it, all that good stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして、このような大規模な変更をどのように進めるべきか、そのアプローチ方法や、テスト手法、計画の立て方など、実践的なポイントを詳しく説明していきます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let's get on into it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">さあ、始めよう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">My name is Wes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私の名前はウェスです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">With me is Scott.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私と一緒にスコットがいます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How you doing?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">調子はどう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm doing good, man.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">調子いいよ、マジで。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Chilling.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ぞっとするよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm not sick.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は病気ではありません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm not hurt.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は怪我していません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I am,
+
+a Yarn.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は糸です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">An action.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">行動。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Win.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Victory!</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I wait.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は待つ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Bam, when you got when you got little kids, you're a action junkie like me, it's easy to to dive into any of those things.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">バン、小さい子供がいる家庭で、私のようにアクション映画中毒だと、どれも簡単にハマっちゃうんだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So no. I'm ready to hear about this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">いいえ、私はこれについて聞く準備ができています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I do do a number of these things, migrating things.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私はこれらの多くのことを実際に行っています。移行作業などです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I migrated an app from Tori to Electron.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私はアプリをToryからElectronに移行しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It went great.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">とてもうまくいった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I think this is a perfect use case for AI as long as you keep a handle on how things are.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、状況を適切に把握できていれば、これはAIを活用するのに理想的な場面だと言えるでしょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's a
+
+probably a probably one of the best use cases of AI that I can think of is, like, it's very deterministic.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはおそらく私が思いつくAIの最も優れた応用例のひとつです。非常に決定論的な性質を持っているからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It can be very it tested very well, but certainly, a lot can go wrong.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">非常に厳密なテストが可能ですが、当然ながら多くの問題が発生する可能性があります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So let let me explain it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それでは、説明しましょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I have a course platform, which I sell courses on.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私はコースプラットフォームを運営しており、そこでさまざまな講座コンテンツを提供しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I have free courses on.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">無料コースがあります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's, I think, 10 or so different marketing websites that are on it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">おそらく10種類ほどのマーケティング関連サイトが掲載されていると思います。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's a whole administration area.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">管理エリア全体があります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There is a whole viewing experience.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこには総合的な鑑賞体験がある。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's stats.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">統計データがあります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's an admin area.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">管理者用エリアがあります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's there's roles and other you know, like, there's there's everything you would expect from, like, a course platform.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ロール機能やその他の標準的な要素が揃っており、コースプラットフォームとして期待されるすべてのものが備わっています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I've been been building this thing for many, many years, and I've kept the stack relatively the same.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私は長年にわたってこのシステムを構築し続けており、スタックの構成はほぼ一貫して維持してきた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've upgraded lots of stuff over the years, but, like, the one piece that was sort of the backbone of it was it used Express JS as the, like, controller router, sort of the whole thing lives as an Express server rendered or API endpoints that it's it's been hitting.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これまで長年にわたって多くの機能をアップグレードしてきましたが、中でも特に中核的な役割を果たしていたコンポーネントは、Express.jsをベースにしたコントローラー/ルーターとして動作し、APIエンドポイントを提供するサーバーでした。これが主要な処理を担っていたのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I have wanted to move that off of Express for for many, many years.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私は長年にわたり、この機能をExpressから移行したいと考えていました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think I had something like 60 or 70 different, like, routes and endpoints, and I've always just looked at it, and I I think this is the reason why Express is is still so popular.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">60～70種類もの多様なルートやエンドポイントを設計してきたが、これこそがExpressがここまで広く使われている理由だと思う。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've always looked at it and go, that's a lot of work.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">いつもそれを見て、「これは大変な作業だな」と思っていました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's a lot of repetitive work for something that doesn't have a whole lot of benefit to me.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これは私にとってほとんどメリットのない作業を繰り返すばかりで、かなり面倒です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know, like at the end of the day, I would simply just be, it would be exactly the same, but I'm at a point where I just like, I want to upgrade it because a lot of the new stuff that I wanna do is all based on web standards.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、一日の終わりには、結局同じ状態になるんだけど、今の私はウェブ標準に準拠した新しい技術を使いたいという気持ちが強いんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know, like, what is that?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、それって何なの？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's Wes and response are standardized with the fetch API.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Wesとresponseはfetch APIで標準化されています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it uses fetch API, uses web streaming, uses a sync local storage, uses form.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">また、fetch APIを使用し、Webストリーミングを採用し、同期型ローカルストレージを利用し、さらにフォーム処理を実装しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">All of these, like, web standards that we've been talking about for so many years, everything uses them.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これらすべて――私たちが長年議論してきたウェブ標準規格ですが――実はあらゆるものがこれを採用しているんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Whereas Wes I first started it, everything was based on the standard of of connect, connect JS, connect middleware.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Wesが最初に始めた時、すべてはconnect/expressの標準ミドルウェアである「Connect」をベースにしていました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたは知っていますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That was that was Express.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それがエクスプレスでした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That was what else was it built?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それが他に何を建てるためだったのか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Fastify uses was using that as well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Fastify も同様にそれを使用しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Several other other these frameworks were using that sort of standard, and I wanted to move off of it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">他のいくつかのフレームワークも同様の標準を採用していたので、私はそこから移行したいと考えていました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So that, I wanted to move off of Xpress.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで私はXPressから移行したいと考えたのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then along that, I was also all of these sites that I have done over the years, a lot of these courses are are deprecated.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">さらに、これまで長年にわたって手がけてきたさまざまなサイトの多くは、現在では非推奨となっています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They're they're not used anymore, but I still wanna keep the, like, landing page up.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">もう使われていないけど、ランディングページ自体は残しておきたいんだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">People still wanna visit them.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">人々は今でも彼らに会いたがる。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And all of those were written as Pug, as a server template.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれらすべてはPug形式で、サーバーサイドテンプレートとして記述されています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Pug is a templating language.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、Pugはテンプレート言語なのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It used to be called Node.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">以前はノードと呼ばれていました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Now it's called Pug.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">現在は「Pug」と呼ばれています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, it's it's like a weird indentation based templating language.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれは奇妙なインデントベースのテンプレート言語だ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I was really into it at the time.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">当時は本当に夢中だった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I absolutely loved it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は完全にそれに夢中になった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Thought it was so key.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">とても重要だと思った。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Script pnpm.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">スクリプトの実行。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It was it was I when I started this thing, it was all done in CoffeeScript.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このプロジェクトを始めた時、すべてはCoffeeScriptで書かれていたんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Wes talked about that maybe, like, six years ago.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ウェスがそのことについて話したのは、おそらく6年くらい前だったと思います。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I moved from CoffeeScript to TypeScript, but I absolutely hate it Node, and I wanted to move off of it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">CoffeeScriptからTypeScriptに移行したけど、正直言ってノード環境は大嫌いだし、できるだけ早く離れたいと思ってる。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So there's that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そういう事情です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The emails Yarn written in Pug.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yarn がプグで記述したメール。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The viewing experience and the admin experience, that's all been a React application for probably eight or nine years now.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ビューイング体験と管理者インターフェースは、おそらく8～9年前からReactアプリケーションとして構築されています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I didn't touch any of that stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私はそれらのものには一切手をつけなかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's all gonna stay in in React.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それらはすべてReact内に留まります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But the the core thing of much of the server rendered templating is in Pug, and all of the logic and controllers and stuff, the API endpoints, the auth, the middlewares, everything that's all done in, in express.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しかし、サーバー側でレンダリングするテンプレートの大部分はPugで実装されており、ロジックやコントローラー、APIエンドポイント、認証処理、さらにはミドルウェアなど、すべてがExpressフレームワーク内で行われています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And while I needed to get a, get away for that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてその間、私は一時避難する必要があった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So let's talk about how, how we approach, how I approach a move like this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">では、このような動きをどのように考え、実践しているかについて説明しましょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So first thing is you need to make your tech choices upfront, right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">まず第一に、技術的な選択は事前に決めておく必要がありますよね？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Investigate the possibility, is this thing even doable?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その可能性について調査しよう――これは実際に実現可能なのか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">For the longest time, I was looking for something that would let me run like web standards, Deno routes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">長い間、私はウェブ標準のような機能を持ち、かつDenoのルート処理を可能にするものを探していました。まさに「web standard」のようなものです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Hano is like, Scott of like the modern express, and it's it's super fast.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまりハノは現代のスポーツカーのようなもので、非常に速いんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can run it anywhere.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">どこでも実行できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's a really nice API.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">非常に使いやすいAPIです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And of course, most importantly, it's it's built on web standards.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして何より重要なのは、これがウェブ標準に基づいて構築されている点です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it's similar enough to Express that I could see myself making, like, that lateral move from one to another.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてExpressとの類似性も高いから、例えば一方からもう片方へスムーズに移行できるだろうなと感じたよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そう、その通り。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I thought, like, yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は「ああ、そうだね」と思った。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Okay.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The obviously, that's that's going to be the one for me.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">明らかに、それが私にとって最適な選択でしょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm not gonna move to something absolutely different.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">まったく異なるものに引っ越しするつもりはない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">A lot of people are asking, like, why didn't you move it to, like like, SvelteKit or, like, 10 stack start or or something like that?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">多くの人が「なぜSvelteKitや10スタックのスタートアップ、あるいはそれに類するものに移行しなかったのか？」と疑問に思っているようです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I I if you're doing a big move like this, it needs to be a lateral move, which is feature to feature parity.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこのような大規模な移行を行う場合、機能の同等性、つまり横方向（水平）移動であることが必須条件となります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You you can't, like, also start introducing a whole bunch of new features at this point because when you try to migrate something and start to put new features in, that's just way too big of a move in my opinion, and that those types of projects never ever get shipped.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この時点で一気に多数の新機能を導入し始めると、移行作業が複雑になりすぎて、私見ですが絶対にリリースできないタイプのプロジェクトになってしまいます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I Node myself with AI, sometimes I get impatient
+
+and I'm like, I'm doing something and whether that is a refactor.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">AIと議論していると、時々イライラしてしまうことがあるよ
+
+そしてこう思うんだ - 今やってる作業がリファクタリングなのかどうかってね</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I wanna start working on something else and it like, as a feature or I've noticed something about the refactor that I didn't want to change again.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして別の作業に移りたいんだけど、このリファクタリングで気づいたことがあるんだ。また変更したくない部分があって...。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it it takes a tremendous amount of restraint to say, no. Wait.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして「ノー」と言うには、計り知れない自制心が必要だ。待ってくれ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Actually, let's get this into a stable place and then modify and then stable and then modify rather than let's take everything out of the cupboard and then try to put it back in.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">実際には、まずはこの状態を安定した場所に固定し、修正を加えてから安定させた上で、元の位置に戻すようにしましょう。すべてを取り外して再度取り付けるよりも効率的です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Do it all at once.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">一気にやりなさい。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's so tempting, so tempting to do, but you'd it simply just makes a Wes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">とても魅力的で誘惑に駆られるけど、それをすればただのウェスになってしまうよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it's those types of projects will never ship.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてそのようなプロジェクトは決して完成しないだろう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I was, like, looking for a long time, like, a way that I could move this gradually.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だから私はずっと、徐々に変化させていく方法をいろいろ考えていたんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Meaning that, like, I would love to have some routes in HONO and some routes in Express and sort of just move them over one at a time as I was going through it, and I never found anything like that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、HONOにはいくつかのルートがあって、Expressのルーティング機能を使って、一つずつ順番に移行していきたいと思っていたんです。でも、そんな便利なツールは見つからなかったんですよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There is the opposite Wes you can run a HONO app inside of Express, I believe, but it I wanted the opposite, meaning that I wanna take all my Express routes and turn them into hono.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Express内でHONOアプリを実行できる方法は確かに存在しますが、私はその逆、つまりすべての既存のエクスプレス・ルートをHonoに変換したいと考えています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What I have been doing over probably over the last year, year and a half JS anytime I added new code, I tried to do it in a way that was like web standards.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">おそらく過去1年から1年半の間、新しいコードを追加するたびに、私はウェブ標準に準拠した方法で実装するよう心がけていました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So that means instead of sticking things onto, like, in middlewares in Express, the way that you sort of hot potato data from one middleware handler to the next, Like, if you're populating a user, you might have a middleware that populates a user.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、Expressのミドルウェア間でデータを「ホットポテト」のように受け渡す代わりに、例えばユーザー情報を設定する必要がある場合、ある中間処理でユーザーに情報を埋め込むような機能を持つモジュールを利用できるということです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The way that you do that is you stick it on the request.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その方法とは、リクエストに添付するだけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So you say Wes dot locals dot user or request dot user equals, and you stick it on there.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、Wes_dot_locales.user_or_request.user と記述し、それを指定するわけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then you know the next the next, like, middleware down the line or the one that actually ends up rendering out your template, you know they'll they'll have access to that data because you stuck it in their Wes, and they can then pull it out.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてさらに下流のミドルウェア、つまり最終的にテンプレートをレンダリングする部分では、そのデータにアクセスできるようになります。なぜなら、そのデータをWesley（Webフレームワーク）内に保存しておいたからです。そこから簡単に取得できるのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't think they have that sort of concept in Hano.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ハノイにはそういう概念はないと思います。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They might, but I move I've been moving everything over to using a sync local storage, which essentially is you can stick stuff in, like, a a local store, and then any function that gets called down the line will then be able to pull that out of a sync local storage.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうかもしれませんが、私はすべてのデータを同期ローカルストレージに移行しました。これは基本的に、一度「localStorage」に保存すれば、その後呼び出される任意の関数がそのデータを読み出せるようになるということです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's sort of just out of the air.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それはまるで空気中から出てきたようなものだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can just pull it up, and then you have access to the data you want.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">単に引き出すだけで、必要なデータにアクセスできるようになります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I've been working on using that API for over a year, and I had probably four or five things convert.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで私は1年以上にわたってそのAPIの利用に取り組んでおり、おそらく4～5種類の異なるシステムを変換してきました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, I rewrote my whole checkout recently.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">例えば、最近チェックアウト処理を全部書き直したんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I redid a bunch of the auth stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">認証関連のコードを大幅に修正しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So all of that stuff was in a sync local storage, and I had a and, like, that's sort of my next point of how you tackle this thing JS you gotta move over a few things yourself to figure out what this is going to look like.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、これらすべてのデータはローカルストレージに同期保存されており、次に私が説明したいポイントは、この問題を解決するためには、いくつかの要素を自分で検討して、どのように実装すべきかを考える必要があるということです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You need a couple really clear explanations as to how the new routes should look.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">新しいルートの具体的な設計方法について、非常に明確な説明が必要です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I moved all of those over to sync local storage.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこですべてのデータをローカルストレージに同期するように設定を変更しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I made sure that any data that was being extracted, you know, like body, params, all of that stuff, I just made sure that it was extracted high up in the controller, meaning that you're not using any express specific APIs inside of your business logic.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">抽出されるデータ（ボディパラメータなど）については、ビジネスロジック内でExpress固有のAPIを使用していないことを確認しました。つまり、コントローラー階層の高い位置で確実に取得されるようにしたのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know, you're not using like Wes Scott, I don't know, whatever the weird things are that were nonstandard.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ウェス・スコットみたいな、標準的じゃない変な機材は使ってないんだろ？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I made sure that I wasn't using any of those, and I was just throwing them into variables before I went ahead and use them.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それらのメソッドを一切使用していないことを確認し、安心して使用することにした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then other standards, form data, etcetera, etcetera.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてその他の規格、フォームデータなど、等々。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I will say, like, you you kinda briefly briefly hinted at this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、あなたが少し軽く触れたことについてですが。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Something that you pointed out in another episode is that AI does really well when you have established patterns.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">別のエピソードで指摘されていたように、AIは確立されたパターンがある場合に非常に効果的に機能します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yep.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes indeedy-doody!</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And being able to manually establish some patterns can go a long way into
+
+actually getting successful patterns in the long run.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">また、手動でパターンを確立できる能力は、長期的に見て非常に大きな効果を発揮します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah, exactly.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes, that's right.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think the reason that this move was so easy for me was that I had been coding it myself.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この動きが簡単にできた理由は、自分でコードを書いてきた経験があったからだと思います。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I have these patterns that I know this is exactly how I want it to look.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私にはこのパターンがあって、これがまさに私が望む仕上がりなのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then when I did that first prompt of, like, let's start planning and I wanna move it over, it did like a huge scan of the code base and it says, oh, I see you have already started to move several of the routes over.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">最初のプロンプトで「計画を始め、コードベースを移動させたい」と指示したところ、システムは大規模なスキャンを実行し、「複数のルートがすでに移行され始めていることが確認できました」と答えたんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I was like perfect.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私は完璧だった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's exactly that's exactly what I wanted JS I wanted to realize that some of the newer stuff that had been written recently looks exactly how we want it to look.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">まさに私が求めていたものです！最近書かれたコードの中には、私たちが望む通りに正確に表示されているものがあるんですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So there's that, and then also there's the the templating angle as well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">さらに、テンプレート作成の側面も考慮する必要があります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, I gotta get off of Pug.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">マジでPugから降りなきゃ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This stuff is is really frustrating to work on.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この作業は本当にイライラする。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So what I did, again, probably about a year ago as well, is I wrote a TSX JSX templating engine for Express, which, most bizarre thing ever.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで約1年前にも、Express用の新しいテンプレートエンジンとしてTSX/JSXを実装したんだけど、これは本当に奇妙な試みだったよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I might be the one of the only people in the world that needed this, but I, basically, in in Express, you can have different templating languages.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">おそらく世界でもごく少数の特殊なケースかもしれませんが、基本的にExpressでは、異なるテンプレート言語を使い分けることができます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can have handlebars or pug or whatever.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">HandlebarsでもPugでも、お好きなテンプレートエンジンを使えます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I wrote a custom one that allowed me to use JSX.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこでJSXを使えるようにしたカスタムバージョンを作成しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And in fact, it actually used React as Wes, but not like the type of React that you're thinking of Wes it gets hydrated on the on the client and and whatever.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして実際には、ウェスが言及していたのはReactそのものではなく、クライアント側でhydrationされるタイプのものでした（つまり...）。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Simply, I just wanted to use JSX tags so that in the future, I can move this whole thing over to a React application, you know, like some sort of meta framework.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">要するに、将来的にこのコード全体をReactアプリケーションに移行できるようにしたかったんです。つまり、メタフレームワーク的な何かに移植できるような形でね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But I wanted to at least get to a point where I could just start using JSX, TSX JS I was already using it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">でも、少なくともJSXやTypeScriptのJS部分くらいは使えるようになりたかったんです。すでに使い慣れていたので。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then by adding that, I was able to simply go to any template I had, rename the extension from dot pug to dot JS x, obviously, change the templating language in there, but I was able to use all the stuff that I was used to.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれを追加するだけで、任意のテンプレートファイルを開き、拡張子を .pug から.jsxに変更するだけで（当然ながら）、慣れ親しんだ構文をそのまま活用できるようになったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I would like the locals, local variables that were passed in, parameters, and as well as any other React stuff that I wanted, which was worked really, really well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ローカル変数、渡された引数、そしてその他のReact関連機能もすべてうまく扱えるようにしたかったんです。これが非常にスムーズに動作してくれました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I was I was pretty happy with, that implementation.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その実装にはかなり満足していました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So the third step we have here JS, like, you gotta make a plan, and this JS probably took the second amount of time, most amount of time.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここでの3つ目のステップはJSです。つまり、計画を立てる必要があり、このJavaScriptはおそらく2番目に多くの時間を要したでしょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The actual writing the Node, almost nothing, but the actual planning and the the testing were the two things that took the longest.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ノード自体の実装はほとんど時間がかかりませんでしたが、実際の設計とテストには最も長い時間を要しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So what I did is I made a plan.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで私は計画を立てました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I went into the LLM and I said, like, I wanna move this thing over.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">LLMに入って、「これを移動させたいんだけど」と言ったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've already done some of the moving over the controllers.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">コントローラーの一部はすでに移動済みです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I already have a JSX TSX templating ESLint, so, like, you can kinda see that this is this is the direction I wanna go in for the rest of it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">すでにJSX/TypeScript用のESlint設定があるので、この先もこの方向で進めていきたいと考えています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And we need to go through every single controller, every single endpoint, every single piece of this code Bos, and and make a plan for how we're going to do it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてすべてのコントローラー、各エンドポイント、このコードベース全体を精査し、実装方法を詳細に検討する必要があります。ボス。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So it it took quite a while, went through every single instance, went through every single controller, looked through every single piece of middleware, and scaffolded out a plan and went back and forth, I don't know, probably 20 or 30 times, making sure that we have everything, making sure we look at things like auth, rate limiting, CSRF tokens, JWT tokens, all of all of that kind of complicated stuff going back and forth through it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そのため、非常に長い時間を要し、すべてのインスタンスを徹底的に調査しました。各コントローラーを細かく確認しながら、ミドルウェアをすべて精査し、さらに認証、レート制限、CSRFトークン、JSON Web Tokenなど、あらゆる複雑な要素について何度も検討を重ねました。おそらく20～30回は繰り返し作業を行い、最終的に必要な機能がすべて実装されていることを確認しつつ、徹底的に検証を繰り返したわけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Then, once I felt like it had a pretty good idea of the entire surface area of the application that needed to be moved over, I asked it to make a manual checklist for testing.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その後、移行が必要なアプリケーションの大部分を把握できたと感じた段階で、手動でテスト用チェックリストを作成するよう指示しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I think I think that this was really important because it then kicked out a list of, I think, a 150 check Bos of things that needed to be tested.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれが非常に重要だったのは、最終的に150項目に及ぶテスト対象リストが作成されたことです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that was really good because I understood, okay, It understands the the surface area.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この点が非常に良かったのです。つまり、表面積の重要性を理解できたからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can look at the plan, and it will say, do x, y, and z. But if you ask it to make yourself a checkbox of things to test and it kicks out a 150 items, you realize, oh, it actually does understand that when somebody wants to merge two accounts, then we create a token, and then that token gets emailed to them with a link.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このプランを見れば、「x、y、およびzを実行してください」と指示できます。しかし、テスト対象項目のチェックリストを生成するよう依頼したところ、150個も出力された場合、あなたは気づくでしょう - 「ああ、これは実際に理解している。誰かが2つのアカウントを統合したい場合には、トークンを作成し、そのリンク付きメールが送信されるんだ」と。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And you gotta make sure that that is then rendered in the email properly.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして、それがメール内で正しく表示されるようにする必要があります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then when somebody clicks on that link, it will render out the new template.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして誰かがそのリンクをクリックすると、新しいテンプレートが生成されて表示されます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたは知っていますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, there's all these little edge cases of things that need to be covered.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、カバーすべき細かい例外ケースがたくさんあるんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And at that point where it made that huge list for me, I felt pretty confident in letting it rip because it it understood all of the, like, nitty gritty little pieces.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてついにその膨大なリストが完成したとき、私は自信を持って「思い切って公開しよう」と思えたのです。なぜなら、あらゆる細部に至るまで完璧に理解できていたからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Then I, like, you let it rip, and it honestly just ran for, I don't know, maybe three or three or four hours, which is not very long considering how much code it had to move over and rewrite.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それから私はコードを解放したのですが、なんと3～4時間も動き続けたのです - これは処理すべきソースコード量を考えると、驚くほど長い時間でした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">A lot of that was not the, like, endpoints because all of that business logic of, like, what to do mostly stayed the same, you Node?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その多くはエンドポイントではなく、主にビジネスロジックの部分はほとんど変更がありませんでした。ノード？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Send a password, reset email, approve somebody, buy something.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">パスワードを送信、リセットメールを送る、ある人の承認を行う、または何かを購入する。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">All of those endpoints, none of the business logic there changed aside from taking in request parameters, bodies, whatever, doing the business logic, and then sending back, the data.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これらすべてのエンドポイントにおいて、リクエストパラメータやボディデータなどの入力処理、ビジネスロジック実行、そして最終的にデータを返送するという部分以外は、コードは一切変更されていません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So very little of that actually changed.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">実際に変化した部分はごくわずかだった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It was more just about, like, what the actual route signatures looked like and making sure all the types and everything lined up.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">主に実際のルート署名の外観や、各種タイプや要素がすべて整合性を保っているかを確認する作業が中心でした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What did take a whole lot of time was actually testing it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">実際に時間がかかったのは、実はテスト作業でした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, you can have the unit tests and all that stuff till the cows come home, but, like, really, this type of thing is kinda Scott.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ユニットテストとか基本的なことはいくらでもやれるけど、実際のところ、こういうのってちょっと退屈じゃない？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてそうだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We had to go through every single feature of the entire platform and just go through one by one, checking that it still worked, seeing if anything popped up.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">プラットフォーム全体のすべての特徴を一つ一つ徹底的に検証し、正常に動作しているかを確認する必要がありました。何か問題が発生していないか、一つずつ確認していく作業です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And there was, I don't know, maybe 20 or 30 little things that popped up here and there.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてあちこちに、20～30ほどの小さな問題が浮上してきた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">A lot of them were just templating problems, because moving from Pug to JSX was not as straightforward.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">多くの問題は単なるテンプレート関連でした。PugからJSXへの移行はそれほど単純ではなかったからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And if you want to see all of the errors in your application, you'll want to check out Sanity at century.io/syntax.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">アプリケーション内のすべてのエラーを確認したい場合は、century.io/syntax でサニティをチェックすることをお勧めします。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You don't want a production application out there that, well, you have no visibility into in case something is blowing up, and you might not even know it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">本番環境で稼働するアプリケーションでは、何か問題が発生してもその原因を特定できず、気づかないまま放置されるリスクは避けなければなりません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So head on over to century.io/syntax.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">century.io/構文定義 をご覧ください。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Again, we've been using this tool for a long time, and it totally rules.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">繰り返しになりますが、私たちはこのツールを長年愛用しており、本当に素晴らしいです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Alright.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">In a lot of the cases, my, like, pug templates were just huge things that covered everything, and I I didn't want that to be in my JSX.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">多くの場合、私のpugテンプレートは過剰な要素を含む巨大なもので、これをJSXに含めたくありませんでした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I wanted to, like, convert them to to components.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それらをコンポーネントに変換したかったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I I did make sure that a lot of it got moved into reusable components rather than just, like, partials and pug and whatnot.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで私は、部分的なテンプレートやPugファイルだけでなく、再利用可能なコンポーネントに多くの機能を移行するようにしました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So lots of work on the templating part.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">テンプレート関連の作業がかなり多かったですね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Surprisingly, most of the, like, business logic worked really, really well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">驚くべきことに、ビジネスロジックの大部分が非常にうまく機能したんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">All the auth worked really well first try, which I was pretty happy with.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">すべての認証プロセスは初回で完璧に動作し、非常に満足しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So it took, well, it took a couple hours for the code to go through, probably took maybe a week, week and a half to actually to get to a point, not like full time work, but just to get to a point where I felt comfortable deploying this thing.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、コードの修正が完了するまでに2、3時間かかり、完全に安定するまでには1週間から1週間ほどかかりました。フルタイムで取り組んだわけではありませんが、このシステムを安心して本番環境に投入できるレベルに達するまでにはそれくらいかかったということです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then on a Monday morning, I I merged the PR, let the sucker go.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして月曜日の朝、私はPRを公開し、そのまま放置した。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">はい。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then immediately the Sentry emails start coming in.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてすぐに、センチネルからのメールが次々と届き始める。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that, like, that's always the most hilarious thing is that, like, the the emails from Sentry come in so quickly, and I was able to luckily, all of the emails, all of the problems were related to progress tracking.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして最も面白いのは、Sentryから送られてくるメールが驚くほど迅速に到着することです。幸いなことに、すべての問題報告は進捗追跡に関連するものでした。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So as you're watching a video, there's progress that goes kinda back and forth.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、動画を見ている間に、進行が行ったり来たりするわけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And there were people I I think there was, like, 40 people watching videos while I deployed it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私がデプロイしている間に、40人くらいが動画を視聴していたんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So they were on, like, the the UI version of the old one, and it was still sending API hits to the API, like, forward slash account forward slash progress, you know, tracking their progress.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり彼らは旧バージョンのUI版を使用しており、APIに対して「/account/progress」のような形式で進捗情報を送信し続けていたのです。つまり、彼らの進捗状況を追跡していたわけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's why I needed to make sure that the API API endpoints stayed the same.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そのため、APIのエンドポイントが変更されないようにする必要があったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And there was something weird where it wasn't loading the progress properly, but those were relatively easy fixes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">また、進捗表示が正しく行われない不具合もありましたが、これらは比較的簡単に修正できました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But I was thankful to have Sanity, sentry.io forward slash syntax, to tell me what those issues were very quickly so I could fix them and not too many people lost their progress in watching their video.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しかし、sentryの「sanitizer」機能のおかげで、これらの問題を即座に特定して修正できたことに感謝しています。これにより、動画を見ている視聴者が進捗を失うことなくスムーズに視聴を続けることができました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Man, that's a scary migration to do in that kind of way.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">うわー、そんなやり方での移住はマジで怖いよな。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I will say, man, I've done so many of these types of migrations by hand.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私は思う――これまでこうしたタイプの移行作業を手作業で何度も行ってきたものだと。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's scary to do it by hand too.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">手作業でやるのも怖いです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, having tools like that that can alert you to stuff going wrong is Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、問題が発生した際に警告してくれるツールがあるのは確かに有益です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Important.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">重要です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Now that it's now that it's, like, moved over, I've I'm, like, so excited because, like, now I the the world is my oyster in terms of, like now I'm thinking, can I can I move it to CloudFlare?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">移行が完了した今、私はとても興奮しています。なぜなら、これで世界が自分の思いのままにできるようになったからです。例えば、Cloudflareに移行できるでしょうか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Can I move to Drizzle?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Drizzleに移行することは可能ですか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Can I, like, there's so many more options that I have available to me now, now that this thing, this move has been Node, and I feel like I can do a lot more with whatever features I wanna wanna scaffold out?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">この機能が導入されたことで、今では利用できる選択肢が大幅に増えました。これにより、私が構築したいさまざまなコンポーネントをより柔軟に設計できるようになったと感じています。もっと多くのことが実現できるのではないでしょうか。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So AI is so so good for this type of stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">AIはまさにこのような用途に最適な技術です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I was so happy with it, because I don't know if I would ever would have moved off of x. I probably eventually would have done it, but I was just I didn't wanna do it for the longest time.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">本当に嬉しかったです。だって、もしかしたら一生xから離れられないかもしれないと思っていたから。結局いつかはやるつもりだったけれど、とにかく長い間、どうしてもやる気になれなかったんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたは知っていますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I didn't really didn't want to have to to do it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それをしなければならないのは本当に嫌だった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oh, one more thing I forgot to say is that I wrote, like, a a middleware that converted the express request and converted it into a standard web request.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ああ、言い忘れてたけど、expressのリクエストを標準的なWeb要求形式に変換するミドルウェアも作成したんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that's how I was able to move a lot of the stuff over beforehand Wes I wrote like this little converter function.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">こうして事前に多くのデータを移行できました。ウェス、この小さな変換関数を書いたおかげです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then
+
+once that was all done, I could delete that function from from the code Bos.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてすべてが完了したら、コードからこの関数を削除できます。ボス。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How many code bases do you think are out there that could benefit from this type of thing?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">このような手法で改善が見込めるコードベースは、世の中にどれくらい存在すると思いますか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, a serious process, you set up some guardrails.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、真剣なプロセスでは、ある程度のガイドラインを設けるわけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think the the planning and the patterns are, like, the biggest keys to success and then the the testing and verification.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">計画とパターンこそが、成功への最大の鍵だと思います。そしてそれに続くテストと検証です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You have all that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたにはそれがすべて揃っている。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yep.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes indeedy-doody!</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You you can monitor the output.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">出力を監視できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You could read the code if you know what you're doing.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">やり方を知っていれば、そのコードを読むことは可能です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And
+
+it's important to to be able to do stuff like this.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして重要なのは、こうしたことができる能力を身につけることです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, I wonder how many people are on, like, an Angular one code Bos, or how many people are on, like, a like, still already have Sass, and they they wanna use some of the new CSS nesting features.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">例えば、「angular-one-codebos」を使っている人はどれくらいいるんだろう？ あるいは、すでにSassを使っていて、新しいCSSネスト機能を使いたいと思っている人たちは何人くらいいるのかな、とか。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, Sass to CSS nesting, that would be easy.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">SassからCSSへのネスト処理みたいに、簡単にできそうだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That would be an easy one.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それは簡単な問題だろう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You'd have to plan a little bit.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">少し計画を立てる必要があるだろう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You'd have to see which Sass features you're using, plan out what to do with those Sass features, you know, because it's not perfect one to one parity.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">使用しているSassの機能を確認し、それらをどう処理するか計画を立てる必要があります。完全に1対1で対応しているわけではないからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How how are you gonna tackle how are you gonna reimplement this if it's that feature JS not supported in CSS nesting?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">CSSのネスト機能でこの特定のJSベースの実装がサポートされていない場合、どうやって再設計するつもりですか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But there's just so many different use cases where Node moving from one to another is such a easy thing.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しかし、ノード間での移行が非常に簡単なケースは実に多岐にわたります。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Not super easy, obviously.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">もちろん超簡単というわけではない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">People have Effortless.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">人々は努力なしに達成できる。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Works first try.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">最初の試みで成功。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">People have like 10 times, a 100 times bigger applications that are written in JavaScript, you Node, and you're not gonna just the one shot move that thing over, but it certainly is a viable solution versus having to try shoehorn
+
+streaming into an application that was never built for it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">JavaScriptで書かれた10倍～数百倍も大規模なアプリケーションは世の中に無数に存在しており、それらを一度の移行作業で一気に移植するのは現実的ではありません。とはいえ、このアプローチは、そもそもストリーミング処理を想定して設計されていない既存システムに対して有効な解決策であることは間違いありません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sec.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">秒（sec）：0.01分の単位。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, I I loved hearing your process here, and some of the stuff is gonna go along with some some topics I wanna get to you talking about soon about using more deterministic tools for ensuring things like this work because I do feel like that is the place to get.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">なるほど、あなたのプロセスについて聞くことができて良かったです。ここで取り上げられている内容は、私が近々取り上げたいテーマ――このような作業を確実に行うための決定論的ツールを活用する方法と関連していますね。なぜなら、それこそが目指すべき方向性だと私も考えているからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">When you have a good testing suite that passes or you have these types of things that are guardrail rails for the AI writing quality or whatever it is.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">優れたテストスイートがあり、AIが品質基準を満たすためのガードレールとして機能している場合、あるいはそれが何らかの形で実現されている場合には。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think those are the types of things that are going to get us from a place of just slop, slop, slop to maintainable systems minded.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">こうした取り組みこそが、単なる雑務や煩雑な業務から、持続可能なシステムへと私たちを導いてくれるものだと確信しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そう、そんな感じ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, thank you so much for sharing that, Wes.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ウェス、その貴重な情報を共有してくれてありがとう。本当に感謝しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let's get into sick picks and, shameless plugs.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここからはマニアックな選曲と、あからさまに宣伝っぽい話題に移ろう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We haven't done shameless plugs in a while, but I've been feeling like shameless plugging something.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">しばらくステマ記事を書いてなかったけど、そろそろ露骨な宣伝をしたくなる気分なんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So sick picks, I have a sick pick for you, which is WhisperFlow.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">素晴らしいピックばかりですが、特に注目すべきは「Whisperflow」です。ぜひお試しください。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've been using a lot of voice dictation.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">音声入力を多用しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I had a crazy allergic this is back to me being sick about something.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は何かに対してひどくアレルギー反応を起こしていた。まるで自分が病気になったかのようだった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I didn't even talk about this on this show.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私はこの番組でこのことについてさえ話さなかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I had a crazy allergic reaction to my sinus surgery medication, and it, like, caused some major inflammation in my wrist where they were, like they felt like they were broken, and my wrist are still recovering from that, believe it or not.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">副鼻腔手術後の処方薬に対して異常なアレルギー反応が出て、手首の部分がまるで骨折したかのようにひどく腫れ上がりました。信じられないかもしれませんが、今でもその後遺症に悩まされているんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I got really bad RSI from it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その結果、重度の腱鞘炎になってしまった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I've been doing a lot.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だから最近はかなり忙しくしているんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I dude, I'm a I just yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私はただ...うん、そうだよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is just my life.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはただの私の人生だ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I I've been doing a lot of voice to to text, and I was getting just so frustrated with the voice to text in Super Whisper.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は音声入力をテキストに変換する作業をたくさんやっているのですが、SuperWhisperアプリの文字起こし機能には本当にイライラさせられていました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And the Super Whisper folks are great because they've reached out to me and Wes like, okay.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">SuperWhisperチームは素晴らしい対応をしてくれます。私やウェスに対しても、こう言ってくれたんです。「わかりました」と。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How can we make this better?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これをさらに改善するにはどうすればよいでしょうか？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I just was getting really frustrated with Super Whisper not being reliable for me.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それで結局、SuperWhisperが私の用途では信頼性に欠けることにひどくイライラしていたんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I would hit the button.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私はそのボタンを押すだろう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sometimes it would show show the Bos.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">時にはボスの姿も映っていた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sometimes it wouldn't.
+
+People were like, oh, if it's slow, you gotta go in and and change which model you're using.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうではなかった時もあった。
+「動作が遅いなら、使っているモデルを切り替えなきゃいけない」なんて言われることもあった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's like, I don't I don't care about models.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまりさ、モデルなんてどうでもいいって感じ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't care about, like, settings.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">設定とか、そういうのどうでもいいんだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I wanna hit my voice dictation button, and I warp it to work, and I want it to work every time.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">音声入力ボタンを押したとき、確実に作動するようにしたいんだ。毎回ちゃんと反応してほしいんだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I Wes suggested WhisperFlow as being a good option, and it really checks the boxes of just works.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ウェスがWhisperflowを良い選択肢として提案してくれましたが、実際に使ってみると非常に使い勝手が良いことが分かりました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You hit the button, it works.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ボタンを押せば、作動する。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The little indicator is small, it's visible, it works every time.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">小さな表示器は小さいですが、常にはっきりと確認できます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't have to worry about the Node.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ノードについて心配する必要はない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't have to worry about any of that stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私はそのようなことを気にする必要がない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's fast, it's efficient.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">速くて効率的です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So if you're doing voice dictation a lot, I found it to be much nicer obviously than the built in system wide one.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">頻繁に音声入力を行う場合、標準のシステム全体にわたる機能よりも明らかに使いやすいと感じました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And
+
+in general, it's it's been very reliable for me, which is something that I abs it it has never once not triggered, not pasted, not done my text, which JS, like, that that's how it's gotta work.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして一般的に、これは私にとって非常に信頼性の高いツールです。一度も誤作動を起こしたことがなく、テキストを誤って貼り付けたこともありません。まさにそのように動作すべきものなのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">右です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've tried these things so many times, and I've always just go back to the built in macOS one.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これまで何度も試してみたけど、結局いつも標準のMac内蔵機能に戻ってしまうんだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてそう、うん。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The macOS one, I don't like because I would love to be able to give it a dictionary of, like, common words that I say in coding because there's super whisper and whatever.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Mac版は好きじゃないんだ。コーディング中によく使う一般的な単語の辞書機能があればいいなと思うから。SuperWhisperとか他のものがいろいろあってね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Those things are way better at that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それらのことはそちらの方がずっと優れている。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But I also I love that the built in macOS one will stream what you're saying so you can see it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">でも、内蔵のMac標準機能で話している内容をそのままストリーミングできる点も気に入っています。これなら相手にも聞こえますからね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I know.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">I do know.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then you can, like Node.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてその後、例えばノードのように動作させることができます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oh, if something is wrong, you can just click where you want to go.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ああ、何か問題があれば、行きたい場所をクリックするだけでいいですよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can delete stuff, and then you can just keep talking.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">削除してから会話を続けられます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, like, why why do you use these things versus the built in one?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">じゃあ、どうして内蔵の機能じゃなくてこれを使うんだい？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Simply because it's more accurate.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">単に精度が高いからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I can say the word century, and it knows that I'm saying century and not century.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は「センチュリー」という単語を言うことができ、それがcentury（世紀）ではなくcenturyを意味することを理解しています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I it it can do my last name correctly, which isn't you Node?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私は自分の姓を正しく入力できますが、あなたはどうですか？ノード？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そうでしょう？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">My last name isn't even hard, but AI, it Scott up my last name or the, the dictation one.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私の姓は難しくないんですよ、AI。単にラストネームを発音しただけか、音声入力で入力しただけです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I also just find, like, the the macOS dictation just be inaccurate enough that I kid you Node.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それに、Macの音声入力は精度が十分に高くないから、冗談抜きで使い物にならないんだよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I bet there are times when I'm sending you guys messages on Slack that it has just weird words in it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">きっと時々、私があなたたちに送信するスラックのメッセージに、意味のない言葉ばかり入っていることがあるんじゃないかな。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And those are almost a 100% of the time because I'm doing it on my phone via the the dictation that's on the phone rather than something like whisper flow or super whisper, which are getting, like, actual the actual words I'm really saying.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてほとんどの場合、100％に近い精度で認識されます。これは「音声入力」（スマートフォンの文字起こし機能）を使用しているためです。Whisper FlowやSuper Whisperといったツールではなく、実際に話している言葉をそのまま正確に捉えているからです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Interesting.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">興味深い。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Just more accurate.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ただより正確です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I need to I'll give them a shot again because I would like to provide a whole bunch of things that I often words that I often say, you Node?</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">もう一度試してみる必要があるわ。よく口にする言葉がたくさんあるから、あなたにも共有したいの。ノード？</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Or, like Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あるいは、Yeahみたいな感じで。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You could even like, what would be cool is if you could hook it up with, like, OCR as well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">さらに言えば、光学式文字認識（OCR）機能と連携できたら最高ですよね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, like, based on the app that you're on, it could, like, look at your code Bos and, like, fill it with words that it sees on screen.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">つまり、使用しているアプリに応じて、画面上に表示されるコードを分析し、関連するキーワードで補完してくれるんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That would be kinda cool.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それはちょっとかっこいいかも。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And whisper whisper flow has a cursor plug in and apparently works well with coding, but I have never done that because I don't use cursor, and there there isn't, like, something for me.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして「whisper」プラグインはカーソル位置への自動挿入機能があり、コーディングとの相性も良いようですが、私はそもそもカーソル操作をしないので、これまで試したことがありません。私には適した用途が見つからなかったのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I don't know how well I would do with that, actually coding with voice.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">実際のところ、音声を使ったコーディングがどの程度できるかは分かりません。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I did get into the accessibility.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">私はアクセシビリティについて理解した。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You like, macOS accessibility has, like, window control with voice.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">あなたは知っていますか？ MacOSのアクセシビリティ機能には、音声でウィンドウを操作できる便利な機能があるんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And so I was like, show numbers 42, enter.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私は「ショーナンバー42、入場」と告げた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I'm, like, talking to my computer like that, whatever, and then dictating Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そして私はコンピューターに向かってこんな風に話しかけながら、「うん、うん」と指示を出しているわけです。そんな感じでね。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The whisper flow.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ささやきが流れる。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it Wes, like, the days when my wrists were at their worst, it was very usable, but, look, definitely definitely took some getting used to.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">手首が一番ひどい時期には、確かに使い勝手は良かったけど、慣れるまでには時間がかかったよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'll tell you that.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それは私が言ってあげましょう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I accidentally, like, archived and deleted some open code sessions because I told it the wrong number at the wrong time and stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">誤って、間違ったタイミングで誤った番号を入力してしまったせいで、いくつかのオープン中のコードセッションをアーカイブして削除しちゃったんだよね...。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Oh, no. Chaotic.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そう、違う。混沌としている。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Alright.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm gonna say pick another app as well.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">別のアプリも選ぶつもりだよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is called DisplayPlacer.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはDisplayPlacerと呼ばれています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is a CLI that allows you to save your display settings, and this is a problem that I have.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">これはディスプレイ設定を保存できるコマンドラインインターフェースですが、私にはこれが問題なのです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If anyone uses a dock and a Mac, and you have multiple monitors, you may know that every time you plug into a different USB port, they ID them, all your monitors separately, and then pnpm time that they come online in a different order, they also ID them differently.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ドックとMacを併用していて、複数のモニターを使用している場合、異なるUSBポートに接続するたびに各ディスプレイが個別に認識され、再起動後にオンライン復帰する際も毎回違う順序で識別されることにお気づきかもしれません。同様に、これらのデバイスは異なる方法でIDを付与します。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I have this problem where every time I plug my dock in, it thinks that my monitors are always wrong, and I have to go and turn them and replace them exactly where I want.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">問題は、ドックを接続するたびにモニターの設定が常に誤認識され、毎回手動で正しい位置に調整しなければならないことです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I have this, prompter, which I have off a lot of the time, and then I when I turn it on, it thinks it's a different arrangement.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてこれがあります - プロンプターです。普段はオフにしていますが、オンにすると別の台本を読んでいるように感じます。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It drove me nuts.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">それは私をひどくイライラさせた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I Scott this little CLI called display placer, and then there's a a ray cast, like, UI for it.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そこで私は「displayplacer」という小さなCLIツールを作成し、UIとしてレイキャスト機能を実装しました。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And basically, you can save your common things, your common layouts, which I really like because I have I have a desk at the Scott, I have a desk here, I have sometimes I have different displays on and off, sometimes I like a, like, a larger resolution, sometimes I like it zoomed a bit more up when I'm recording.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">基本的に、よく使う設定や共通レイアウトを保存できるのが非常に便利です。私はスコットにデスクを置いていますが、ここには時々ディスプレイの数を変えたり、録画時には解像度を少し上げて表示を拡大したい場合があります。このような柔軟な対応が可能な点が特に気に入っています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I have, like, six or seven different presets, and I can just type into it and hit presets.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だから私は6つか7つの異なるプリセットを持っていて、それを選んでボタンを押すだけで設定できるんだ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's not perfect.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">完璧ではない。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's, like, maybe once in the last couple weeks, I've had to manually go and and change it again, but it is way better than having to, like, manually go in and
+
+do my monitors every time I plug into my dock.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ここ2、3週間の間に1回くらいは、手動で設定をやり直したこともあるけど、それでもドックに接続するたびに毎回手作業で調整するよりずっとマシだよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Man, what annoying little things, Real quick before we get out of here, I do have a shameless plug.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">まったく、本当に厄介な奴らだな。出かける前に、一つ宣伝させてもらおう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">My wife started a podcast.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">妻がポッドキャストを始めた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've talked about it on here before, phases.fm.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">以前ここで触れたことがあるんですが、phases.fmについてです...。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Her most recent episode is growth mindset for kids, and it's really talking about how to raise resilient kids who don't give up.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">彼女の最新のテーマは「成長マインドセット」で、挫折しても諦めない強い子どもを育てる方法について語っています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because, man, it's really easy that, like, when kids get frustrated with stuff that they can, just quit or do something else or we wanna raise resilient kids.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だって、子どもが何かに挫折したとき、すぐに諦めたり、別のことをしたりしちゃうでしょ。私たちは「困難に負けない子を育てたい」と思っているんだから。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, my wife is a doctor of psychology, and she has a new podcast about making parenting topics, scientific but also fun and easy.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">というわけで、私の妻は心理学博士で、子育てに関する話題を科学的でありながら楽しく分かりやすく解説するポッドキャストを始めたんです。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So check it out @phases.fm.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">ぜひ@phases.fmをチェックしてみてください。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it's available on all podcast players, all that stuff.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">そしてすべてのポッドキャストプレーヤーで利用可能です。あらゆる機能が揃っています。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So check it out.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">だからよく見てみろよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Is a great
+
+Wes domain name.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">素晴らしいドメイン名です。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I can't believe you got that, phases.fm.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">phases.fmでそんなの手に入れたなんて信じられないよ。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Such a good name.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">なんと素晴らしい名前だろう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Jumped on it so quickly.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">すぐに飛びついた。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">Yes.</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I when I saw that that existed and the YouTube and all that, I just jumped on it as fast as possible.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">その存在を知ってYouTubeなどで動画を見た瞬間、私は即座に飛びつきました。できる限り早く。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sick faces.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">不機嫌な顔。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Alright.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">わかった。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Thanks, everybody, for tuning in.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">皆さん、聴いてくれてありがとう。</div>
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Catch you later.</div>
+      <div style="font-size:8pt; line-height:2.4; color:#888; margin-top:1pt;">後でね。</div>
+    </div>
+</body>
+</html>

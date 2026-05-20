@@ -1,0 +1,2223 @@
+{
+  "id": "syntax/0996",
+  "title": "#996 10 New CSS and HTML APIs",
+  "source": "SYNTAX",
+  "source_url": "https://www.youtube.com/watch?v=unqPqGeJMck",
+  "sentences": [
+    {
+      "sentence_index": 0,
+      "english_text": "Welcome to Syntax.",
+      "japanese_text": "構文解析へようこそ。"
+    },
+    {
+      "sentence_index": 1,
+      "english_text": "Today, we are talking about a bunch of new stuff in CSS and HTML.",
+      "japanese_text": "今日はCSSとHTMLの最新機能についていくつかご紹介します。"
+    },
+    {
+      "sentence_index": 2,
+      "english_text": "There has been some big things added and some small things added, some nice quality of life things, and some really exciting things that you cannot use just yet, but you can play around with.",
+      "japanese_text": "大きな新機能がいくつか追加され、いくつかの細かな利便性向上要素も実装されました。現時点ではまだ完全には利用できないものの、実験的に試せる興味深い機能も用意されています。"
+    },
+    {
+      "sentence_index": 3,
+      "english_text": "There is just like an onslaught of new stuff.",
+      "japanese_text": "まるで新しいものばかりが溢れているようだ。"
+    },
+    {
+      "sentence_index": 4,
+      "english_text": "So we've collected a handful of these things and are gonna be sharing with you today.",
+      "japanese_text": "そこで私たちはこれらのアイテムをいくつか集め、今日皆さんと共有することにしました。"
+    },
+    {
+      "sentence_index": 5,
+      "english_text": "I didn't even know that this was gonna be a thing.",
+      "japanese_text": "これが実際に行われるなんて全く知らなかったよ。"
+    },
+    {
+      "sentence_index": 6,
+      "english_text": "I didn't even know this was an option.",
+      "japanese_text": "これが選択肢にあることさえ知らなかった。"
+    },
+    {
+      "sentence_index": 7,
+      "english_text": "And now It showed up out of nowhere.",
+      "japanese_text": "そして突然、どこからともなく現れた。"
+    },
+    {
+      "sentence_index": 8,
+      "english_text": "Was opened up to me.",
+      "japanese_text": "私に開かれました。"
+    },
+    {
+      "sentence_index": 9,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 10,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 11,
+      "english_text": "Scott, my brain has been opened up by some of these demos for this, so I I'm stoked to get into that too.",
+      "japanese_text": "スコット、これらのデモのいくつかで私の脳は刺激されたから、こっちも深く掘り下げていくのが楽しみだよ。"
+    },
+    {
+      "sentence_index": 12,
+      "english_text": "So stay tuned, folks.",
+      "japanese_text": "皆さん、引き続き注目していてください。"
+    },
+    {
+      "sentence_index": 13,
+      "english_text": "We're gonna be talking about what the heck HTML in Canvas is and why it's going to allow for crazy stuff going on on the web.",
+      "japanese_text": "これから、CanvasにおけるHTMLの本質と、ウェブ上で実現可能になる驚くべき機能について掘り下げていきます。"
+    },
+    {
+      "sentence_index": 14,
+      "english_text": "So so the very first one I wanna get into is something that has been long awaited in CSS, which is the CSS masonry API, aka the actual name for this thing is CSS grid lanes.",
+      "japanese_text": "まず最初に取り上げたいのは、CSSで長らく待ち望まれていた「マソンリーAPI」、正式名称は「グリッドレイアウト機能」です。"
+    },
+    {
+      "sentence_index": 15,
+      "english_text": "There's a display property, display grid lanes, and then you can specify using grid template columns, those types of things in GAP, the CSS properties that we know and love.",
+      "japanese_text": "表示プロパティ、ディスプレイグリッドレーンがあり、さらにCSSでお馴染みのgrid-template-columnsなどの設定が可能です。これらは私たちが慣れ親しんだHTMLのレイアウト属性です。"
+    },
+    {
+      "sentence_index": 16,
+      "english_text": "The only difference is is that the content actually filters in in the classic masonry Pinterest style layout.",
+      "japanese_text": "唯一の違いは、コンテンツが実際にクラシックなMasonryスタイルのPinterest風レイアウトで表示される点です。"
+    },
+    {
+      "sentence_index": 17,
+      "english_text": "This can be useful for all kinds of things beyond just your classic photo grids or things like that.",
+      "japanese_text": "これは標準的な写真グリッドや類似の用途にとどまらず、さまざまな場面で活用できます。"
+    },
+    {
+      "sentence_index": 18,
+      "english_text": "I saw it being used for, like, footer, links to have the footer links all shuffle correctly.",
+      "japanese_text": "フッターのリンクが正しく表示されるなど、様々な用途で使用されている場面を目撃しました。"
+    },
+    {
+      "sentence_index": 19,
+      "english_text": "This is kind of the the best possible thing we could be adding as an implementation for the masonry style layouts in CSS.",
+      "japanese_text": "これは、CSSのマソンリースタイルレイアウトを実装する上で考えられる最良の解決策と言えるでしょう。"
+    },
+    {
+      "sentence_index": 20,
+      "english_text": "It's going to allow for the shuffling of elements in such a great way where, in the past, we had CSS columns that warp things went like one, two, three down vertically before going into the next column.",
+      "japanese_text": "これにより、要素の配置方法が大幅に改善され、従来のように垂直方向に1列（例：1,2,3）と並んだ後、次のカラムに移動するといった処理が極めて効率的に行えるようになります。"
+    },
+    {
+      "sentence_index": 21,
+      "english_text": "This is actually going to do the opposite where things will fill in kind of where they fit in left to right.",
+      "japanese_text": "これは実際には逆の効果をもたらし、要素は左から右へと自然に配置されるようになります。"
+    },
+    {
+      "sentence_index": 22,
+      "english_text": "They will just kind of fit and and you can actually do it right to left or up to down, left to right.",
+      "japanese_text": "これは基本的に左から右、上から下、または左揃えで配置することができます。"
+    },
+    {
+      "sentence_index": 23,
+      "english_text": "You could you can change all of that as well.",
+      "japanese_text": "これらすべても変更できます。"
+    },
+    {
+      "sentence_index": 24,
+      "english_text": "But if you just want a straight up masonry style layout, man, display grid lanes, can it, like, get any more simple than that?",
+      "japanese_text": "でも、純粋にレンガ積み風のシンプルなレイアウトが欲しいだけなら、これ以上シンプルにできるかな？ってくらいシンプルだよ。"
+    },
+    {
+      "sentence_index": 25,
+      "english_text": "It is\n\nreally super cool.",
+      "japanese_text": "本当に超かっこいいです。"
+    },
+    {
+      "sentence_index": 26,
+      "english_text": "That's it.",
+      "japanese_text": "それで終わりです。"
+    },
+    {
+      "sentence_index": 27,
+      "english_text": "There's nothing to learn here.",
+      "japanese_text": "ここには学ぶべきものはない。"
+    },
+    {
+      "sentence_index": 28,
+      "english_text": "It's simply just display grid lanes, and now you can have multiple like like, a Pinterest style layout, which is something that we have been trying to do forever.",
+      "japanese_text": "これは単にグリッドレーンを表示する機能に過ぎず、今やPinterestのようなスタイルのレイアウトを実現できます。これまで長年実現を目指してきたものです。"
+    },
+    {
+      "sentence_index": 29,
+      "english_text": "And we've had like, in in we had what?",
+      "japanese_text": "そして私たちはこれまでに、例えば何があったでしょうか？？"
+    },
+    {
+      "sentence_index": 30,
+      "english_text": "Like, box pack fit in CSS grid, but it never was perfect, and and it didn't go the way you wanted, and it had to have a fixed height.",
+      "japanese_text": "ボックスパックはCSSグリッドシステムに対応してはいるものの、完全に思い通りに動作するわけではなく、常に固定の高さを設定する必要がありました。"
+    },
+    {
+      "sentence_index": 31,
+      "english_text": "There's always gotchas with this type of thing.",
+      "japanese_text": "この手のものにはいつも落とし穴があるものだ。"
+    },
+    {
+      "sentence_index": 32,
+      "english_text": "And now we have it, and I am so happy that we can finally have this type of layout.",
+      "japanese_text": "そしてついに実現しました。このようなレイアウトがついに可能になったことを、心から嬉しく思います。"
+    },
+    {
+      "sentence_index": 33,
+      "english_text": "It's gonna make doing these types of websites\n\nso much easier.",
+      "japanese_text": "こうしたタイプのウェブサイト作成が格段に簡単になるでしょう！"
+    },
+    {
+      "sentence_index": 34,
+      "english_text": "And, like, also, like, it opens up new creative use cases as well.",
+      "japanese_text": "そしてさらに、新たな創造的な活用事例も切り開いてくれるんです。"
+    },
+    {
+      "sentence_index": 35,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 36,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 37,
+      "english_text": "Super cool stuff.",
+      "japanese_text": "超クールなものだね。"
+    },
+    {
+      "sentence_index": 38,
+      "english_text": "So we we'll we'll link up a Wes kit post.",
+      "japanese_text": "そこで私たちはウェスキットの投稿にリンクを貼ることにします。"
+    },
+    {
+      "sentence_index": 39,
+      "english_text": "This is available right now in the, as of Safari version 26.",
+      "japanese_text": "これは現在、Safariバージョン26以降で利用可能です。"
+    },
+    {
+      "sentence_index": 40,
+      "english_text": "4, and it is behind a flag in Chrome and Firefox.",
+      "japanese_text": "4. Google ChromeとFirefoxでは旗のアイコンが表示されます。"
+    },
+    {
+      "sentence_index": 41,
+      "english_text": "So\n\nScott long off here.",
+      "japanese_text": "だからスコットはここで長くは続かないだろう。"
+    },
+    {
+      "sentence_index": 42,
+      "english_text": "Really stoked about this one.",
+      "japanese_text": "これ本当にワクワクするよ。"
+    },
+    {
+      "sentence_index": 43,
+      "english_text": "Alright.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 44,
+      "english_text": "Next, we have this HTML in Canvas API, and I had zero idea that this was coming.",
+      "japanese_text": "次に、Canvas APIでこのHTMLコードが登場しましたが、これが表示されるとは全く予想していませんでした。"
+    },
+    {
+      "sentence_index": 45,
+      "english_text": "It's an experimental API, meaning that, like, it might not ever come, but it sort of solves one problem we have with Canvas, which is you you cannot draw HTML to Canvas.",
+      "japanese_text": "これは実験的なAPIであり、つまり将来的に実装されない可能性もあります。現在Canvasで抱えている問題の一つを解決するもので、具体的にはHTMLコンテンツを直接キャンバスに描画できないという制約を解消します。"
+    },
+    {
+      "sentence_index": 46,
+      "english_text": "And the other problem is that when you make UI in Canvas, if if you wanna, like, add effects or whatever with Canvas, then it's it's very hard to make accessible.",
+      "japanese_text": "もう一つの問題は、CanvasでUIを作成する場合、エフェクトなどの追加機能を実装しようとするとアクセシビリティを確保することが非常に困難になるという点です。"
+    },
+    {
+      "sentence_index": 47,
+      "english_text": "So this new UI will allow you to simply just put elements inside of a canvas.",
+      "japanese_text": "この新しいUIでは、要素をキャンバス内に簡単に配置できるようになります。"
+    },
+    {
+      "sentence_index": 48,
+      "english_text": "Like, I got my dev tools open right here.",
+      "japanese_text": "ほら、ここに開発ツール開いてるでしょ？"
+    },
+    {
+      "sentence_index": 49,
+      "english_text": "This is literally a canvas element.",
+      "japanese_text": "これは文字通りキャンバス要素です。"
+    },
+    {
+      "sentence_index": 50,
+      "english_text": "And then inside of that, you can just put regular HTML.",
+      "japanese_text": "そしてその内部には通常のHTMLコードを直接記述できます。"
+    },
+    {
+      "sentence_index": 51,
+      "english_text": "And then there's some JavaScript APIs that will allow you to paint that HTML to the Sanity.",
+      "japanese_text": "さらに、HTMLをSanityにレンダリングするためのJavaScriptインターフェースも用意されています。"
+    },
+    {
+      "sentence_index": 52,
+      "english_text": "Now why would you want to do that?",
+      "japanese_text": "ではなぜそんなことをしたいのでしょうか？"
+    },
+    {
+      "sentence_index": 53,
+      "english_text": "Well, there are so many different effects that you can do with Canvas that you you can put a canvas in front of HTML.",
+      "japanese_text": "CanvasではHTML要素の前面に配置できる多様な効果を実現できます。例えば、以下のようなことが可能です："
+    },
+    {
+      "sentence_index": 54,
+      "english_text": "You can use SVG Wes there's some tricks where you can put HTML inside of an SVG, and now it's an image, and then you can paint that to canvas, but there's a whole bunch of limitations.",
+      "japanese_text": "HTMLをSVG内に埋め込む方法はいくつか存在します（例えば特定の手法を使えば可能ですが、多くの制約があります）。ただし、この方法には重大な制限事項がいくつかあります。"
+    },
+    {
+      "sentence_index": 55,
+      "english_text": "That's actually how we use on the SynHax platform.",
+      "japanese_text": "これは実際にSynhaXプラットフォームで採用している方法です。"
+    },
+    {
+      "sentence_index": 56,
+      "english_text": "But this is simply just you can put most HTML inside of a Canvas element and then apply any shaders or any any whatever things that you want to the canvas element.",
+      "japanese_text": "ただし、これは基本的にCanvas要素内に任意のHTMLコンテンツを配置し、必要に応じてシェーダーやその他の処理をキャンバスエレメントに適用できるということを意味しています。"
+    },
+    {
+      "sentence_index": 57,
+      "english_text": "So here, I've got pixelization, and I can just go ahead and, like, type in it.",
+      "japanese_text": "ここではピクセル化効果が得られますので、そのまま文字を入力できます。"
+    },
+    {
+      "sentence_index": 58,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 59,
+      "english_text": "Like, this Deno, this is totally unreadable for people who are not watching this.",
+      "japanese_text": "例えばこのDenoみたいに、これを見てない人には全く理解できないでしょ？"
+    },
+    {
+      "sentence_index": 60,
+      "english_text": "It's a completely form input.",
+      "japanese_text": "完全にフォーム入力です。"
+    },
+    {
+      "sentence_index": 61,
+      "english_text": "HTML\n\nin here.",
+      "japanese_text": "HTML\n\nここに挿入します。"
+    },
+    {
+      "sentence_index": 62,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 63,
+      "english_text": "It's it's obviously a stupid example, but it's just showing how, like, this is live\n\nHTML.",
+      "japanese_text": "これは明らかに馬鹿げた例ですが、まさにこれがリアルタイムで起こっている様子です：\n\n<html lang=\"ja\">\n<head>\n    <title>ライブデモ</title>\n</head>\n<body>\n    <h1>ようこそ！</h1>\n    <p>こんにちは、世界。</p>\n</body>\n</html>\n````"
+    },
+    {
+      "sentence_index": 64,
+      "english_text": "And, like, I don't know.",
+      "japanese_text": "そしてまあ、よくわからないけど。"
+    },
+    {
+      "sentence_index": 65,
+      "english_text": "Like, if you backed it off a little bit, that kinda looks kinda cool.",
+      "japanese_text": "例えば、ちょっと控えめにやると、ちょっとカッコよく見えるんだよね。"
+    },
+    {
+      "sentence_index": 66,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 67,
+      "english_text": "I I got a question about that, Wes.",
+      "japanese_text": "ウェス、その件で質問があるんだ。"
+    },
+    {
+      "sentence_index": 68,
+      "english_text": "If you just had the HTML inside of the canvas, would it just render as normally, or do you have to, tell it to render the HTML?",
+      "japanese_text": "canvas 内に単にHTMLコードを配置した場合、通常どおりに表示されますか、それとも明示的にレンダリングするよう指示する必要がありますか？"
+    },
+    {
+      "sentence_index": 69,
+      "english_text": "There is a, like, a request drawing API on it where you have to explicitly tell it to to draw.",
+      "japanese_text": "そこには、明示的に描画を指示する必要があるリクエストドローAPIが実装されています。つまり、「ここに描け」と指定しなければならないのです。"
+    },
+    {
+      "sentence_index": 70,
+      "english_text": "I'm curious about what would happen if you're not.",
+      "japanese_text": "そうでない場合にどうなるかも興味深いですね。"
+    },
+    {
+      "sentence_index": 71,
+      "english_text": "I have a whole bunch of demos in here, but I I assume it would probably fall back, but maybe not, because maybe that's not what you want.",
+      "japanese_text": "ここにはたくさんのデモ音源が入っていますが、おそらくデフォルト設定に戻るでしょう。ただし、それが必ずしもご希望ではないかもしれません。"
+    },
+    {
+      "sentence_index": 72,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 73,
+      "english_text": "I need some hand holding sometimes in these demos.",
+      "japanese_text": "これらのデモでは、時々指導が必要なんです。"
+    },
+    {
+      "sentence_index": 74,
+      "english_text": "I look through them, and I'm like, what is required here?",
+      "japanese_text": "それらを見て、「ここで求められているのは何だろう？」と考えます。"
+    },
+    {
+      "sentence_index": 75,
+      "english_text": "What is not required?",
+      "japanese_text": "必須ではないものは何ですか？"
+    },
+    {
+      "sentence_index": 76,
+      "english_text": "So here here's another example where I made a magnifying glass for a website.",
+      "japanese_text": "次に、ウェブサイト用に拡大鏡ウィジェットを実装した別の例をご紹介します。"
+    },
+    {
+      "sentence_index": 77,
+      "english_text": "This.",
+      "japanese_text": "This is it."
+    },
+    {
+      "sentence_index": 78,
+      "english_text": "And because the HTML is is being drawn to it right?",
+      "japanese_text": "そしてHTMLが直接描画されているんですよね？"
+    },
+    {
+      "sentence_index": 79,
+      "english_text": "Like, you can see I'm I'm just typing into this input here.",
+      "japanese_text": "例えば、ここでこの入力欄に文字を入力しているのがわかりますか？"
+    },
+    {
+      "sentence_index": 80,
+      "english_text": "Uh-huh.",
+      "japanese_text": "うん。"
+    },
+    {
+      "sentence_index": 81,
+      "english_text": "But and I'm I'm using a magnifying glass to to make that bigger and and slightly distort it.",
+      "japanese_text": "しかし私は、拡大鏡を使ってそれを大きくし、さらにわずかに歪ませています。"
+    },
+    {
+      "sentence_index": 82,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 83,
+      "english_text": "Another one is frosted.",
+      "japanese_text": "もう一つのものは霜が降りている。"
+    },
+    {
+      "sentence_index": 84,
+      "english_text": "So here you can see, like, this is just text.",
+      "japanese_text": "つまり、これは単なるテキストデータです。"
+    },
+    {
+      "sentence_index": 85,
+      "english_text": "I'm Can you describe what you're doing, Wes, for the audio?",
+      "japanese_text": "ウェス、音声の説明をしてもらえますか？今何をしているのか詳しく教えてください。"
+    },
+    {
+      "sentence_index": 86,
+      "english_text": "Sorry.",
+      "japanese_text": "すみません。"
+    },
+    {
+      "sentence_index": 87,
+      "english_text": "This is, creating, like, a a frosted effect on a window.",
+      "japanese_text": "これはつまり、窓に霜が降りたような効果を作り出す技法です。"
+    },
+    {
+      "sentence_index": 88,
+      "english_text": "You know, if you're blow on a window on, like, a a cold, warm day and then use your finger to wipe the frost away, I'm I'm doing that.",
+      "japanese_text": "ほら、寒い日に窓ガラスが曇ってる時、指で霜を拭き取るみたいにするだろ？ まさにそれをやってるんだよ。"
+    },
+    {
+      "sentence_index": 89,
+      "english_text": "And and this, again, you could have kind of done this before Wes you could put a canvas in front of the HTML, but what I'm doing here is I'm literally, I'm blurring the stuff that is behind the canvas.",
+      "japanese_text": "そしてこれも以前ウェスがやっていた方法ですが、HTML要素の前にキャンバスを配置することは可能です。ただし私がここで行っているのは、文字通りcanvasより後ろにあるコンテンツをぼかしているのです。"
+    },
+    {
+      "sentence_index": 90,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 91,
+      "english_text": "And then as you use your finger to move the frost out of the way, it becomes less blurred.",
+      "japanese_text": "そして指で霜をよけながら動かすと、徐々にぼやけが解消されていきます。"
+    },
+    {
+      "sentence_index": 92,
+      "english_text": "It's a little random every single time.",
+      "japanese_text": "毎回ちょっとランダムな感じだね。"
+    },
+    {
+      "sentence_index": 93,
+      "english_text": "There's some other really cool demos from here we go.",
+      "japanese_text": "ここからさらに素晴らしいデモがいくつか登場します。"
+    },
+    {
+      "sentence_index": 94,
+      "english_text": "Matt Rothenberg had a cool demo where he's look at this.",
+      "japanese_text": "マット・ロスバーグが披露したデモでは、彼がこのコンセプトを見事に表現していました。"
+    },
+    {
+      "sentence_index": 95,
+      "english_text": "And if you pause it really quickly, you'll see What is happening now, Wes, for the Oh my gosh.",
+      "japanese_text": "そして素早く一時停止すると、ウェス、今まさに何が起きているかがわかります――「うわっ！」という感じです。"
+    },
+    {
+      "sentence_index": 96,
+      "english_text": "I'm so sorry, audio listeners.",
+      "japanese_text": "音声で聴いているリスナーの皆さん、本当に申し訳ありません。"
+    },
+    {
+      "sentence_index": 97,
+      "english_text": "He has two things.",
+      "japanese_text": "彼には二つのものがある。"
+    },
+    {
+      "sentence_index": 98,
+      "english_text": "One is when you have an input, you have, like, a kind of a cool box that's following around the currently focused input, and that is just rendering out a cool border hover effect around each of the inputs, which you could have done that previously with Canvas in some work, but I think it's a a lot easier now.",
+      "japanese_text": "1つ目は、現在フォーカスされている入力フィールドに追従するクールなボックスがある場合です。この効果は以前ならCanvasを使って実現していましたが、今ではもっと簡単に実装できます。"
+    },
+    {
+      "sentence_index": 99,
+      "english_text": "And then the other thing is that when you submit it, there's, like, scan ESLint goes down through the form and sort of, like like, wipes it off the page.",
+      "japanese_text": "そしてもう一つ重要なのは、フォームを送信すると、スキャン機能がページ全体を下方向に移動しながらエラーをチェックしてくれる点です。"
+    },
+    {
+      "sentence_index": 100,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 101,
+      "english_text": "But part of the wipe is you'll see that the the wording is getting slightly stretched and blurred as it's being wiped off.",
+      "japanese_text": "ただし、拭き取る過程で文字が少しずつ引き伸ばされ、ぼやけていく様子が確認できる。"
+    },
+    {
+      "sentence_index": 102,
+      "english_text": "And I thought that was such a cool effect.",
+      "japanese_text": "とてもかっこいい効果だと思ったんです。"
+    },
+    {
+      "sentence_index": 103,
+      "english_text": "Even, like you Node, on iOS, when you bring up, like, Siri on Bos, where you Mhmm.",
+      "japanese_text": "あなたのようなノードでさえ、iOSでSiriを起動するとき――例えばBos上でMhmと入力するような場合でも同じです。"
+    },
+    {
+      "sentence_index": 104,
+      "english_text": "It slightly does, like, a gradient border around your phone.",
+      "japanese_text": "電話機の周囲にグラデーション状の境界線が少しついている感じです。"
+    },
+    {
+      "sentence_index": 105,
+      "english_text": "Or when you do your volume up and down on iOS, it actually pushes in the content that is on the screen.",
+      "japanese_text": "また、iOSで音量を上げたり下げたりする操作を行うと、画面上のコンテンツが実際に押し込まれるようになっています。"
+    },
+    {
+      "sentence_index": 106,
+      "english_text": "It's not just overlapping the volume slider.",
+      "japanese_text": "音量スライダーを重ねるだけではありません。"
+    },
+    {
+      "sentence_index": 107,
+      "english_text": "The volume slider is literally pushing the content over, and it slightly warps it.",
+      "japanese_text": "ボリュームスライダーが文字通りコンテンツをはみ出しており、わずかに歪んでいます。"
+    },
+    {
+      "sentence_index": 108,
+      "english_text": "And I think, like, that kind of stuff is so cool that you can have control over how the pixels are painted in the DOM.",
+      "japanese_text": "そして思うのですが、ピクセル単位でHTML要素を操作できるというのは、本当に素晴らしいことだと思います。DOM上でどのように描画されるかを完全に制御できるという点が。"
+    },
+    {
+      "sentence_index": 109,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 110,
+      "english_text": "Whatever is simply falling behind this volume slider, I wanna simply push that Vercel, and that is something that you have not been able to do.",
+      "japanese_text": "このボリュームスライダーの背後にあるものは何でも、単にVercelを押したいだけなんです。これまでできなかったことですから。"
+    },
+    {
+      "sentence_index": 111,
+      "english_text": "You've been able to, like, have SVG filters on top of things, but in actually having full control over how the pixels are rendered on the screen without having to give up or move to something or give up a whole bunch of accessibility and whatnot.",
+      "japanese_text": "これまではベクター画像にフィルター効果を適用することはできましたが、その一方で、アクセシビリティ機能の多くを犠牲にしたり、別のものに完全に移行したりする必要がありました。しかし今では、ピクセル単位で画面表示を完全に制御しつつ、こうした制約から解放されるようになったんです。"
+    },
+    {
+      "sentence_index": 112,
+      "english_text": "You just regular HTML inside of a canvas element.",
+      "japanese_text": "canvas要素内に通常のHTMLコードを記述するだけです。"
+    },
+    {
+      "sentence_index": 113,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 114,
+      "english_text": "So It's I don't know if Sony make it or not.",
+      "japanese_text": "だからソニーがこれを発売するかどうかはわからないんだ。"
+    },
+    {
+      "sentence_index": 115,
+      "english_text": "It's so cool, though.",
+      "japanese_text": "でも本当にかっこいいですよね。"
+    },
+    {
+      "sentence_index": 116,
+      "english_text": "It's so cool.",
+      "japanese_text": "とてもかっこいい。"
+    },
+    {
+      "sentence_index": 117,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 118,
+      "english_text": "The just jelly slider right here?",
+      "japanese_text": "このすぐそばにあるゼリースライダー？"
+    },
+    {
+      "sentence_index": 119,
+      "english_text": "Like, we saw this demo on on Twitter a couple years ago or a couple weeks ago.",
+      "japanese_text": "例えば、2年前か1ヶ月前くらいにTwitterでこのデモを見たことがあるんですよ。"
+    },
+    {
+      "sentence_index": 120,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 121,
+      "english_text": "Couple it feels like years ago at this point.",
+      "japanese_text": "今となっては何年も前のことのように思える。"
+    },
+    {
+      "sentence_index": 122,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 123,
+      "english_text": "If I inspect element on this jelly slider,\n\nit is simply just an input.",
+      "japanese_text": "このジェリースライダーの要素を検査してみると、\n\n実際にはただの入力フィールドであることがわかります。"
+    },
+    {
+      "sentence_index": 124,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 125,
+      "english_text": "That's the best part, folks, because people who might not know is the moment you get into any of this Canvas stuff, you're you're having to write so much, interactivity code or in the case of inputs, forget about it.",
+      "japanese_text": "ここが一番の見どころです。Canvasについて知らない人たちにとって、この種のことに取り組む際には、膨大な量のインタラクティブなコードを書く必要があります - 入力要素に関しては、完全に無視して構いません。"
+    },
+    {
+      "sentence_index": 126,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 127,
+      "english_text": "Like so having the actual DOM elements, and then you don't lose accessibility in Canvas based sites too.",
+      "japanese_text": "このように実際のDOM要素を保持しておけば、Canvasベースのサイトでもアクセシビリティを損なうことがありません。"
+    },
+    {
+      "sentence_index": 128,
+      "english_text": "It's it's really just what a what a powerhouse of an API this is.",
+      "japanese_text": "これは本当に、実に強力なAPIです。"
+    },
+    {
+      "sentence_index": 129,
+      "english_text": "So here's another one from Jake Archibald\n\nWes like, if you wanted, like like, a old CRT TV Wes things are slightly what do you call that shape that the the CRT TV has, you know, where it's it's not perfectly square, but there's a bit of an arch to it?",
+      "japanese_text": "さて、ジェイク・アーチボルドからの新たな投稿です：\n\nウェス、例えば古いCRTテレビのように、画面が完全な正方形ではなく、わずかに湾曲した形状をしているものがあるでしょう？あの独特のカーブを描いたフォルムのことなんですが？"
+    },
+    {
+      "sentence_index": 130,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 131,
+      "english_text": "It's, Scott\n\nkinda\n\nthat's Convex.",
+      "japanese_text": "それはスコットだ\n\nちょっと凸状になってるよ"
+    },
+    {
+      "sentence_index": 132,
+      "english_text": "Something like that.",
+      "japanese_text": "そんな感じです。"
+    },
+    {
+      "sentence_index": 133,
+      "english_text": "Whew.",
+      "japanese_text": "ふう。"
+    },
+    {
+      "sentence_index": 134,
+      "english_text": "So cool.",
+      "japanese_text": "すごくかっこいい。"
+    },
+    {
+      "sentence_index": 135,
+      "english_text": "And, like, the again, this is just regular old HTML.",
+      "japanese_text": "そしてこれも同様、これは単なる通常のHTMLです。"
+    },
+    {
+      "sentence_index": 136,
+      "english_text": "I can inspect element on it.",
+      "japanese_text": "その要素を検査できます。"
+    },
+    {
+      "sentence_index": 137,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 138,
+      "english_text": "I can change some of the text inside of that.",
+      "japanese_text": "そのテキストの一部を変更できます。"
+    },
+    {
+      "sentence_index": 139,
+      "english_text": "I can use all of the stuff that I'm used to in HTML, and it's just updated any any effects you have.",
+      "japanese_text": "HTMLで使い慣れたすべての要素を使用でき、さらに最新機能も自由に活用できます。"
+    },
+    {
+      "sentence_index": 140,
+      "english_text": "So I'm gonna I'm building out some more demos with this because this is right down my alley.",
+      "japanese_text": "だからこのテーマでもっとデモを作っていくつもりだ。これはまさに得意分野だから。"
+    },
+    {
+      "sentence_index": 141,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 142,
+      "english_text": "It you know what?",
+      "japanese_text": "あなたが何を知っているの？"
+    },
+    {
+      "sentence_index": 143,
+      "english_text": "It kind of feels like it would give the, the stuff that we wanted to do with Houdini Node now you could kind of do.",
+      "japanese_text": "これはHoudiniノードでやりたかったことがある程度実現できそうな感じですね。"
+    },
+    {
+      "sentence_index": 144,
+      "english_text": "You could do all kinds of custom rendering.",
+      "japanese_text": "さまざまなカスタムレンダリングが可能でした。"
+    },
+    {
+      "sentence_index": 145,
+      "english_text": "Yes.",
+      "japanese_text": "はい。"
+    },
+    {
+      "sentence_index": 146,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 147,
+      "english_text": "Really stoked about this.",
+      "japanese_text": "これ本当にワクワクするよ。"
+    },
+    {
+      "sentence_index": 148,
+      "english_text": "A lot of the Houdini stuff, like, never panned out.",
+      "japanese_text": "『Houdini』の多くは、結局うまくいかなかったものばかりだ。"
+    },
+    {
+      "sentence_index": 149,
+      "english_text": "We and pnpm ended up making its way via things like like text align center or or no. What is it?",
+      "japanese_text": "私たちと npm（現在は pnpm）は最終的に、text-align:center; や display:none;、あるいは単に非表示にするなどの方法にたどり着きました。結局どれを選んだのでしょうか？"
+    },
+    {
+      "sentence_index": 150,
+      "english_text": "Text wrap balance.",
+      "japanese_text": "テキストの折り返しバランスを調整します。"
+    },
+    {
+      "sentence_index": 151,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 152,
+      "english_text": "App wrap balance.",
+      "japanese_text": "アプリラップ残高。"
+    },
+    {
+      "sentence_index": 153,
+      "english_text": "But I think that this is another one of those APIs where, yeah, just render out the HTML to a canvas element, and then you've got the pixels.",
+      "japanese_text": "しかしこれは、HTMLをcanvas要素に直接レンダリングすれば、ピクセルデータが得られるタイプのAPIだと思います。"
+    },
+    {
+      "sentence_index": 154,
+      "english_text": "You could do whatever you want.",
+      "japanese_text": "あなたは好きなことを何でもすることができた。"
+    },
+    {
+      "sentence_index": 155,
+      "english_text": "You can put shaders on it.",
+      "japanese_text": "シェーダーを適用できます。"
+    },
+    {
+      "sentence_index": 156,
+      "english_text": "You can tweak it.",
+      "japanese_text": "微調整できます。"
+    },
+    {
+      "sentence_index": 157,
+      "english_text": "You can morph it.",
+      "japanese_text": "変形させることができます。"
+    },
+    {
+      "sentence_index": 158,
+      "english_text": "Whatever you want.",
+      "japanese_text": "何でも好きなものを。"
+    },
+    {
+      "sentence_index": 159,
+      "english_text": "So I hope this works in.",
+      "japanese_text": "うまく機能してくれるといいのですが。"
+    },
+    {
+      "sentence_index": 160,
+      "english_text": "It's behind a flag in Chrome right Node.",
+      "japanese_text": "Chromeのノードで旗マークのある場所にありますよ。"
+    },
+    {
+      "sentence_index": 161,
+      "english_text": "So, obviously, you can't use this on any website, but everybody who saw this is like, yes.",
+      "japanese_text": "つまり、当然ながらあらゆるウェブサイトで使えるわけではありませんが、これを見た人は皆、「これは素晴らしい」と思うでしょう。"
+    },
+    {
+      "sentence_index": 162,
+      "english_text": "I absolutely need this thing for, making next gen interfaces.",
+      "japanese_text": "次世代インターフェースの開発には絶対にこれが必要だ！"
+    },
+    {
+      "sentence_index": 163,
+      "english_text": "Nice.",
+      "japanese_text": "素敵ですね。"
+    },
+    {
+      "sentence_index": 164,
+      "english_text": "I have one that you might not have seen here, and this one kinda flew underneath the radar.",
+      "japanese_text": "ここでまだご覧になっていないかもしれない作品が1つあって、これはちょっと注目されていなかったんです。"
+    },
+    {
+      "sentence_index": 165,
+      "english_text": "Firefox Node forty nine, Chrome one forty eight, and, the same version of Safari that brings was it 26.",
+      "japanese_text": "Mozilla Firefox 49、Google Chrome 68、およびSafariの同じバージョン（26）です。"
+    },
+    {
+      "sentence_index": 166,
+      "english_text": "4 that brought grid lanes, are are bringing container queries that you don't have to specify the actual query part of the container query.",
+      "japanese_text": "グリッドレーンを導入することで、コンテナクエリで実際の問い合わせ部分を具体的に指定する必要がなくなります。"
+    },
+    {
+      "sentence_index": 167,
+      "english_text": "You can just specify the name.",
+      "japanese_text": "名前だけを指定するだけで済みます。"
+    },
+    {
+      "sentence_index": 168,
+      "english_text": "So the way you would do this is you would on a wrapper, you would give your container name property a name, so container name sidebar.",
+      "japanese_text": "具体的には、ラッパー要素内でコンテナ名プロパティに名前を指定します。例えば「container-name-sidebar」といった具合です。"
+    },
+    {
+      "sentence_index": 169,
+      "english_text": "Then you could just use the at container sidebar, and that would scope the CSS to that container specifically, giving you basically another way of doing, scoped CSS that is baked into the platform.",
+      "japanese_text": "この場合、atコンテナサイドバーを使用するだけで、その特定のコンテキストにCSSを限定でき、プラットフォーム自体が提供するスコープ付きスタイルシートと同様の効果が得られます。"
+    },
+    {
+      "sentence_index": 170,
+      "english_text": "Because right now, all the scoped CSS solutions are adding a bunch of classes to scope.",
+      "japanese_text": "現在のスコープ付きCSSソリューションはいずれも、要素に大量のクラスを追加することで対応しているからです。"
+    },
+    {
+      "sentence_index": 171,
+      "english_text": "And this is, again, just another way that we could have native scoping in CSS because, typically, with container queries, you're specifying, like, a style query.",
+      "japanese_text": "これはCSSでネイティブなスコープ機能を実現するもう一つの方法です。通常、コンテナクエリではスタイル条件を指定しますが、これも一種の「style-query」と言えます。"
+    },
+    {
+      "sentence_index": 172,
+      "english_text": "Okay.",
+      "japanese_text": "わかりました。"
+    },
+    {
+      "sentence_index": 173,
+      "english_text": "Apply this CSS when this value is equal to this or apply this CSS when the container width or size is this or this.",
+      "japanese_text": "この値が指定された値と等しい場合に適用するか、コンテナの幅またはサイズがこの数値に達したときにCSSを適用します。"
+    },
+    {
+      "sentence_index": 174,
+      "english_text": "But this is basically just saying, apply this CSS inside of this container, but it does scope it so that way you could use more generic specifiers inside of that and scope it to that container itself.",
+      "japanese_text": "ただしこれは基本的に「このコンテナ要素内でのみ、このCSSを適用する」という意味であり、より一般的なセレクタを使用しても、その範囲をその特定の容器自体に限定できるという利点があります。"
+    },
+    {
+      "sentence_index": 175,
+      "english_text": "Oh,\n\nman.",
+      "japanese_text": "ああ、\n\n男。"
+    },
+    {
+      "sentence_index": 176,
+      "english_text": "I think that that is awesome because like, we have at scope in CSS Node, and I I ended up I tried using this for a project I was working on the other day, and, like, it just didn't feel right.",
+      "japanese_text": "これは素晴らしいアイデアだと思います。CSSのスコープ機能を使えば、先日取り組んでいたプロジェクトで試してみたんですが、どうもしっくりこなかったんです。"
+    },
+    {
+      "sentence_index": 177,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 178,
+      "english_text": "Really?",
+      "japanese_text": "本当に？"
+    },
+    {
+      "sentence_index": 179,
+      "english_text": "And you can at scope, you can give it a selector, but and then you can also donut scope, which is really cool.",
+      "japanese_text": "スコープ内で使用する際にはセレクタを指定できますが、さらに「donut-scope」機能も利用可能です。これは非常に便利な機能です。"
+    },
+    {
+      "sentence_index": 180,
+      "english_text": "So you can start the Scott, and you can tell it to end at a specific thing, which that's great as well.",
+      "japanese_text": "このようにスコットを開始し、特定の時点まで再生するように指示することも可能です。これは非常に便利な機能です。"
+    },
+    {
+      "sentence_index": 181,
+      "english_text": "And this is this is widely supported as well.",
+      "japanese_text": "そしてこれも広くサポートされています。"
+    },
+    {
+      "sentence_index": 182,
+      "english_text": "But the ability to make, like, named scopes, like sidebar, that's great, and you're simply just using container queries for that.",
+      "japanese_text": "しかし、サイドバーのような名前付きスコープを作成できる機能は素晴らしいですし、実際にはコンテナクエリをその目的で使用しているだけです。"
+    },
+    {
+      "sentence_index": 183,
+      "english_text": "And very likely, you also want to do things with your container queries as well, and then those are not two separate APIs.",
+      "japanese_text": "さらに、コンテナクエリに対しても同様の操作を行いたい場合が多く、これらは別々のAPIとして実装されるべきではありません。"
+    },
+    {
+      "sentence_index": 184,
+      "english_text": "This is simply just the container spec.",
+      "japanese_text": "これは単にコンテナ仕様を定義しているだけです。"
+    },
+    {
+      "sentence_index": 185,
+      "english_text": "And now and then their style queries JS welcome into container queries.",
+      "japanese_text": "そして時折、彼らのスタイルクエリはコンテナーサイズに応じたメディアクエリにも対応している。"
+    },
+    {
+      "sentence_index": 186,
+      "english_text": "I am in.",
+      "japanese_text": "私は賛成です。"
+    },
+    {
+      "sentence_index": 187,
+      "english_text": "That that is awesome.",
+      "japanese_text": "それは素晴らしいですね。"
+    },
+    {
+      "sentence_index": 188,
+      "english_text": "So that's just called name only container queries.",
+      "japanese_text": "つまり、これは名前だけのコンテナクエリーと呼ばれるものです。"
+    },
+    {
+      "sentence_index": 189,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 190,
+      "english_text": "It's hard to actually find anything about this.",
+      "japanese_text": "これについて実際に情報を見つけるのは難しい。"
+    },
+    {
+      "sentence_index": 191,
+      "english_text": "I saw it because Chris Coyier had a tweet, and then Yeah.",
+      "japanese_text": "クリス・コイラーがツイートしていたのを見て、それから確かにそうだった。"
+    },
+    {
+      "sentence_index": 192,
+      "english_text": "Front end masters had a post on it.",
+      "japanese_text": "フロントエンドのマスターには投稿がありました。"
+    },
+    {
+      "sentence_index": 193,
+      "english_text": "And then I'm Scott looking for what the support is, and I can only find it in GitHub issues and stuff.",
+      "japanese_text": "そしてサポート情報を探すと、結局 GitHub Issues（問題追跡システム）でしか見つけられないんです。"
+    },
+    {
+      "sentence_index": 194,
+      "english_text": "So, one of those things that was hard to track down what the support is, but really neat.",
+      "japanese_text": "つまり、サポートを見つけるのは難しかったけれど、とても興味深いものでした。"
+    },
+    {
+      "sentence_index": 195,
+      "english_text": "According to Anthony Ferner on Blue Sky, he says it's in Firefox one forty nine, Chrome one forty eight, and now Safari 24 or 26.",
+      "japanese_text": "アンソニー・フェナー氏（BlueSky社）によると、Firefoxではバージョン1.49、Chromeは28または30以降で動作し、Safariについては最新のVer.24か26に対応しているとのことです。"
+    },
+    {
+      "sentence_index": 196,
+      "english_text": "4, 24.",
+      "japanese_text": "4, 24."
+    },
+    {
+      "sentence_index": 197,
+      "english_text": "6, one of the 26.",
+      "japanese_text": "六、26のうちの一つ。"
+    },
+    {
+      "sentence_index": 198,
+      "english_text": "4.",
+      "japanese_text": "4."
+    },
+    {
+      "sentence_index": 199,
+      "english_text": "Yes.",
+      "japanese_text": "はい。"
+    },
+    {
+      "sentence_index": 200,
+      "english_text": "There we go.",
+      "japanese_text": "これでいいでしょう。"
+    },
+    {
+      "sentence_index": 201,
+      "english_text": "Okay.",
+      "japanese_text": "わかりました。"
+    },
+    {
+      "sentence_index": 202,
+      "english_text": "And if you want to see all of the errors in your application, you'll want to check out Sanity at sentry.io/syntax.",
+      "japanese_text": "アプリケーション内のすべてのエラーを確認したい場合は、sentry.io/docs/error-tracking を参照してください。"
+    },
+    {
+      "sentence_index": 203,
+      "english_text": "You don't want a production application out there that, well, you have no visibility into in case something is blowing up, and you might not even know it.",
+      "japanese_text": "本番環境で稼働するアプリケーションでは、問題が発生しても検知できず、気づかないまま放置されるリスクは避けなければなりません。"
+    },
+    {
+      "sentence_index": 204,
+      "english_text": "So head on to century.io/syntax.",
+      "japanese_text": "century.io/構文 をご覧ください。"
+    },
+    {
+      "sentence_index": 205,
+      "english_text": "Again, we've been using this tool for a long time, and it totally rules.",
+      "japanese_text": "繰り返しになりますが、私たちはこのツールを長年愛用しており、本当に素晴らしいです。"
+    },
+    {
+      "sentence_index": 206,
+      "english_text": "Alright.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 207,
+      "english_text": "Man, I am in.",
+      "japanese_text": "やばい、やられた！"
+    },
+    {
+      "sentence_index": 208,
+      "english_text": "There's so much of CSS that doesn't get the, like, props that it needs to.",
+      "japanese_text": "CSSには本来与えられるべき評価を受けていない要素が実にたくさんある。"
+    },
+    {
+      "sentence_index": 209,
+      "english_text": "And I attribute that to people being obsessed with AI right now.",
+      "japanese_text": "これは今みんながAIに夢中になっているからだと思うんです。"
+    },
+    {
+      "sentence_index": 210,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 211,
+      "english_text": "There's there's not a lot of time to to spend on new CSS stuff.",
+      "japanese_text": "新しいCSSの学習に割ける時間はあまりありません。"
+    },
+    {
+      "sentence_index": 212,
+      "english_text": "Or, like, everybody's just cranking out Tailwind left and right, and, like, lot of this new stuff is not supported in Tailwind at all.",
+      "japanese_text": "あるいは、みんながTailwindを次々と生成していて、この新しい機能の多くがまったくサポートされていないのが現状です。"
+    },
+    {
+      "sentence_index": 213,
+      "english_text": "So it's kinda hard, but there's so much cool stuff added to CSS that is super powerful.",
+      "japanese_text": "だからちょっと難しい面もあるけど、CSSには驚くほど強力な機能がたくさん追加されているんだ。"
+    },
+    {
+      "sentence_index": 214,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 215,
+      "english_text": "Couple other ones.",
+      "japanese_text": "他にもいくつかあります。"
+    },
+    {
+      "sentence_index": 216,
+      "english_text": "Safari, again, cranking on all of these things.",
+      "japanese_text": "再びサファリでこれらすべてを処理している。"
+    },
+    {
+      "sentence_index": 217,
+      "english_text": "First of all, a couple episodes ago, we talked about the ability to use haptic feedback in the browser in in iOS now, which means, like, if you have your phone and you want to, like, slightly vibrate it to the user to tell them that something has happened, there was a a trick Wes if you have an input type of checkbox and you give it a switch attribute, which is only supported in Safari Mhmm.",
+      "japanese_text": "まず前回のエピソードでは、iOSブラウザで触覚フィードバックを使用できる機能について触れました。つまり、スマートフォンを持っていて、何かが発生したことをユーザーに知らせるために軽く振動させたい場合、Safariでは特定の入力タイプを持つチェックボックスにswitch属性を指定できるようになりました（これはMhmというバージョンからサポートされています）。"
+    },
+    {
+      "sentence_index": 218,
+      "english_text": "It will when you you you turn a switch on and off, it would do a little vibration.",
+      "japanese_text": "スイッチのオン・オフ時に小さな振動が発生します。"
+    },
+    {
+      "sentence_index": 219,
+      "english_text": "So people figured out that you can programmatically turn a switch on and off many times, and you'd be able to get haptic feedback in the web.",
+      "japanese_text": "そこで人々は、スイッチをプログラムで何度もオン/オフできることに気づき、ウェブ上で触覚フィードバックを得られるようになったのです。"
+    },
+    {
+      "sentence_index": 220,
+      "english_text": "Apparently, I went back in the, like, WebKit GitHub repo and and and the WebKit docs.",
+      "japanese_text": "どうやらWebkitのGitリポジトリとドキュメントを調べたらしい。"
+    },
+    {
+      "sentence_index": 221,
+      "english_text": "Apparently, it was only ever supposed to be associated with a user interaction, like, same thing, like, opening up a pop up window or playing audio.",
+      "japanese_text": "どうやら本来は、ポップアップウィンドウの表示や音声再生など、ユーザー操作と直接結びついた用途を想定して設計された機能だったようです。"
+    },
+    {
+      "sentence_index": 222,
+      "english_text": "Those things always have to be associated with, like, a click or some sort of user interaction.",
+      "japanese_text": "こうした機能は常に、クリック操作や何らかのユーザーインタラクションと結びつけて設計する必要があります。"
+    },
+    {
+      "sentence_index": 223,
+      "english_text": "You just can't fire them off willy nilly.",
+      "japanese_text": "適当に撃ちまくるわけにはいかないんだ。"
+    },
+    {
+      "sentence_index": 224,
+      "english_text": "And I think I think that was just a regression in Safari for one version that people figured out.",
+      "japanese_text": "そしてこれは、あるバージョンのSafariで一時的に発生した不具合だったのではないかと推測しています。"
+    },
+    {
+      "sentence_index": 225,
+      "english_text": "You can do that because it's been fixed, and you can no longer use haptic feedback on the web.",
+      "japanese_text": "これは修正済みの問題であり、ウェブ上ではもはや触覚フィードバックを使用できなくなったためです。"
+    },
+    {
+      "sentence_index": 226,
+      "english_text": "So\n\nthanks, Safari.",
+      "japanese_text": "だからさ、Safariありがとう。"
+    },
+    {
+      "sentence_index": 227,
+      "english_text": "Fuck.",
+      "japanese_text": "クソッ。"
+    },
+    {
+      "sentence_index": 228,
+      "english_text": "Safari.",
+      "japanese_text": "サファリ。"
+    },
+    {
+      "sentence_index": 229,
+      "english_text": "But, yeah, it's one of those APIs that, like, the navigator.",
+      "japanese_text": "でもまあ、これはナビゲーターのような機能を持つAPIの一つだね。"
+    },
+    {
+      "sentence_index": 230,
+      "english_text": "Vibrate.",
+      "japanese_text": "振動する。"
+    },
+    {
+      "sentence_index": 231,
+      "english_text": "Like, Safari, it's just one of those ones that, like, adds more fuel to the fire that, Apple intentionally, like, limits the browser APIs.",
+      "japanese_text": "Safariと同様、これはAppleが意図的にブラウザAPIを制限している典型的な例だ。"
+    },
+    {
+      "sentence_index": 232,
+      "english_text": "Because what?",
+      "japanese_text": "なぜですか？何が？"
+    },
+    {
+      "sentence_index": 233,
+      "english_text": "They don't want people, like\n\nabusing it.",
+      "japanese_text": "彼らは人々にそれを濫用してほしくないのです。"
+    },
+    {
+      "sentence_index": 234,
+      "english_text": "People abusing it.",
+      "japanese_text": "それを悪用する人々。"
+    },
+    {
+      "sentence_index": 235,
+      "english_text": "Node.",
+      "japanese_text": "ノード。"
+    },
+    {
+      "sentence_index": 236,
+      "english_text": "But you're not gonna tell that to the native developers.",
+      "japanese_text": "でもそれをネイティブ開発者には言わないでしょ？"
+    },
+    {
+      "sentence_index": 237,
+      "english_text": "We don't want you abusing it.",
+      "japanese_text": "それを濫用してほしくない。"
+    },
+    {
+      "sentence_index": 238,
+      "english_text": "Like, come on.",
+      "japanese_text": "ほら、早くしてよ。"
+    },
+    {
+      "sentence_index": 239,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 240,
+      "english_text": "Because they don't have to be abuses it.",
+      "japanese_text": "なぜなら彼らはそれを悪用する必要がないからだ。"
+    },
+    {
+      "sentence_index": 241,
+      "english_text": "If you scroll through people's stories, every time, like, a friend likes that story as well, it goes, dude, it's so annoying.",
+      "japanese_text": "他人のストーリーをスクロールするたびに、友達がその投稿に「いいね」すると、「うわー、これ本当にウザいんだよな」"
+    },
+    {
+      "sentence_index": 242,
+      "english_text": "So I I see why, but that shouldn't that shouldn't stop us.",
+      "japanese_text": "だから理解できるけど、それで私たちが諦める理由にはならない。"
+    },
+    {
+      "sentence_index": 243,
+      "english_text": "You should be able to turn it off, like like webcam access or anything else.",
+      "japanese_text": "ウェブカメラへのアクセスなど、他の機能と同様に無効化できるはずです。"
+    },
+    {
+      "sentence_index": 244,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 245,
+      "english_text": "Do you want this page to be able to vibrate?",
+      "japanese_text": "このページを振動させる機能を有効にしますか？"
+    },
+    {
+      "sentence_index": 246,
+      "english_text": "I don't know if that requires permission or not, but that's frustrating.",
+      "japanese_text": "それが許可を必要とするかどうかはわかりませんが、イライラしますね。"
+    },
+    {
+      "sentence_index": 247,
+      "english_text": "One cool thing Safari did give us is random.",
+      "japanese_text": "Safariが提供してくれた一つの優れた機能は「ランダム」モードです。"
+    },
+    {
+      "sentence_index": 248,
+      "english_text": "So CSS random random zero one hundred two will choose an even number between zero and one hundred.",
+      "japanese_text": "したがって、CSSのランダム関数で0から100までの範囲内で偶数を選ぶと、結果は2番目になります。"
+    },
+    {
+      "sentence_index": 249,
+      "english_text": "This is so cool because I every time I need randomness in CSS, I have to go into my, like, my view layer and, like, pass in a CSS variable that has been programmatically calculated as random.",
+      "japanese_text": "これは本当に素晴らしい機能です。CSSでランダム性が必要な時はいつでも、ビューレイヤーに移動して、プログラム的に計算された乱数として処理されるJavaScriptの変数を渡さなければならないからです。"
+    },
+    {
+      "sentence_index": 250,
+      "english_text": "And then I also have to make something seeded random because if you're doing server client rehydration, it needs to be the same amount of random, on the server and on the client.",
+      "japanese_text": "さらに、サーバーとクライアント間で再初期化を行う場合、ランダム値の生成量も完全に一致させる必要があります。"
+    },
+    {
+      "sentence_index": 251,
+      "english_text": "So then you have to get into seeded random, so it's you know, it's it's not as random.",
+      "japanese_text": "つまりシード付き乱数を使わなければならないわけで、完全にランダムとは言えないわけです。"
+    },
+    {
+      "sentence_index": 252,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 253,
+      "english_text": "It's the same amount of same value you get on both sides.",
+      "japanese_text": "両側で同じ価値のものが得られる。"
+    },
+    {
+      "sentence_index": 254,
+      "english_text": "But this is something is a straight up CSS API where you can randomize your values, which is gonna be great for Awesome.",
+      "japanese_text": "しかしこれは純粋なCSSのAPIであり、値をランダム化できるため、Awesomeな機能となるでしょう。"
+    },
+    {
+      "sentence_index": 255,
+      "english_text": "I don't know.",
+      "japanese_text": "わかりません。"
+    },
+    {
+      "sentence_index": 256,
+      "english_text": "It it even just like rotating values on a page, I very often will rotate cards, and I'll have to, like on the mad CSS website, I have to programmatically go in and give every single value a random random one.",
+      "japanese_text": "ページ上の値を回転させる場合も同様で、madCSSウェブサイトのように、すべての要素に対してランダムな数値プログラム的に設定しなければならないことが頻繁にあります。"
+    },
+    {
+      "sentence_index": 257,
+      "english_text": "I'm in.",
+      "japanese_text": "私は賛成です。"
+    },
+    {
+      "sentence_index": 258,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 259,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 260,
+      "english_text": "Neat.",
+      "japanese_text": "きれいだ。"
+    },
+    {
+      "sentence_index": 261,
+      "english_text": "I have a Node here which is search text, which is a new pseudo selector.",
+      "japanese_text": "ここに「search_text」というノードがあり、これは新しい疑似セレクタです。"
+    },
+    {
+      "sentence_index": 262,
+      "english_text": "So colon colon search hyphen text.",
+      "japanese_text": "コロンとハイフンで囲まれたテキストを検索します。"
+    },
+    {
+      "sentence_index": 263,
+      "english_text": "Or there's a what what do they call it when there's a double, pseudo selector?",
+      "japanese_text": "あるいは、ダブルセレクタ（疑似セレクター）のことを何と言うのでしょうか？正式名称は何ですか？"
+    },
+    {
+      "sentence_index": 264,
+      "english_text": "Because you can do colon colon search hyphen text colon current as well.",
+      "japanese_text": "なぜなら、コロン、ハイフン付きテキスト、および現在の行も検索対象にできるからです。"
+    },
+    {
+      "sentence_index": 265,
+      "english_text": "So it's like a a second layer to it.",
+      "japanese_text": "つまり、これは第二のレイヤーのようなものです。"
+    },
+    {
+      "sentence_index": 266,
+      "english_text": "I guess that's pseudo class.",
+      "japanese_text": "擬似クラスのことかな。"
+    },
+    {
+      "sentence_index": 267,
+      "english_text": "So those are just that's just stacking pseudo classes.",
+      "japanese_text": "これらは単にスタックされた疑似クラスに過ぎません。"
+    },
+    {
+      "sentence_index": 268,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 269,
+      "english_text": "That's not Oh, yeah.",
+      "japanese_text": "それは違うよ、うん。"
+    },
+    {
+      "sentence_index": 270,
+      "english_text": "Right.",
+      "japanese_text": "その通りです。"
+    },
+    {
+      "sentence_index": 271,
+      "english_text": "You're right.",
+      "japanese_text": "あなたの言う通りです。"
+    },
+    {
+      "sentence_index": 272,
+      "english_text": "Active and hover.",
+      "japanese_text": "アクティブ時とホバー状態。"
+    },
+    {
+      "sentence_index": 273,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 274,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 275,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 276,
+      "english_text": "It's so funny to see that in action.",
+      "japanese_text": "それが実際に動いているのを見るなんて、とても面白い。"
+    },
+    {
+      "sentence_index": 277,
+      "english_text": "It looks like something entirely new, but it's not at all.",
+      "japanese_text": "全く新しいもののように見えるが、実はそうではない。"
+    },
+    {
+      "sentence_index": 278,
+      "english_text": "So there's search search text in current.",
+      "japanese_text": "現在の検索テキストは次のとおりです："
+    },
+    {
+      "sentence_index": 279,
+      "english_text": "So search text is allowing you to style, like, the when you do command f in a browser and you start searching, it allows you to style the way that that text is highlighted on the page, matching the rest of your CSS for for searching.",
+      "japanese_text": "つまり、検索テキストを使用すると、ブラウザでコマンド「f」（Find）を実行して探索を開始すると、ページ上でその文字列がどのようにハイライト表示されるかをCSSの他の部分と統一したスタイルで表示できるようになります。これにより、検索結果が視覚的に一貫性のある形で表現されます。"
+    },
+    {
+      "sentence_index": 280,
+      "english_text": "But the coolest thing is the the colon current on here because you can, the you know, when you do, like, next or next and next to find the current iteration, you can now style that however the heck you want Oh.",
+      "japanese_text": "最も素晴らしいのは、この「現在位置インジケーター」機能です。次/前ページに移動して現行項目を表示させる際に、自由にスタイルを設定できるんです。すごいでしょう？"
+    },
+    {
+      "sentence_index": 281,
+      "english_text": "Which is really super neat.",
+      "japanese_text": "これは本当に素晴らしいですね。"
+    },
+    {
+      "sentence_index": 282,
+      "english_text": "So you could have some, really to to really match the the theme of your site to make the current one look interesting.",
+      "japanese_text": "サイトのテーマに合わせてカスタマイズすれば、現在のものをより魅力的に演出できます。"
+    },
+    {
+      "sentence_index": 283,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 284,
+      "english_text": "I I think I think there's all kinds of different ways you could make that look nicer than just putting a stupid highlight on it.",
+      "japanese_text": "あのさ、ただアホみたいなハイライト入れるより、もっといろんな方法で見栄え良くできると思うんだよね。"
+    },
+    {
+      "sentence_index": 285,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 286,
+      "english_text": "That's great.",
+      "japanese_text": "それは素晴らしいですね。"
+    },
+    {
+      "sentence_index": 287,
+      "english_text": "I like that a lot because yeah.",
+      "japanese_text": "それがすごく好きなんだ、なぜならね。"
+    },
+    {
+      "sentence_index": 288,
+      "english_text": "How how does a browser know that\n\nyellow or whatever is going to be the best version for you?",
+      "japanese_text": "ブラウザはどうやって、あなたに最適なバージョンが黄色（あるいは他の色）が最適だと判断するのでしょうか？"
+    },
+    {
+      "sentence_index": 289,
+      "english_text": "So this will allow you to highlight them.",
+      "japanese_text": "これにより、それらをハイライト表示できるようになります。"
+    },
+    {
+      "sentence_index": 290,
+      "english_text": "That's such a simple API, and I'm so glad we have it.",
+      "japanese_text": "これは本当にシンプルなAPIで、実装できて本当に良かったです。"
+    },
+    {
+      "sentence_index": 291,
+      "english_text": "I do wish you know what I one thing that grinds my gears is that if you have, like, a search going, and this is on tweets as well where I'm looking for a specific reply or a specific word in, like, people replying to a tweet.",
+      "japanese_text": "本当に腹が立つのは、検索をかけている時に、特にツイート内で特定の返信や「tweet」内で使われている具体的な単語を探している時なんです。"
+    },
+    {
+      "sentence_index": 292,
+      "english_text": "So I'll search for, like, syntax, and then I'll scroll through some replies.",
+      "japanese_text": "だから構文を調べて、いくつかの回答をスクロールして確認するんだ。"
+    },
+    {
+      "sentence_index": 293,
+      "english_text": "And as Twitter loads in more, you know, it's lazy loading the values, the browser search doesn't update.",
+      "japanese_text": "そしてTwitterがさらに読み込まれるにつれ、値が徐々に表示されるものの、ブラウザの検索バーは更新されません。"
+    },
+    {
+      "sentence_index": 294,
+      "english_text": "So I have to, like, go back to my search, like, push space and then push back space, and then it, then it applies to the markup on the page.",
+      "japanese_text": "つまり検索をやり直して、スペースキーを押してからもう一度バックスラッシュを押す必要があり、その後マークアップに反映されるわけです。"
+    },
+    {
+      "sentence_index": 295,
+      "english_text": "I wish that the browser would say, ah, I have changed the markup on the page.",
+      "japanese_text": "ブラウザが「ああ、ページのマークアップを変更したんだな」と認識してくれたらいいのだが。"
+    },
+    {
+      "sentence_index": 296,
+      "english_text": "Therefore, I will rehighlight\n\nwhat is going on on the page.",
+      "japanese_text": "したがって、ページ上で実際に起こっていることを改めて強調したいと思います。"
+    },
+    {
+      "sentence_index": 297,
+      "english_text": "Do you think it's a just a virtualization issue, or is it, like,\n\nalways just the DOM not having the Well, like, in that case, like, it would be nice if the browser like, if the website would just use, like, the there's there is native APIs that allow you to, like, not render things, but still maintain the search.",
+      "japanese_text": "これは単なる仮想化の問題だと思いますか？それとももっと根本的な、例えば...\n\n常に DOM（Document Object Model）自体に問題があるのでしょうか？その場合、そのウェブサイトが単にレンダリングを行わず、それでいて検索機能だけは保持するようなネイティブAPIがあれば理想的だと思いますが。"
+    },
+    {
+      "sentence_index": 298,
+      "english_text": "In that way, you can you can find it.",
+      "japanese_text": "そのようにすれば、それを見つけることができます。"
+    },
+    {
+      "sentence_index": 299,
+      "english_text": "But in many cases, like, Twitter doesn't wanna send a thousand replies on a single endpoint to to the thing.",
+      "japanese_text": "しかし多くの場合、例えばTwitterでは、単一のエンドポイントに対して1,000件もの返信を送信することは望ましくないとされています。"
+    },
+    {
+      "sentence_index": 300,
+      "english_text": "So you need to be, like, live searching every single time the DOM updates.",
+      "japanese_text": "つまり、ドキュメントオブジェクトが更新されるたびにリアルタイムで検索を行う必要があるわけです。"
+    },
+    {
+      "sentence_index": 301,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 302,
+      "english_text": "Word.",
+      "japanese_text": "単語。"
+    },
+    {
+      "sentence_index": 303,
+      "english_text": "Sticky both ways.",
+      "japanese_text": "両面粘着テープ。"
+    },
+    {
+      "sentence_index": 304,
+      "english_text": "Oh.",
+      "japanese_text": "Ah, I see."
+    },
+    {
+      "sentence_index": 305,
+      "english_text": "Una had a post the other day where Chrome one forty eight sticky positioning now works on a per access basis.",
+      "japanese_text": "先日の投稿で、Chrome 48ではアクセスごとに異なる位置でスティッキー機能が動作するようになったと報告されていました。"
+    },
+    {
+      "sentence_index": 306,
+      "english_text": "So sticky headers in CSS, when you scroll, you're able to stick them to the top or or offset them certain amount, but it previously has only worked in one access, meaning that, like, you can scroll left to right or top to bottom.",
+      "japanese_text": "CSSのstickyヘッダー機能を使えば、スクロール時に要素を固定表示させたり、一定距離オフセットさせたりできますが、これまでは単一方向（左右または上下）でしか動作しませんでした。"
+    },
+    {
+      "sentence_index": 307,
+      "english_text": "And now they work in in both directions, which is awesome for specifically for, like, conference layouts.",
+      "japanese_text": "そして現在では双方向に機能するため、特に会議用レイアウトなどにおいて非常に有用です。"
+    },
+    {
+      "sentence_index": 308,
+      "english_text": "Or if you've got, like, a big tournament where there's, I don't know, three different places that people are playing and you wanna figure out where they are, tables is one of the hardest things to do well on mobile, and this will certainly improve that.",
+      "japanese_text": "あるいは、複数の会場で行われる大規模な大会で、参加者がどこにいるかを把握したい場合、モバイル環境で正確に位置を特定するのは最も困難な課題のひとつです。この点において、この技術は確実に性能を向上させるでしょう。"
+    },
+    {
+      "sentence_index": 309,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 310,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 311,
+      "english_text": "I I think this is dope.",
+      "japanese_text": "これはイケてると思う。"
+    },
+    {
+      "sentence_index": 312,
+      "english_text": "Again, just more more stuff that we,\n\nmore stuff that we need here.",
+      "japanese_text": "再び、これは私たちが必要とするさらなるアイテムです：\n\nここに追加すべきさらに多くの物品です。"
+    },
+    {
+      "sentence_index": 313,
+      "english_text": "It's just little paper cuts that are are being solved.",
+      "japanese_text": "解決されているのはほんの些細な問題ばかりです。"
+    },
+    {
+      "sentence_index": 314,
+      "english_text": "Paper cuts.",
+      "japanese_text": "紙で指を切る。"
+    },
+    {
+      "sentence_index": 315,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 316,
+      "english_text": "Another one with little paper cuts here is this multi column fixes.",
+      "japanese_text": "もう一つの小さな改善点として、複数列レイアウトの修正があります。"
+    },
+    {
+      "sentence_index": 317,
+      "english_text": "So we all know multi column CSS sucks, but there is new column wrap properties as well as a new column height that Node, basically, even if you were to specify how many columns before, it would just continue to make them horizontal.",
+      "japanese_text": "マルチカラムCSSが使いにくいのは周知の事実ですが、新たに追加されたcolumn-wrapプロパティや列の高さ設定機能を使えば、たとえ事前に何段にするかを指定しても、結局は横並び表示になってしまいます。"
+    },
+    {
+      "sentence_index": 318,
+      "english_text": "But now what it does is if you have too much text for the amount of columns you specify, if you specify a height, it puts them on the the next line.",
+      "japanese_text": "ただし、指定した列数に対してテキスト量が過剰な場合、高さを指定すると、それらは次の行に配置されます。"
+    },
+    {
+      "sentence_index": 319,
+      "english_text": "The reason why you would use this over something like Flexbox is because this is breaking up a single, like, paragraph full of text instead of, like Okay.",
+      "japanese_text": "Flexボックスをフレックスコンテナーの代わりに使う理由は、単一の段落テキストを複数行に分割する必要がある場合などです。例えば...。"
+    },
+    {
+      "sentence_index": 320,
+      "english_text": "Having divs where you're say, segmenting the text into different divs.",
+      "japanese_text": "div要素を使用してテキストを異なるセクションに分割する場合を考えてみましょう。"
+    },
+    {
+      "sentence_index": 321,
+      "english_text": "So this would be one long paragraph full of text, and you want it to be in three columns.",
+      "japanese_text": "つまり、テキストがぎっしり詰まった1つの段落を3列レイアウトにしたいということですね。"
+    },
+    {
+      "sentence_index": 322,
+      "english_text": "And then if there's too much text for three columns, then it's gonna wrap onto another line.",
+      "japanese_text": "そして3列分のテキストが多すぎる場合、別行に折り返されます。"
+    },
+    {
+      "sentence_index": 323,
+      "english_text": "So just giving you that flexibility and freedom.",
+      "japanese_text": "つまり、そうした柔軟性と自由を与えるということです。"
+    },
+    {
+      "sentence_index": 324,
+      "english_text": "This is an API again that I I I pretty much avoid using, but it definitely has its use case, and and happy to see that it does in fact, ESLint, and and and, like, working in a way that probably should have worked from the start.",
+      "japanese_text": "これは再び、私がほとんど使わないAPIですが、確かに用途は存在しますし、そして実際に最初から期待通りに動作していたのを見て嬉しく思います。"
+    },
+    {
+      "sentence_index": 325,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 326,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 327,
+      "english_text": "I agree.",
+      "japanese_text": "私は賛成です。"
+    },
+    {
+      "sentence_index": 328,
+      "english_text": "The columns has always been, like, kinda not great.",
+      "japanese_text": "このチームは昔から、まあ正直言ってあまり良くない。"
+    },
+    {
+      "sentence_index": 329,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 330,
+      "english_text": "It it works okay, but here and there.",
+      "japanese_text": "うまく動くけど、ところどころで。"
+    },
+    {
+      "sentence_index": 331,
+      "english_text": "And you you have to think, like, a lot anytime we show any demos like this, people are always like, oh, I don't see where you would wanna use that.",
+      "japanese_text": "こうしたデモを見せるたびに、人々はいつも「そんなのどこで役に立つんだ？」と疑問に思います。"
+    },
+    {
+      "sentence_index": 332,
+      "english_text": "And, like, guarantee, there's somebody who is like, oh, I work in publishing, and we lay everything out in HTML and CSS, and, we need, like, this weird print style sheet hack to make it work, and, like, finally, this is gonna they're gonna work well for you.",
+      "japanese_text": "そして例えば、「出版業界で働いているんですが、すべてをHTMLとCSSで構築していて、うまく動作させるためには特殊な印刷用スタイルシートのハックが必要で、これでようやく見栄えが良くなるんです」といったケースです。"
+    },
+    {
+      "sentence_index": 333,
+      "english_text": "So just because your single one website doesn't need this doesn't mean that it doesn't it shouldn't be added to the web platform because people use the web in many different ways in many weird ways.",
+      "japanese_text": "したがって、単一のウェブサイトがこの機能を必要としないからといって、ウェブプラットフォームに追加すべきでないというわけではありません。人々はさまざまな奇妙な方法でインターネットを利用しているからです。"
+    },
+    {
+      "sentence_index": 334,
+      "english_text": "Border shape, another one from Oona.",
+      "japanese_text": "ボーダーの形状、オーナから届いたもう一つのデザイン。"
+    },
+    {
+      "sentence_index": 335,
+      "english_text": "Border shape can handle both insets and outsets, so you can do this is so cool.",
+      "japanese_text": "境界線の形状は内側余白と外側突出部の両方に対応していますので、非常に洗練されたデザインが可能です。"
+    },
+    {
+      "sentence_index": 336,
+      "english_text": "You can make, like, breadcrumbs that are like chevrons, and then the focus wrap will follow that along, which is super cool.",
+      "japanese_text": "例えば、シェブロン型のパンくずリストを作成でき、フォーカスが移動するとそれに追従します。これは非常に便利な機能です。"
+    },
+    {
+      "sentence_index": 337,
+      "english_text": "The border shape stuff has been so fun to work with.",
+      "japanese_text": "境界線の形状を扱う作業はとても楽しかったです。"
+    },
+    {
+      "sentence_index": 338,
+      "english_text": "On the mad CSS website, I used it for both for these ones right here.",
+      "japanese_text": "madCSSウェブサイトでは、これら2つのケースで両方とも使用しました。"
+    },
+    {
+      "sentence_index": 339,
+      "english_text": "You see these little cutouts Yeah.",
+      "japanese_text": "ほら、こういう切り抜きがあるでしょ？ そう、それ。"
+    },
+    {
+      "sentence_index": 340,
+      "english_text": "On the the tickets?",
+      "japanese_text": "チケットについて？"
+    },
+    {
+      "sentence_index": 341,
+      "english_text": "So I, like, I replicated, like, what a ticket would look like, and then I used border shape to cut out the corners.",
+      "japanese_text": "そこで私は、チケットのデザインを模倣し、角を切り取るためにボーダー形状を使いました。"
+    },
+    {
+      "sentence_index": 342,
+      "english_text": "And and that's been doable before with, you could use, like, a mask image.",
+      "japanese_text": "そしてこれは以前も可能だった手法で、マスク画像を使用することで実現できました。"
+    },
+    {
+      "sentence_index": 343,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 344,
+      "english_text": "And that's what I'm falling back to.",
+      "japanese_text": "それが今の私の現状だ。"
+    },
+    {
+      "sentence_index": 345,
+      "english_text": "But this, like, where the border follows the border shape, that was not really doable with with masking previously.",
+      "japanese_text": "ただし以前のマスク処理では、境界線が境界形状に沿って正確に追従させることは不可能でした。"
+    },
+    {
+      "sentence_index": 346,
+      "english_text": "So this the red inset value here looks so cool.",
+      "japanese_text": "この赤いインセット値がとてもかっこいいですね。"
+    },
+    {
+      "sentence_index": 347,
+      "english_text": "That's not really something you could have done previously unless you, like, have, like, an image programmatically generated or you use, like, an SVG to sort of draw it.",
+      "japanese_text": "これは従来、画像プログラムで動的に生成するか、例えば SVG を使用して描画する場合を除いては不可能だった手法です。"
+    },
+    {
+      "sentence_index": 348,
+      "english_text": "And now you can simply just use regular CSS borders, and it will just bite right into them.",
+      "japanese_text": "そして今や、通常のCSSボーダーを使用するだけで、これらに直接適用できます。"
+    },
+    {
+      "sentence_index": 349,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 350,
+      "english_text": "There's so many cool things about this API.",
+      "japanese_text": "このAPIには素晴らしい点がたくさんあります。"
+    },
+    {
+      "sentence_index": 351,
+      "english_text": "Congest.",
+      "japanese_text": "混雑。"
+    },
+    {
+      "sentence_index": 352,
+      "english_text": "Man.",
+      "japanese_text": "男。"
+    },
+    {
+      "sentence_index": 353,
+      "english_text": "Scott everybody when it first came out, everybody's like, it's squircles, and I was one of those people.",
+      "japanese_text": "スコットが初めて発表された時、みんな「これはスクイクルだ」って騒いでたけど、私もその一人だったわ。"
+    },
+    {
+      "sentence_index": 354,
+      "english_text": "It's squircles.",
+      "japanese_text": "それはスクイクルです。"
+    },
+    {
+      "sentence_index": 355,
+      "english_text": "But it's more than squircles.",
+      "japanese_text": "しかしこれは単なる四角形以上のものです。"
+    },
+    {
+      "sentence_index": 356,
+      "english_text": "We got all kinds of, what's it, scoop?",
+      "japanese_text": "私たちはあらゆる種類の情報、つまり「スクープ」を手に入れた？"
+    },
+    {
+      "sentence_index": 357,
+      "english_text": "I we did one of these for our live we did a live CSS show, and I had a fake corner shaped property in there.",
+      "japanese_text": "ライブでこれらの一つを実施した際、私は偽のコーナー型プロパティをその中に配置しました。"
+    },
+    {
+      "sentence_index": 358,
+      "english_text": "And, just to be a little devious right now?",
+      "japanese_text": "そしてちょっと意地悪な質問を一つ？"
+    },
+    {
+      "sentence_index": 359,
+      "english_text": "Let me try.",
+      "japanese_text": "やってみます。"
+    },
+    {
+      "sentence_index": 360,
+      "english_text": "Let me try.",
+      "japanese_text": "やってみます。"
+    },
+    {
+      "sentence_index": 361,
+      "english_text": "Let me try.",
+      "japanese_text": "やってみます。"
+    },
+    {
+      "sentence_index": 362,
+      "english_text": "Okay.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 363,
+      "english_text": "I'm not gonna look at your screen.",
+      "japanese_text": "あなたの画面は見ません。"
+    },
+    {
+      "sentence_index": 364,
+      "english_text": "Squircle, super ellipse.",
+      "japanese_text": "スクイクル（squircle）、超楕円。"
+    },
+    {
+      "sentence_index": 365,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 366,
+      "english_text": "My god.",
+      "japanese_text": "なんてこった。"
+    },
+    {
+      "sentence_index": 367,
+      "english_text": "Scoop.",
+      "japanese_text": "スクープ。"
+    },
+    {
+      "sentence_index": 368,
+      "english_text": "I'm, like, blanking whether or not the one that I had in there was fake or not.",
+      "japanese_text": "あの中にあったのが本物かどうか思い出せないんだよね～。"
+    },
+    {
+      "sentence_index": 369,
+      "english_text": "A Vercel?",
+      "japanese_text": "Vercelですか？"
+    },
+    {
+      "sentence_index": 370,
+      "english_text": "Yep.",
+      "japanese_text": "Yes indeedy-doody!"
+    },
+    {
+      "sentence_index": 371,
+      "english_text": "Am I missing one?",
+      "japanese_text": "何か見落としているでしょうか？"
+    },
+    {
+      "sentence_index": 372,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 373,
+      "english_text": "Super Licks, squircle, bevel.",
+      "japanese_text": "スーパーリックス、スクアークル（四角形の角を丸めた形状）、ベベル加工。"
+    },
+    {
+      "sentence_index": 374,
+      "english_text": "Oh, I'm missing one.",
+      "japanese_text": "あ、一つ足りない。"
+    },
+    {
+      "sentence_index": 375,
+      "english_text": "I just saw it.",
+      "japanese_text": "ちょうど今見たところです。"
+    },
+    {
+      "sentence_index": 376,
+      "english_text": "I'm missing notch and round, but although it's round, it's a default one.",
+      "japanese_text": "ノッチとラウンドは欠けていますが、丸い形状ですがデフォルトのものです。"
+    },
+    {
+      "sentence_index": 377,
+      "english_text": "Which is probably the default.",
+      "japanese_text": "これはおそらくデフォルト設定です。"
+    },
+    {
+      "sentence_index": 378,
+      "english_text": "Scoop Yeah.",
+      "japanese_text": "スクープだぜ。"
+    },
+    {
+      "sentence_index": 379,
+      "english_text": "Bevel, notch, square,\n\nsquircle, and super ellipse.",
+      "japanese_text": "ベベル、ノッチ（切り欠き）、正方形、\n\nスクイクル、およびスーパー楕円。"
+    },
+    {
+      "sentence_index": 380,
+      "english_text": "So Yep.",
+      "japanese_text": "そう、その通り。"
+    },
+    {
+      "sentence_index": 381,
+      "english_text": "All of these values, bevel, scoop, whatever or whatever, those are just, like, nice shorthands, and then you can literally make anything with a super ellipse.",
+      "japanese_text": "これらの値――ベベル、スクープ、あるいはその他どんな設定であれ、単なる便利な省略表記に過ぎません。そして実際には、超楕円を使えばどんなものでも作成できるのです。"
+    },
+    {
+      "sentence_index": 382,
+      "english_text": "So it has a squircle is just a super ellipse with custom values preset on them.",
+      "japanese_text": "つまり、squirclesは単なる楕円にカスタム値を設定した特殊なケースなのです。"
+    },
+    {
+      "sentence_index": 383,
+      "english_text": "Big fan.",
+      "japanese_text": "大ファンです。"
+    },
+    {
+      "sentence_index": 384,
+      "english_text": "Van, one thing about MDN is they gotta make their demos look cooler.",
+      "japanese_text": "ヴァン、MDNについて一つ言えるのは、デモをもっとかっこよくしなきゃってことだよ。"
+    },
+    {
+      "sentence_index": 385,
+      "english_text": "I Yeah.",
+      "japanese_text": "ああ。"
+    },
+    {
+      "sentence_index": 386,
+      "english_text": "It's so hard to make a cool demo and not add a bunch of CSS that is unrelated.",
+      "japanese_text": "クールなデモを作るのに、無関係なCSSコードをたくさん追加せずに済ませるなんて本当に難しい。"
+    },
+    {
+      "sentence_index": 387,
+      "english_text": "But still That's probably what they need to do.",
+      "japanese_text": "それでもやはり、それが彼らに必要なのだろう。"
+    },
+    {
+      "sentence_index": 388,
+      "english_text": "But then also, like, I was looking at border image the other day where, like, CSS has this thing where you can add images for borders.",
+      "japanese_text": "でも最近、ボーダー画像について考えていたんです。CSSでは境界線に画像を設定できる機能がありますよね。あれってすごく便利なんですよ。"
+    },
+    {
+      "sentence_index": 389,
+      "english_text": "And let me show you.",
+      "japanese_text": "そしてお見せしましょう。"
+    },
+    {
+      "sentence_index": 390,
+      "english_text": "Border image CSS.",
+      "japanese_text": "ボーダー画像のCSS。"
+    },
+    {
+      "sentence_index": 391,
+      "english_text": "This all looks awful.",
+      "japanese_text": "これはすべてひどく見える。"
+    },
+    {
+      "sentence_index": 392,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 393,
+      "english_text": "And, like, I I don't think I've any ever seen anybody use border image before.",
+      "japanese_text": "それに、ボーダー画像を使ったデザインって、今まで一度も見たことがない気がする。"
+    },
+    {
+      "sentence_index": 394,
+      "english_text": "And I was looking it up.",
+      "japanese_text": "そして私はそれを調べていた。"
+    },
+    {
+      "sentence_index": 395,
+      "english_text": "I was like, oh, maybe I could use this type of thing.",
+      "japanese_text": "「あ、こういうの使えるかも」って思ったんです。"
+    },
+    {
+      "sentence_index": 396,
+      "english_text": "And all all of them was look like see, that maybe is one good,\n\nbut that's not even that's not even the API.",
+      "japanese_text": "そしてそれらすべてが、まるで一つの良いアイデアのように見えた――\n\nしかし実はそれもAPIではない。"
+    },
+    {
+      "sentence_index": 397,
+      "english_text": "That's not even good.",
+      "japanese_text": "それは全然良くない。"
+    },
+    {
+      "sentence_index": 398,
+      "english_text": "I it's so funny because it's always been like that.",
+      "japanese_text": "いつもそうだから、おかしくてたまらないんだ。"
+    },
+    {
+      "sentence_index": 399,
+      "english_text": "And and then what the problem is is that, like, I think people don't reach for some of these tools because they don't see it in action as being,\n\nlike, good looking or useful.",
+      "japanese_text": "問題は、人々がこうしたツールを活用しないのは、その有用性や実用性を実感できないからです。\n\nつまり、見た目が魅力的でなかったり、実際に役立つ場面を想像しにくいためです。"
+    },
+    {
+      "sentence_index": 400,
+      "english_text": "This JS, the cool one that I did find.",
+      "japanese_text": "このJS、見つけた中ではかなりイケてるやつだ。"
+    },
+    {
+      "sentence_index": 401,
+      "english_text": "So this guy on CSS tricks made a Oh, yeah.",
+      "japanese_text": "CSSのテクニックを紹介するサイトでこんな記事があったんだ：ああ、そうそう。"
+    },
+    {
+      "sentence_index": 402,
+      "english_text": "Like, right here.",
+      "japanese_text": "ほら、ここだよ。"
+    },
+    {
+      "sentence_index": 403,
+      "english_text": "Like, one of these Oh, yeah.",
+      "japanese_text": "ほら、こういうのとかさー、うん、そんな感じ。"
+    },
+    {
+      "sentence_index": 404,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 405,
+      "english_text": "Paper Scott, two of these stuff.",
+      "japanese_text": "ペーパー・スコット、この2つの書類。"
+    },
+    {
+      "sentence_index": 406,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 407,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 408,
+      "english_text": "Video game style repeating border images.",
+      "japanese_text": "ビデオゲーム風の繰り返しパターンボーダー画像。"
+    },
+    {
+      "sentence_index": 409,
+      "english_text": "So this next one is something that's really neat for animations in the browser, which is element scoped view transitions.",
+      "japanese_text": "次に紹介するのは非常に便利な機能で、ブラウザ上でアニメーションを実現する「要素スコープ付きビュー遷移」です。"
+    },
+    {
+      "sentence_index": 410,
+      "english_text": "So you, you are able to basically give a view element name something that, is scoped to that element specifically.",
+      "japanese_text": "つまり、特定の要素に限定してビューエレメント名を指定できるということです。"
+    },
+    {
+      "sentence_index": 411,
+      "english_text": "And then you can have something called a view transition group contain and then a, view transition class where you can then style things for that individual animation.",
+      "japanese_text": "その後、「ビュー遷移グループ」を作成し、その中に個別のアニメーション用にスタイル設定可能な「ビュートランジションクラス」を含めることができます。これにより、各個々の動きに対して詳細なスタイリングを適用できるようになります。"
+    },
+    {
+      "sentence_index": 412,
+      "english_text": "Basically, with this API, you can have tightly scoped view transitions Wes in the past like, if you wanted to do the automatic view transition movement kind of stuff, Wes, you're giving everything a unique name.",
+      "japanese_text": "基本的に、このAPIを使えば、過去のWesleyが行っていたような厳密にスコープされたビュー遷移を実現できます。例えば、自動的な画面切り替えアニメーションのような処理を実装したい場合、すべての要素に対して一意の名前を付与するだけで済みます。"
+    },
+    {
+      "sentence_index": 413,
+      "english_text": "You are giving everything a unique view transition name.",
+      "japanese_text": "すべての要素に一意なビュー遷移名を指定しています。"
+    },
+    {
+      "sentence_index": 414,
+      "english_text": "But here, you're able to have it yes.",
+      "japanese_text": "でもここでは、それが可能なんです。"
+    },
+    {
+      "sentence_index": 415,
+      "english_text": "You're able to have them be grouped and and scoped, essentially.",
+      "japanese_text": "これらをグループ化してスコープ設定することも可能です。"
+    },
+    {
+      "sentence_index": 416,
+      "english_text": "It it's very just like one of those quality of life things.",
+      "japanese_text": "これはまさに生活の質に関わる問題です。"
+    },
+    {
+      "sentence_index": 417,
+      "english_text": "Again, a lot of people are reaching for JavaScript for animations, and this gives you the ability to\n\nreally control them a bit more.",
+      "japanese_text": "再び、多くの開発者がアニメーションにJavaScriptを採用しており、これにより以下のような高度な制御が可能になります：\n\nより精密なコントロールが可能になる。"
+    },
+    {
+      "sentence_index": 418,
+      "english_text": "I did this like, if you have any sort of UI where you're adding and removing cards, like, that's a very common thing to do.",
+      "japanese_text": "これは例えば、カードの追加や削除を行うUIがある場合によくあるケースです。このような操作は非常に一般的なものです。"
+    },
+    {
+      "sentence_index": 419,
+      "english_text": "You know, you got a, like, a a to do list, and you're adding and removing elements from it.",
+      "japanese_text": "つまり、やることリストがあって、そこに項目を追加したり削除したりするような感じです。"
+    },
+    {
+      "sentence_index": 420,
+      "english_text": "Previously, you had to give every single one, like, a unique name.",
+      "japanese_text": "以前は、それぞれに一意の名前を個別に付ける必要がありました。"
+    },
+    {
+      "sentence_index": 421,
+      "english_text": "And now you can simply just say anything that is, like, an l I element, give it a view transition name, and then you can animate those in and out or or reorder them or anything like that.",
+      "japanese_text": "そして現在では、単に「l i」要素のような任意のHTMLタグにビュー遷移名を指定するだけで、それらをスムーズに表示・非表示させたり、並べ替えたりといった操作が簡単に行えるようになっています。"
+    },
+    {
+      "sentence_index": 422,
+      "english_text": "It's it's true.",
+      "japanese_text": "それは本当です。"
+    },
+    {
+      "sentence_index": 423,
+      "english_text": "Because I remember, like, the first time I got into, like, view transitions, I was just like, ah, this is a little bit limited in terms of what I wanted to do.",
+      "japanese_text": "初めて映像の切り替え効果を使った時のことを覚えているんだけど、「ああ、これは自分がやりたいことを表現するには限界があるな」って思ったんだよね。"
+    },
+    {
+      "sentence_index": 424,
+      "english_text": "But now I this has been out for,\n\nlike, a while Node, I'm pretty sure.",
+      "japanese_text": "でも今はもう、少なくとも数ヶ月はリリースされているはずです――おそらく。"
+    },
+    {
+      "sentence_index": 425,
+      "english_text": "For element scope view transitions, it's in Chrome\n\none forty seven.",
+      "japanese_text": "要素のスコープ内でビュー遷移を行う場合、これはChromeで動作します：\n\n147秒です。"
+    },
+    {
+      "sentence_index": 426,
+      "english_text": "I'm not sure about the other browsers, though.",
+      "japanese_text": "他のブラウザについてはよくわかりません。"
+    },
+    {
+      "sentence_index": 427,
+      "english_text": "Okay.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 428,
+      "english_text": "So that it this is new.",
+      "japanese_text": "これが新しいものだから。"
+    },
+    {
+      "sentence_index": 429,
+      "english_text": "Maybe I was using it in in Chrome Canary for a while.",
+      "japanese_text": "もしかしたらしばらくの間Chromeカンナリで使っていたかもしれません。"
+    },
+    {
+      "sentence_index": 430,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 431,
+      "english_text": "Just living in La La Land.",
+      "japanese_text": "ただの夢見る世界に住んでいるだけ。"
+    },
+    {
+      "sentence_index": 432,
+      "english_text": "Work work for me, but it's just a just a fun demo.",
+      "japanese_text": "これは私の仕事用ですが、単なる楽しいデモです。"
+    },
+    {
+      "sentence_index": 433,
+      "english_text": "So like, hopefully, soon, we'll be able to use this with It says stable by the March.",
+      "japanese_text": "つまり、早ければ3月には安定したバージョンで使えるようになるはずです。"
+    },
+    {
+      "sentence_index": 434,
+      "english_text": "So I believe it is stable by the time you're listening to this in Chrome, specifically.",
+      "japanese_text": "ですから、Chromeでこの文章を読んでいる時点では、すでに安定していると考えてよいでしょう。"
+    },
+    {
+      "sentence_index": 435,
+      "english_text": "So I hope you learned something new today, got excited about something.",
+      "japanese_text": "今日何か新しいことを学び、ワクワクしてもらえたら嬉しいです。"
+    },
+    {
+      "sentence_index": 436,
+      "english_text": "There are so many neat stuff in CSS, stuff you can use, stuff you can't use, stuff you can progressively enhance in your code Bos today.",
+      "japanese_text": "CSSには実に多くの優れた機能があり、今日ではコード内で段階的に強化できる要素が数多く存在します。"
+    },
+    {
+      "sentence_index": 437,
+      "english_text": "Which of these APIs are you the most excited about?",
+      "japanese_text": "これらのAPIの中で最も期待しているものはどれですか？"
+    },
+    {
+      "sentence_index": 438,
+      "english_text": "Which of them has tickled your fancy?",
+      "japanese_text": "その中であなたの興味を引いたものはどれですか？"
+    },
+    {
+      "sentence_index": 439,
+      "english_text": "What kinda crazy stuff are you gonna do with HTML and Canvas?",
+      "japanese_text": "HTMLとCanvasで一体どんなクレイジーなことするつもりなんだ？"
+    },
+    {
+      "sentence_index": 440,
+      "english_text": "Because this one, wow.",
+      "japanese_text": "なぜならこれはすごいから。"
+    },
+    {
+      "sentence_index": 441,
+      "english_text": "Very stoked about this.",
+      "japanese_text": "これすごくワクワクしてる。"
+    },
+    {
+      "sentence_index": 442,
+      "english_text": "Let us know down below what you think.",
+      "japanese_text": "以下にあなたの考えをお聞かせください。"
+    }
+  ]
+}

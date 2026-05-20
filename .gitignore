@@ -1,24 +1,5 @@
-# Rust / Cargo
-target/
-**/target/
-**/target/**
-
-# Cargo incremental compilation artifacts
-**/target/debug/incremental/
-**/target/release/incremental/
-
-# MacOS 系一時ファイル
+# macOS
 .DS_Store
 
-# SQLite DB
-*.db
-*.db-shm
-*.db-wal
-
-# Node.js / frontend
+# Node.js
 node_modules/
-dist/
-
-# 環境変数（.env.example はコミット対象）
-.env
-.env.local

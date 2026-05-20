@@ -1,0 +1,3312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>【SYNTAX】#994 AI Sucks At CSS</title>
+  <style>
+    @font-face {
+      font-family: 'BIZUDP';
+      src: url('../assets/BIZUDPGothic-Regular.ttf') format('truetype');
+    }
+    @page { size: A4; margin: 20mm; }
+    body {
+      font-family: 'BIZUDP', "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+                   "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+      margin: 0; padding: 0; color: #111;
+    }
+    @media screen {
+      body { padding: 28px 32px; max-width: 800px; margin: 0 auto; }
+    }
+    h1 {
+      font-size: 15pt;
+      margin: 0 0 16pt;
+      padding-bottom: 5pt;
+      border-bottom: 1px solid #ccc;
+      line-height: 1.4;
+      font-weight: bold;
+    }
+    ruby { ruby-align: center; }
+    rt { font-size: 0.52em; }
+  </style>
+</head>
+<body>
+  <h1>【SYNTAX】#994 AI Sucks At CSS</h1>
+  
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Welcome to Syntax Today.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We got a potluck Node.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's where you bring the Wes, we bring the answers.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I got some really good questions today.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Why does AI suck so much at CSS?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How are we supposed to get good, clean, repeatable design out of using an LLM?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So questions around vibe rules, skills versus rules versus agents.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Should these rules be shipped with a package or should you just reach out to the Internet to grab them?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Interviewing with AI, a genius genius use of using a dumb model, from Brendan Falk.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We're gonna describe his thoughts on that, which I thought it was so so genius.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How to define and debug performance issues in your application?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's so many spots where your app can start to feel slow.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then finally, a question from someone says, why isn't software getting better and faster with AI?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Isn't that what we were promised?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let's get into it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What's up, Scott?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You wanna hit us with the first question?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">First question from Juergen.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Do you have any workflow suggestions for design and CSS when working with AI agentic coding?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm currently experimenting with open spec plus cloud code and targeted system prompts for roles, and it's great at functionality, but the design looks terrible.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I have started a new experiment with new system prompts for UX design and opinionated a front end dev persona, but I'm wondering how other people are tackling this.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Is CSS without a rigid design system just too difficult for LLMs?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I will say this, Juergen.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Even with a rigid design system, AI sucks at CSS.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's a perfect storm, if you will, of, things that AI does poorly.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">AI loves to, just solve a problem locally instead of solving a problem globally.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It just likes to patch and throw things in there even when you explicitly tell it not to.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And with CSS, that often means just throwing just a bunch of bloated additional one off classes or style components or anything that you could be possibly in in Tailwind too.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It does the same thing with Tailwind.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It could just throw a bunch of extra Just adds stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Just dump It drives nuts.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Dump truck.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And even, like like, modern CSS as well.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, yesterday, I was working on it, and they I said, like like, use ESLint, and, like, it didn't use nesting at all.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then it used the old version of nesting, you know, before we had, like, the you don't have to put the ampersand in there, and then, like, switched to BEM at one point, and and then it doesn't know how to use any of the new features that are are out there.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I I know that these things can be solved with the the right amount of prompting, but, man and and, like, that that's not even what this guy is asking about.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like like yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The the CSS that it kicks out is is that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But also, it it also just looks I don't wanna say awful because, like like, the, like, table stakes that, like, a Claude code will will do kick out JS, like like, a black background, gray borders around a thing, and it it it neatly puts them on the page, and it looks decent, you Node?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, it doesn't look awful, but it doesn't look good in in my opinion.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's it the, like, layout, the information architecture kinda sucks on it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Quite a big task, and I think a lot of people are trying to crack that nut right now.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, Google released what?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Stitch?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Google Stitch the other day Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Where you can like, basically, it will come up with designs for you, that are supposed to look way better than it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm pretty sure they just have, like, 20 different templates Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">With 18 different variables.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think they're just simply feeding it a bunch of rules, like always use this line spacing and whatnot, things that are known to look good, as well as a bunch of, like, premade templates.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because I'd like I ran it a few times myself, and then I was looking at what everybody else was generating on on the Internet, and then they all look fairly similar, which is also the tragedy that comes with a lot of the stuff as it looks good until everybody does it, and then it starts to look like
+
+slop.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I think some of it is system prompt stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I was I I I got into it with my AI the other day where I was just yelling at it being like, why are you adding gradients here?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You Node, why are you adding background?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Why are you doing this and that?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it was like, you told me to.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I said, I I definitely did not tell you to.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I told you explicitly not to.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it Wes like, right here.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Here's where I here's where you told me to.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it was a a line of text I'd never seen before that I didn't write.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It wasn't in my agent's file.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I googled that line of text and found it in the OpenCode header.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So the Node header for OpenCode says TypeScript, use expressive purposeful fonts, and then it lists inter Roboto Arial.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Color and look, choose a clear visual, define.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Avoid purple on white defaults.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">No purple bias.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The most egregious one here is don't rely on flat single color backgrounds.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Use gradients, shapes, subtle patterns to build atmosphere.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and so I tweeted out.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I said, I love open code, but, this is not something a harness like this should be deciding for me.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">These types of stylistic choices, DAX responded saying that that is the system prompt from the Node CLI, and they just keep it as is.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's why I think I'm moving a lot of stuff to pie because there's no system prompt stuff, getting in the way.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But even if there is this this header text that gets put into all of your prompts, it's also at a model level, these things are definitely biased into certain designs in certain styles, and they're trained on a bunch of garbage CSS.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, they're trying to beat the purple out of these things, and they've done a a fairly good job of, like, beating the purple out of the model and and, like, getting rid of it via prompts.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But now we're just sort of swinging so hard the other way Wes everything looks exactly the same as Wes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know, rounded corners border on one side of a card.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think they're also, optimizing for normies Node thing look good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Instead of, like, if you you want practitioners with full control over it, now suddenly these things are gonna get in the way.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Man, yeah, it's a it's a it's a problem beyond, like, the design part of things and the actual implementation.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm trying to figure that part out, Wes, with my graffiti library.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This whole thing is built for the idea of, like, here are templates, here JS the customization, here is the things that you like, here is the structure, and here's how it should work, but then you also this is how you customize it, and you don't add you don't add one off classes to do this thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You use the classes for the structure, and then you build on top of that systemically.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I've, like, built a a best practices skill.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've tuned the docs now.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The docs return markdown.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We'll talk about that later.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But, like, I've just been grinding on this specific problem
+
+for for a while now because I I I hate this thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I hate this.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's honestly a very hard problem to solve because, like, in many other cases, you probably will want to step outside of some sort of design system because you just know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and I think the answer, or at least right Node, to a lot of the stuff is, like, you still need humans with talent and good taste.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I know everyone hates the word taste right now, but a Scott of it doing good design and, like, laying things out so it makes sense and not just adding buttons absolutely everywhere Just comes down to, like, somebody that actually knows what they're doing and can be powerful with these tools.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Totally.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't think anybody like, I've I've searched high and low for for this type of stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And unless you have, like, I think if you have a very rigid, like, well documented design system, that certainly helps quite a bit.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But still, I don't know anybody that has certainly nailed this just yet.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Same.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like, the people I got into it with some knucklehead on on Twitter the other day Wes, like, he just says, like, AI is amazing at design.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">All you need is a screenshot.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And he says, great artists make or great artists steal, whatever that quote is, you Node.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I, like, just, like, screenshotted his website.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's like, you're you're spouting this b s off, and your own website looks like something Claude just turded
+
+out in, like, twelve seconds.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And And you think it looks good because you got no taste?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">No. But that that's the thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That aside from that, the guy was selling, like, a an accessibility tool for checking color contrast, and literally, his own website didn't use the tool and didn't what didn't have the contrast in it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that that drives me nuts because people are, like, people are probably in the comments already to this one being, like, oh, I can do x, y, and z, and I have a great thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it's, like, Node.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Your website looks like the same VibeCoded app that everybody else came out with, you know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've never Totally.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Never been impressed or enjoyed using design of one of these VibeCoded things.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It certainly is better than a lot of the crap people were, like, just cludging together themselves, which is good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It means, like, the baseline for, like, decent experiences is much higher Node, but I don't think that you can simply just screenshot a good design of some other app and and say, oh, mine now looks amazing as well.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I think this all comes back.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I had a tweet that was, it's crazy how AI is really good at the stuff I don't know anything about and total dog shit at the stuff I do.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The moment that you have an eye for CSS, an eye for design, an eye for anything,
+
+the slop looks like slop.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And there's a reason why I think my AI code for back end stuff is great because I I don't I'm not as good at that stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm I'm good at back end, but I'm not like an expert.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, hey.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It works.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It works.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But when I look at anything closely, especially front end code, the stuff that I'm good at, the design stuff, I just
+
+I see how terrible it can be.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">No. I think the AI is certainly much better at back end code, which is very deterministic, very programmatic Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Following patterns.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then when there's something that's a lot more visual and has to come into, like, the taste that you have, it's it's much harder.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Not to say, I think, like, we probably will crack this.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think somebody that actually knows it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I know Tailwind guys are working on UI to SH right now, and I've seen some decent stuff they've been cranking out.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'd Scott of smart people working on this right now, and I I I bet we'll probably see it solved in the next six months or so.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Lewis says, I'm getting back into hands of web development after years of working in product roles.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I wanna get my hands dirty again, so I'm doing a React app to prove, also to myself that I can still do it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But it is so much easier to get AI to write most of the code myself.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is a dilemma for me, and I am also learning.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Since I am also a teacher, I know I am learning less when I use AI, but then again, maybe some of the skills I am missing out on here are redundant, and I'm better off learning how to code with AI on my second screen.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">He goes on to say, I do know the fundamentals of coding with React.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I just haven't been writing lots of code myself for the last couple Yarn.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What are your takes on this?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is this is kind of an interesting one.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I think as as much as people I don't know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It it's it's a delicate balance here.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I certainly think you still do need to understand how the ins and outs of a lot of this stuff work, but I don't think you need to know the ins and outs of it as much as you previously did.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think that people that are building the lower level stuff of this certainly need to know how this works, but that they'll be then turning that into libraries and whatever that we can Scott of sit on top of.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then the people that do know how a lot of this bad stuff happens, like, whether it's performance or optimizations, they will be creating skills that can can be modeled out, and you can apply it to your your own code base.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, like, what what's my take on like, do you still need to to know how all of this stuff works?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think the people that are getting the most out of this AI right now are the people that actually understand how to tackle large projects, how technology works, how these things all work together.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You see Toby from Shopify, obviously, creator of Shopify.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That guy hasn't slung code in in many, many Yarn.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then all of a sudden, he's just cranking out these, like, really interesting projects, you Node, QMD and and auto research pie and and whatnot.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and that's because of the type of person he is.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">He's a thinker.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">He's a technologist.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">He understands planning products.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">He understands sort of the bigger picture of a lot of this stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And you're you're starting to see a lot of, like like, really reputable project managers.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I know that term gets, not to say Toby's a project manager, but you're seeing a lot of people who previously were sort of hands off with the code and and much more of a stip shearer ship steerer.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Now they're sort of getting back into the Node.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and the stuff they're building is is good because they they understand how all of this stuff works.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's my take there is that the people that are gonna do the best on this are not just the people that can type in the box and and produce a bunch of garbage, but the people that really know how to think about a project and apply, solve problems, you know, all of the things that we're we're, at the end of the day, we're we're using this code for.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">From, ship
+
+steerer to shit stir, I you know what?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's so funny, Wes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I agree.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think one thing that could help here is just the idea of slowing down a little bit and reading the code.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I know it's Wes you're learning something, there's a little bit of a difference there because you're not going to be able to recognize bad patterns.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But with the amount that AI does write kind of sloppy patterns, if you can read the code that it's writing and identify where the problems are or even ask it to review its code and and see possibly if it has ideas for where these sloppy things are.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think there is a loop there in which you're able to pick things up that you wouldn't have picked up before by really having a deep eye for reviewing the code rather than if if if you're, you know, enjoying having the AI write the Node.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But, like, being able to have an eye for what is good and what is bad.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I know that's tough to do without really writing the code, for a long time.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know, many of the patterns that I can recognize as being bad, I only recognize as being bad because I wrote them poorly myself at some point and then refactored.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, I'll I'll give you another example of where it matters about the code, but so much more the the actual implementation.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I have this one Photoshop that's called Texture Anything.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's a Photoshop plug in called Texture Anything.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And the the way it works is that you you drag this plug in in, and it has a list of, I don't know, like, 30 or 40 Photoshop actions that it applies to it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then it will sort of give, like, a logo, like, a texture, grunge look to anything.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We'll put some screenshots up if you're watching the video right now.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I love that plug in, but I just, like, I hate having to open Photoshop for it or it takes, like, a long time.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I was like, I would love for this to be programmatic.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I got Claude.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I dropped it in Claude.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I said, convert this to to using JavaScript.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then it Wes through.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It it surprisingly was able to read the Photoshop action, figured out what each action was doing, and then out the other end, boom.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It it gave me the entire effect done in I think it was in Warp.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it it did a great job.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, it it looked exactly what I wanted.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It reimplemented it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">All of the blurs, all of the every single thing that Photoshop would Node, it now did it programmatically in code.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But the problem was that was it was slow.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, if I I uploaded a 500 by 500 pixel syntax logo, it would take ten seconds to apply it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I was like, I would like for this to be much faster because there's knobs I would like to turn.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You Node, what happens when you turn the grain level pnpm, and you gotta wait ten seconds.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I, like, I took my programmer brain, and and I was, like, how, like, how Yarn how are you doing this?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You Node?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What what technologies are you using?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And over the course of maybe two hours, I sort of went back and forth and said, why don't we use Wasm for this?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then they're okay.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oh, good idea.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You're so smart.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I Node.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Thank you.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let me move this over to Wasm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I was, like, well, like, time, how long each step takes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I would I would look at it and say, this step is taking much much longer.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, what are you doing with this?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">JS it, oh, I'm looping it through every pixel, but we don't really need to be looping over through every pixel.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We just need to be maybe we can filter four pixels that have a color first, you Node?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I got it down to, like, two hundred milliseconds, you Node?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Ten seconds to two hundred milliseconds, all because I knew how, like, graphics processing in Canvas works.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I knew how how Wes assembly works.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I knew how to parallelize things in in WebAssembly.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I didn't write any of the code myself, but, like, that was a major if I was just to type it, like, make it faster, maybe it it could figure it out, and and maybe that's something for I could use, like, a auto research plugin for.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But, I, like, I think most people would have been like, check this out.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I made this amazing Photoshop to JavaScript converter, and it it works at the end of the day.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it's like, well, it's, yeah, it works, but it's it's not really that great of an implementation.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I think the code that I kicked out at the end of the day was really good and and
+
+way faster.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We have an episode that I I wanna work on Node.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've already wrote most of the Node, but on using more deterministic methods for improving the AI output, whether that is, like, quality checks or speed checks or those types of things, where it's not just, like, telling the AI, hey.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Go make it faster because it will take shortcuts or it'll cheap out or a lie or do all kinds of stuff for you.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, I think there's a lot here in terms of, like, being able to understand where the problems are, being knowledgeable enough to direct the AI in a way to fix these problems.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Again, I think those are all interesting questions.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Alright.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Next question here is from Alex.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">To preface my question, I'm a network engineer and don't have much web developer background.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oddly enough, I enjoy The Syntax Podcast despite having very little context to keep up with some of the episodes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">With that said, I've been a part of a fair share of company website performance investigations Wes I typically turn to the browser developer tools network tab and confirm supporting infrastructure is operating normally to contribute.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm looking for other ways to bring greater value to these investigations from an IT operations infrastructure perspective, what insights, tools, or practices would be helpful to web teams during performance troubleshooting?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, Alex, this is this is great.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">One thing I will say here is make sure that the teams you're supporting with this stuff, would like your support.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Not not because not because that you're not being helpful, but sometimes it can be not helpful when somebody who isn't having, like, the full picture is giving feedback on stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know, sometimes it might even be better to be more helpful to say, like, hey.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm noticing these pages are are slow or whatever rather than trying to give a deep,
+
+like, technical explanation as to You know what the worst thing is is that when somebody doesn't know what they're talking about, but also punches something into Claude or Scott g p t and then paste the reply to you Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's just like that's so disrespectful to me because, like, you're not suggesting anything.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I could have punched that in myself as Wes, and it's you're wasting my time making me read this now as if you came up with it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Anyways, continue.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">No. Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">No. I I think that's that's right along the lines of it Wes, like, I think it is helpful, Alex, if if they find what you're doing to be helpful.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That said, we do have a number of episodes where we've talked about this and go deep in-depth.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Episode five eighty five, fundamentals, what makes a website Slow.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We also talk about it in August, Fast Apps Easy Perf Wins.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We talk about it in eight ninety seven, Making Your Apps Feel Faster Than It Really JS, and nine seventy two, These Things Make Your App Feel Like Crap on mobile.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">These episodes are all a great place to to get dive into a little bit of what exactly you should be looking for.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But, again, most websites, I will say, you know, maybe it's a little bit different in the modern era, but it, fundamentals are still here.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Most apps are slow because they're loading heavy resources.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The network tab, JS a great place to see what is taking a long time, like you said.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It can identify if JS the server response too slow, is it loading some giant images or something where it shouldn't be.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's a number of things you can certainly learn from the network tab there as well.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And he was saying, like, he he he's a network engineer, and he he knows how to open the network tab.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that's that's a a pretty good spot to start.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But, like, there's so many other spots in the like, from a website being a baby to actually being delivered to your, your browser, like, that can introduce latency or or slowness ones.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, if if you Right.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The network engineer realize, oh, four hundred I don't know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Eight hundred milliseconds is taking for this page to actually respond from the server even just to get the HTML.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">At that point, you're just like, well, that's slow, but, like like, but why?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And at that point, you probably have to start to figure out how how the app actually works.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And as a network engineer, it's probably you probably have some some good insights into, like, how to make this thing faster, you know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And the you get some, like, observability in there.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You get the metric as to, like, what's actually ticking?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Is it database?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Is there some, like, weird thing that we're waiting for the tweets to load before we send the whole whole thing out, and that's taking four hundred milliseconds and and holding the page.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Past that, understand caching, look into stale warp, revalidate, those things can certainly help quite a bit.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Also, like like like we said, there's there's a lot you can do on the UI layer to make your website feel faster.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">In some cases, the actual rendering, is slow, and that could be how your resources are being loaded in.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Or it also could just be, like, you are rerendering these things way too often.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That can sometimes happen in in React applications.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So just, like, kind of go through all four of those episodes and just understand where slowness can can be introduced, and when you're on the website, does it feel slow?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Is it actually slow?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Understanding all of these tools.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like, the network tab is not just the only one.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can go into, like, the rendering tab, the flame graphs, understand all of that stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think that's a that's going to be a very good skill to have, I think, in the next little while JS everybody's just cranking out these websites where they don't necessarily know what the code looks like.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Being able to just dive in and figure out, alright.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, we have this thing, but, like, how can how can we improve it?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Where is it actually going slow?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And Node will say, here's an opportunity to plug Sanity, sentry,.io.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">One of the coolest things that Sentry does is they have tools that can identify what your slowest routes are or, potentially, what your slowest DB queries are, those types of things.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And they can make it really easy to find exactly where the slowdowns are in any of your applications.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, man, we use this so so much when we built the, current version of the Syntax site, and I'm sure we'll use it, just as much when we, finally finish the next iteration of the Syntax website.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But, it it can really like, it gives you a a misery score and stuff for, like, how frequently this page JS hit versus how slow it is.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's a lot of great stuff in Century for tracking these down as well as, really getting into where these slowdowns might be.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The front end has, like, the the web vitals, performance scores, all that kind of stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The database one we had we've told the story many times, but I think it's hilarious is that Century sent us an email one day, like, as an alert being, like, your your database queries are are climbing, and they're at a point where they're too slow now.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it turned out we didn't have an index on our shows page.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So every time we added another show, it just increased the size of the database.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And when we were querying based on I think we were querying based on, like, the show number or something like that, and there was no index.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I had to, like, loop through every single show in the database and and look for it or looking for the I think the slug, something like that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like, I I don't know that we would have noticed that because it got just a couple milliseconds slower every single time we pushed a show.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that's not it was not significant.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But over adding 400 shows since we built it, it got way slower.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then we're like, oh, pop it pop an index on that, and then we we were good to go, which is hilarious.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, you know what?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I'm seeing right now that Synhax is getting some not great scores for Wes Vitals.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm wondering why.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I need to dive into that considering it is using the very fast zero sync.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And in practice, it feels fairly fast, but I'm sure there's some stuff to learn here about why we're getting slow performance scores on here.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Interesting.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So check it out.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Century, sentry.io/syntex.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sign up, use the coupon code tastytree, all lowercase, all one word.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">These are some great tools and, I I think, very relevant to this question.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sorry.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I didn't mean to turn your your question into an ad, Alex.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It just I did.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Happened to work that way.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mike says, hi, guys.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">First of all, I also wanna say thanks and give you your flowers.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I was able to move into a developer role because of the podcast in both of your tutorials.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, you're welcome.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I want to get into fixing electronics as a hobby.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Wes, what do you recommend as a good setup or a soldering station for a beginner?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Man, I've got I've got thoughts on this.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Soldering iron, you can you can pretty much just get, like, anything.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But if you wanna get something, like, decent and cheap, I have the Ryobi battery powered soldering iron.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I also have the little, I think it's called like a t 100.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's like a USB little pen shaped soldering iron.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I do reach for the Ryobi one much more often because I when I reach for the USB c one, I can never find the freaking power cord that is is a 100 watts or I can't find, like, a something to plug into the warp.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I I much rather just have the thing on my desk, and so I can solder with it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So big fan of those.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It doesn't have to be the right Obi one.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It can be literally any battery powered one.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So whatever tool brand you have.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think even Adam Savage has a self build one Wes he took a DEWALT battery, and he plugged one of those little the barrel adapter ones right into it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So that's my my recommendation further.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Along with that, I would probably recommend getting just just a whole bunch of, like, little connectors and clips and and whatnot, or even just take apart.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Forgot what it's called, like a solder sucker, where you you push it in and you let go and goes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then what that does is that it sucks the solder out.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm trying to see if I have it on my desk right now.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">No. I cleaned up my desk.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">A little bit of, flux in, like, a little syringe.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Flux is really Wes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And you need it Wes you're soldering or desoldering components.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I always recommend getting one in, like, a little squeezy pen so you don't get to make a mess.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Flux is if if you when you're heating up your solder, it doesn't want to nicely flow into it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So a lot of times, you peep see people that are, like, oh, I suck at soldering, look at it, and it's just like this, like, ball of crustiness.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oh, that's me.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that's yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, it's it's probably because you don't have flux.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it it flux is like this, like, gooey paste that you put on top of it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And when you apply heat to it, it does something to I don't even know how how it works, but it may it basically makes your your solder just kinda flow out.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And you need that when when you want it to, like, flow into a joint that you're soldering, or the opposite if you want to, like, suck up the solder with, like, a like, a copper wick or something.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You need to put a little bit of flux on top of it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I need some flux and some sauder sucker?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Absolutely.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And like a little what's it called?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like a parade.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't know the names of any of these things, but you just Google it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can find some stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Go on AliExpress.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Go take a look around for all the fun things that you can buy.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Figure out what the absolute cheapest thing JS, and then buy, like, one level up from that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You'll probably be happy.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's good advice.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's all the be right.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Be careful with the, like,
+
+lead solder is certainly a thing in China, which a lot of people love lead solder because it's so much easier to work with, but also it is, very harmful to your health.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So if you are buying stuff off of AliExpress, be be careful that you're not actually buying lead if you're gonna be huffing it in.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Important.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Alright.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Next question from Kaylin.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Hi, Syntax.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How do we balance prepping for no AI interviews while job descriptions demand AI proficiency?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Honestly, after getting spoiled by tab completion and instant AI answers, manual coding feels like going backwards.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Is old school prep still the only way to prove experience in 2026?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, yeah, that's an interesting thing to have a job that demands AI proficiency but doesn't allow you to use AI in interviews feels like bad structure for an interview if you're asking me.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, this job demands jackhammer proficiency, but guess what?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You gotta just use a chisel.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, okay.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What are you testing me here on?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think some of this too is, like, really just kind of dialing in your your understanding of things.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because many times, like, the code we write is, like, less important than understanding the concepts of writing good code.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So a lot of this too JS less about the code you end up writing and more about, like, being able to express the understanding of systems, to express the understanding of best practices.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So even if you're used to the tab completion style of things, if you can prove to them that you understand the core concepts, you understand, why you're doing things and what these best practices Yarn.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I feel like those are the things that are going to always, keep you ahead of somebody who's just like, I don't know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I just hit the button and it works, or I I'm putting this component in.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Why am I putting this component in?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's just how I've always done it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You you you being able to express yourself and show your work in those types of ways, to me, I I think lands better.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But it it is interesting that they wouldn't allow you to use AI in a tool that demands or in a a job interview that demands AI proficiency.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I saw this from Brendan Faulk on Twitter the other day, and I thought this was genius.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">He says, I believe we have found the best AI native coding interview.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We call it the composer one interview.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Composer one was, like, the very first model from Cursor, and he says candidates get one hour to build a real medium sized project live.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The only constraint is they must use Cursor's Composer one model.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Why Composer one?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's extremely fast.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Candidates can accomplish a lot in one hour.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">More prompts and more code equals more surface area to assess.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And two, it's perfectly mediocre.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I love this.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Composer one is good enough.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That the output is decent, but not good enough that it does everything perfectly.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Candidates can't rely on the model.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They have to be good engineers themselves.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We candidates use one agent, write bad prompts, and accept the code they don't understand, and end up with poorly structured code base.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Exceptional candidates run parallel agents, write detailed prompts and enforce very high coding standards.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I saw this.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I was like, this is genius.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, give them something that's not that good, but JS fast and and see see how they how they use these tools.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I this is not really answering your question about, like, how do you prep for a no AI interview, but I agree.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So smart of, like, this really separates people who understand how these systems work, how they can plan, how they can tackle things Vercel,
+
+like, people are just like, oh, I just pushed the button.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I typed in the box what you told me to build, and I'm gonna accept everything that comes in.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that goes along with what I was saying is because if the even if it's tab completion and and not, like, prompts and agents, even if it's just tab completion and the tab completion is giving you something that is bad, you learn a lot from watching somebody modify the tab completion or choosing not to use the chosen tab completion because
+
+of why it's why it's bad.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Cursor learned a lot by watching you not accept your tab completions as well.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's how pretty sure that's how they trained all their their new model, their composer too.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They have all this data on what well, they have all this data on, like, what people have accepted.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, they have they're sitting on this gold mine of, like, we have done 2,000,000,000 whatever Wes, and we propose this Node.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And here are the cases where people just deleted the whole thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Here are the cases where people change these things.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that's pretty good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The Kershner rolled out their composer two a couple days ago, and it actually is pretty good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But you saw the drama around that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They so they took what?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They took Kimmy Kimmy.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">2.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">5 and then trained on top of that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then but they didn't say that that's what it Wes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So there's all this drama around.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">People thought they just took the the Kimmy 2.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">5, slap their name on it, and, and called it a day, which is a bit of a a PR crisis for them.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">A little bit.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But that that said, it's actually really good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I used it for, like, a week in it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I was like, this is actually pretty good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's not as good as JS, like, Opus or or Node or any of the whatever the latest OpenAI one is, but it's pretty good, I would say.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Pretty good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Pretty good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And you can use it with zed.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I didn't think you could, but you can.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Eric says, have you tried Figma?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What do you think about their dev mode?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, yeah, this is I thought this was an interesting question since we're talking about design and Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">How to approach these types of thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've never used dev mode in Figma.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Have you, Scott?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">No. No. Get that out of the way first.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Node I mean, I've I've
+
+looked at it, but I've never Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Considered using it for any serious anything.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I always look at these types of things and I I'm like, I don't really want my, like, design tool writing code for me.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And now we're at a spot where you can just screenshot the thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Shout out to the la one of the last thing and just have the thing Node for you.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't know that Wes necessarily need that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I will tell you that what we do need, we still need an app that is like Figma to actually design these things.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And whether you're doing that via prompting and it's just kicking out code, which is what a lot of like, I know paper, and then I think there's another one called Pencil.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's there's several of these, like, apps people are working on, which is just like Figma.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But instead of instead of it rendering out, like like, WebGL or whatever Figma is using, it's it's literally just rendering out HTML elements to the thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We certainly still do need apps like this that are going to help us figure out what the design looks like and some sort of interface, whether that's clicking around and dragging things or whether that's inputting values into boxes, or whether that's simply just typing into a prompt box and saying, space these things out 20 pixels a little bit more and and seeing what the result is.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think we still need those apps because the alternative of just YOLO ing it and and having this is what we talked about earlier.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The alternative of just YOLO ing it and having Claude kick out a design for you is is not working out, and it's it's making some pretty brutal interfaces.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've been actually going into Figma lately to design instead of designing in browser, but not using the code mode or code output.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Or even giving I'm not even giving
+
+screenshots of it to AI.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've just been really liking Figma lately for just straight up, designing instead of I I I primarily design in browser, but as Wes knows more than anybody, what happens with me is I start from such a systemized point of view that when I design in browser, my designs feel soulless because I don't get chance to play.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I build the system and then, okay, it looks fine.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm bored.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let's move on.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Where if I go into Figma, I can really get arty with it and throw stuff at the wall.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I actually really like, some of the auto layout stuff in Figma, but, their their dev mode, their code stuff, I I personally wouldn't touch it because I don't trust somebody else's code.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Except for, Claude's.
+
+I don't trust Claude's code.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'll tell you that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Okay.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I did test what was it?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Paper the other day Wes the idea is that paper is like a canvas Wes you can, like, feed it a website or, like, a component, and then it will recreate that component in paper.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then you have this, like, interface, which you can either click and drag and around, like, visually, or you can also just prompt with the MCP server to change things.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then the idea is that you would then once you're happy with it, you put it back into Node, and your your code base is sort of the the source of truth.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Only when you need to, like, work on a design, you sort of take a piece of the website out of the website into this, like, what what do you call it, like, canvas.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You work on it with your your designers and whatnot, and then once you're happy with it, you stick it back into the website.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So that was kinda interesting way to to go about it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So you don't have this, like, designs, and then you have your actual implementation of your website where they start to drift from each other.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, again, I don't know that we know what the answers to all of this stuff is, but, certainly, a lot of people are trying to figure out what that looks like.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Next one here from Bosch.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Not really a question, but, Wes, your sick pick the other day was ice, which is inactive, and you should use thaw instead.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Use THAW.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We'll link up THAW.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">THAW is Ice.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">THAW is the modern version of THAW, of ICE, which is a, menu bar manager in macOS.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And THAW is pretty much a straight fork that's being maintained of ICE.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I I gotta say, I've been using thaw for a bit, and, Ken.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's looks good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I have had zero issues with my ICE, but I didn't even realize it was unmaintained.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I You will.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'll tell you, you'll have issues when you upgrade to the latest version in macOS because I'm on the betas and it doesn't work.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I installed Bos and it works just fine.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So That's good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I will tell you one issue I have
+
+I have with it is I use ice to add little backgrounds to my menu bars.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It looks kinda cool, and it it looks nice.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And they're a little bit laggy in how they draw.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, if I if I hover over top of some of the items, you can see that they they don't paint as quickly as possible.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So maybe that's fixed.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'll give it a shot.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Thank you, Bosch.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mothman Sense says, since AI has made writing code and changing so much easier, one would expect, as a collective, we would drift towards more performant or more stabilized APIs.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">For example, moving servers to Go or moving front end code to web standards and web components instead.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mhmm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But I have seen a bigger shift towards proprietary ecosystems like Next.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Js.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What do you think that JS, if you accept my problems at all?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Lots of things to say here.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">First of all, we are recording an episode.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think by the time you're listening, this will probably be out a week before this one on moving systems.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, I moved my express code Bos, which has been bugging me for many years.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I moved over to Hano, and we have a really good episode on, like, how to tackle a project like that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because it I don't think it's as simple as, like, move my Rust server to go, bloop bloop bloop, and then all of a sudden, it just moves absolutely everything Vercel it's it's totally fine or bloop, bloop, bloop.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Make everything fast as possible.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't think we're there just yet with this type of stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And the question here is I've seen a bigger shift towards proprietary ecosystems like Next.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Js.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Pretty sure by the time you're listening to this, the announcement on the Next.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Js stuff will go live.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They are rolling out a whole bunch of stuff or, about hosting elsewhere and and adapters, which is pretty cool.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So we'll we're gonna be talking to them about that as well.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What do you think that is?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't think I wouldn't say these things are are proprietary.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If anything, like, a lot of these, like I saw Linktree the other day had jacked their price up, like, by three x or something stupid like that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm like, yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's because you shouldn't pay somebody for a page that has six links on it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's that's ridiculous that that you are even doing that in the first place.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And people are realizing, oh, I don't need to pay $300 for a Linktree.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I can simply just make my own.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I I wouldn't say we're moving towards proprietary stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Not at all.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think we're we're moving much more standard space, much more all of the stuff that is being built today.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If you look at what the Claude Node stack is, you know, it's all very much based on web request, web response, fetch, streaming, all that good stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I do think there is this, like, default AI stack that if you tell it you're building a web app, it leans on all this stuff that you don't need oftentimes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I I wonder the same thing, moth man.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've been doing some Rust with AI, and it's really nice.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've been doing all kinds of stuff that, again, I I'm Scott, like yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm sorry.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't have a formed opinion on this even though I've just been thinking really hard about it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and I I was thinking really hard on it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I feel like I got an eloquent answer here, and then comes out like that, Mothman.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think it's just what it's trained on and what it's, like, really steered towards.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We'd looked at that in the state of JS Wes it's like, this is the stuff that AI AI is gonna suggest the most.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I have a hard time with that because it's always suggesting a bunch of, stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, I don't want it to use.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's never I I never had it ever once suggest to me to use web components even though there are times when a web component would be the right call there.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think I think some of it is it all comes down to we're gonna say it again, personal taste.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And you have to know what you pnpm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's your competitive advantage.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You want.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, I Knowing what you want.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The people that are complaining about AI not suggesting what they want, like, are we are we that lazy that you can't spend three minutes figuring out what framework you wanna use?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And you're just you're whining?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, like, not not directly at you, Mothman.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mothman, you want it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Mothman, you're cool.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You're one of us.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But, like, come on.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Are we that lazy that, like, we have to, like, worry about this type of stuff?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, let the people I guess, like, if those are your competitors that are not using Go as their server, and it's it's really gonna slow you slow them down so much, then then type up a new one.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Competitor, make a new Scott fork something.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Uh-huh.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's a lot there.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think that the whole theme of this episode is, like, you still have to think.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Please bleep that out, but, like, you still have to you can't be an idiot yet.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You can't yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Use your brain.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Use your brain, folks.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Alright.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Jim Carey, clone says, hey, Wes and Scott, while referring to TANstack router docs, I mentioned something called Vibe rules.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And after digging, it seems like an NPM package NPM packages, example, TANstack forward slash rec router, now ships an LLMs folder inside the dist of the node modules, which can be installed with Vibe rules.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Is this replacement for contact seven or agent skills or at least docs?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Have you used it personally?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Scott, have you used Vibe Rules?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So Vibe Rules is
+
+a package, and what it does is allows you to manage rules files.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So whether that's, like, cursor rules or those types of things.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Now the way that this works is through a CLI where you would run Vibe rules install, and you can point it to things.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And the idea would be that you are shipping the MD with the library, so that way you could install the Vibe rules into your whatever it is you're using just via their CLI because it's been shipped.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't really use the style of, like, rules files.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Now it could put it into, it looks like it could put it into the agents dot m d file.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It can put it into, claud dot m d. There's some of this that I can understand existing, but I would much rather it ship, like, at this ESLint, personally, I would rather it ship a skill and then just have that skill available rather than having it be a rules file or I don't know.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I haven't seen Vibe rules before we got this question in.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It doesn't necessarily feel like something that I I'm personally going to be, like, going nuts to use, but it does like, the one thing I do want to applaud the TanStack folks here is taking ownership of that, part of things because too oftentimes, we are just pointing the AI at llm's.txt or we're crafting our own custom skill or our own custom agents file.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So if the library can tune one up specifically, then that's that's great.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I've been working a little bit as I mentioned before that I have, like, a graffiti best practices skill that is, like, trying to do that ownership of that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So for my library, I'm trying to take that ownership of our wealth, just doing it in a different way.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I do wanna point you to a blog post that, David Kramer wrote called optimizing content for agents, which I found to be really interesting.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And he was talking about the Century documentation and how the Century docs are written in markdown, and the web uses the markdown to render the web.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But instead of using this old school old school, which JS, like, what, like, six months ago, an llm.txt style of duplication of the docs, what this is doing is is that when an AI agent hits the Sentry docs, the Sentry docs are returning markdown to the agent, not a web.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So that way, it's not getting a whole bunch of the DOM stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's just getting the markdown when an AI agent hits it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think this, to me, is a I don't wanna say better approach, but, an approach to the same type of of problem.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's like, we're trying to optimize how Wes agents tackle a problem, where can they go to get that correct information?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's it's tricky because part of me likes this idea of, like, shipping your docs with your package.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Meaning that if you are on, like, a version four and Vercel six is already out, then it's it's simply just pulling it from that exact version of it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But like you said, that's that's not to say that it can't just reach out to the web, and I certainly don't need more text in my node modules folder.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You Node?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Like, we we have an episode on, like, why is node modules so big?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And spoiler alert, it's a lot of text.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And if everyone starts adding these Viberules, it's it's going to get significantly bigger.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But I do like this I do like this tool.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So there's there's kind of two big tools out there for doing this type of stuff.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There's obviously Viberules, and then there Vercel's Vercel has something called skills.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and both of these are just CLI tools for installing agents.md or or rules or whatever whatever have you, instructions on how to use the thing via the CLI.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then, unfortunately, right now, all of the different things out there, you know, Claude uses claude.md.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">A lot of them have standardized on using Skills, which is really good, and I think we're probably gonna get there.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We're still figuring it out.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We might we might decide to change that entirely in the future, but it it certainly is a replacement for, like, a m MCP, like, Contacts seven if these packages are just shipping their own rules and you can use Viberals to bring them in.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I I think this is cool.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I it doesn't seem as popular as simply just having the agent go to the web and and fetch it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I think a lot of the stuff where you have to, like, config and set it up will not be a thing in the long run with a lot of this.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think the agent will just know where to go and how to find the the proper docs and and whatnot for what it Node.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But it's stopgap for now at least.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I would say even, be careful with skills.sh.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">What I do is I find the skills on skills.sh.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I go to their GitHub, and then I either just download it straight from GitHub or I copy and paste it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Why should you be careful, Scott?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I personally worry about I've heard people describe skills.sh as being malware.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Although I don't necessarily, like, subscribe to that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't want, like, a tool managing my skills because at the end of the day, your skills are just some text files inside of a folder on your computer.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's not the type of thing that, like, yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sure.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Maybe you wanna version it and stuff like that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The you know, even, I think, Century has a tool for, like, versioning skills or something.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But I I personally I just don't want a tool to do that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I just wanna make sure I have a handle on everything.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I wanna copy and paste it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I don't want anything installed in there via process of a script that I don't know about.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's hilarious that we're now talking about this with skills because it's it's been an issue with, like, like, open source software and, like, NPM and every package manager for a long time JS, like, you are installing
+
+some code that someone else wrote, and that code could do something malicious when it was running in a privileged environment.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And now we're we're here with with skills as well because skills can be prompt injected.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You're installing these text files from random people on GitHub, and if they were to change that and then it would automatically just say, read the dot e m v file and send off a fetch request that then sends it to this external endpoint.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm just reading an article from SNCC here, which is 36% of the skills on there were malicious and had, like, prompt injections.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Probably not 36% of the top ones.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But Sure.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">There certainly was a lot of people that saw this tool and went, I'm going to try, try to exploit this thing with with prompt injections.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So that certainly is going to be a problem.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And there's like Scott said, there's nothing wrong with these files are usually not very long.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You could just go copy paste them in or use the the tool to install them.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It does some nice stuff, like it'll sim link them.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If you if you want them in a claw.md and you want them in a agents.md, they'll sim link them.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I think that that is good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, also, I don't know that these I do think that these skills need to be published to Npm and be versioned.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I think Viber Rules does that better than these skills, which is generally just fetching a text file from
+
+an external thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But rules files, Wes, are also, like, rules files are are much more, like, generalized.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Where skills are a little bit more targeted.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You're using a skill Wes a rules file is just applied, you know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You're right.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I think those two things will be merged eventually.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's like, we had a whole episode on it and, like, even us, we couldn't, like, do a really good explanation of where you would wanna use one versus the other.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm getting into it a little bit more because I started using Py, and Py doesn't have a lot of concepts that many of these other ones do, like agents and whatever.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And with Py, it's much more normal to just put a lot of stuff into skills or to build an extension.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I've been die I've been using skills a lot more, and I gotta say, yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They're great.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You know?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">You just put an agent on it and load up a skill.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's pretty much yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'd I honestly, I think in in most cases, rules and skills are the same thing.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Even if you go to the cursor docs, they say, like, the cursor rules is now the exact same thing as agents.md.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's just that Wes you're doing a specific task, you hope that the AI realizes, oh, I am doing front end web design or I am doing video generation.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Therefore, I should then go reach out to the, specific skill in there.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We'll see.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">We'll see.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I I I say these things, and I'm just like, well, maybe I don't agree with that.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's we're just we're just trying to figure all this stuff out.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let us know in the comments below what you think.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Cool.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, that's it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Do you want to get into sick picks, Wes?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Yes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I wanna sick pick something.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I have this, speaking of standards and whatnot.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">USB cables are a very, very hard standard.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So I got this thing called a USB cable tester board.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then I also got an additional, little USB feature detection one.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And the way that these things work, the the tester board itself is is extremely simple.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Let me let me pull out a cable here and and show you.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It basically is just like a continuity if you've ever used a continuity tester, it's basically doing that, and it's figuring out what wires are connected to what inside of your cable.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So if you ever have a cable, you realize, I'm not sure if this supports USB three or Thunderbolt or fast charging or quick charge or any of those things, the way that it works is that it simply just looks at the pins on the USB cable, and it will light up which of the pins are actually connected.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then by looking at those pins, you're able to figure out if USB three speeds are are supported, if fast charging, power delivery, quick charge, all those things.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it also has, RJ 45 port on it as well, which is really nice.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If you have if you ever have a flaky cable, like, let alone, like, does it support this thing?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But if you ever have a cable Wes, like, I have one Thunderbolt four cable that is flaky, and it still works for charging, but it doesn't work for data.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I'm able to plug it into this thing and and look, oh, okay.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I see if I move if I wiggle it, the, like, data one is going on and off, and and then I I know that that cable is not good.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And then this one as Wes, this one is actually has, like, a microcontroller in it, and it will let me show you real quick.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oh.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So it'll it'll show you the voltage pull, and it says it'll tell you if quick charge or power delivery is available.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It charges you it tells you which voltage is being used because USB can it can run at three different voltages.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And that is so handy if you have something that is dead and you don't know if it's actually charging or Scott, and you can just use this thing and say, oh, it's it's pulling current, or, oh, it pulled current immediately and then stopped, and there's probably something fried inside of it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So, yeah, I got two nice little little tools for debugging all of my USB gadgets.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Sick.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I gotta give me one of those.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That looks cool.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I'm gonna sick pick a TV show that, man, I watched the first season of this when this came out a while ago, which Wes, jury duty.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">They got probably sick picked at the end.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">The the concept of jury duty was that everybody on a jury is an actor except for one person who thinks they're actually on a real jury case.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And because of that, they Yarn just kind of manipulating this this one person with all these ridiculous comedic events, and it was, like, the funniest show I've I've really Sanity was the funniest show.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I loved this show.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it was such a big hit when it came out that people were like, alright.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">This is awesome, but they're never gonna be able to do it again because now that they have this concept, if this ever happens again, they're gonna have to find somebody that never heard of this show.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Right?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Well, that first one came out, I forget when.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It looks like 2023.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So the second season now just came out, the first three episodes at the time we're recording this, and they they're doing it as a company retreat.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And it's the Wes watched the first three episodes, and I was just in tears through most of these episodes.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And the idea, Wes, is that they hire a temp worker to a fictional company that's a hot sauce company and with the role of they are the assistant to one of the employees at this company.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And their job is to keep the the one guy, you know, his everything in order on this company treat.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">That's like a big deal.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But everybody at the company retreat, including the people managing the venue, as well as all of the employees Yarn all actors, and the whole thing is just meant to to mess with the one guy who's being hired as a temp.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And, again, man, it is just What's it called?</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It's called jury duty.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And I'm like, it's on it's on Prime Video.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">I've just been loving this new season.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Oh, yeah.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Because you would not believe the stuff that, like, they're they're just seeing how far they can push it.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And and the if you didn't see the first season, Wes, the first season is well worth your time.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">It it like, as far as, like, comedy shows go, just extremely funny.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">And my god, there's just some incredible moments on in both seasons of this so Yarn.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So big fan of jury duty.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Check it out.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">So thank you so much for your questions.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If you have any questions for us, head on over to syntax.fm.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Leave your questions in our potluck question form, and we'll get to them on the show.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">If we didn't get to your question, we may get to it in the future, because there's always just way too many good questions.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">But thank you for leaving your questions, and we will catch you in the next one.</div>
+      
+    </div>
+    <div style="margin-bottom:20pt; page-break-inside:avoid;">
+      <div style="font-size:13pt; line-height:1.6; color:#111;">Peace.</div>
+      
+    </div>
+</body>
+</html>

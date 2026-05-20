@@ -1,0 +1,382 @@
+title: Programatic and Skill based Video Creation with Remotion
+---
+
+Welcome to Syntax. Today, we have Johnny Berger on. He is the author of Remotion, and we had Johnny on, what, I don't probably probably three or four years ago to talk about Remotion, which is programmatically creating videos with code.
+
+And so stoked to see. I'm stoked to have him on again because in Johnny's been grinding on Remotion for for many, many Yarn. And in, I don't know, probably about January or so, this thing absolutely blew up because there was a release of a Claude skill that allowed you to basically just instead of writing the the the JavaScript and React code behind it, you could now simply just prompt your way through it, and it made it a lot easier. And it was probably one of the most impressive things, both to us developers, and it absolutely exploded the brains of people who were not developers seeing that you could just type into a box and a video would come out the other end, which is is really, really cool. So we're excited to talk to him about that JS well as a new Chrome spec, which is, HTML in Canvas, which JS soon as I saw this drop, I was like, this is gonna be killer for doing, like, basically making videos with HTML, CSS, and JavaScript. So welcome, Johnny. Thanks a lot for coming on. Hello. Thanks a lot for having me on for the second time. That feels special.
+
+Yeah. You're right. It's only a only a couple people have been on on more than once, so we're stoked to have you on.
+
+So do you wanna give us a quick rundown for the six people who have not heard of Remotion,
+
+what it is and how it works? Sure. Remotion is a way to create videos programmatically.
+
+So you use React to essentially code a website, but then you kind of also have this dimension of time and you change the website over time. And through that, you can, render a video.
+
+And I've been doing that since 2021.
+
+Found a couple of people who like to use it. And, for a couple of years, we were all coding the videos manually.
+
+And now the latest craze is that the AI writes the code, and, now it has become a lot more easier.
+
+Mhmm. Yeah. Yeah. And it it seems like, you know, the longevity of the project's really great. And it seems like you found a way to monetize it without turning people off. How how did you, come up with was it Remotion Pro and the idea of being able to actually sustain this thing?
+
+Yeah. So, essentially, the idea has not changed since the very beginning, since 2021.
+
+I was in the situation where I already had a couple of open source projects that I maintained, like some indie hacker projects, and I was also working part time.
+
+And I really felt like taking on, ownership of another project could stress me out, and I kind of sense that this one could become more popular.
+
+And then I felt like if if it becomes successful and all I get out of it is, like, issues and bug reports and stress, then I would not want that. And so I kind of put a clause in the license, which requires, like, the bigger companies, to pay for that and for everybody else.
+
+It's free, and it's been going great. We we've been able to sustain ourselves from that. We Yarn now a team of three people.
+
+Yeah.
+
+Decision I do not regret and that Yeah. Yeah. I can also recommend to any other maintainer that they think about it before they launch the room. I I think you did a good job of of doing this without, pissing people off. It feels like so many
+
+monetization strategies really either don't work or make people angry, and I think you've found a nice balance of something that works. And I I never hear anybody complaining about the monetization of this library. Mhmm. Yeah. I think I genuinely wanted to keep, like, the open source spirit,
+
+but find a way to make it sustainable. And I figured, like, drawing this boundary be at, like, four people, if you Yarn an organization with four people, from then on, you have to pay. I figured that makes sense because then you're probably in the situation where you are able to afford a small, fee for that. Especially this year, it's been exploding, and we can hire more people.
+
+We have, like, a public GitHub repo. Wes, like, incredible. I've not heard of any other projects. Been able to do that. Yeah.
+
+Let's talk a bit more about the, like, the cloud skills or the the AI skills in order to to make that. So if you're looking at, like, a Npm trends, it went from, like, a 125,000 installs a day in, like, November, December up to almost 800,000 installs a day. Right? Like, it's grown absolutely crazy.
+
+And I'm I'm assuming most of that was was due to, like, the skills release. Is that is that fair to say? Yeah.
+
+I I would say so. So I guess this pivotal moment was when we just, like like, made a tweet very sad that now you can, like, steer Remotion through, agent skills. So there's, like, this npm x skills command line, which is kind of like a package manager for skills.
+
+And and that one blew up. Yeah.
+
+And what kind of people are you seeing, using this product now? Like, the people that are actually implementing it in their business. Right? Like, I think everybody has, like, a little demo video here and there, but I'm curious to see, like, what types of people or what types of videos are people programmatically building versus, like, going in, like, an actual editor. Right? Like because, like, I'm thinking about this podcast and whatnot. I probably don't wanna edit this podcast in in Remotion, but there's there's pieces of it, like maybe the overlays and whatnot that would be a use good use case for us.
+
+Yeah. I think the audience has changed towards, more nontechnical nontechnical people.
+
+They are now willing to to give it a try and just giving Claude a very, broad nonspecific prompt about the video that they would like to have.
+
+And I think because they Yarn just, like, so because it's so accessible, many people are now just doing that and doing, videos like, small, like, product launch videos or, like, explainer videos or, like, graphics for for their YouTube videos.
+
+There have also been, like, real companies, big companies, building up, like, design systems, like, reusable graphics, kind of like a motion design system. Yeah. With that, like, a couple of days ago, I saw that, like, OpenAI was tweeting from the main account, like, an announcement video for for Node.
+
+That was maybe, like, the biggest wow for moment for me. That so that was built in Remotion? Yeah.
+
+Yeah. You guys even open about this. And do you see a a a large differentiator between the people who are using this to build, like, apps Vercel people who are using this to build one off, video animations and things? Because I I actually used Remotion to build, like, a audio wavelength like, what are they? Like, a visualizer for just audio content on YouTube. So you get, like, the bars and the text and stuff on there. And I found it to be awesome for that specific use case. You could, you know, design this thing. You could build yourself a tool and have it export video. But do you see most people using it as a one off make me a video kind of deal? Nowadays, yes. So
+
+Mhmm. To be honest, we've kind of, like, never really found our niche and we've, like, bounced around a bit.
+
+At first, we thought, like, templates, data driven videos.
+
+That's it.
+
+Then we kind of try to position ourselves as, like, the framework with which you can make a video editor.
+
+Node not only can you code a video, but you can code a video editor.
+
+Have Yeah. You have, like, a you have a whole, like, video editor UI that you built. Right? And you can just buy that, and someone could if you wanna go make, like, your own, like, what's TikTok's editor called?
+
+CapCut.
+
+Yeah. If you wanna make your own CapCut, you could just take this UI and then take a lot of your underlying tech. You could build a video editor. Right? Yeah. Pretty much.
+
+Well, we figured building this is kind of like insane and it require solving 1,000 problems.
+
+Yeah. I would say a couple of them be be like componentized and put them into, like, singular functions.
+
+And, yeah, that was and and still is like a a big idea of Free motion. I guess we're mostly into video technology at all. Like like video technology overall. This is also like what what is most fun to me, one prompt to video thing.
+
+I've not yet found myself to be, like, super comfortable, in this segment, but Yeah. It's it's obviously huge. That's when Claude Claude has these amazing,
+
+launch videos, every time they have, like, a product, they have these unreal animation videos that, like, zoom in and out. And I was like I asked on Twitter. I was like, who's building these? And, like, half of the comments were like, oh, you're just prompted with Remotion, bro. And and, like, not to knock Remotion, but, like, it was it was very good. It still needs, like, a a a human. Like like you said, like, Remotion is is a lot of, like, video tech, and it has a lot of, like, built in animations and examples and and things like that, which is why it makes good stuff. But I think you still obviously need that human at at the other end. Wes, finally, I got a hold of the person at Anthropic that made it, and they didn't want me to, like, share anything. But, they they did tell me, like, their process was, like, partially browser. Right? A lot forgetting a lot of, like, the assets, but then they a lot of that was, like, exported from the browser into, like, after effects, assets, which I thought was kind of an interesting workflow. But, like, do you think we will get to a spot or or maybe maybe another question JS, like, like, what is a good have you seen any good workflows for people maybe partially prompting, partially editing, or, like, what does that even look like to build, like, a really good video?
+
+I think there's still a bit a big gap to, like, a a super nice, fast, iterative workflow. I mean, I'm using After Effects myself. I'm fascinated by the program, and I'm trying to learn from it. And, like, gonna be gonna be honest, I I wanna copy some of its ideas now. Like, for example, they have, like, this this LX system. Yeah.
+
+The this this effects system where you have, like, blur, wiggle, vignette, you Node, just like grab them from a panel and drag them on top of a layer.
+
+And then you have these, controls which you can adjust and you get instant feedback.
+
+And and this does not make sense to do agentically because you have to wait. I I think this could be the next step, and I'm actively working on this. I'm Cool. Kind of, like, trying to figure out how this can make sense because I do think one other important aspect is that the code should, like, remain the source of truth.
+
+So if you, like, visually edit the values in a UI, how does it save back to the code? What I've kind of figured out so far is that, you know, like, with some black magic with JavaScript proxies and source maps, we can kind of, like, figure out where a React component is is located in in the original Node, and then we can use some abstract syntax tree processing to, like, write the props back. But then if you, like, write values back to the Node, then that triggers, like, a fast refresh and there's, like, two hundred milliseconds latency and what have happened.
+
+At the at the same time, it's not a nice experience. So now I'm, like, trying to bypass the the bundler if you write back to the code, but then the agent That's pain for the demo. The write at the same time.
+
+I'm I'm I'm thinking about this. And, you know, once I figured it out, you know, we we can also bring this aspect to Remotion.
+
+That's cool. Because I agree. Because I was working on some Remotion the other day, and my process Wes, sometimes I was jumping into the Node. Sometimes I was prompting to have changes, and sometimes I was in, like, Remotion Studio, selecting from the drop down. And then I ended up making my own, like, crappy version of Remotion Studio that sort of embedded, like, the it embedded the Remotion player, and then I had all my, like, props as drop downs, like background and font and color. All of those things, you can you can click. And as you hover over it, it shows you in real time. Then when you click it, it updates the code. And I was like, this is kind of a nightmare because there's now three spots Wes you can you wanna interface with it. Right? Editing the code directly, via prompting an agent, or actually via the UI, and it all sort of comes back to, the actual the code, the code where re the Remotion, like, timeline lives.
+
+So that's really cool because I'm I'm really excited to hear about that. Our editor, Randy, who is, like, absolute vibe coder Chad now that he's he's got a, like, a cursor TypeScript, and he built all kinds of stuff. Funny. He's he's so good at it, and he's building all these Python scripts, that, like, automate a lot of the editing, and, like, import it into DaVinci and transcribe it, and he's building this whole app. And then, like, one thing we're we're starting to think about now is, like, we would love to have, like, motion graphics and overlays and and things like that programmatically done. And in the past, I've done it for my videos with just, like, static PNGs, and I I built a whole web app that just exported it as, like, a transparent PNG because I was like, this is way easier to lay out in HTML and CSS and and with a little bit of JavaScript if you need it. It's way easier to do that than to use, like, Photoshop or Figma or or something else. And that's why I love this, like, the idea of doing it in video so much. But one thing that came out couple couple weeks ago was this, Chrome is prototyping HTML in Canvas, meaning that you can now write parts or all of the DOM into a Canvas element, meaning that, like, you can but you can still interact with it like it's, like, HTML. So your your pnpm still work. Your drop downs still work. You can still highlight text. But because it's in a Canvas element, then you can apply shaders or or any effects that you're used to in in Canvas, which is do you wanna talk a little bit about that? I think that's probably really exciting for you. It's very exciting.
+
+Maybe I need to contain the hype at at the beginning. It's like pnpm experimental technology. And for it to work, you have to, like, download Chrome Canary and enable a flag in the settings.
+
+So you cannot, like, ship this preview to as a website to a user.
+
+But if if you are willing to put up with it, then you can use this to create some really cool videos. And if we think about it, it's like any video editor, any motion graphics editor.
+
+What they do is they essentially have, like, a canvas, a rasterized bitmap, and all of these, effects are just being drawn onto the bitmap. And then if you have effects transitions, they just manipulate the the pixels in many different creative ways.
+
+And that's not been possible in the on the web so far. We we do have a Sanity element, but it is, like, separate from the DOM world.
+
+So in in a DOM world, you can lay out items in in a grid, in a in a row, you know, like with CSS, refine line of CSS, apply all sorts of things, but you cannot apply, like, a progressive blur or a vignette effect on top Mhmm. Of that content. And this API makes that possible. And so it feels like day one again because Yeah. That number one constraints that we had Yeah. Is now gone. And so, yeah, we are rethinking a lot of things.
+
+Yeah. It's So cool. So exciting. Do you foresee this being, like, paradigm shifting in in your world because of the amount of things you can just apply with Canvas now? Canvas
+
+unlocks so much. Right? Yeah. Definitely. There are, like, a couple I'm trying to, like, figure out the exact mechanics of how does this HTML in Canvas, like, actually works and and what are the limitations of it. Like, for example, one limitation that I have found is that you you cannot, like, nest it. In my prototyping, I I would have found it, like, very useful if we could, like, maybe, like, add a shine effect, like, one small element, but then add, like, a blur or a vignette effect to, like, the entire video. Oh, yeah. And how HTML and Canvas works is in the DOM, you add child Node to the Canvas, something that
+
+you would not do before. It's really weird. Like, you open a Canvas tag and then put your HTML inside of there. Yeah. It feels illegal.
+
+Yeah.
+
+But but that's how it works. And then you end up with, like, this tree.
+
+And I was, like, trying to figure out in the inner canvas tag if we, like, apply the shider the shader there, will it also, does the out of shader then compose with that? And, that does not seem to be the case, unfortunately. So, yeah, I'm I'm thinking about, like, whether there's, like, a workaround or whether I should, like, open an issue in the spec and ask about this. But, yeah, for now, it's just, like, we'll throw an error. And if you want to see all of the errors in your application,
+
+you'll want to check out Sentry at century.io/syntax.
+
+You don't want a production application out there that, well, you have no visibility into in case something is blowing up, and you might not even know it. So head on over to century.io/syntax.
+
+Again, we've been using this tool for a long time, and it totally rules. Alright.
+
+Do do you think there's any concern about this API just not making it?
+
+Yeah. It could happen. I mean, if Wes need to be realistic and they could just, like, scrap it, I think there's, like, this whole process of, like, stage zero, stage one, stage two that, like, any web technology has to go through. And, it's not even at stage zero yet. And, also, like, the API could change entirely.
+
+I'm just not willing to let it dampen my mood right now because Yeah. Yeah. You know, we we can pin the version if we wanted to, and we can I'm willing to,
+
+adapt to whatever the API. It feels like one of the first APIs that's been Vercel, like, this is amazing. You know? Like, I haven't I I've seen just a tremendous amount of people being excited about this. So you would hope that that would influence things.
+
+I I agree. And a lot of the the people that are working on on Chrome has said, like, yeah. Send us your feedback. And, like like, now JS the time to it's amazing that so many people are playing with it because they're gonna have such good feedback, like the one you can't nest them, you Node, or, like, another one is you can't put an iframe inside of it, which maybe makes sense probably makes sense. There's probably a lot of security issues there.
+
+But it is such a cool thing. I made one where, like, I just love, like, grunge and blur on a lot of my text, and I I built some, like, three d shaders that would very efficiently add, like, blur and grunge and grit and grain to your text, which is just it looks so cool. And I I can think of so many use cases for that in in my videos.
+
+And maybe we should say for for people who haven't used it before, it doesn't necessarily have to be in the browsers because it's it's not like people are watching Remotion videos in the browser. You you can, But Right. Most people are are exporting them. And then the way that it works is that you can maybe you can tell me, but it just takes it takes screenshots of or not screen shot or screen captures of every single frame and then stitches those together. Is that how it works?
+
+Yeah. Pretty much. It it it sounds very simple, and it is on on the surface that we just, like, essentially launch puppeteer, seek to the right frame and and capture it and encode it with FFmpeg.
+
+Mhmm. Mhmm. Yeah. I don't wanna make it sound more complicated than it is. To, like, get this HTML and Canvas thing working was, like, very difficult though, actually, because, we, like, wanted to compile a version of Chrome, which was recent enough to have this thing, but also was, like, small enough so that it can fit in an AWS Lambda function and also that, it has, like, the h two six four and h two six five Node enabled, which by default, like, the headless Chrome does not have. And this is also very important for us to play videos.
+
+And so for, like, all of the operating systems, we, like, compiled Chrome, like, for five different platforms, and that's, like, a huge project.
+
+How long does it take to compile Chrome?
+
+I I would say, like, four to five hours. You would, like, spin up, like, an e c two instance with 150 gigabytes of RAM and hokey Like, really? Course.
+
+Yeah. Yeah. It's massive.
+
+And I used to do this by hand, and it would, like, take me a week because it would also fail. And now, with the agents, I I can do, like, multiple compiles, a day and parallelize them. It's really, really nice. Oh, that's great.
+
+Yeah. That's one thing I wanted to ask about as well JS, like, because of the way that that works is that it takes, like, a screenshot of of every frame.
+
+Your UI essentially needs to be like a like a pure function, meaning that you pass in a time Node, and it will always render that exact same frame at that exact same time.
+
+And because of that, when you wanna use animations and whatnot, does that all need to be, like, the Remotion way of doing animations, or can I just use regular CSS animations as well?
+
+You you can animate the CSS properties in in JavaScript, but you cannot have, like, the the CSS native animations. These, do not work and and they lead to flickering.
+
+Our model is essentially that using a hook called use current frame, you get the current time and then it's, like, up to you to, like, render the right image. It's like a pure function.
+
+The time is the argument and and your job is to return an image. And because, like, the CSS animation is not, like, tied to the time well well, actually, you can make it, but it's a bit tacky.
+
+That does not work by default.
+
+But, it's unlocked some some really nice things. Like, you you can have, like, a huge timeline and only need to mount and render the content that you really actually need at the moment. So if you have 100 clips, then, you Node, you know, you don't have a bottleneck. And you can multitracks the render because, like, every frame is so deterministic.
+
+You can
+
+parallelize it as much as you want. Yeah. Be like, you could theoretically spin up like, let's say you had, like, a 100,000 frames. Could you theoretically spin up a 100,000 Lambdas and render it all in, like, one second?
+
+Yeah. Let me think about it. So 100 so 100,000 frames, that's let's divide it by, 30. That's, like, three thousand something seconds. So it's like an app an hour long video.
+
+And with, like, Remotion Lambda, you can I mean, this is like a Yarn, coded limits by by us because we think too much concurrency also doesn't make sense, but you can, like, spin up to 200 Lambda functions and actually split up this hour of video into 200 parts and render it pretty quickly? The longer the video, like, the more x real time it is because the parallelism outweighs the the overhead. Yeah. So absolutely possible. And our users actually want to do that. And the the problems are more with, like, the two hours, three hours, four hours long videos because then you run out of Lambda resources.
+
+Oh, yeah. And when you spin up a Lambda, does it like, I'm assuming there's some overhead of, like, spinning it up, and then you're able to take you take multiple screenshots in that one once it's warm.
+
+Is that even a thing anymore? Do we still say warm Lambda? Yeah. It does make a difference.
+
+I would say you save Node, two, three seconds if a Lambda is warm.
+
+If that is the case, then we can also already open the browser.
+
+Yeah. Then you can perfectly, parallelize it. In the end, you kind of need to stitch together the already encoded parts of a video and the encoded audio together.
+
+Make it seamless so that there are no audio artifacts.
+
+Also, like, a delicate topic that Wes pnpm a lot of time on. But, yeah, I we have, like, some some metrics from our users, I think. Like, millions of videos are rendered every month on on these Lambda functions.
+
+And one thing I'm really curious about JS, do you have any insight into, like, the CD underworld of video slop? I I like, you know, like, these, like, programmatically made videos that YouTube is trying to crack there. I think YouTube is calling it loop content, which is just videos that can be programmatically made over and over again.
+
+Do you have any insight into that underworld? Have you talked to anybody about that?
+
+Yeah.
+
+ESLint interesting.
+
+I I don't have, like, super secret info.
+
+Okay. But,
+
+you know, like, some some people have been like, whenever a video JS being made with Free motion, Wes, like, using FFmpeg, like, embed, like, metadata. Like Yeah. I FM probed a video the other day, and it says Node by
+
+Remotion.
+
+And and some users complained that, you know, they wanna be able to remove this because, apparently, platforms use this to Oh. Detect their their slop.
+
+Yeah. I made a slop video the other day, and I removed it. I think I removed it, but or, Node. I didn't.
+
+And TikTok just tanked it immediately.
+
+And then it Instagram did well, but I think that they were I'm not sure if they detected the Remotion tag or they detected that. It was like an AI music kinda meme reading GitHub, GitHub meme GitHub comments.
+
+It was really funny, by the way. You should watch it. But,
+
+I was curious what they used to detect that. I mean, if if that is really true, then I Yeah. I apologize to the world, really, for for all of this love.
+
+I was never Yarn of the plan.
+
+Started this when AI was not a thing.
+
+And I'm I'm trying to not, amplify it or
+
+implement our users on it who are doing this. Oh, no. That's it's not your fault. Right? Like, you you build an awesome tool, and and people use it, figure out how to use it for bad as well. But I think the the platforms are doing a pretty good job at at trying to figure out how to detect this type of stuff. I'm curious about MediaBunny. So you all moved over to MediaBunny ESLint
+
+seems like, February.
+
+Can that's a project that I've always had on my radar, but I'm not quite sure where it fits in in the ecosystem. Scott why you moved to MediaBunny and, like, where it fits in here?
+
+Yes. I I'd love to. So, traditionally, in in the browser, if we are dealing with video, then we are just, like, interfacing with the video tag. Or we wanna extract a frame from a video, we mount a media tag a a video tag. We seek to the correct time and then, like, capture a screenshot, but this is not frame accurate.
+
+There's a limit. You cannot, like, match too many video tags at some point. Like, the browser will just start, throttling you, and, it's not efficient at all. And there's another really interesting technology that, is a bit more mature than HTML and Canvas that is now available in all browsers in 2026, called WebCodecs.
+
+And that allows you to interface with video on a very low level.
+
+So this allows you to take encoded h two six four chunks, h two six five chunks allows you to decompress them and also to encode them again.
+
+These h two six four chunks, they Yarn, like, embedded. This is what you will find in an m p four video.
+
+And to read them out, you, like, actually need to read the binary data of an m p four and extract and interpret these, encoded packets.
+
+And that is, as it turns out, a really difficult task because MP4s have so many different features. There are many edge cases, and that is just for, like, one container.
+
+There's also WebM and, like, six other containers if you include the audio containers.
+
+I saw this opportunity that we can work around limitations of the video tag by just fetching the m p four via the the web fetch API, reading the binary data, putting this into web Node, and then doing things. And then even doing things like converting an m p four to a WebM and have, like, a different codec, which was not possible before.
+
+I mean, it was possible, like, software only, but this Wes also used, like, the accelerated codecs. And so sorry. Only now I'm getting to Media Bunny.
+
+When I saw this, then I immediately realized that the guy behind it was, like, much smarter at it in in every aspect. And now we talk often, and it's, like, amazing how brilliant he is. He, like, for every topic, always knows the right answer, and, like, I immediately realized that, you know, maybe I should give up on this rabbit hole and, you know, just use this awesome library instead.
+
+Oh, man. It takes a special kind of person to want to have to, like, write a Node, man. I can't imagine the the little bug rabbit holes you've gone down in your days of of writing codecs of just little I'm sure I'm sure you've had, like I've battled my fair share of just frame drops of just using software to record video, and I can't imagine poor people writing the codecs of finding all these bugs. Yeah. It's,
+
+its own world. Like, last year, I've also been to, like, multimedia, developer conference, DMXed, and it's you know, like, every talk is just, like, funny anecdotes, rants about edge cases, and what can go wrong.
+
+Really funny.
+
+Oh, that's great. I once saw years ago, I saw a talk on how m p fours were Node, and they basically said, like, you know, sometimes you're watching an m p four and you just get, like, a blocky green. And they this was way before. It was probably ten years ago at Frontier's conference, and they explained how, like, the m p four codec works and and what happens when things go wrong. And they had built, like, an m p four, I don't know, decompiler or something in the browser.
+
+And I thought that was so interesting to understand. Oh, that's why when you see green, it's it's glitching out, and it's because there's something wrong with the the underlying data.
+
+I wanna ask about, like, motion graphics workflow as Wes. Because, like, if if we were to, like, build some sort of, like like, a lower third, or or whatever, like, we're this is one thing we're kinda looking into right now. It's just the NFL has all these things over top. The scores, when the score changes, the it will go up. All of that stuff is just great in in the browser. Right? I it's I can think of so many easier ways to handle it. Now we have the, what's the retext? I did a video on it. Why am I forgetting it? Oh, the retext.
+
+Pretext. Yeah. Yeah. All the the new the new pretext APIs for sizing things. And, like, the browser JS just such a good use case for doing layout and and being able to do animations and change text and whatever.
+
+And I'm curious. Do you have you heard of anybody and what their workflow looks like for programmatically creating these things? I know there's, like, Lottie files. I know there's this new o graph HTML spec. Have you looked into that whole area of, like, how do we get these motion graphics out of rendered in Remotion and then somehow into the editor, but be able to update them? Yeah. I guess the Remotion way is that
+
+you would, like, first figure out how to build, like, this, like a scaffold in web technology using React CSS, make it look like you want it to, then you you animate it. You Mhmm. You have keyframes and remotion.
+
+In the end, we we have a way to, like, parameterize these motion graphics.
+
+We simply use React props for that. Props? Yeah.
+
+You you have a component. You give it props.
+
+And, I I think you've also, like, alluded to, like, these little drop downs that we have in the studio.
+
+Mhmm. So we allow you to, like, interactively, edit and preview them, like, to find like, using a Scott schema, kind of, like, create a form where you can, like, try different values and see how So good. Just makes so much sense in my brain that way of doing it. And I would say if you are good with this workflow, then that is the way to go. But reality JS, and a lot of users ask us this, is that they have an After Effects template and now they wanna parameterize it. This is where we have to use Lottie. Well, it's it works well.
+
+Use the regular Lottie React component. Where we've kind of made our own integration, but it's like a very thin layer on top of it.
+
+And you parameterize the the Pnpm, essentially.
+
+But it's also one big limitation of the Lottie file that it is just a JSON, which describes the whole video.
+
+You do not have the crazy cascading of CSS.
+
+You do not have the crazy if else data fetching stuff that you can do in React.
+
+It's not code.
+
+It's just data which defines, a Lottie file. So you are limited in how you can parameterize a Lottie file.
+
+And it's very pragmatic. You design something in After Effects, and then you bring it over to Remotion with Lottie. That's cool. And does Lottie have, like
+
+like so they wouldn't have the ability to, like, say, measure a name. You know? If if my name, West Boss, is short, maybe you wanna increase the size of it until the height of it gets to a certain point. Whereas, like, somebody's German last name is really long, you wanna, like you maybe wanna, shorten it. The Lottie doesn't have
+
+that logic like that, does it? I do think it gets pretty hairy if you wanna do that. Because as far as I know, the like, a Lottie animation has, like, fixed dimensions.
+
+So if you clip outside of it, then Mhmm. You know, you you have to maybe with with Node, also detect like, measure the text and also decrease the font size, which is also in the JSON.
+
+Yeah. I I think that's how it works, but I'm not Scott Lottie expert. May maybe they do have, like, an auto sizing feature. This would be cool.
+
+Yeah. I think like, honestly, I'm I'm talking, like, Randy, our editor as well. Like, essentially, I think what what we wanna end up with is just like a like a website we can visit, and we have got all of our components. And you can just type in, and there's all logic in those. You Node? If there's if there's three people, render it this way. And then you obviously could just click download. It'll render it out, download Node. We can throw it into into DaVinci. But, like, I think the dream would be, like, a DaVinci plug in or something like that Wes you can type in the different props and then click, like, rerender or something, and that would replace that piece somewhere in there. Yeah.
+
+So we do not have a plug in yet, but what you have just described before, you can totally do it, and we actually have a demo if somebody wants to check it out. It's on the remotion.dev/ brand, and you will essentially end up on a website where you can click through, our logos, like lower thirds that we use Mhmm. In in our videos.
+
+You can even, like, if this Scott schema parameterize, like, the lower thirds that we have. And then not yet possible to render directly on the website because this is a static website, but you can copy a CLI command, and then you can render out that lower warp as a transparent ProRes video and drag it into DaVinci.
+
+So, yes, we've not yet closed the arc quite yet. You have Mhmm. To jump through one hoop maybe, but, I would say it's still pretty good progress.
+
+Cool. Wow. Yeah. This is neat. Yeah.
+
+Wes, alright. This has been amazing, Johnny. Now is the part of the show where we're gonna be talking about sick picks and shameless plugs. Sick picks for people who don't know or things that generally find interesting, exciting, or just stuff that's making your life better. Johnny, do you have a sick pick for us today?
+
+I do have one indeed, and it JS, right in my hand.
+
+It is the EnTech DMX USB Pro. This is a, device that's not so cheap, actually. Maybe, like, $100.
+
+And what it allows you to do is it's an interface that allows you to plug in, like, actual, disco lights, like this one, into into your, MacBook and then interface with this this collides through the DMX protocol.
+
+This is like the protocol that is actually being used for, like, big concerts, big festival productions.
+
+It all runs over the DMX protocol.
+
+I figured out, with one prompt, I was really surprised that it worked, that through the web serial API, we can program these slides, in the browser.
+
+And then we can, like, we can wipe Node slides.
+
+We can and and it's, like, honestly, so cool. So, I bought, like, couple of these lights, made some, vibe code made essentially a vibe coded light show, used free motion to and 11 laps to, like, make some karaoke videos, some lyric videos.
+
+Oh, yeah. Compose the silver after effects, and essentially used all of but really really used, like, all of the AI tools. Yeah. And, Wes, essentially, try it like a a vibe Node. It's DJ stuff. Do you have a fog machine too? I do. Yeah. It does.
+
+But but this one is just like, like a dumb fog machine. You just press a button.
+
+Okay. You need to make that smart. Alright. What about lasers? You have you hooked up AI to high powered lasers yet? I also,
+
+have a laser. Like, out of all of the light, to be honest. This was, like, the most disappointing one because it's just, like, produced, like, one small dot.
+
+But, yeah, this was kind of, like, my rabbit hole at the beginning of this year. And then, like, for, like, for my birthday party, I invited a couple of friends and then, like, I performed the the Vibe Node teacher, I said. Yes.
+
+Wes. So we gotta do something for our live shows with this.
+
+Oh, yeah.
+
+DMX. That's I was actually upset. I have all these lights in my office, and they're Bluetooth. And I hate it because Bluetooth is the worst.
+
+And I was like, oh, just hook them up to DMX. And turns out my lights don't have a DMX input, so I'm kinda bummed about that. I shoulda got some that were DMX compatible.
+
+Also, DMX, sick rapper.
+
+Indeed. Rest in peace. DMX. Yes. Rest in peace.
+
+Cool.
+
+Shameless Plugs, what would you like to plug to our audience? Where can we find you online? All that good stuff.
+
+Absolutely nothing. I'm I think I'm, good with, exposure recently.
+
+I mean, at the moment, I just want my peace.
+
+Yeah. People Scott finding you. I'm sure you get all kinds of yahoos in your inbox now that this thing is gone. It just exploded.
+
+Alright. Well, thank you so much for tuning in. We appreciate you coming on. And, definitely, audience, check out Remotion. Build it. I'd love to see what you build. Thanks again.
+
+Peace.

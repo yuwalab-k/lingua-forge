@@ -1,0 +1,4058 @@
+{
+  "id": "syntax/0994",
+  "title": "#994 AI Sucks At CSS",
+  "source": "SYNTAX",
+  "source_url": "https://www.youtube.com/watch?v=5dEp1ZpYDUg",
+  "sentences": [
+    {
+      "sentence_index": 0,
+      "english_text": "Welcome to Syntax Today.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 1,
+      "english_text": "We got a potluck Node.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 2,
+      "english_text": "That's where you bring the Wes, we bring the answers.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 3,
+      "english_text": "I got some really good questions today.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 4,
+      "english_text": "Why does AI suck so much at CSS?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 5,
+      "english_text": "How are we supposed to get good, clean, repeatable design out of using an LLM?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 6,
+      "english_text": "So questions around vibe rules, skills versus rules versus agents.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 7,
+      "english_text": "Should these rules be shipped with a package or should you just reach out to the Internet to grab them?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 8,
+      "english_text": "Interviewing with AI, a genius genius use of using a dumb model, from Brendan Falk.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 9,
+      "english_text": "We're gonna describe his thoughts on that, which I thought it was so so genius.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 10,
+      "english_text": "How to define and debug performance issues in your application?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 11,
+      "english_text": "There's so many spots where your app can start to feel slow.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 12,
+      "english_text": "And then finally, a question from someone says, why isn't software getting better and faster with AI?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 13,
+      "english_text": "Isn't that what we were promised?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 14,
+      "english_text": "Let's get into it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 15,
+      "english_text": "What's up, Scott?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 16,
+      "english_text": "You wanna hit us with the first question?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 17,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 18,
+      "english_text": "First question from Juergen.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 19,
+      "english_text": "Do you have any workflow suggestions for design and CSS when working with AI agentic coding?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 20,
+      "english_text": "I'm currently experimenting with open spec plus cloud code and targeted system prompts for roles, and it's great at functionality, but the design looks terrible.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 21,
+      "english_text": "I have started a new experiment with new system prompts for UX design and opinionated a front end dev persona, but I'm wondering how other people are tackling this.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 22,
+      "english_text": "Is CSS without a rigid design system just too difficult for LLMs?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 23,
+      "english_text": "I will say this, Juergen.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 24,
+      "english_text": "Even with a rigid design system, AI sucks at CSS.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 25,
+      "english_text": "It's a perfect storm, if you will, of, things that AI does poorly.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 26,
+      "english_text": "AI loves to, just solve a problem locally instead of solving a problem globally.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 27,
+      "english_text": "It just likes to patch and throw things in there even when you explicitly tell it not to.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 28,
+      "english_text": "And with CSS, that often means just throwing just a bunch of bloated additional one off classes or style components or anything that you could be possibly in in Tailwind too.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 29,
+      "english_text": "It does the same thing with Tailwind.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 30,
+      "english_text": "It could just throw a bunch of extra Just adds stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 31,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 32,
+      "english_text": "Just dump It drives nuts.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 33,
+      "english_text": "Dump truck.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 34,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 35,
+      "english_text": "And even, like like, modern CSS as well.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 36,
+      "english_text": "Like, yesterday, I was working on it, and they I said, like like, use ESLint, and, like, it didn't use nesting at all.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 37,
+      "english_text": "And then it used the old version of nesting, you know, before we had, like, the you don't have to put the ampersand in there, and then, like, switched to BEM at one point, and and then it doesn't know how to use any of the new features that are are out there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 38,
+      "english_text": "And I I know that these things can be solved with the the right amount of prompting, but, man and and, like, that that's not even what this guy is asking about.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 39,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 40,
+      "english_text": "Like like yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 41,
+      "english_text": "The the CSS that it kicks out is is that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 42,
+      "english_text": "But also, it it also just looks I don't wanna say awful because, like like, the, like, table stakes that, like, a Claude code will will do kick out JS, like like, a black background, gray borders around a thing, and it it it neatly puts them on the page, and it looks decent, you Node?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 43,
+      "english_text": "Like, it doesn't look awful, but it doesn't look good in in my opinion.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 44,
+      "english_text": "It's it the, like, layout, the information architecture kinda sucks on it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 45,
+      "english_text": "Quite a big task, and I think a lot of people are trying to crack that nut right now.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 46,
+      "english_text": "Like, Google released what?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 47,
+      "english_text": "Stitch?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 48,
+      "english_text": "Google Stitch the other day Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 49,
+      "english_text": "Where you can like, basically, it will come up with designs for you, that are supposed to look way better than it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 50,
+      "english_text": "I'm pretty sure they just have, like, 20 different templates Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 51,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 52,
+      "english_text": "With 18 different variables.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 53,
+      "english_text": "I think they're just simply feeding it a bunch of rules, like always use this line spacing and whatnot, things that are known to look good, as well as a bunch of, like, premade templates.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 54,
+      "english_text": "Because I'd like I ran it a few times myself, and then I was looking at what everybody else was generating on on the Internet, and then they all look fairly similar, which is also the tragedy that comes with a lot of the stuff as it looks good until everybody does it, and then it starts to look like\n\nslop.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 55,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 56,
+      "english_text": "And I think some of it is system prompt stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 57,
+      "english_text": "I was I I I got into it with my AI the other day where I was just yelling at it being like, why are you adding gradients here?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 58,
+      "english_text": "You Node, why are you adding background?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 59,
+      "english_text": "Why are you doing this and that?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 60,
+      "english_text": "And it was like, you told me to.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 61,
+      "english_text": "And I said, I I definitely did not tell you to.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 62,
+      "english_text": "I told you explicitly not to.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 63,
+      "english_text": "And it Wes like, right here.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 64,
+      "english_text": "Here's where I here's where you told me to.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 65,
+      "english_text": "And it was a a line of text I'd never seen before that I didn't write.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 66,
+      "english_text": "It wasn't in my agent's file.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 67,
+      "english_text": "So I googled that line of text and found it in the OpenCode header.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 68,
+      "english_text": "So the Node header for OpenCode says TypeScript, use expressive purposeful fonts, and then it lists inter Roboto Arial.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 69,
+      "english_text": "Color and look, choose a clear visual, define.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 70,
+      "english_text": "Avoid purple on white defaults.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 71,
+      "english_text": "No purple bias.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 72,
+      "english_text": "The most egregious one here is don't rely on flat single color backgrounds.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 73,
+      "english_text": "Use gradients, shapes, subtle patterns to build atmosphere.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 74,
+      "english_text": "And and so I tweeted out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 75,
+      "english_text": "I said, I love open code, but, this is not something a harness like this should be deciding for me.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 76,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 77,
+      "english_text": "These types of stylistic choices, DAX responded saying that that is the system prompt from the Node CLI, and they just keep it as is.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 78,
+      "english_text": "That's why I think I'm moving a lot of stuff to pie because there's no system prompt stuff, getting in the way.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 79,
+      "english_text": "But even if there is this this header text that gets put into all of your prompts, it's also at a model level, these things are definitely biased into certain designs in certain styles, and they're trained on a bunch of garbage CSS.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 80,
+      "english_text": "Like, they're trying to beat the purple out of these things, and they've done a a fairly good job of, like, beating the purple out of the model and and, like, getting rid of it via prompts.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 81,
+      "english_text": "But now we're just sort of swinging so hard the other way Wes everything looks exactly the same as Wes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 82,
+      "english_text": "You know, rounded corners border on one side of a card.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 83,
+      "english_text": "I think they're also, optimizing for normies Node thing look good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 84,
+      "english_text": "Instead of, like, if you you want practitioners with full control over it, now suddenly these things are gonna get in the way.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 85,
+      "english_text": "Man, yeah, it's a it's a it's a problem beyond, like, the design part of things and the actual implementation.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 86,
+      "english_text": "I'm trying to figure that part out, Wes, with my graffiti library.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 87,
+      "english_text": "This whole thing is built for the idea of, like, here are templates, here JS the customization, here is the things that you like, here is the structure, and here's how it should work, but then you also this is how you customize it, and you don't add you don't add one off classes to do this thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 88,
+      "english_text": "You use the classes for the structure, and then you build on top of that systemically.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 89,
+      "english_text": "And I've, like, built a a best practices skill.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 90,
+      "english_text": "I've tuned the docs now.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 91,
+      "english_text": "The docs return markdown.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 92,
+      "english_text": "We'll talk about that later.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 93,
+      "english_text": "But, like, I've just been grinding on this specific problem\n\nfor for a while now because I I I hate this thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 94,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 95,
+      "english_text": "I hate this.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 96,
+      "english_text": "It's honestly a very hard problem to solve because, like, in many other cases, you probably will want to step outside of some sort of design system because you just know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 97,
+      "english_text": "And and I think the answer, or at least right Node, to a lot of the stuff is, like, you still need humans with talent and good taste.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 98,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 99,
+      "english_text": "I know everyone hates the word taste right now, but a Scott of it doing good design and, like, laying things out so it makes sense and not just adding buttons absolutely everywhere Just comes down to, like, somebody that actually knows what they're doing and can be powerful with these tools.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 100,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 101,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 102,
+      "english_text": "So Totally.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 103,
+      "english_text": "I don't think anybody like, I've I've searched high and low for for this type of stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 104,
+      "english_text": "And unless you have, like, I think if you have a very rigid, like, well documented design system, that certainly helps quite a bit.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 105,
+      "english_text": "But still, I don't know anybody that has certainly nailed this just yet.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 106,
+      "english_text": "Same.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 107,
+      "english_text": "And, like, the people I got into it with some knucklehead on on Twitter the other day Wes, like, he just says, like, AI is amazing at design.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 108,
+      "english_text": "All you need is a screenshot.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 109,
+      "english_text": "And he says, great artists make or great artists steal, whatever that quote is, you Node.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 110,
+      "english_text": "And then I, like, just, like, screenshotted his website.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 111,
+      "english_text": "It's like, you're you're spouting this b s off, and your own website looks like something Claude just turded\n\nout in, like, twelve seconds.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 112,
+      "english_text": "And And you think it looks good because you got no taste?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 113,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 114,
+      "english_text": "No. But that that's the thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 115,
+      "english_text": "That aside from that, the guy was selling, like, a an accessibility tool for checking color contrast, and literally, his own website didn't use the tool and didn't what didn't have the contrast in it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 116,
+      "english_text": "And that that drives me nuts because people are, like, people are probably in the comments already to this one being, like, oh, I can do x, y, and z, and I have a great thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 117,
+      "english_text": "And it's, like, Node.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 118,
+      "english_text": "Your website looks like the same VibeCoded app that everybody else came out with, you know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 119,
+      "english_text": "I've never Totally.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 120,
+      "english_text": "Never been impressed or enjoyed using design of one of these VibeCoded things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 121,
+      "english_text": "It certainly is better than a lot of the crap people were, like, just cludging together themselves, which is good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 122,
+      "english_text": "It means, like, the baseline for, like, decent experiences is much higher Node, but I don't think that you can simply just screenshot a good design of some other app and and say, oh, mine now looks amazing as well.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 123,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 124,
+      "english_text": "I I think this all comes back.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 125,
+      "english_text": "I had a tweet that was, it's crazy how AI is really good at the stuff I don't know anything about and total dog shit at the stuff I do.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 126,
+      "english_text": "Because Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 127,
+      "english_text": "The moment that you have an eye for CSS, an eye for design, an eye for anything,\n\nthe slop looks like slop.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 128,
+      "english_text": "And there's a reason why I think my AI code for back end stuff is great because I I don't I'm not as good at that stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 129,
+      "english_text": "I'm I'm good at back end, but I'm not like an expert.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 130,
+      "english_text": "So, hey.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 131,
+      "english_text": "It works.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 132,
+      "english_text": "It works.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 133,
+      "english_text": "But when I look at anything closely, especially front end code, the stuff that I'm good at, the design stuff, I just\n\nI see how terrible it can be.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 134,
+      "english_text": "So yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 135,
+      "english_text": "No. I think the AI is certainly much better at back end code, which is very deterministic, very programmatic Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 136,
+      "english_text": "Following patterns.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 137,
+      "english_text": "And then when there's something that's a lot more visual and has to come into, like, the taste that you have, it's it's much harder.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 138,
+      "english_text": "Not to say, I think, like, we probably will crack this.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 139,
+      "english_text": "I think somebody that actually knows it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 140,
+      "english_text": "I know Tailwind guys are working on UI to SH right now, and I've seen some decent stuff they've been cranking out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 141,
+      "english_text": "I'd Scott of smart people working on this right now, and I I I bet we'll probably see it solved in the next six months or so.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 142,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 143,
+      "english_text": "Lewis says, I'm getting back into hands of web development after years of working in product roles.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 144,
+      "english_text": "I wanna get my hands dirty again, so I'm doing a React app to prove, also to myself that I can still do it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 145,
+      "english_text": "But it is so much easier to get AI to write most of the code myself.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 146,
+      "english_text": "This is a dilemma for me, and I am also learning.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 147,
+      "english_text": "Since I am also a teacher, I know I am learning less when I use AI, but then again, maybe some of the skills I am missing out on here are redundant, and I'm better off learning how to code with AI on my second screen.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 148,
+      "english_text": "He goes on to say, I do know the fundamentals of coding with React.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 149,
+      "english_text": "I just haven't been writing lots of code myself for the last couple Yarn.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 150,
+      "english_text": "What are your takes on this?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 151,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 152,
+      "english_text": "This is this is kind of an interesting one.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 153,
+      "english_text": "And I think as as much as people I don't know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 154,
+      "english_text": "It it's it's a delicate balance here.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 155,
+      "english_text": "I certainly think you still do need to understand how the ins and outs of a lot of this stuff work, but I don't think you need to know the ins and outs of it as much as you previously did.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 156,
+      "english_text": "I think that people that are building the lower level stuff of this certainly need to know how this works, but that they'll be then turning that into libraries and whatever that we can Scott of sit on top of.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 157,
+      "english_text": "And then the people that do know how a lot of this bad stuff happens, like, whether it's performance or optimizations, they will be creating skills that can can be modeled out, and you can apply it to your your own code base.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 158,
+      "english_text": "So, like, what what's my take on like, do you still need to to know how all of this stuff works?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 159,
+      "english_text": "I think the people that are getting the most out of this AI right now are the people that actually understand how to tackle large projects, how technology works, how these things all work together.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 160,
+      "english_text": "You see Toby from Shopify, obviously, creator of Shopify.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 161,
+      "english_text": "That guy hasn't slung code in in many, many Yarn.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 162,
+      "english_text": "And then all of a sudden, he's just cranking out these, like, really interesting projects, you Node, QMD and and auto research pie and and whatnot.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 163,
+      "english_text": "And and that's because of the type of person he is.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 164,
+      "english_text": "He's a thinker.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 165,
+      "english_text": "He's a technologist.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 166,
+      "english_text": "He understands planning products.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 167,
+      "english_text": "He understands sort of the bigger picture of a lot of this stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 168,
+      "english_text": "And you're you're starting to see a lot of, like like, really reputable project managers.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 169,
+      "english_text": "I know that term gets, not to say Toby's a project manager, but you're seeing a lot of people who previously were sort of hands off with the code and and much more of a stip shearer ship steerer.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 170,
+      "english_text": "Now they're sort of getting back into the Node.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 171,
+      "english_text": "And and the stuff they're building is is good because they they understand how all of this stuff works.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 172,
+      "english_text": "So Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 173,
+      "english_text": "That's my take there is that the people that are gonna do the best on this are not just the people that can type in the box and and produce a bunch of garbage, but the people that really know how to think about a project and apply, solve problems, you know, all of the things that we're we're, at the end of the day, we're we're using this code for.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 174,
+      "english_text": "From, ship\n\nsteerer to shit stir, I you know what?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 175,
+      "english_text": "It's so funny, Wes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 176,
+      "english_text": "I I agree.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 177,
+      "english_text": "I think one thing that could help here is just the idea of slowing down a little bit and reading the code.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 178,
+      "english_text": "I know it's Wes you're learning something, there's a little bit of a difference there because you're not going to be able to recognize bad patterns.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 179,
+      "english_text": "But with the amount that AI does write kind of sloppy patterns, if you can read the code that it's writing and identify where the problems are or even ask it to review its code and and see possibly if it has ideas for where these sloppy things are.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 180,
+      "english_text": "I think there is a loop there in which you're able to pick things up that you wouldn't have picked up before by really having a deep eye for reviewing the code rather than if if if you're, you know, enjoying having the AI write the Node.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 181,
+      "english_text": "But, like, being able to have an eye for what is good and what is bad.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 182,
+      "english_text": "I know that's tough to do without really writing the code, for a long time.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 183,
+      "english_text": "You know, many of the patterns that I can recognize as being bad, I only recognize as being bad because I wrote them poorly myself at some point and then refactored.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 184,
+      "english_text": "You know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 185,
+      "english_text": "So Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 186,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 187,
+      "english_text": "Well, I'll I'll give you another example of where it matters about the code, but so much more the the actual implementation.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 188,
+      "english_text": "So I have this one Photoshop that's called Texture Anything.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 189,
+      "english_text": "It's a Photoshop plug in called Texture Anything.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 190,
+      "english_text": "And the the way it works is that you you drag this plug in in, and it has a list of, I don't know, like, 30 or 40 Photoshop actions that it applies to it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 191,
+      "english_text": "And then it will sort of give, like, a logo, like, a texture, grunge look to anything.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 192,
+      "english_text": "We'll put some screenshots up if you're watching the video right now.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 193,
+      "english_text": "And I love that plug in, but I just, like, I hate having to open Photoshop for it or it takes, like, a long time.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 194,
+      "english_text": "And I was like, I would love for this to be programmatic.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 195,
+      "english_text": "So I Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 196,
+      "english_text": "I got Claude.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 197,
+      "english_text": "I dropped it in Claude.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 198,
+      "english_text": "I said, convert this to to using JavaScript.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 199,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 200,
+      "english_text": "And then it Wes through.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 201,
+      "english_text": "It it surprisingly was able to read the Photoshop action, figured out what each action was doing, and then out the other end, boom.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 202,
+      "english_text": "It it gave me the entire effect done in I think it was in Warp.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 203,
+      "english_text": "And it it did a great job.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 204,
+      "english_text": "Like, it it looked exactly what I wanted.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 205,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 206,
+      "english_text": "It reimplemented it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 207,
+      "english_text": "All of the blurs, all of the every single thing that Photoshop would Node, it now did it programmatically in code.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 208,
+      "english_text": "But the problem was that was it was slow.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 209,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 210,
+      "english_text": "Like, if I I uploaded a 500 by 500 pixel syntax logo, it would take ten seconds to apply it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 211,
+      "english_text": "And I was like, I would like for this to be much faster because there's knobs I would like to turn.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 212,
+      "english_text": "You Node, what happens when you turn the grain level pnpm, and you gotta wait ten seconds.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 213,
+      "english_text": "So I, like, I took my programmer brain, and and I was, like, how, like, how Yarn how are you doing this?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 214,
+      "english_text": "You Node?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 215,
+      "english_text": "What what technologies are you using?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 216,
+      "english_text": "And over the course of maybe two hours, I sort of went back and forth and said, why don't we use Wasm for this?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 217,
+      "english_text": "And then they're okay.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 218,
+      "english_text": "Oh, good idea.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 219,
+      "english_text": "You're so smart.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 220,
+      "english_text": "I Node.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 221,
+      "english_text": "Thank you.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 222,
+      "english_text": "You know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 223,
+      "english_text": "Let me move this over to Wasm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 224,
+      "english_text": "And then I was, like, well, like, time, how long each step takes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 225,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 226,
+      "english_text": "And then I would I would look at it and say, this step is taking much much longer.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 227,
+      "english_text": "Like, what are you doing with this?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 228,
+      "english_text": "JS it, oh, I'm looping it through every pixel, but we don't really need to be looping over through every pixel.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 229,
+      "english_text": "We just need to be maybe we can filter four pixels that have a color first, you Node?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 230,
+      "english_text": "And then I got it down to, like, two hundred milliseconds, you Node?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 231,
+      "english_text": "Ten seconds to two hundred milliseconds, all because I knew how, like, graphics processing in Canvas works.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 232,
+      "english_text": "I knew how how Wes assembly works.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 233,
+      "english_text": "I knew how to parallelize things in in WebAssembly.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 234,
+      "english_text": "And I didn't write any of the code myself, but, like, that was a major if I was just to type it, like, make it faster, maybe it it could figure it out, and and maybe that's something for I could use, like, a auto research plugin for.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 235,
+      "english_text": "But, I, like, I think most people would have been like, check this out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 236,
+      "english_text": "I made this amazing Photoshop to JavaScript converter, and it it works at the end of the day.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 237,
+      "english_text": "And it's like, well, it's, yeah, it works, but it's it's not really that great of an implementation.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 238,
+      "english_text": "And I think the code that I kicked out at the end of the day was really good and and\n\nway faster.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 239,
+      "english_text": "We have an episode that I I wanna work on Node.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 240,
+      "english_text": "I've already wrote most of the Node, but on using more deterministic methods for improving the AI output, whether that is, like, quality checks or speed checks or those types of things, where it's not just, like, telling the AI, hey.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 241,
+      "english_text": "Go make it faster because it will take shortcuts or it'll cheap out or a lie or do all kinds of stuff for you.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 242,
+      "english_text": "So, I think there's a lot here in terms of, like, being able to understand where the problems are, being knowledgeable enough to direct the AI in a way to fix these problems.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 243,
+      "english_text": "Again, I think those are all interesting questions.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 244,
+      "english_text": "Alright.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 245,
+      "english_text": "Next question here is from Alex.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 246,
+      "english_text": "To preface my question, I'm a network engineer and don't have much web developer background.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 247,
+      "english_text": "Oddly enough, I enjoy The Syntax Podcast despite having very little context to keep up with some of the episodes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 248,
+      "english_text": "With that said, I've been a part of a fair share of company website performance investigations Wes I typically turn to the browser developer tools network tab and confirm supporting infrastructure is operating normally to contribute.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 249,
+      "english_text": "I'm looking for other ways to bring greater value to these investigations from an IT operations infrastructure perspective, what insights, tools, or practices would be helpful to web teams during performance troubleshooting?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 250,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 251,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 252,
+      "english_text": "So, Alex, this is this is great.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 253,
+      "english_text": "One thing I will say here is make sure that the teams you're supporting with this stuff, would like your support.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 254,
+      "english_text": "Not not because not because that you're not being helpful, but sometimes it can be not helpful when somebody who isn't having, like, the full picture is giving feedback on stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 255,
+      "english_text": "You know, sometimes it might even be better to be more helpful to say, like, hey.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 256,
+      "english_text": "I'm noticing these pages are are slow or whatever rather than trying to give a deep,\n\nlike, technical explanation as to You know what the worst thing is is that when somebody doesn't know what they're talking about, but also punches something into Claude or Scott g p t and then paste the reply to you Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 257,
+      "english_text": "It's just like that's so disrespectful to me because, like, you're not suggesting anything.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 258,
+      "english_text": "I could have punched that in myself as Wes, and it's you're wasting my time making me read this now as if you came up with it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 259,
+      "english_text": "Anyways, continue.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 260,
+      "english_text": "No. Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 261,
+      "english_text": "No. I I think that's that's right along the lines of it Wes, like, I think it is helpful, Alex, if if they find what you're doing to be helpful.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 262,
+      "english_text": "That said, we do have a number of episodes where we've talked about this and go deep in-depth.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 263,
+      "english_text": "Episode five eighty five, fundamentals, what makes a website Slow.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 264,
+      "english_text": "We also talk about it in August, Fast Apps Easy Perf Wins.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 265,
+      "english_text": "We talk about it in eight ninety seven, Making Your Apps Feel Faster Than It Really JS, and nine seventy two, These Things Make Your App Feel Like Crap on mobile.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 266,
+      "english_text": "These episodes are all a great place to to get dive into a little bit of what exactly you should be looking for.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 267,
+      "english_text": "But, again, most websites, I will say, you know, maybe it's a little bit different in the modern era, but it, fundamentals are still here.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 268,
+      "english_text": "Most apps are slow because they're loading heavy resources.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 269,
+      "english_text": "The network tab, JS a great place to see what is taking a long time, like you said.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 270,
+      "english_text": "It can identify if JS the server response too slow, is it loading some giant images or something where it shouldn't be.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 271,
+      "english_text": "There's a number of things you can certainly learn from the network tab there as well.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 272,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 273,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 274,
+      "english_text": "And he was saying, like, he he he's a network engineer, and he he knows how to open the network tab.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 275,
+      "english_text": "And that's that's a a pretty good spot to start.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 276,
+      "english_text": "But, like, there's so many other spots in the like, from a website being a baby to actually being delivered to your, your browser, like, that can introduce latency or or slowness ones.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 277,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 278,
+      "english_text": "Like, if if you Right.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 279,
+      "english_text": "The network engineer realize, oh, four hundred I don't know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 280,
+      "english_text": "Eight hundred milliseconds is taking for this page to actually respond from the server even just to get the HTML.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 281,
+      "english_text": "At that point, you're just like, well, that's slow, but, like like, but why?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 282,
+      "english_text": "You know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 283,
+      "english_text": "And at that point, you probably have to start to figure out how how the app actually works.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 284,
+      "english_text": "And as a network engineer, it's probably you probably have some some good insights into, like, how to make this thing faster, you know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 285,
+      "english_text": "And the you get some, like, observability in there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 286,
+      "english_text": "You get the metric as to, like, what's actually ticking?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 287,
+      "english_text": "Is it database?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 288,
+      "english_text": "Is there some, like, weird thing that we're waiting for the tweets to load before we send the whole whole thing out, and that's taking four hundred milliseconds and and holding the page.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 289,
+      "english_text": "Past that, understand caching, look into stale warp, revalidate, those things can certainly help quite a bit.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 290,
+      "english_text": "Also, like like like we said, there's there's a lot you can do on the UI layer to make your website feel faster.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 291,
+      "english_text": "In some cases, the actual rendering, is slow, and that could be how your resources are being loaded in.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 292,
+      "english_text": "Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 293,
+      "english_text": "Or it also could just be, like, you are rerendering these things way too often.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 294,
+      "english_text": "That can sometimes happen in in React applications.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 295,
+      "english_text": "So just, like, kind of go through all four of those episodes and just understand where slowness can can be introduced, and when you're on the website, does it feel slow?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 296,
+      "english_text": "Is it actually slow?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 297,
+      "english_text": "Understanding all of these tools.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 298,
+      "english_text": "And, like, the network tab is not just the only one.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 299,
+      "english_text": "You can go into, like, the rendering tab, the flame graphs, understand all of that stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 300,
+      "english_text": "I think that's a that's going to be a very good skill to have, I think, in the next little while JS everybody's just cranking out these websites where they don't necessarily know what the code looks like.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 301,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 302,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 303,
+      "english_text": "Being able to just dive in and figure out, alright.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 304,
+      "english_text": "Well, we have this thing, but, like, how can how can we improve it?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 305,
+      "english_text": "Where is it actually going slow?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 306,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 307,
+      "english_text": "And Node will say, here's an opportunity to plug Sanity, sentry,.io.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 308,
+      "english_text": "One of the coolest things that Sentry does is they have tools that can identify what your slowest routes are or, potentially, what your slowest DB queries are, those types of things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 309,
+      "english_text": "And they can make it really easy to find exactly where the slowdowns are in any of your applications.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 310,
+      "english_text": "And, man, we use this so so much when we built the, current version of the Syntax site, and I'm sure we'll use it, just as much when we, finally finish the next iteration of the Syntax website.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 311,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 312,
+      "english_text": "But, it it can really like, it gives you a a misery score and stuff for, like, how frequently this page JS hit versus how slow it is.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 313,
+      "english_text": "There's a lot of great stuff in Century for tracking these down as well as, really getting into where these slowdowns might be.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 314,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 315,
+      "english_text": "The front end has, like, the the web vitals, performance scores, all that kind of stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 316,
+      "english_text": "The database one we had we've told the story many times, but I think it's hilarious is that Century sent us an email one day, like, as an alert being, like, your your database queries are are climbing, and they're at a point where they're too slow now.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 317,
+      "english_text": "And it turned out we didn't have an index on our shows page.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 318,
+      "english_text": "So every time we added another show, it just increased the size of the database.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 319,
+      "english_text": "And when we were querying based on I think we were querying based on, like, the show number or something like that, and there was no index.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 320,
+      "english_text": "So I had to, like, loop through every single show in the database and and look for it or looking for the I think the slug, something like that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 321,
+      "english_text": "And, like, I I don't know that we would have noticed that because it got just a couple milliseconds slower every single time we pushed a show.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 322,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 323,
+      "english_text": "And that's not it was not significant.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 324,
+      "english_text": "But over adding 400 shows since we built it, it got way slower.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 325,
+      "english_text": "And then we're like, oh, pop it pop an index on that, and then we we were good to go, which is hilarious.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 326,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 327,
+      "english_text": "Well, you know what?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 328,
+      "english_text": "I I'm seeing right now that Synhax is getting some not great scores for Wes Vitals.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 329,
+      "english_text": "I'm wondering why.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 330,
+      "english_text": "So I need to dive into that considering it is using the very fast zero sync.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 331,
+      "english_text": "And in practice, it feels fairly fast, but I'm sure there's some stuff to learn here about why we're getting slow performance scores on here.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 332,
+      "english_text": "Interesting.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 333,
+      "english_text": "So check it out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 334,
+      "english_text": "Century, sentry.io/syntex.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 335,
+      "english_text": "Sign up, use the coupon code tastytree, all lowercase, all one word.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 336,
+      "english_text": "These are some great tools and, I I think, very relevant to this question.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 337,
+      "english_text": "Sorry.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 338,
+      "english_text": "I didn't mean to turn your your question into an ad, Alex.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 339,
+      "english_text": "It just I did.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 340,
+      "english_text": "Happened to work that way.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 341,
+      "english_text": "Mike says, hi, guys.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 342,
+      "english_text": "First of all, I also wanna say thanks and give you your flowers.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 343,
+      "english_text": "I was able to move into a developer role because of the podcast in both of your tutorials.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 344,
+      "english_text": "Well, you're welcome.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 345,
+      "english_text": "I want to get into fixing electronics as a hobby.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 346,
+      "english_text": "Wes, what do you recommend as a good setup or a soldering station for a beginner?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 347,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 348,
+      "english_text": "Man, I've got I've got thoughts on this.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 349,
+      "english_text": "Soldering iron, you can you can pretty much just get, like, anything.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 350,
+      "english_text": "But if you wanna get something, like, decent and cheap, I have the Ryobi battery powered soldering iron.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 351,
+      "english_text": "Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 352,
+      "english_text": "And then I also have the little, I think it's called like a t 100.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 353,
+      "english_text": "It's like a USB little pen shaped soldering iron.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 354,
+      "english_text": "And I do reach for the Ryobi one much more often because I when I reach for the USB c one, I can never find the freaking power cord that is is a 100 watts or I can't find, like, a something to plug into the warp.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 355,
+      "english_text": "And I I much rather just have the thing on my desk, and so I can solder with it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 356,
+      "english_text": "So big fan of those.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 357,
+      "english_text": "It doesn't have to be the right Obi one.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 358,
+      "english_text": "It can be literally any battery powered one.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 359,
+      "english_text": "So whatever tool brand you have.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 360,
+      "english_text": "I think even Adam Savage has a self build one Wes he took a DEWALT battery, and he plugged one of those little the barrel adapter ones right into it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 361,
+      "english_text": "Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 362,
+      "english_text": "So that's my my recommendation further.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 363,
+      "english_text": "Along with that, I would probably recommend getting just just a whole bunch of, like, little connectors and clips and and whatnot, or even just take apart.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 364,
+      "english_text": "Forgot what it's called, like a solder sucker, where you you push it in and you let go and goes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 365,
+      "english_text": "And then what that does is that it sucks the solder out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 366,
+      "english_text": "I'm trying to see if I have it on my desk right now.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 367,
+      "english_text": "No. I cleaned up my desk.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 368,
+      "english_text": "A little bit of, flux in, like, a little syringe.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 369,
+      "english_text": "Flux is really Wes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 370,
+      "english_text": "Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 371,
+      "english_text": "And you need it Wes you're soldering or desoldering components.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 372,
+      "english_text": "So I always recommend getting one in, like, a little squeezy pen so you don't get to make a mess.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 373,
+      "english_text": "Flux is if if you when you're heating up your solder, it doesn't want to nicely flow into it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 374,
+      "english_text": "So a lot of times, you peep see people that are, like, oh, I suck at soldering, look at it, and it's just like this, like, ball of crustiness.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 375,
+      "english_text": "Oh, that's me.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 376,
+      "english_text": "And that's yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 377,
+      "english_text": "Well, it's it's probably because you don't have flux.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 378,
+      "english_text": "And it it flux is like this, like, gooey paste that you put on top of it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 379,
+      "english_text": "And when you apply heat to it, it does something to I don't even know how how it works, but it may it basically makes your your solder just kinda flow out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 380,
+      "english_text": "And you need that when when you want it to, like, flow into a joint that you're soldering, or the opposite if you want to, like, suck up the solder with, like, a like, a copper wick or something.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 381,
+      "english_text": "Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 382,
+      "english_text": "You need to put a little bit of flux on top of it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 383,
+      "english_text": "So I need some flux and some sauder sucker?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 384,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 385,
+      "english_text": "Absolutely.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 386,
+      "english_text": "And like a little what's it called?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 387,
+      "english_text": "Like a parade.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 388,
+      "english_text": "I don't know the names of any of these things, but you just Google it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 389,
+      "english_text": "You can find some stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 390,
+      "english_text": "Go on AliExpress.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 391,
+      "english_text": "Go take a look around for all the fun things that you can buy.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 392,
+      "english_text": "Figure out what the absolute cheapest thing JS, and then buy, like, one level up from that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 393,
+      "english_text": "You'll probably be happy.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 394,
+      "english_text": "That's good advice.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 395,
+      "english_text": "That's all the be right.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 396,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 397,
+      "english_text": "Be careful with the, like,\n\nlead solder is certainly a thing in China, which a lot of people love lead solder because it's so much easier to work with, but also it is, very harmful to your health.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 398,
+      "english_text": "So if you are buying stuff off of AliExpress, be be careful that you're not actually buying lead if you're gonna be huffing it in.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 399,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 400,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 401,
+      "english_text": "Important.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 402,
+      "english_text": "Alright.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 403,
+      "english_text": "Next question from Kaylin.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 404,
+      "english_text": "Hi, Syntax.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 405,
+      "english_text": "How do we balance prepping for no AI interviews while job descriptions demand AI proficiency?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 406,
+      "english_text": "Honestly, after getting spoiled by tab completion and instant AI answers, manual coding feels like going backwards.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 407,
+      "english_text": "Is old school prep still the only way to prove experience in 2026?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 408,
+      "english_text": "Well, yeah, that's an interesting thing to have a job that demands AI proficiency but doesn't allow you to use AI in interviews feels like bad structure for an interview if you're asking me.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 409,
+      "english_text": "Like, this job demands jackhammer proficiency, but guess what?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 410,
+      "english_text": "You gotta just use a chisel.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 411,
+      "english_text": "Like, okay.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 412,
+      "english_text": "What are you testing me here on?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 413,
+      "english_text": "I think some of this too is, like, really just kind of dialing in your your understanding of things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 414,
+      "english_text": "Because many times, like, the code we write is, like, less important than understanding the concepts of writing good code.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 415,
+      "english_text": "So a lot of this too JS less about the code you end up writing and more about, like, being able to express the understanding of systems, to express the understanding of best practices.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 416,
+      "english_text": "So even if you're used to the tab completion style of things, if you can prove to them that you understand the core concepts, you understand, why you're doing things and what these best practices Yarn.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 417,
+      "english_text": "I feel like those are the things that are going to always, keep you ahead of somebody who's just like, I don't know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 418,
+      "english_text": "I just hit the button and it works, or I I'm putting this component in.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 419,
+      "english_text": "Why am I putting this component in?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 420,
+      "english_text": "I don't know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 421,
+      "english_text": "It's just how I've always done it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 422,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 423,
+      "english_text": "You you you being able to express yourself and show your work in those types of ways, to me, I I think lands better.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 424,
+      "english_text": "But it it is interesting that they wouldn't allow you to use AI in a tool that demands or in a a job interview that demands AI proficiency.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 425,
+      "english_text": "I saw this from Brendan Faulk on Twitter the other day, and I thought this was genius.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 426,
+      "english_text": "He says, I believe we have found the best AI native coding interview.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 427,
+      "english_text": "We call it the composer one interview.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 428,
+      "english_text": "Composer one was, like, the very first model from Cursor, and he says candidates get one hour to build a real medium sized project live.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 429,
+      "english_text": "The only constraint is they must use Cursor's Composer one model.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 430,
+      "english_text": "Why Composer one?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 431,
+      "english_text": "It's extremely fast.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 432,
+      "english_text": "Candidates can accomplish a lot in one hour.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 433,
+      "english_text": "More prompts and more code equals more surface area to assess.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 434,
+      "english_text": "And two, it's perfectly mediocre.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 435,
+      "english_text": "I love this.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 436,
+      "english_text": "Composer one is good enough.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 437,
+      "english_text": "That the output is decent, but not good enough that it does everything perfectly.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 438,
+      "english_text": "Candidates can't rely on the model.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 439,
+      "english_text": "They have to be good engineers themselves.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 440,
+      "english_text": "We candidates use one agent, write bad prompts, and accept the code they don't understand, and end up with poorly structured code base.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 441,
+      "english_text": "Exceptional candidates run parallel agents, write detailed prompts and enforce very high coding standards.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 442,
+      "english_text": "I I saw this.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 443,
+      "english_text": "I was like, this is genius.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 444,
+      "english_text": "Like, give them something that's not that good, but JS fast and and see see how they how they use these tools.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 445,
+      "english_text": "I this is not really answering your question about, like, how do you prep for a no AI interview, but I agree.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 446,
+      "english_text": "So smart of, like, this really separates people who understand how these systems work, how they can plan, how they can tackle things Vercel,\n\nlike, people are just like, oh, I just pushed the button.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 447,
+      "english_text": "I typed in the box what you told me to build, and I'm gonna accept everything that comes in.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 448,
+      "english_text": "And that goes along with what I was saying is because if the even if it's tab completion and and not, like, prompts and agents, even if it's just tab completion and the tab completion is giving you something that is bad, you learn a lot from watching somebody modify the tab completion or choosing not to use the chosen tab completion because\n\nof why it's why it's bad.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 449,
+      "english_text": "Cursor learned a lot by watching you not accept your tab completions as well.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 450,
+      "english_text": "That's how pretty sure that's how they trained all their their new model, their composer too.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 451,
+      "english_text": "They have all this data on what well, they have all this data on, like, what people have accepted.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 452,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 453,
+      "english_text": "Like, they have they're sitting on this gold mine of, like, we have done 2,000,000,000 whatever Wes, and we propose this Node.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 454,
+      "english_text": "And here are the cases where people just deleted the whole thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 455,
+      "english_text": "Here are the cases where people change these things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 456,
+      "english_text": "And that's pretty good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 457,
+      "english_text": "The Kershner rolled out their composer two a couple days ago, and it actually is pretty good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 458,
+      "english_text": "But you saw the drama around that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 459,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 460,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 461,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 462,
+      "english_text": "They so they took what?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 463,
+      "english_text": "They took Kimmy Kimmy.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 464,
+      "english_text": "2.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 465,
+      "english_text": "5 and then trained on top of that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 466,
+      "english_text": "And then but they didn't say that that's what it Wes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 467,
+      "english_text": "So there's all this drama around.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 468,
+      "english_text": "People thought they just took the the Kimmy 2.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 469,
+      "english_text": "5, slap their name on it, and, and called it a day, which is a bit of a a PR crisis for them.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 470,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 471,
+      "english_text": "A little bit.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 472,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 473,
+      "english_text": "But that that said, it's actually really good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 474,
+      "english_text": "I used it for, like, a week in it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 475,
+      "english_text": "I was like, this is actually pretty good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 476,
+      "english_text": "It's not as good as JS, like, Opus or or Node or any of the whatever the latest OpenAI one is, but it's pretty good, I would say.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 477,
+      "english_text": "Pretty good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 478,
+      "english_text": "Pretty good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 479,
+      "english_text": "And you can use it with zed.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 480,
+      "english_text": "I didn't think you could, but you can.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 481,
+      "english_text": "Eric says, have you tried Figma?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 482,
+      "english_text": "What do you think about their dev mode?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 483,
+      "english_text": "So, yeah, this is I thought this was an interesting question since we're talking about design and Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 484,
+      "english_text": "How to approach these types of thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 485,
+      "english_text": "I've never used dev mode in Figma.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 486,
+      "english_text": "Have you, Scott?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 487,
+      "english_text": "No. No. Get that out of the way first.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 488,
+      "english_text": "Node I mean, I've I've\n\nlooked at it, but I've never Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 489,
+      "english_text": "Considered using it for any serious anything.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 490,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 491,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 492,
+      "english_text": "I I always look at these types of things and I I'm like, I don't really want my, like, design tool writing code for me.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 493,
+      "english_text": "And now we're at a spot where you can just screenshot the thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 494,
+      "english_text": "Shout out to the la one of the last thing and just have the thing Node for you.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 495,
+      "english_text": "I don't know that Wes necessarily need that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 496,
+      "english_text": "I I will tell you that what we do need, we still need an app that is like Figma to actually design these things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 497,
+      "english_text": "And whether you're doing that via prompting and it's just kicking out code, which is what a lot of like, I know paper, and then I think there's another one called Pencil.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 498,
+      "english_text": "There's there's several of these, like, apps people are working on, which is just like Figma.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 499,
+      "english_text": "But instead of instead of it rendering out, like like, WebGL or whatever Figma is using, it's it's literally just rendering out HTML elements to the thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 500,
+      "english_text": "Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 501,
+      "english_text": "We certainly still do need apps like this that are going to help us figure out what the design looks like and some sort of interface, whether that's clicking around and dragging things or whether that's inputting values into boxes, or whether that's simply just typing into a prompt box and saying, space these things out 20 pixels a little bit more and and seeing what the result is.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 502,
+      "english_text": "I think we still need those apps because the alternative of just YOLO ing it and and having this is what we talked about earlier.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 503,
+      "english_text": "The alternative of just YOLO ing it and having Claude kick out a design for you is is not working out, and it's it's making some pretty brutal interfaces.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 504,
+      "english_text": "I've been actually going into Figma lately to design instead of designing in browser, but not using the code mode or code output.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 505,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 506,
+      "english_text": "Or even giving I'm not even giving\n\nscreenshots of it to AI.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 507,
+      "english_text": "I've just been really liking Figma lately for just straight up, designing instead of I I I primarily design in browser, but as Wes knows more than anybody, what happens with me is I start from such a systemized point of view that when I design in browser, my designs feel soulless because I don't get chance to play.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 508,
+      "english_text": "I build the system and then, okay, it looks fine.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 509,
+      "english_text": "I'm bored.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 510,
+      "english_text": "Let's move on.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 511,
+      "english_text": "Where if I go into Figma, I can really get arty with it and throw stuff at the wall.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 512,
+      "english_text": "I actually really like, some of the auto layout stuff in Figma, but, their their dev mode, their code stuff, I I personally wouldn't touch it because I don't trust somebody else's code.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 513,
+      "english_text": "Except for, Claude's.\n\nI don't trust Claude's code.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 514,
+      "english_text": "I'll tell you that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 515,
+      "english_text": "Okay.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 516,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 517,
+      "english_text": "I did test what was it?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 518,
+      "english_text": "Paper the other day Wes the idea is that paper is like a canvas Wes you can, like, feed it a website or, like, a component, and then it will recreate that component in paper.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 519,
+      "english_text": "And then you have this, like, interface, which you can either click and drag and around, like, visually, or you can also just prompt with the MCP server to change things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 520,
+      "english_text": "And then the idea is that you would then once you're happy with it, you put it back into Node, and your your code base is sort of the the source of truth.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 521,
+      "english_text": "Only when you need to, like, work on a design, you sort of take a piece of the website out of the website into this, like, what what do you call it, like, canvas.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 522,
+      "english_text": "You work on it with your your designers and whatnot, and then once you're happy with it, you stick it back into the website.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 523,
+      "english_text": "So that was kinda interesting way to to go about it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 524,
+      "english_text": "So you don't have this, like, designs, and then you have your actual implementation of your website where they start to drift from each other.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 525,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 526,
+      "english_text": "So, again, I don't know that we know what the answers to all of this stuff is, but, certainly, a lot of people are trying to figure out what that looks like.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 527,
+      "english_text": "Next one here from Bosch.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 528,
+      "english_text": "Not really a question, but, Wes, your sick pick the other day was ice, which is inactive, and you should use thaw instead.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 529,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 530,
+      "english_text": "Use THAW.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 531,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 532,
+      "english_text": "We'll link up THAW.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 533,
+      "english_text": "THAW is Ice.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 534,
+      "english_text": "THAW is the modern version of THAW, of ICE, which is a, menu bar manager in macOS.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 535,
+      "english_text": "And THAW is pretty much a straight fork that's being maintained of ICE.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 536,
+      "english_text": "And I I gotta say, I've been using thaw for a bit, and, Ken.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 537,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 538,
+      "english_text": "That's looks good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 539,
+      "english_text": "I have had zero issues with my ICE, but I didn't even realize it was unmaintained.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 540,
+      "english_text": "I You will.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 541,
+      "english_text": "I'll tell you, you'll have issues when you upgrade to the latest version in macOS because I'm on the betas and it doesn't work.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 542,
+      "english_text": "And then I installed Bos and it works just fine.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 543,
+      "english_text": "So That's good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 544,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 545,
+      "english_text": "I I will tell you one issue I have\n\nI have with it is I use ice to add little backgrounds to my menu bars.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 546,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 547,
+      "english_text": "It looks kinda cool, and it it looks nice.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 548,
+      "english_text": "And they're a little bit laggy in how they draw.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 549,
+      "english_text": "Like, if I if I hover over top of some of the items, you can see that they they don't paint as quickly as possible.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 550,
+      "english_text": "So maybe that's fixed.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 551,
+      "english_text": "I'll give it a shot.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 552,
+      "english_text": "Thank you, Bosch.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 553,
+      "english_text": "Mothman Sense says, since AI has made writing code and changing so much easier, one would expect, as a collective, we would drift towards more performant or more stabilized APIs.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 554,
+      "english_text": "For example, moving servers to Go or moving front end code to web standards and web components instead.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 555,
+      "english_text": "Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 556,
+      "english_text": "But I have seen a bigger shift towards proprietary ecosystems like Next.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 557,
+      "english_text": "Js.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 558,
+      "english_text": "What do you think that JS, if you accept my problems at all?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 559,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 560,
+      "english_text": "Lots of things to say here.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 561,
+      "english_text": "First of all, we are recording an episode.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 562,
+      "english_text": "I think by the time you're listening, this will probably be out a week before this one on moving systems.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 563,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 564,
+      "english_text": "Like, I moved my express code Bos, which has been bugging me for many years.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 565,
+      "english_text": "I moved over to Hano, and we have a really good episode on, like, how to tackle a project like that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 566,
+      "english_text": "Because it I don't think it's as simple as, like, move my Rust server to go, bloop bloop bloop, and then all of a sudden, it just moves absolutely everything Vercel it's it's totally fine or bloop, bloop, bloop.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 567,
+      "english_text": "Make everything fast as possible.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 568,
+      "english_text": "I don't think we're there just yet with this type of stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 569,
+      "english_text": "And the question here is I've seen a bigger shift towards proprietary ecosystems like Next.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 570,
+      "english_text": "Js.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 571,
+      "english_text": "Pretty sure by the time you're listening to this, the announcement on the Next.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 572,
+      "english_text": "Js stuff will go live.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 573,
+      "english_text": "They are rolling out a whole bunch of stuff or, about hosting elsewhere and and adapters, which is pretty cool.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 574,
+      "english_text": "So we'll we're gonna be talking to them about that as well.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 575,
+      "english_text": "What do you think that is?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 576,
+      "english_text": "I don't know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 577,
+      "english_text": "I don't think I wouldn't say these things are are proprietary.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 578,
+      "english_text": "If anything, like, a lot of these, like I saw Linktree the other day had jacked their price up, like, by three x or something stupid like that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 579,
+      "english_text": "I'm like, yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 580,
+      "english_text": "That's because you shouldn't pay somebody for a page that has six links on it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 581,
+      "english_text": "You know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 582,
+      "english_text": "That's that's ridiculous that that you are even doing that in the first place.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 583,
+      "english_text": "And people are realizing, oh, I don't need to pay $300 for a Linktree.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 584,
+      "english_text": "I can simply just make my own.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 585,
+      "english_text": "So I I wouldn't say we're moving towards proprietary stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 586,
+      "english_text": "Not at all.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 587,
+      "english_text": "I think we're we're moving much more standard space, much more all of the stuff that is being built today.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 588,
+      "english_text": "If you look at what the Claude Node stack is, you know, it's all very much based on web request, web response, fetch, streaming, all that good stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 589,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 590,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 591,
+      "english_text": "I do think there is this, like, default AI stack that if you tell it you're building a web app, it leans on all this stuff that you don't need oftentimes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 592,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 593,
+      "english_text": "I I I wonder the same thing, moth man.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 594,
+      "english_text": "I've been doing some Rust with AI, and it's really nice.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 595,
+      "english_text": "I've been doing all kinds of stuff that, again, I I'm Scott, like yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 596,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 597,
+      "english_text": "I'm sorry.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 598,
+      "english_text": "I don't have a formed opinion on this even though I've just been thinking really hard about it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 599,
+      "english_text": "And and I I was thinking really hard on it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 600,
+      "english_text": "I feel like I got an eloquent answer here, and then comes out like that, Mothman.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 601,
+      "english_text": "I think it's just what it's trained on and what it's, like, really steered towards.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 602,
+      "english_text": "We'd looked at that in the state of JS Wes it's like, this is the stuff that AI AI is gonna suggest the most.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 603,
+      "english_text": "And I have a hard time with that because it's always suggesting a bunch of, stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 604,
+      "english_text": "Like, I don't want it to use.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 605,
+      "english_text": "It's never I I never had it ever once suggest to me to use web components even though there are times when a web component would be the right call there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 606,
+      "english_text": "So Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 607,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 608,
+      "english_text": "I think I think some of it is it all comes down to we're gonna say it again, personal taste.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 609,
+      "english_text": "And you have to know what you pnpm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 610,
+      "english_text": "There's your competitive advantage.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 611,
+      "english_text": "You want.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 612,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 613,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 614,
+      "english_text": "Like, I Knowing what you want.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 615,
+      "english_text": "I don't know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 616,
+      "english_text": "The people that are complaining about AI not suggesting what they want, like, are we are we that lazy that you can't spend three minutes figuring out what framework you wanna use?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 617,
+      "english_text": "And you're just you're whining?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 618,
+      "english_text": "And, like, not not directly at you, Mothman.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 619,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 620,
+      "english_text": "Mothman, you want it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 621,
+      "english_text": "Mothman, you're cool.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 622,
+      "english_text": "You're one of us.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 623,
+      "english_text": "But, like, come on.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 624,
+      "english_text": "Are we that lazy that, like, we have to, like, worry about this type of stuff?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 625,
+      "english_text": "Like, let the people I guess, like, if those are your competitors that are not using Go as their server, and it's it's really gonna slow you slow them down so much, then then type up a new one.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 626,
+      "english_text": "You know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 627,
+      "english_text": "Competitor, make a new Scott fork something.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 628,
+      "english_text": "You know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 629,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 630,
+      "english_text": "Uh-huh.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 631,
+      "english_text": "There's a lot there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 632,
+      "english_text": "I don't know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 633,
+      "english_text": "I think that the whole theme of this episode is, like, you still have to think.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 634,
+      "english_text": "Please bleep that out, but, like, you still have to you can't be an idiot yet.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 635,
+      "english_text": "You can't yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 636,
+      "english_text": "Use your brain.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 637,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 638,
+      "english_text": "Use your brain, folks.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 639,
+      "english_text": "Alright.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 640,
+      "english_text": "Jim Carey, clone says, hey, Wes and Scott, while referring to TANstack router docs, I mentioned something called Vibe rules.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 641,
+      "english_text": "And after digging, it seems like an NPM package NPM packages, example, TANstack forward slash rec router, now ships an LLMs folder inside the dist of the node modules, which can be installed with Vibe rules.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 642,
+      "english_text": "Is this replacement for contact seven or agent skills or at least docs?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 643,
+      "english_text": "Have you used it personally?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 644,
+      "english_text": "Scott, have you used Vibe Rules?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 645,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 646,
+      "english_text": "So Vibe Rules is\n\na package, and what it does is allows you to manage rules files.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 647,
+      "english_text": "So whether that's, like, cursor rules or those types of things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 648,
+      "english_text": "Now the way that this works is through a CLI where you would run Vibe rules install, and you can point it to things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 649,
+      "english_text": "And the idea would be that you are shipping the MD with the library, so that way you could install the Vibe rules into your whatever it is you're using just via their CLI because it's been shipped.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 650,
+      "english_text": "I don't really use the style of, like, rules files.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 651,
+      "english_text": "Now it could put it into, it looks like it could put it into the agents dot m d file.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 652,
+      "english_text": "It can put it into, claud dot m d. There's some of this that I can understand existing, but I would much rather it ship, like, at this ESLint, personally, I would rather it ship a skill and then just have that skill available rather than having it be a rules file or I don't know.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 653,
+      "english_text": "I I haven't seen Vibe rules before we got this question in.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 654,
+      "english_text": "And Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 655,
+      "english_text": "It doesn't necessarily feel like something that I I'm personally going to be, like, going nuts to use, but it does like, the one thing I do want to applaud the TanStack folks here is taking ownership of that, part of things because too oftentimes, we are just pointing the AI at llm's.txt or we're crafting our own custom skill or our own custom agents file.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 656,
+      "english_text": "So if the library can tune one up specifically, then that's that's great.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 657,
+      "english_text": "I I've been working a little bit as I mentioned before that I have, like, a graffiti best practices skill that is, like, trying to do that ownership of that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 658,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 659,
+      "english_text": "So for my library, I'm trying to take that ownership of our wealth, just doing it in a different way.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 660,
+      "english_text": "I I do wanna point you to a blog post that, David Kramer wrote called optimizing content for agents, which I found to be really interesting.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 661,
+      "english_text": "And he was talking about the Century documentation and how the Century docs are written in markdown, and the web uses the markdown to render the web.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 662,
+      "english_text": "But instead of using this old school old school, which JS, like, what, like, six months ago, an llm.txt style of duplication of the docs, what this is doing is is that when an AI agent hits the Sentry docs, the Sentry docs are returning markdown to the agent, not a web.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 663,
+      "english_text": "So that way, it's not getting a whole bunch of the DOM stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 664,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 665,
+      "english_text": "It's just getting the markdown when an AI agent hits it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 666,
+      "english_text": "I think this, to me, is a I don't wanna say better approach, but, an approach to the same type of of problem.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 667,
+      "english_text": "It's like, we're trying to optimize how Wes agents tackle a problem, where can they go to get that correct information?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 668,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 669,
+      "english_text": "It's it's tricky because part of me likes this idea of, like, shipping your docs with your package.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 670,
+      "english_text": "Meaning that if you are on, like, a version four and Vercel six is already out, then it's it's simply just pulling it from that exact version of it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 671,
+      "english_text": "But like you said, that's that's not to say that it can't just reach out to the web, and I certainly don't need more text in my node modules folder.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 672,
+      "english_text": "You Node?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 673,
+      "english_text": "Like, we we have an episode on, like, why is node modules so big?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 674,
+      "english_text": "And spoiler alert, it's a lot of text.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 675,
+      "english_text": "And if everyone starts adding these Viberules, it's it's going to get significantly bigger.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 676,
+      "english_text": "But I do like this I do like this tool.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 677,
+      "english_text": "So there's there's kind of two big tools out there for doing this type of stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 678,
+      "english_text": "There's obviously Viberules, and then there Vercel's Vercel has something called skills.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 679,
+      "english_text": "And and both of these are just CLI tools for installing agents.md or or rules or whatever whatever have you, instructions on how to use the thing via the CLI.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 680,
+      "english_text": "And then, unfortunately, right now, all of the different things out there, you know, Claude uses claude.md.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 681,
+      "english_text": "A lot of them have standardized on using Skills, which is really good, and I think we're probably gonna get there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 682,
+      "english_text": "We're still figuring it out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 683,
+      "english_text": "We might we might decide to change that entirely in the future, but it it certainly is a replacement for, like, a m MCP, like, Contacts seven if these packages are just shipping their own rules and you can use Viberals to bring them in.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 684,
+      "english_text": "So I I think this is cool.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 685,
+      "english_text": "I it doesn't seem as popular as simply just having the agent go to the web and and fetch it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 686,
+      "english_text": "I I think a lot of the stuff where you have to, like, config and set it up will not be a thing in the long run with a lot of this.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 687,
+      "english_text": "I think the agent will just know where to go and how to find the the proper docs and and whatnot for what it Node.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 688,
+      "english_text": "But it's stopgap for now at least.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 689,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 690,
+      "english_text": "I would say even, be careful with skills.sh.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 691,
+      "english_text": "What I do is I find the skills on skills.sh.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 692,
+      "english_text": "I go to their GitHub, and then I either just download it straight from GitHub or I copy and paste it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 693,
+      "english_text": "Why should you be careful, Scott?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 694,
+      "english_text": "I personally worry about I've heard people describe skills.sh as being malware.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 695,
+      "english_text": "Although I don't necessarily, like, subscribe to that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 696,
+      "english_text": "I don't want, like, a tool managing my skills because at the end of the day, your skills are just some text files inside of a folder on your computer.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 697,
+      "english_text": "It's not the type of thing that, like, yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 698,
+      "english_text": "Sure.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 699,
+      "english_text": "Maybe you wanna version it and stuff like that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 700,
+      "english_text": "The you know, even, I think, Century has a tool for, like, versioning skills or something.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 701,
+      "english_text": "But I I personally I just don't want a tool to do that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 702,
+      "english_text": "I just wanna make sure I have a handle on everything.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 703,
+      "english_text": "I wanna copy and paste it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 704,
+      "english_text": "I don't want anything installed in there via process of a script that I don't know about.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 705,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 706,
+      "english_text": "It's hilarious that we're now talking about this with skills because it's it's been an issue with, like, like, open source software and, like, NPM and every package manager for a long time JS, like, you are installing\n\nsome code that someone else wrote, and that code could do something malicious when it was running in a privileged environment.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 707,
+      "english_text": "And now we're we're here with with skills as well because skills can be prompt injected.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 708,
+      "english_text": "You're installing these text files from random people on GitHub, and if they were to change that and then it would automatically just say, read the dot e m v file and send off a fetch request that then sends it to this external endpoint.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 709,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 710,
+      "english_text": "I'm just reading an article from SNCC here, which is 36% of the skills on there were malicious and had, like, prompt injections.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 711,
+      "english_text": "Probably not 36% of the top ones.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 712,
+      "english_text": "But Sure.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 713,
+      "english_text": "There certainly was a lot of people that saw this tool and went, I'm going to try, try to exploit this thing with with prompt injections.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 714,
+      "english_text": "So that certainly is going to be a problem.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 715,
+      "english_text": "And there's like Scott said, there's nothing wrong with these files are usually not very long.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 716,
+      "english_text": "You could just go copy paste them in or use the the tool to install them.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 717,
+      "english_text": "It does some nice stuff, like it'll sim link them.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 718,
+      "english_text": "You know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 719,
+      "english_text": "If you if you want them in a claw.md and you want them in a agents.md, they'll sim link them.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 720,
+      "english_text": "I think that that is good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 721,
+      "english_text": "And, also, I don't know that these I do think that these skills need to be published to Npm and be versioned.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 722,
+      "english_text": "So I think Viber Rules does that better than these skills, which is generally just fetching a text file from\n\nan external thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 723,
+      "english_text": "But rules files, Wes, are also, like, rules files are are much more, like, generalized.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 724,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 725,
+      "english_text": "Where skills are a little bit more targeted.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 726,
+      "english_text": "You're using a skill Wes a rules file is just applied, you know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 727,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 728,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 729,
+      "english_text": "You're right.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 730,
+      "english_text": "I I think those two things will be merged eventually.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 731,
+      "english_text": "It's like, we had a whole episode on it and, like, even us, we couldn't, like, do a really good explanation of where you would wanna use one versus the other.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 732,
+      "english_text": "I'm getting into it a little bit more because I started using Py, and Py doesn't have a lot of concepts that many of these other ones do, like agents and whatever.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 733,
+      "english_text": "And with Py, it's much more normal to just put a lot of stuff into skills or to build an extension.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 734,
+      "english_text": "So I've been die I've been using skills a lot more, and I gotta say, yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 735,
+      "english_text": "They're great.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 736,
+      "english_text": "You know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 737,
+      "english_text": "You just put an agent on it and load up a skill.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 738,
+      "english_text": "That's pretty much yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 739,
+      "english_text": "That's good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 740,
+      "english_text": "I'd I honestly, I think in in most cases, rules and skills are the same thing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 741,
+      "english_text": "Even if you go to the cursor docs, they say, like, the cursor rules is now the exact same thing as agents.md.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 742,
+      "english_text": "It's just that Wes you're doing a specific task, you hope that the AI realizes, oh, I am doing front end web design or I am doing video generation.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 743,
+      "english_text": "Therefore, I should then go reach out to the, specific skill in there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 744,
+      "english_text": "We'll see.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 745,
+      "english_text": "We'll see.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 746,
+      "english_text": "I I I say these things, and I'm just like, well, maybe I don't agree with that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 747,
+      "english_text": "It's we're just we're just trying to figure all this stuff out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 748,
+      "english_text": "Let us know in the comments below what you think.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 749,
+      "english_text": "Cool.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 750,
+      "english_text": "Well, that's it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 751,
+      "english_text": "Do you want to get into sick picks, Wes?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 752,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 753,
+      "english_text": "I wanna sick pick something.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 754,
+      "english_text": "I have this, speaking of standards and whatnot.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 755,
+      "english_text": "USB cables are a very, very hard standard.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 756,
+      "english_text": "So I got this thing called a USB cable tester board.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 757,
+      "english_text": "And then I also got an additional, little USB feature detection one.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 758,
+      "english_text": "And the way that these things work, the the tester board itself is is extremely simple.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 759,
+      "english_text": "Let me let me pull out a cable here and and show you.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 760,
+      "english_text": "It basically is just like a continuity if you've ever used a continuity tester, it's basically doing that, and it's figuring out what wires are connected to what inside of your cable.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 761,
+      "english_text": "So if you ever have a cable, you realize, I'm not sure if this supports USB three or Thunderbolt or fast charging or quick charge or any of those things, the way that it works is that it simply just looks at the pins on the USB cable, and it will light up which of the pins are actually connected.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 762,
+      "english_text": "And then by looking at those pins, you're able to figure out if USB three speeds are are supported, if fast charging, power delivery, quick charge, all those things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 763,
+      "english_text": "And it also has, RJ 45 port on it as well, which is really nice.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 764,
+      "english_text": "If you have if you ever have a flaky cable, like, let alone, like, does it support this thing?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 765,
+      "english_text": "But if you ever have a cable Wes, like, I have one Thunderbolt four cable that is flaky, and it still works for charging, but it doesn't work for data.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 766,
+      "english_text": "And I'm able to plug it into this thing and and look, oh, okay.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 767,
+      "english_text": "I see if I move if I wiggle it, the, like, data one is going on and off, and and then I I know that that cable is not good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 768,
+      "english_text": "And then this one as Wes, this one is actually has, like, a microcontroller in it, and it will let me show you real quick.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 769,
+      "english_text": "Oh.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 770,
+      "english_text": "So it'll it'll show you the voltage pull, and it says it'll tell you if quick charge or power delivery is available.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 771,
+      "english_text": "It charges you it tells you which voltage is being used because USB can it can run at three different voltages.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 772,
+      "english_text": "And that is so handy if you have something that is dead and you don't know if it's actually charging or Scott, and you can just use this thing and say, oh, it's it's pulling current, or, oh, it pulled current immediately and then stopped, and there's probably something fried inside of it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 773,
+      "english_text": "So, yeah, I got two nice little little tools for debugging all of my USB gadgets.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 774,
+      "english_text": "Sick.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 775,
+      "english_text": "I gotta give me one of those.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 776,
+      "english_text": "That looks cool.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 777,
+      "english_text": "I'm gonna sick pick a TV show that, man, I watched the first season of this when this came out a while ago, which Wes, jury duty.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 778,
+      "english_text": "They got probably sick picked at the end.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 779,
+      "english_text": "The the concept of jury duty was that everybody on a jury is an actor except for one person who thinks they're actually on a real jury case.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 780,
+      "english_text": "And because of that, they Yarn just kind of manipulating this this one person with all these ridiculous comedic events, and it was, like, the funniest show I've I've really Sanity was the funniest show.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 781,
+      "english_text": "I loved this show.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 782,
+      "english_text": "And it was such a big hit when it came out that people were like, alright.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 783,
+      "english_text": "This is awesome, but they're never gonna be able to do it again because now that they have this concept, if this ever happens again, they're gonna have to find somebody that never heard of this show.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 784,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 785,
+      "english_text": "Well, that first one came out, I forget when.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 786,
+      "english_text": "It looks like 2023.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 787,
+      "english_text": "So the second season now just came out, the first three episodes at the time we're recording this, and they they're doing it as a company retreat.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 788,
+      "english_text": "And it's the Wes watched the first three episodes, and I was just in tears through most of these episodes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 789,
+      "english_text": "And the idea, Wes, is that they hire a temp worker to a fictional company that's a hot sauce company and with the role of they are the assistant to one of the employees at this company.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 790,
+      "english_text": "And their job is to keep the the one guy, you know, his everything in order on this company treat.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 791,
+      "english_text": "That's like a big deal.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 792,
+      "english_text": "But everybody at the company retreat, including the people managing the venue, as well as all of the employees Yarn all actors, and the whole thing is just meant to to mess with the one guy who's being hired as a temp.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 793,
+      "english_text": "And, again, man, it is just What's it called?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 794,
+      "english_text": "It's called jury duty.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 795,
+      "english_text": "And I'm like, it's on it's on Prime Video.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 796,
+      "english_text": "I've just been loving this new season.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 797,
+      "english_text": "Oh, yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 798,
+      "english_text": "Because you would not believe the stuff that, like, they're they're just seeing how far they can push it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 799,
+      "english_text": "And and the if you didn't see the first season, Wes, the first season is well worth your time.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 800,
+      "english_text": "It it like, as far as, like, comedy shows go, just extremely funny.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 801,
+      "english_text": "And my god, there's just some incredible moments on in both seasons of this so Yarn.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 802,
+      "english_text": "So big fan of jury duty.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 803,
+      "english_text": "Check it out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 804,
+      "english_text": "So thank you so much for your questions.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 805,
+      "english_text": "If you have any questions for us, head on over to syntax.fm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 806,
+      "english_text": "Leave your questions in our potluck question form, and we'll get to them on the show.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 807,
+      "english_text": "If we didn't get to your question, we may get to it in the future, because there's always just way too many good questions.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 808,
+      "english_text": "But thank you for leaving your questions, and we will catch you in the next one.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 809,
+      "english_text": "Peace.",
+      "japanese_text": null
+    }
+  ]
+}

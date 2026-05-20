@@ -1,0 +1,4183 @@
+{
+  "id": "syntax/0995",
+  "title": "#995 Next.js Vendor Lock-in No More",
+  "source": "SYNTAX",
+  "source_url": "https://www.youtube.com/watch?v=UCveltYOQIs",
+  "sentences": [
+    {
+      "sentence_index": 0,
+      "english_text": "Welcome to Syntax.",
+      "japanese_text": "構文解析へようこそ。"
+    },
+    {
+      "sentence_index": 1,
+      "english_text": "Today, we have Tim and Jimmy on today.",
+      "japanese_text": "今日はティムとジミーが出演しています。"
+    },
+    {
+      "sentence_index": 2,
+      "english_text": "Tim is the, of course, the lead dev of Next.",
+      "japanese_text": "ティムは言うまでもなく、Nextの主要開発者です。"
+    },
+    {
+      "sentence_index": 3,
+      "english_text": "Js, and Jimmy is the head of Next.",
+      "japanese_text": "JimはNextの責任者であり、ジミーはそのトップを務めています。"
+    },
+    {
+      "sentence_index": 4,
+      "english_text": "Js.",
+      "japanese_text": "js."
+    },
+    {
+      "sentence_index": 5,
+      "english_text": "And we're they're here to talk to us today about some cool stuff that they're rolling out around their adapters platform, which is is it going to allow you to host Next.",
+      "japanese_text": "そして本日は、彼らが展開するアダプタープラットフォームに関する最新の取り組みについてご紹介します。これはNext.jsアプリケーションをホスト可能にする画期的な機能です。"
+    },
+    {
+      "sentence_index": 6,
+      "english_text": "Js on different providers like Cloudflare and Netlify JS well as, like, different run times as well.",
+      "japanese_text": "CloudflareやNetlifyなどの異なるプロバイダーや、実行時間の違いなども考慮する必要があります。"
+    },
+    {
+      "sentence_index": 7,
+      "english_text": "I mean, like, if you wanna use Node or BUN or whatever, you can you can do that.",
+      "japanese_text": "つまり、もしノードやブンを使いたいなら、もちろんそれでも構いません。"
+    },
+    {
+      "sentence_index": 8,
+      "english_text": "Conversation takes a little bit to get warmed up, but trust me, it's gonna be worth it because these are some super smart guys, and I actually really enjoy this conversation.",
+      "japanese_text": "会話が盛り上がるまでには少し時間がかかるかもしれませんが、信じてください、これは間違いなく価値ある時間になります。参加者たちは非常に知的な人たちで、私はこのディスカッションを心から楽しんでいます。"
+    },
+    {
+      "sentence_index": 9,
+      "english_text": "We talk about caching, Next.",
+      "japanese_text": "次はキャッシュについて説明します。"
+    },
+    {
+      "sentence_index": 10,
+      "english_text": "JS, performance.",
+      "japanese_text": "JavaScript、パフォーマンス。"
+    },
+    {
+      "sentence_index": 11,
+      "english_text": "We talked about turbo pack and all the turbo pack internals and the whole process of building that.",
+      "japanese_text": "ターボパックの仕組みや内部構造、そしてそれを組み立てる工程について詳細に話し合いました。"
+    },
+    {
+      "sentence_index": 12,
+      "english_text": "We, of course, asked them, why don't you just use Vite like everybody else is asking?",
+      "japanese_text": "もちろん、私たちも尋ねました。「どうして他のみんなが使ってるViteを使わないんですか？」って。"
+    },
+    {
+      "sentence_index": 13,
+      "english_text": "And they had a really interesting answer to that as well, which is maybe maybe one day.",
+      "japanese_text": "彼らの回答も非常に興味深いものでした。おそらくいつかその日が来るかもしれません。"
+    },
+    {
+      "sentence_index": 14,
+      "english_text": "And, the infrastructure, just like in general.",
+      "japanese_text": "そして、インフラストラクチャーも全般的に同様です。"
+    },
+    {
+      "sentence_index": 15,
+      "english_text": "Like like, Next.",
+      "japanese_text": "次は、次へ。"
+    },
+    {
+      "sentence_index": 16,
+      "english_text": "Js, of course, is is code, but it's also if you warp it to run like Vercel, it it requires a whole bunch of infrastructure, so we kinda go through that as well.",
+      "japanese_text": "JavaScriptはもちろんコードですが、Vercelのように実行させるには膨大なインフラストラクチャが必要なので、その点についても触れておきます。"
+    },
+    {
+      "sentence_index": 17,
+      "english_text": "Let's get into\n\nit.",
+      "japanese_text": "それに飛び込もう。"
+    },
+    {
+      "sentence_index": 18,
+      "english_text": "So the other day, you guys launched what the adapter platform.",
+      "japanese_text": "先日、アダプタープラットフォームをリリースされましたね。"
+    },
+    {
+      "sentence_index": 19,
+      "english_text": "Tell us about what that is.",
+      "japanese_text": "それが何なのか教えてください。"
+    },
+    {
+      "sentence_index": 20,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 21,
+      "english_text": "So we launched the adapters,\n\nlike, API as, like, stable, which has been, like, a long time coming, as you said.",
+      "japanese_text": "そこで私たちはアダプターをリリースしました - いわゆるAPIとしての安定したバージョンで、皆さんがおっしゃる通り、長らく待ち望まれていたものでした。"
+    },
+    {
+      "sentence_index": 22,
+      "english_text": "We've been working on it for close to a Yarn, at this point.",
+      "japanese_text": "もうほぼ1年もこのプロジェクトに取り組んでいるんですよ。"
+    },
+    {
+      "sentence_index": 23,
+      "english_text": "And, so the idea, right, is that we kinda, Next Wes by itself, you know, it runs super well, like, with with, like, sort of, like, next start, you know, like, on a simple sort of, like, VPS.",
+      "japanese_text": "つまり、Next.js単体では、シンプルな仮想プライベートサーバー（いわゆる「ちょっとした」環境）で非常にうまく動作するんです。例えば、基本的な構成のものとか。"
+    },
+    {
+      "sentence_index": 24,
+      "english_text": "You can sort of tap into, like, all capacities of Next.",
+      "japanese_text": "Nextのあらゆる機能を活用できる感じですね。"
+    },
+    {
+      "sentence_index": 25,
+      "english_text": "But when it comes to kind of scaling it, it's always been maybe slightly, slightly more difficult just because, like, Next.",
+      "japanese_text": "ただし、スケーリングに関しては、常に若干の課題がありました。Next.jsの場合、特にその傾向が強いように感じます。"
+    },
+    {
+      "sentence_index": 26,
+      "english_text": "Js capacities, like, the features, like caching and ISR just requires, like, you know, synchronization, across, like, you know, multiple nodes if you need it.",
+      "japanese_text": "JSの機能、例えばキャッシュやISRなどは、必要に応じて複数ノード間で同期を取る必要があります（例：マルチデバイス環境で）。"
+    },
+    {
+      "sentence_index": 27,
+      "english_text": "So, or with your CDN if you require it.",
+      "japanese_text": "CDNが必要な場合は、そちらをご利用ください。"
+    },
+    {
+      "sentence_index": 28,
+      "english_text": "And we basically introduced a layer so that you can basically tap into this and, you know, have, like, a somewhat of a stable contract so that you can easily adapt it wherever you kinda wanna host it.",
+      "japanese_text": "そして基本的に、この基盤に簡単にアクセスできるレイヤーを導入しました。これにより、さまざまな環境で柔軟に展開可能な、ある程度の安定性を備えた契約形態を実現できます。つまり、お好みのホスト環境で簡単に適応させることができるのです。"
+    },
+    {
+      "sentence_index": 29,
+      "english_text": "Like, it like, the adapters API, it's useful for yourself if you're just, like, hosting, like, you know, just across, like, five, simple servers, you you you might not even want, like, a VPN, like, sorry, like a CDN or something.",
+      "japanese_text": "例えば、アダプターのAPIは、5台程度のシンプルなサーバーを運用している場合、VPNやCDNのようなものは必要ないかもしれません。そういう用途なら特に必要ないでしょう？"
+    },
+    {
+      "sentence_index": 30,
+      "english_text": "But it's also useful if you're someone like CloudFlare or Netlify and you're, like, hosting Nextiva ESLint a specific way with, like, serverless, And that JS in, like, you want potentially, like, to host your middleware in in a different way.",
+      "japanese_text": "しかし、CloudflareやNetlifyのようなサービスで、Next.jsをサーバーレス環境で特定の方法でデプロイしている場合や、ミドルウェアを全く異なる形で提供したい場合には非常に有用です。"
+    },
+    {
+      "sentence_index": 31,
+      "english_text": "And so, yeah, we created that API, as a as a need, to answer the needs of the community.",
+      "japanese_text": "こうして、コミュニティのニーズに応えるため、このAPIを開発したわけです。"
+    },
+    {
+      "sentence_index": 32,
+      "english_text": "We also created, like, an ecosystem working group, which is basically composed of, like, us and partners across Google, Netify, Cloudfare.",
+      "japanese_text": "また、「エコシステム作業部会」も設立しました。これは基本的に当社とGoogle内のパートナー企業、NetlifyやCloudflareなどのメンバーで構成されています。"
+    },
+    {
+      "sentence_index": 33,
+      "english_text": "Used to have AWS in the group, but they they dropped out at some point.",
+      "japanese_text": "以前はグループに AWS が含まれていましたが、途中で離脱したようです。"
+    },
+    {
+      "sentence_index": 34,
+      "english_text": "But, the idea is that we since a lot of, like, the Next.",
+      "japanese_text": "しかし、私たちが目指すのは「Next」、つまり次なる段階なのです。"
+    },
+    {
+      "sentence_index": 35,
+      "english_text": "Js features require that level of, you know, a certain level of, like, infrastructure work Yeah.",
+      "japanese_text": "JavaScriptの機能を活用するには、ある程度のインフラ整備が必要ですよね そうですね"
+    },
+    {
+      "sentence_index": 36,
+      "english_text": "To make it work on scale, we basically, basically creating groups so we can, like, share ideas in advance, could collect their feedbacks, and kinda, you know, make sure they don't they don't, you know, dislike supporting Nextiva's on their own platform.",
+      "japanese_text": "このシステムを大規模に運用するためには、基本的にグループを作成し、事前にアイデアを共有したり、フィードバックを集めたりすることで、彼らがNextviaのプラットフォーム上で自主的に協力し合える環境を整えています。これにより、彼ら自身が自社サービスを積極的に支持してくれるようになるわけです。"
+    },
+    {
+      "sentence_index": 37,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 38,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 39,
+      "english_text": "So so you mentioned that you've been working on this for,\n\nquite a while now.",
+      "japanese_text": "つまり、あなたはかなり長い間このプロジェクトに取り組んできたわけですね。\n\nかなりの期間にわたって。"
+    },
+    {
+      "sentence_index": 40,
+      "english_text": "So I I take it then that this wasn't a knee jerk reaction to the slop pork.",
+      "japanese_text": "つまり、これは単なる一時的な感情による反応ではなかったということですね。"
+    },
+    {
+      "sentence_index": 41,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 42,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 43,
+      "english_text": "Not not really.",
+      "japanese_text": "Well, not exactly."
+    },
+    {
+      "sentence_index": 44,
+      "english_text": "No.\n\nIf you if you look back, we published the RFC a year ago, and, maybe we I don't the timeline is quite fuzzy to me at this point too because it's been so long.",
+      "japanese_text": "番号。\n\n過去を振り返ると、1年前にRFCを公開しましたが、この件に関するタイムラインは私自身にとってもかなり曖昧になっています。時間が経ちすぎたためです。"
+    },
+    {
+      "sentence_index": 45,
+      "english_text": "But, like, we had started engaging with, like, NetFlare and CloudFlare and the OpenX guys even a few months before that.",
+      "japanese_text": "でも実は、その数ヶ月前からNetflareやCloudflare、OpenXの人たちともすでに交流を始めていたんです。"
+    },
+    {
+      "sentence_index": 46,
+      "english_text": "So not really.",
+      "japanese_text": "つまり、そうではない。"
+    },
+    {
+      "sentence_index": 47,
+      "english_text": "Node.",
+      "japanese_text": "ノード。"
+    },
+    {
+      "sentence_index": 48,
+      "english_text": "Can't say it hasn't, like, ESLint fork term.",
+      "japanese_text": "「fork」という用語を使わないわけにはいかないよね。"
+    },
+    {
+      "sentence_index": 49,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 50,
+      "english_text": "I I think one of the main points there, right, is that, like, the main reason why Cloudflare did this is that they kinda, like, wanted to avoid, like, you know, some sort of, like, vendor look in, and they wanted to make it, like, somewhat easier to support some version of NetConnect on Cloudflare.",
+      "japanese_text": "ここでの重要なポイントは、Cloudflareがこの変更を行った主な理由として、Netconnect製品におけるベンダーロックインを回避しつつ、クラウドフレア上で特定バージョンのネットコネクトをより容易にサポートできるようにしたかったという点でしょう。"
+    },
+    {
+      "sentence_index": 51,
+      "english_text": "And so we did wanna Scott to the community that we also, well, we had to Yeah.",
+      "japanese_text": "そして私たちはスコットをコミュニティに招き入れました。そう、私たちもそうだったのです。"
+    },
+    {
+      "sentence_index": 52,
+      "english_text": "Had been cooking on this.",
+      "japanese_text": "ずっとこれを作っていた。"
+    },
+    {
+      "sentence_index": 53,
+      "english_text": "It's a great timeline, though, because we internally, this match up with, like, our testing or on testing.",
+      "japanese_text": "これは素晴らしいタイムラインです。なぜなら、私たちのテストプロセスや品質保証活動と完全に一致しているからです。"
+    },
+    {
+      "sentence_index": 54,
+      "english_text": "We were like, the reason why it wasn't stable JS just that we wanted, all of our own website to be working on this adapter's API first before\n\nbefore we published it.",
+      "japanese_text": "私たちは「安定したJSが実現できなかったのは、単に私たちが望む機能がなかったからではなく、このアダプターAPIを最初に実装する前に、自分たち専用サイトでうまく動作するかどうかを確認したかったからだ」と言っていました。公開する前のことです。"
+    },
+    {
+      "sentence_index": 55,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 56,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 57,
+      "english_text": "So we've been dog footing it for, for quite some time, like, outside of, like, this release.",
+      "japanese_text": "つまり私たちはこのリリース前から、かなり長い間、文字通り「犬の足で歩く」ような状態が続いているんだ。つまり、これ以外のことに関してはね。"
+    },
+    {
+      "sentence_index": 58,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 59,
+      "english_text": "Like, this release JS, market stable, but, we we introduced, I think it was beta in, at Nextiva's call, last year in October.",
+      "japanese_text": "このリリース版JSは動作が安定していますが、昨年10月のNextivコール機能でベータテストとして導入したものでした。"
+    },
+    {
+      "sentence_index": 60,
+      "english_text": "But the the reason that we hadn't marked it stable yet is that also Wes had been documenting it on our own application.",
+      "japanese_text": "ただし、まだ安定版としてマークしていなかったのは、ウェスが当社独自のアプリケーションでもこれを文書化していたためです。"
+    },
+    {
+      "sentence_index": 61,
+      "english_text": "So, like, we built the adapter for for sale, and we had been rolling it out to, like, all, like, for sale's own applications, like, similar to how we do it for Nexus features, like, in general.",
+      "japanese_text": "つまり、販売用のアダプターを開発し、ネクサス機能と同様に、各種アプリケーションに順次展開していったわけです。一般的なアプローチと同じ方法で。"
+    },
+    {
+      "sentence_index": 62,
+      "english_text": "And, and that took some time because, like, we have a pretty large application and, like, we wanted to iron out all the, like, issues that we had with this, like because because for reference like this, like, think about this, like, adapter that we had before was already like, it had been battle tested across, like, like, eight years or so.",
+      "japanese_text": "そしてこれには時間がかかりました。というのも、私たちのアプリケーションはかなり大規模で、例えば以前使用していたアダプターなどは、実に8年ほどにわたって様々な環境で徹底的にテストされていたからです。このような背景を考慮する必要がありました。"
+    },
+    {
+      "sentence_index": 63,
+      "english_text": "Like, Like, since we introduced, like, now v two, when we, like, introduced the serverless function ESLint Vercel of that, like, this is still the same adapter from back then.",
+      "japanese_text": "例えば、v2を導入した時、サーバーレス関数向けのESlintをVercelで提供し始めたんですが、実はあの時から使っている同じアダプターなんです。"
+    },
+    {
+      "sentence_index": 64,
+      "english_text": "So that all the, like, possible edge cases that that you could find in, like, Vercel application like, Vercel version of, of Nextiva's. This new adapter JS, like, from the ground up built on the adapter's API.",
+      "japanese_text": "つまり、VercelのNext.jsアプリケーション（例えばvercel/next-dev-adapter）で発生する可能性のあるあらゆるエッジケースを、アダプターAPIをベースに一から設計し直したということです。"
+    },
+    {
+      "sentence_index": 65,
+      "english_text": "So we're really, like, dog footing this, like, in the same way that, like, every other platform is.",
+      "japanese_text": "つまり他のプラットフォームと同じように、私たちも「犬のように」この分野に取り組んでいるわけです。"
+    },
+    {
+      "sentence_index": 66,
+      "english_text": "And Okay.",
+      "japanese_text": "そしてオーケー。"
+    },
+    {
+      "sentence_index": 67,
+      "english_text": "And because of that, like, we we had to do, like, some extra checks to make sure that, like, can roll it out to everyone, in in this way.",
+      "japanese_text": "そのため特別な追加チェックが必要で、全員に確実に展開できるようにしなければならなかった。"
+    },
+    {
+      "sentence_index": 68,
+      "english_text": "So, yeah, like, that that's, like, why the timeline was also, like, spread out over a year instead of, like, hey.",
+      "japanese_text": "つまり、つまりそういうことで、タイムラインも1年かけて展開するように設定されていたんです。急か何かじゃなくて。"
+    },
+    {
+      "sentence_index": 69,
+      "english_text": "We're gonna have this new thing.",
+      "japanese_text": "私たちは新しい企画を始める予定です。"
+    },
+    {
+      "sentence_index": 70,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 71,
+      "english_text": "Because in pnpm practice, like, if you think about it, there's, like, the adapters API inside of Nexus itself, like, that's not that complicated.",
+      "japanese_text": "実際、PnPMの実践では、例えばネクサス自体にアダプターAPIが組み込まれていることを考えると、そんなに複雑なものではないんです。"
+    },
+    {
+      "sentence_index": 72,
+      "english_text": "It's like a couple of functions that have, like, a typed contract.",
+      "japanese_text": "型付き契約のようなもので、関数間で暗黙の合意があるようなものです。"
+    },
+    {
+      "sentence_index": 73,
+      "english_text": "Like, the real point is, like, you Node have a integration, layer that, you don't have to, like, refer to engineer on any side of things, like, not on wholesale, not on any other platform.",
+      "japanese_text": "要するに、真のポイントは、ノードベースシステムには統合レイヤーがあって、あらゆる側面でエンジニアに頼る必要がないという点です。他のどのプラットフォームと比べても、これは顕著です。"
+    },
+    {
+      "sentence_index": 74,
+      "english_text": "Because, like, typically, like, you could already host, like, Next.",
+      "japanese_text": "だって、普通に考えて、Next.jsとかすでにホストできるわけだし。"
+    },
+    {
+      "sentence_index": 75,
+      "english_text": "Js on Netlify or Glassware or, like, through Pnpm on AWS or things like that.",
+      "japanese_text": "NetlifyやGlassWareで、あるいはAmazon Web Services上でPnPMを使うとか、そういった方法です。"
+    },
+    {
+      "sentence_index": 76,
+      "english_text": "But, basically, like, this new API makes it a lot easier for these platform teams to just integrate with Next.",
+      "japanese_text": "しかし基本的に、この新しいAPIによって、プラットフォームチームがNext.jsとの連携を大幅に簡素化できるようになったのです。"
+    },
+    {
+      "sentence_index": 77,
+      "english_text": "Js directly instead of, like, having to, like, find which files need to be included in the serverless side Yeah.",
+      "japanese_text": "サーバーレス側でどのファイルを含める必要があるかを調べる必要がなくなるんです。そう、その通りです。"
+    },
+    {
+      "sentence_index": 78,
+      "english_text": "Things like that.",
+      "japanese_text": "そういったものだ。"
+    },
+    {
+      "sentence_index": 79,
+      "english_text": "Hack around it.",
+      "japanese_text": "それを回避する方法を見つける。"
+    },
+    {
+      "sentence_index": 80,
+      "english_text": "It's like, I I was trying OpenNext\n\non CloudFlare for for quite a while, and I Wes, like, digging into it.",
+      "japanese_text": "OpenDNSをしばらく試していたんだけど、ウェス、詳しく調べていたんだ。"
+    },
+    {
+      "sentence_index": 81,
+      "english_text": "It's during the early days of the OpenNext CloudFlare, so I was doing, like, bug reports and whatnot.",
+      "japanese_text": "OpenNebulaの初期段階だったから、バグ報告とかそんなことをやってた時期だね。"
+    },
+    {
+      "sentence_index": 82,
+      "english_text": "And I was looking into it, and, like, a lot of it was just, like, regexes and taking the bundled output and, like, uncompiling it and, like, I was like, oh, this really is just a bunch of hacks on the output.",
+      "japanese_text": "このコードを詳しく調べてみたところ、その大部分が正規表現を使った処理や、バンドルされた出力を逆コンパイルして解析するもので、要するにこれは単なるアウトプットに対する様々な工夫の積み重ねに過ぎないことに気づきました。"
+    },
+    {
+      "sentence_index": 83,
+      "english_text": "Like,\n\neverything that Nextiva's, like, knows, like, basically, like, all this, like, metadata around, like, what is a route, what is a like, how does it match, like, that kind of thing.",
+      "japanese_text": "例えば：\n\nNextivaが把握している情報、つまり基本的に、ルートに関するあらゆるメタデータ――「ルーティングとは何か」「どのようにマッチングが行われるのか」といった内容です。"
+    },
+    {
+      "sentence_index": 84,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 85,
+      "english_text": "That's not all part of the adapters API.",
+      "japanese_text": "これはアダプターズAPIの一部ではありません。"
+    },
+    {
+      "sentence_index": 86,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 87,
+      "english_text": "And, like, let's talk about, like, the different pieces to to this because\n\nI I think one of the hard re one of the reasons why it was historically hard to put Next.",
+      "japanese_text": "そして例えば、このプロジェクトのさまざまな要素について話しましょう――なぜなら：\n\n私が考えている、歴史的にNext.jsを実装するのが難しかった主な理由の一つには..."
+    },
+    {
+      "sentence_index": 88,
+      "english_text": "Js on other platforms is because it it kinda blurs the line between, like like, this is a Node app, but, also, there's this all of this infrastructure that that needs to come along with it.",
+      "japanese_text": "他のプラットフォームで動作しない理由は、ある意味これが「単なる」ノードアプリケーションであると同時に、これに伴うすべてのインフラストラクチャも必要となるためです。"
+    },
+    {
+      "sentence_index": 89,
+      "english_text": "And, like like you said, that that special sauce of why it was so easy on Vercel was because, like, you guys have had your own adapter platform and and have have made it, like, line up with all the the different pieces.",
+      "japanese_text": "そして、あなたが指摘されたように、Vercelでこれほど簡単に実装できた理由は、彼らが独自のアダプタープラットフォームを開発し、さまざまなコンポーネントを適切に連携させたからです。"
+    },
+    {
+      "sentence_index": 90,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 91,
+      "english_text": "You got CDN and databases and caching and and all that type of stuff.",
+      "japanese_text": "CDNやデータベース、キャッシュ機構など、そういった各種機能も揃っています。"
+    },
+    {
+      "sentence_index": 92,
+      "english_text": "If if somebody's, like, just looking at this right now, like, what are the different pieces of infrastructure that are needed for, like, a a Next.",
+      "japanese_text": "もし今これを見ている人がいるなら、Next.jsに必要なインフラストラクチャの構成要素について知りたいかもしれません。具体的には："
+    },
+    {
+      "sentence_index": 93,
+      "english_text": "Js app that uses every single feature under the sun?",
+      "japanese_text": "太陽の下に存在するあらゆる機能をすべて網羅したJavaScriptアプリですか？"
+    },
+    {
+      "sentence_index": 94,
+      "english_text": "The thing is, something that, like, I kinda want to try to dispel a little bit is that, like, a lot of the what we're talking about, like, the the sort of, like, complexity that comes with, like, some of the Next.",
+      "japanese_text": "要するに、少し払拭したいのは、私たちが議論している内容――特に「Next.js」に関連する部分についてですが……その複雑さについてです。"
+    },
+    {
+      "sentence_index": 95,
+      "english_text": "Js features, those are, like, mostly sort of, like, additive, compared to, like, the other frameworks on its own if you're just, like, you know, if you're just looking for a framework that kinda just, like, you know, service side renders and or just, like, you know, serves API routes and serve some, like, cached.",
+      "japanese_text": "JavaScriptの機能は、他のフレームワークと比較して基本的に追加的な性質を持っています。つまり、単にサービス側のレンダリングやAPIルート処理、キャッシュされたコンテンツを提供するだけであれば、ほぼそのまま利用できるということです。"
+    },
+    {
+      "sentence_index": 96,
+      "english_text": "They're not that stuff just kinda works out of the box.",
+      "japanese_text": "それらは単なる箱から出しただけの製品ではありません。ちゃんと機能します。"
+    },
+    {
+      "sentence_index": 97,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 98,
+      "english_text": "There's there's nothing you don't need, like, crazy info or anything to do so.",
+      "japanese_text": "必要なものは何もありません - クレイジーな情報や余計な情報は一切ありません。"
+    },
+    {
+      "sentence_index": 99,
+      "english_text": "You just need, like, a a server that can return to your response.",
+      "japanese_text": "必要なのは、単にレスポンスを返せるサーバーだけです。"
+    },
+    {
+      "sentence_index": 100,
+      "english_text": "Where we go a bit further, is when it comes to basically everything caching related.",
+      "japanese_text": "さらに一歩踏み込むと、基本的にすべてのキャッシュ関連機能について言えます。"
+    },
+    {
+      "sentence_index": 101,
+      "english_text": "And then we've made kind of updates to our docs to kinda clarify this, but those things are mostly, I'd say, performance optimizations.",
+      "japanese_text": "その後、ドキュメントにも若干の修正を加え、この概念をより明確にしましたが、これらは主にパフォーマンス向上を目的とした改良です。"
+    },
+    {
+      "sentence_index": 102,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 103,
+      "english_text": "Like, partial prerendering, which JS, like, one of the features that allows you to kinda serve, like, a static page and then kinda compose with with, like, some dynamic contents.",
+      "japanese_text": "例えば部分的なプリレンダリング機能があります。これはJavaScriptを使用して、まず静的なページを表示し、その後で動的コンテンツを少しずつ追加していくような手法です。"
+    },
+    {
+      "sentence_index": 104,
+      "english_text": "I I love those.",
+      "japanese_text": "私はそれらが好きです。"
+    },
+    {
+      "sentence_index": 105,
+      "english_text": "I want those features.",
+      "japanese_text": "私はそれらの機能が欲しい。"
+    },
+    {
+      "sentence_index": 106,
+      "english_text": "Those are great features.",
+      "japanese_text": "それらは素晴らしい機能ですね。"
+    },
+    {
+      "sentence_index": 107,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 108,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 109,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 110,
+      "english_text": "And it works with Nextart.",
+      "japanese_text": "そしてNextArtにも対応しています。"
+    },
+    {
+      "sentence_index": 111,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 112,
+      "english_text": "Like, you know, you're you're gonna hit your server.",
+      "japanese_text": "つまり、サーバーに負荷がかかるってことだよ。"
+    },
+    {
+      "sentence_index": 113,
+      "english_text": "It's gonna return, like, the without rendering.",
+      "japanese_text": "レンダリングなしで戻ってくる感じです。"
+    },
+    {
+      "sentence_index": 114,
+      "english_text": "It's just gonna return you the the static HTML, and then it's gonna do, like, the render.",
+      "japanese_text": "これは静的なHTMLを返すだけで、実際のレンダリング処理はその後に行われます。"
+    },
+    {
+      "sentence_index": 115,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 116,
+      "english_text": "And when it comes to Vercel, the way we we kinda optimize for this is that this Node this this the CDN this sorry.",
+      "japanese_text": "Vercelの場合、この最適化を実現する方法として、CDNとの統合が挙げられます。申し訳ありません、訂正します。"
+    },
+    {
+      "sentence_index": 117,
+      "english_text": "This this HTML shell can be served from the the CDN rather.",
+      "japanese_text": "このHTMLシェルはCDN経由で配信することが可能です。"
+    },
+    {
+      "sentence_index": 118,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 119,
+      "english_text": "Like, closer to the user, and then we'll, like, invoke, like, certain background.",
+      "japanese_text": "ユーザーに近い位置に配置し、特定の背景効果を呼び出すようなイメージです。"
+    },
+    {
+      "sentence_index": 120,
+      "english_text": "This is, like, purely just taking the the primitives that we've taken that that we've put in the framework and then just, like, optimizing them.",
+      "japanese_text": "これはつまり、フレームワークに組み込んだ基本機能をそのまま最適化しているだけなんです。"
+    },
+    {
+      "sentence_index": 121,
+      "english_text": "So that I think that answered the question a little bit.",
+      "japanese_text": "これで質問に少しは答えられたでしょうか。"
+    },
+    {
+      "sentence_index": 122,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 123,
+      "english_text": "Like, I think to get, like, the experience, what I would want what I would recommend, anyone who's, like, adopting the or adapters to to get those features is you want your server close to your database.",
+      "japanese_text": "つまり、実際の使用感を知るためには、データベースに近い環境でテストすることをお勧めします。サーバーをデータソースにできるだけ近づけることが重要です。"
+    },
+    {
+      "sentence_index": 124,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 125,
+      "english_text": "If you're doing, like, any research, like, just the thing that makes sense in general.",
+      "japanese_text": "一般的な研究を行う場合、つまり一般的に意味のある作業をしているのであれば。"
+    },
+    {
+      "sentence_index": 126,
+      "english_text": "And then you wanted your static contents always close as close to the user as possible.",
+      "japanese_text": "そして静的コンテンツは常にユーザーの可能な限り近くに配置したいと考えていました。"
+    },
+    {
+      "sentence_index": 127,
+      "english_text": "And you need something that kinda handles the connection between the two.",
+      "japanese_text": "そして、両者をつなぐ役割を果たすものが必要です。"
+    },
+    {
+      "sentence_index": 128,
+      "english_text": "And it could be, like, on CloudFlare, it could be like a, you know, like a a worker.",
+      "japanese_text": "Cloudflareの場合、ワーカーのような機能として動作させることも可能です。"
+    },
+    {
+      "sentence_index": 129,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 130,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 131,
+      "english_text": "And and that worker would just, like, execute at the edge, return to you the CDN content, the the the static shell, and then, like, invoke another worker that is closer to the to the origin, basically.",
+      "japanese_text": "このワーカーはエッジで動作し、CDNコンテンツをそのまま返した上で、さらにオリジンに近い別のワーカを起動します - 要するにそういうことです。"
+    },
+    {
+      "sentence_index": 132,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 133,
+      "english_text": "And even for this case or, like, if you're talking about PPR, for example, like, the this static shell, like, even if you serve that from a server that does dynamic rendering.",
+      "japanese_text": "そしてこのケースにおいても、例えばPPRについて話す場合――つまり、静的シェルであっても、動的レンダリングを行うサーバーから配信する場合でも同様です。"
+    },
+    {
+      "sentence_index": 134,
+      "english_text": "So, like, if you serve it from next start, like, it's still a win because the, like, you still have this, like, immediate response.",
+      "japanese_text": "つまり、次回から提供すればまだ「即時対応」というメリットは残るわけです。"
+    },
+    {
+      "sentence_index": 135,
+      "english_text": "The only difference is that it's not this response is not immediately coming from, like, a CDN per se, but it's instead, like, serve from your, like, server that you have hosted.",
+      "japanese_text": "唯一の違いは、この応答がCDNから直接送られてくるのではなく、ホストしている自身のサーバーから配信されている点です。"
+    },
+    {
+      "sentence_index": 136,
+      "english_text": "And that's the same way if you go to any other platform.",
+      "japanese_text": "他のプラットフォームでも同じことが言えます。"
+    },
+    {
+      "sentence_index": 137,
+      "english_text": "It works in the same way.",
+      "japanese_text": "それは同じように機能します。"
+    },
+    {
+      "sentence_index": 138,
+      "english_text": "But what you can do, like, additively to that is, like, you can make it so that your CDN supports this, like, new primitive, like, VPR, for example, and then it can serve that shell from the, from the CDN itself while stitching the the dynamic render as well.",
+      "japanese_text": "ただし、CDN側で追加的に実装可能な機能として、例えばVPRのような新しいプリミティブをサポートし、コンテンツ配信と同時に動的レンダリングも行えるようにすることが考えられます。これにより、キャッシュされた静的アセットと並行して、こうしたシェルコンテンツを直接提供できるようになります。"
+    },
+    {
+      "sentence_index": 139,
+      "english_text": "There's,\n\nlike, maybe, yeah, the PPR part JS, like, an optimization.",
+      "japanese_text": "あるんです、つまり、PPR部分のJSで、最適化が行われているような。"
+    },
+    {
+      "sentence_index": 140,
+      "english_text": "I will say probably, like, something that I would consider kinda important and that we still wanna make improvements on is, the cache Scott of synchronization story.",
+      "japanese_text": "おそらく最も重要な改善点の一つは、キャッシュと同期処理に関するストーリーでしょう。これはまだ改善が必要な領域だと考えています。"
+    },
+    {
+      "sentence_index": 141,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 142,
+      "english_text": "Let's say you're having, like, five servers Yarn using Next, and, like, you might, you know, you you might, like, started with, like, NextStart, on all your, like, instances.",
+      "japanese_text": "例えば、Next.jsでYarnを使って5つのサーバーを運用しているとしましょう。すべてのインスタンスにデフォルト設定として`next-start`を使用しているとします。"
+    },
+    {
+      "sentence_index": 143,
+      "english_text": "If you're like, NextGen's caching, like, the the the pretty powerful thing about it is that, like, we allow you to kinda invalidate it, whenever you want, and then we do it in the background.",
+      "japanese_text": "NextGenのキャッシュ機能は、例えば必要に応じていつでも無効化できる点が特徴で、バックグラウンドで自動的に処理してくれます。"
+    },
+    {
+      "sentence_index": 144,
+      "english_text": "And, of course, whenever you you you you call this sort of revalidation methods, that one thing that is important for your provider, or yourself JS that, like, a revalidation is, like, just to share across all nodes.",
+      "japanese_text": "そしてもちろん、このような再検証メソッドを呼び出す際には、プロバイダーや自身のJSコードにとって重要な点として、すべてのノード間で一貫性を保つことが不可欠です。"
+    },
+    {
+      "sentence_index": 145,
+      "english_text": "And so that's that's one of the things that we wanna we're we're making better with the adapter's API, but we still, you know, still got some some work to do, I'd say.",
+      "japanese_text": "こうした点は、アダプターのAPIを改善することで対応していますが、まだ改善すべき課題が残っていると言えるでしょう。"
+    },
+    {
+      "sentence_index": 146,
+      "english_text": "Okay.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 147,
+      "english_text": "And, like, when when someone's, like, having a cache,\n\nlike like, when when, like, a page or component is cached, where is that typically stored?",
+      "japanese_text": "それから、誰かがキャッシュを使用している場合、例えばページやコンポーネントが一時的に保存されるのは、通常どこに格納されているのでしょうか？"
+    },
+    {
+      "sentence_index": 148,
+      "english_text": "Is that thrown into, like, a key value to file, or does it does it matter?",
+      "japanese_text": "これはキー値をファイルに投げ込むようなものですか、それとも何か他の意味があるのでしょうか？違いはありますか？"
+    },
+    {
+      "sentence_index": 149,
+      "english_text": "So we have multiple layers of of caching as you as you you might see from the the memes, about our docs.",
+      "japanese_text": "このように、ドキュメントに関するミームからもわかるように、私たちは多層的なキャッシュシステムを採用しています。"
+    },
+    {
+      "sentence_index": 150,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 151,
+      "english_text": "We, and I don't know if you have have familiar you are with, like, the or cache components.",
+      "japanese_text": "私たち、そしてあなたがご存知かもしれませんが、キャッシュコンポーネントのようなものについてです。"
+    },
+    {
+      "sentence_index": 152,
+      "english_text": "Oh, yeah.",
+      "japanese_text": "ああ、そうだ。"
+    },
+    {
+      "sentence_index": 153,
+      "english_text": "So you're like, Node.",
+      "japanese_text": "つまり君はノードのようなものだね？"
+    },
+    {
+      "sentence_index": 154,
+      "english_text": "And I've I've I've many times said, like, I I want that in every single Yeah.",
+      "japanese_text": "そして何度も繰り返してきたように、私は「そうしたい」と思っているのです。ええ、本当に。"
+    },
+    {
+      "sentence_index": 155,
+      "english_text": "Thing.",
+      "japanese_text": "物事。"
+    },
+    {
+      "sentence_index": 156,
+      "english_text": "Like, one of the reasons I'm such a huge React Vercel component fan is the ability to, like, fetch and cache and just do everything in the component rather than, like, everybody else's, like, route layer, except for Svelte.",
+      "japanese_text": "例えば、私がReactのVercelコンポーネントをこれほど気に入っている理由の一つに、Svelteを除いて他では見られないような、データ取得からキャッシュ処理まですべてUI部品内で直接行える機能があるからなんです。"
+    },
+    {
+      "sentence_index": 157,
+      "english_text": "Svelte is along with the synchronous now.",
+      "japanese_text": "現在の Svelte は同期処理と同様に動作します。"
+    },
+    {
+      "sentence_index": 158,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 159,
+      "english_text": "And and see the idea behind use cache and the idea and why we chose, like, you know, a very almost, like, generic kind of name for a cache components JS that we kinda want you to think about caching at every possible layers.",
+      "japanese_text": "そしてキャッシュの概念とその背後にある考え方、そして私たちがなぜこの「汎用的な」名前をJS用コンポーネントに付けたのか、その理由を理解してください。これは可能な限りあらゆるレイヤーでキャッシングについて考慮してほしいからです。"
+    },
+    {
+      "sentence_index": 160,
+      "english_text": "So it starts, like, purely through the the clients.",
+      "japanese_text": "つまり、クライアント側から純粋に始まるわけです。"
+    },
+    {
+      "sentence_index": 161,
+      "english_text": "So if you use use cache, you can actually add a property that will just say, you know, cache it on the on the browser so that, like, across my session, the the page is, like, stored here, and I and I can configure, like, how long it should it should be kept around.",
+      "japanese_text": "したがって、キャッシュを使用すれば、実際にブラウザ上にプロパティを追加して、セッション全体でページがここに保存されるように設定できます。つまり、どのくらいの期間保持すべきかを指定できるのです。"
+    },
+    {
+      "sentence_index": 162,
+      "english_text": "Then it can also happen at, like, runtime, when you server side render your page.",
+      "japanese_text": "また、サーバー側でページをレンダリングする場合にも、実行時に同様の問題が発生する可能性があります。"
+    },
+    {
+      "sentence_index": 163,
+      "english_text": "Now this cache lives also can also live, well, on your on your server across your request, and you can have, like, a a time the JS you wanna keep it around.",
+      "japanese_text": "このキャッシュはリクエスト間も保持できるため、例えば特定のJSファイルを一定期間保存しておくことができます。"
+    },
+    {
+      "sentence_index": 164,
+      "english_text": "We can also have this at build time, and for static pages where now this this cache page should live in your CDN too.",
+      "japanese_text": "ビルド時にもこの処理を実行でき、静的ページの場合はキャッシュされたこのページをCDNに配置することも可能です。"
+    },
+    {
+      "sentence_index": 165,
+      "english_text": "And so so there there are multiple layers to it, but but but we think, basically, it allows you to build, like, you know, the the sort of most composable kinda app.",
+      "japanese_text": "つまり、複数のレイヤーが存在しますが、基本的には、非常に組み合わせ可能なタイプのアプリケーションを構築できる仕組みだと言えます。"
+    },
+    {
+      "sentence_index": 166,
+      "english_text": "Some some, some pages, for example.",
+      "japanese_text": "いくつかのページ、例えば。"
+    },
+    {
+      "sentence_index": 167,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 168,
+      "english_text": "It's fine if they live, on the CDN, like, and they're they're never really sort of, like, Wes validate.",
+      "japanese_text": "CDN上で動作する限りは問題ありません。つまり、ウェスが検証するような厳密なチェックは必要ありません。"
+    },
+    {
+      "sentence_index": 169,
+      "english_text": "And if you do so, you're doing it, like, you know, kinda random.",
+      "japanese_text": "そしてそれをするなら、まあなんとなく適当にやってる感じになるよね。"
+    },
+    {
+      "sentence_index": 170,
+      "english_text": "Not randomly, but, like, occasionally, like a CMS or something.",
+      "japanese_text": "ランダムじゃなくて、例えばCMSみたいに時々使う感じで。"
+    },
+    {
+      "sentence_index": 171,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 172,
+      "english_text": "But those things don't matter, right, if you're, like, a page, like, in an app like ChatGPT Wes you would rather wanna cache on the on the ESLint instead.",
+      "japanese_text": "でもそんなことは重要じゃないですよね？ChatGPTのようなアプリでは、むしろESlintでキャッシュしたいでしょう？"
+    },
+    {
+      "sentence_index": 173,
+      "english_text": "One thing I'm really excited about, for example, is that we could we wanna extend the the use cache to, like, layer so that we can have also, like, an offline kinda kinda layer.",
+      "japanese_text": "特に楽しみにしているのは、キャッシュ機能をレイヤー構造に拡張できる点です。これにより、オフラインモードのような仕組みも実現できるはずです。"
+    },
+    {
+      "sentence_index": 174,
+      "english_text": "So right now, like, we can cache it on clients across sessions, but the idea is, like, what if we just, like, also kept it across reloads, seamlessly?",
+      "japanese_text": "つまり現時点では、クライアント側でセッションを超えてキャッシュすることは可能ですが、さらにリロード時にもシームレスに保持し続けることができればどうでしょう？"
+    },
+    {
+      "sentence_index": 175,
+      "english_text": "Like like and then you would just be able to, reload your page while offline, and then still have, like, the data from or something out of the Bos, right, without having to do, like, potentially, like, a, a a synchronization, layer.",
+      "japanese_text": "このようにすれば、オフライン時にページを再読み込みしても、Bosからのデータなどを取得でき、同期処理のような手間をかけずに済みます。"
+    },
+    {
+      "sentence_index": 176,
+      "english_text": "Wes, that'd be cool.",
+      "japanese_text": "ウェス、それいいね。"
+    },
+    {
+      "sentence_index": 177,
+      "english_text": "I like that a lot.",
+      "japanese_text": "私はそれがとても好きです。"
+    },
+    {
+      "sentence_index": 178,
+      "english_text": "So a lot of the APIs that we're adding Yarn, like, like, edit like, especially with cache components.",
+      "japanese_text": "そのため、YarnのようなAPIを多数追加しています - 特にキャッシュコンポーネントに関しては。"
+    },
+    {
+      "sentence_index": 179,
+      "english_text": "Like, there's, like, many things that we haven't, like, really talked about, like, this offline thing that Jimmy's talking about.",
+      "japanese_text": "つまり、ジミーが話しているオフラインの件とか、まだちゃんと話し合っていないことがたくさんあって...。"
+    },
+    {
+      "sentence_index": 180,
+      "english_text": "They're, like right now, they're building the foundation of, of what this, like, caching layer will look like.",
+      "japanese_text": "現在まさにこの、キャッシュ層がどのような形になるかの基礎部分を構築しているところです。"
+    },
+    {
+      "sentence_index": 181,
+      "english_text": "The other thing is, like, while Jimmy said that, like, we want you to think about caching in every layer.",
+      "japanese_text": "もう一つ重要なのは、ジミーが言っていたように、あらゆる階層でキャッシュについて考慮すべきだという点です。"
+    },
+    {
+      "sentence_index": 182,
+      "english_text": "The default is actually to, be, like, as dynamic as possible.",
+      "japanese_text": "デフォルトでは、実際には可能な限り動的に動作するように設計されています。"
+    },
+    {
+      "sentence_index": 183,
+      "english_text": "So if you use, like, dynamic APIs, it will basically like, it feel like, like, how you're you were using, like, a service of props before or things like that.",
+      "japanese_text": "つまり、動的APIを使用する場合、基本的には従来のpropsベースのサービスを使用しているような感覚で操作できるということです。"
+    },
+    {
+      "sentence_index": 184,
+      "english_text": "If you use, like, dates or things like that, things become dynamic still.",
+      "japanese_text": "日付とかそういうのを使うと、動的な要素も取り入れられるんだよね。"
+    },
+    {
+      "sentence_index": 185,
+      "english_text": "And then you like, basically, the the biggest change from, like, Nexus 13 and, like, the the first, like, iteration of all the discussion APIs that we want you to just, like, build the app first, and then you can start optimizing.",
+      "japanese_text": "そして基本的に、ネクサス13からの最大の違いは、すべてのディスカッションAPIについて最初にアプリを構築し、その後で最適化を開始できるようにすることです。"
+    },
+    {
+      "sentence_index": 186,
+      "english_text": "Whereas previously, you were already in this, like, optimized state by default, and that that was, like, kinda confusing.",
+      "japanese_text": "以前はデフォルトで既にこの最適化状態になっていたため、かえって混乱を招く要因となっていました。"
+    },
+    {
+      "sentence_index": 187,
+      "english_text": "So we really want you to, like, see these APIs as, like, additive.",
+      "japanese_text": "ですから、これらのAPIを「追加的な」機能として捉えてほしいんです。つまり、既存システムにプラスアルファで組み込めるものとして考えていただきたいということです。"
+    },
+    {
+      "sentence_index": 188,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 189,
+      "english_text": "Like, you we want to add to use cache instead of, like, it's cached by default or, like, you have to reason about that that kind of thing.",
+      "japanese_text": "つまり、デフォルトでキャッシュを使用するようにしたいのか、それとも何らかの理由でその処理を考慮する必要があるのか、といった点です。"
+    },
+    {
+      "sentence_index": 190,
+      "english_text": "And then, like, when you want to add to use cache, like Jimmy said, you can do it everywhere, in in the sense that, like, you can add you do it at the page Vercel.",
+      "japanese_text": "そしてキャッシュ機能を追加したい場合、Jimmyが説明したように、Vercelのページレベルで設定できます。つまり、あらゆる場所で実装可能だということです。"
+    },
+    {
+      "sentence_index": 191,
+      "english_text": "You can do it at, the individual function level or at, like, components even.",
+      "japanese_text": "個々の機能レベルだけでなく、コンポーネント単位でも行うことができます。"
+    },
+    {
+      "sentence_index": 192,
+      "english_text": "And that's something that Wes, previously, Scott even possible.",
+      "japanese_text": "ウェスもスコットも、以前は到底不可能だったことだ。"
+    },
+    {
+      "sentence_index": 193,
+      "english_text": "Like, even in the first version, like, we we like, it was either it's fully static or it's fully dynamic.",
+      "japanese_text": "最初のバージョンでさえ、完全に静的か完全動的のどちらかだったんです。"
+    },
+    {
+      "sentence_index": 194,
+      "english_text": "And, like, it started with the the the static thing, and then, like, everything is cached, but now it's, you have to opt into it.",
+      "japanese_text": "そして最初は静的コンテンツから始まり、すべてがキャッシュされる仕組みでしたが、今では意図的に有効化する必要があるようになりましたよね。"
+    },
+    {
+      "sentence_index": 195,
+      "english_text": "And,\n\nand it feels nicer in in a way as well, like, when you're building the app.",
+      "japanese_text": "そしてさらに、アプリを開発している最中にもより快適に感じることができます――その感覚自体が心地よいのです。"
+    },
+    {
+      "sentence_index": 196,
+      "english_text": "Yep.",
+      "japanese_text": "Yes indeedy-doody!"
+    },
+    {
+      "sentence_index": 197,
+      "english_text": "And, like, say somebody builds out an XJS app, you know, bunch of pages, bunch of components, does a whole bunch of stuff, and they say, okay.",
+      "japanese_text": "例えば、誰かがXJSアプリケーションを構築したとしましょう - 複数のページやコンポーネントで構成された複雑なシステムで、様々な機能を実装した後に、「これで完了です」と言うような場合です。"
+    },
+    {
+      "sentence_index": 198,
+      "english_text": "Like, I'm I feel like the app is in a really good spot.",
+      "japanese_text": "つまり、このアプリは本当に良いポジションにいると思うんです。"
+    },
+    {
+      "sentence_index": 199,
+      "english_text": "Now I, either want to move to use using less resources or or make the app a little bit faster.",
+      "japanese_text": "現在、リソース使用量を削減するか、アプリの動作を少し高速化したいと考えています。"
+    },
+    {
+      "sentence_index": 200,
+      "english_text": "Now I'm gonna start looking into cash.",
+      "japanese_text": "これから現金の流れを詳しく調べてみよう。"
+    },
+    {
+      "sentence_index": 201,
+      "english_text": "Like, what what would be your first, like, couple steps of attacking, like, the lowest hanging fruit?",
+      "japanese_text": "例えば、最初に狙うべき最も簡単なターゲット、つまり「低木の果実」から攻めるとしたら、どんな手順で進めますか？"
+    },
+    {
+      "sentence_index": 202,
+      "english_text": "The nice thing about our model is that we kinda we still try to Node you toward, like, making the choice as you develop.",
+      "japanese_text": "このモデルの優れた点は、開発プロセス全体を通じて、ユーザーが自然に適切な選択へと導かれるようになっているところです。"
+    },
+    {
+      "sentence_index": 203,
+      "english_text": "I think I think other different frameworks kinda have, like, this other sort of, like, less maybe less opinionated way of Yeah.",
+      "japanese_text": "他のフレームワークはどちらかというと、もっと意見を押し付けないような、より柔軟なアプローチを取っているように思います。まあそんな感じです。"
+    },
+    {
+      "sentence_index": 204,
+      "english_text": "Developing.",
+      "japanese_text": "開発中。"
+    },
+    {
+      "sentence_index": 205,
+      "english_text": "You can, like, sort of, like you can start with, like, just client side fetching.",
+      "japanese_text": "例えば、クライアント側でのデータ取得から始めることができます。つまり、基本的なフェッチ処理から始められます。"
+    },
+    {
+      "sentence_index": 206,
+      "english_text": "And, and at some point, yeah, you do need to kinda invest into, like, optimizing your app, pulling emit potentially into the the server or the loader or something.",
+      "japanese_text": "そしていつかは、アプリの最適化にも投資する必要があります――サーバーやローダーなどに潜在的な改善を施すといった具合に。"
+    },
+    {
+      "sentence_index": 207,
+      "english_text": "And, while we don't cache for you by default anymore, a big part of, like, the programming model now on on cache components is that, like, you you'll write your your code as, like, intended, but then, like, Nextiva will kinda mention, like, with with, like, a little, like, nice, warning window.",
+      "japanese_text": "また、現在ではデフォルトでのキャッシュは行いませんが、最新のプログラミングモデルでは、コンポーネントを意図した通りに記述し、その後Next.jsが適切なタイミングで適切に処理する仕組みになっています（小さな警告ウィンドウなどで通知されます）。"
+    },
+    {
+      "sentence_index": 208,
+      "english_text": "Like, hey.",
+      "japanese_text": "ほら、見てよ。"
+    },
+    {
+      "sentence_index": 209,
+      "english_text": "Either you need to add, like, a suspense boundary here so that you keep this thing dynamic or you just cache it now, with, like, use cache.",
+      "japanese_text": "ここでサスペンス要素を加えるか、単にキャッシュを使用するかのどちらかです。例えば、動的に処理するか、または... つまり「cache」を使う方法です。"
+    },
+    {
+      "sentence_index": 210,
+      "english_text": "And then you, you know, it's like a simple drop in directive, and you sort of, like, our setup from the get go already.",
+      "japanese_text": "そして設定も簡単で、最初からスムーズに運用できるんです。"
+    },
+    {
+      "sentence_index": 211,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 212,
+      "english_text": "Because then it allows us to progressively do it.",
+      "japanese_text": "なぜなら、それによって段階的に実施できるからです。"
+    },
+    {
+      "sentence_index": 213,
+      "english_text": "And so, yeah, I think I think this is kinda like the the the nice part of, with that's that's why I really like Next.",
+      "japanese_text": "だからそう、Nextのこういうところが本当に気に入っているんです。これがまさに私がこのプロジェクトを好きな理由だと思います。"
+    },
+    {
+      "sentence_index": 214,
+      "english_text": "Js by itself.",
+      "japanese_text": "JavaScript単体で。"
+    },
+    {
+      "sentence_index": 215,
+      "english_text": "Right now, today, right, if you have, like, a slow Next.",
+      "japanese_text": "今まさに、今日の時点で、例えば低速のNext.jsを使っているとしましょう。"
+    },
+    {
+      "sentence_index": 216,
+      "english_text": "Js app, the first thing I suggest, right, is, like, you're probably not on cache components just because, like, it's somewhat somewhat very recent.",
+      "japanese_text": "JavaScriptアプリケーションの場合、まず第一に提案したいのは、おそらくキャッシュコンポーネントを使用していないことでしょう。なぜなら、それらは最近追加された機能だからです。"
+    },
+    {
+      "sentence_index": 217,
+      "english_text": "Like, we haven't, like, put, you know, as much effort as we, as we could have into the the documentation and experience yet.",
+      "japanese_text": "つまり、まだドキュメントやユーザー体験の面で、本来投入すべきだったほど十分な努力をしていないということです。"
+    },
+    {
+      "sentence_index": 218,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 219,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 220,
+      "english_text": "But, that's the first thing.",
+      "japanese_text": "でも、それは最初の一歩です。"
+    },
+    {
+      "sentence_index": 221,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 222,
+      "english_text": "That's that's what ups you into this.",
+      "japanese_text": "それがあなたをこの道に進ませるんだ。"
+    },
+    {
+      "sentence_index": 223,
+      "english_text": "Hey.",
+      "japanese_text": "Hello there."
+    },
+    {
+      "sentence_index": 224,
+      "english_text": "I'm gonna warn you about this little thing.",
+      "japanese_text": "この小さな問題について警告しておくよ。"
+    },
+    {
+      "sentence_index": 225,
+      "english_text": "And, really take it take it from there.",
+      "japanese_text": "そして、本当にそこから始めてください。"
+    },
+    {
+      "sentence_index": 226,
+      "english_text": "Read the the use case docs.",
+      "japanese_text": "ユースケースドキュメントを読んでください。"
+    },
+    {
+      "sentence_index": 227,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 228,
+      "english_text": "Like, no one no one likes learning having to learn about, like, a new directive here and there.",
+      "japanese_text": "つまり、誰もが新しい指令をあちこちで学ぶのは好きじゃないんだよ。"
+    },
+    {
+      "sentence_index": 229,
+      "english_text": "And, you know, for most people, performance is also somewhat somewhat fine.",
+      "japanese_text": "そして大抵の人にとって、パフォーマンスもまあまあ許容範囲内です。"
+    },
+    {
+      "sentence_index": 230,
+      "english_text": "But, I think, you know, the our our idea is just weird.",
+      "japanese_text": "でも、私たちのアイデアってちょっと変だと思うんです。"
+    },
+    {
+      "sentence_index": 231,
+      "english_text": "Whenever you're ready, we'll sort of, like, we'll be there.",
+      "japanese_text": "準備ができたら、いつでも私たちがここにいます。"
+    },
+    {
+      "sentence_index": 232,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 233,
+      "english_text": "Let's say.",
+      "japanese_text": "例えば。"
+    },
+    {
+      "sentence_index": 234,
+      "english_text": "Waiting for us.",
+      "japanese_text": "私たちを待っています。"
+    },
+    {
+      "sentence_index": 235,
+      "english_text": "That's that's great, Jimmy.",
+      "japanese_text": "それは素晴らしい、ジミー。"
+    },
+    {
+      "sentence_index": 236,
+      "english_text": "I like that.",
+      "japanese_text": "私はそれが好きです。"
+    },
+    {
+      "sentence_index": 237,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 238,
+      "english_text": "I'm I'm curious about with with your whole adapter pattern, is there, like, a minimum subset of features that adapters need to support before considering, like, before considered to be, like, a blessed adapter by the next team?",
+      "japanese_text": "アダプターパターン全般について気になっているのですが、次チームが「祝福された」アダプタと見なす前に、実装すべき必須機能セットのようなものはあるのでしょうか？つまり、最低限サポートしておくべきコアな特徴要件というのは存在するでしょうか？"
+    },
+    {
+      "sentence_index": 239,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 240,
+      "english_text": "It's a great question.",
+      "japanese_text": "それは素晴らしい質問です。"
+    },
+    {
+      "sentence_index": 241,
+      "english_text": "Not really.",
+      "japanese_text": "それほどでもない。"
+    },
+    {
+      "sentence_index": 242,
+      "english_text": "So so the the idea is that, I don't, like, I don't wanna get kept necessarily on, like, whatever you like, you know, someone's platform is supporting or not.",
+      "japanese_text": "つまりこういうことです――私は必ずしも、誰かのプラットフォームに固定されて活動したいわけではないんです。その人がどんな立場を取っていようとも。"
+    },
+    {
+      "sentence_index": 243,
+      "english_text": "Sometimes, like, the thing with, like, PPR is that, like, it does require, like, a little bit of warp if you want to do this at scale.",
+      "japanese_text": "PPRの場合、特に大規模に展開する際には、ある程度の「歪み」（柔軟性）が必要になることがあるんだ。"
+    },
+    {
+      "sentence_index": 244,
+      "english_text": "And there's no right and wrong here.",
+      "japanese_text": "そしてここには正しいも間違いもない。"
+    },
+    {
+      "sentence_index": 245,
+      "english_text": "It's more like just, like, the users kinda should make their own choice.",
+      "japanese_text": "どちらかというと、ユーザーが自分で選択すべきものだと思います。"
+    },
+    {
+      "sentence_index": 246,
+      "english_text": "But one thing we do require, as part of, like, the adapters, working group, if they wanna be blessed, is that they should just run our test suite.",
+      "japanese_text": "ただし、アダプターが認定を受けるためには、テストスイートを実行することが必須条件となります。これは「祝福」プロセスの一環として求められます。"
+    },
+    {
+      "sentence_index": 247,
+      "english_text": "So we've made some work to make this available for, everyone until you just, Node know, you just plug in your API keys and, like, just like the the pipeline on, like, how to just deploy it with, like, a few scripts here and there.",
+      "japanese_text": "そこで私たちは、誰もが簡単に利用できるよう、いくつかの改善を行いました。具体的には、APIキーを入力するだけで、さまざまなスクリプトを使って手軽にデプロイできるようにしたのです。例えば、数行のコードを追加するだけで済みます。"
+    },
+    {
+      "sentence_index": 248,
+      "english_text": "And then you can just use participate in in the same way VineX has used it and, and just basically assess how good your platform is at supporting Next.",
+      "japanese_text": "そしてVineが活用しているのと同様に「participate in」を使用し、プラットフォームがどれだけNext.jsをサポートしているかを評価できます。"
+    },
+    {
+      "sentence_index": 249,
+      "english_text": "And even then, it doesn't really cover, like, it it's not very, like, opinionated about, like, whether or not you're running PPR from a CDN or not.",
+      "japanese_text": "それでもなお、CDN経由でPPRを実行しているかどうかについては特に言及していません。つまり、それが実際に有効になっているか否かについては明確な判断を下していないのです。"
+    },
+    {
+      "sentence_index": 250,
+      "english_text": "We don't really sort of check for performance expectations here rather than just, like, you load the page and it's just working as intended.",
+      "japanese_text": "ここでは主に、ページを読み込んだときに意図した通りに動作するかどうかを確認します。パフォーマンスに関する具体的な基準を設けるわけではありません。"
+    },
+    {
+      "sentence_index": 251,
+      "english_text": "It's not but maybe it could be taking twenty seconds.",
+      "japanese_text": "おそらく20秒くらいかかるかもしれません。"
+    },
+    {
+      "sentence_index": 252,
+      "english_text": "Don't I don't really care about this the as long as the test pass.",
+      "japanese_text": "テストが通過さえすれば、このことについてはあまり気にしません。"
+    },
+    {
+      "sentence_index": 253,
+      "english_text": "And the other thing is, like, we're we're also not specifically gatekeeping on a amount of test passing.",
+      "japanese_text": "もう一つ重要なのは、特定の試験合格を必須条件としていないことです。"
+    },
+    {
+      "sentence_index": 254,
+      "english_text": "So, what we did is we we we give you the test suite.",
+      "japanese_text": "そこで私たちが行ったことは、テストスイートを提供することです。"
+    },
+    {
+      "sentence_index": 255,
+      "english_text": "The only thing we ask so there there's two, sets of adapters.",
+      "japanese_text": "私たちが要求するのはアダプターが2組あることだけです。"
+    },
+    {
+      "sentence_index": 256,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 257,
+      "english_text": "Like, there's adapters that that anyone could build, and there's the the ones that are, like, part of the docs that we, like, explicitly mention.",
+      "japanese_text": "例えば、誰でも構築可能なアダプターもあれば、ドキュメントで明確に言及されている特定のタイプもあります。"
+    },
+    {
+      "sentence_index": 258,
+      "english_text": "And then we also publish the results from the test suite for.",
+      "japanese_text": "さらに、テストスイートの結果も公開しています。"
+    },
+    {
+      "sentence_index": 259,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 260,
+      "english_text": "This so this doesn't mean that you have to, say, like, build a an adapter for for, like, any platform that doesn't pass, like, every single test, but it will split out by, like, in the test suite.",
+      "japanese_text": "ただし、これは必ずしも「あらゆるプラットフォーム向けに、例えばすべてのテストケースに対応する専用アダプターを開発しなければならない」という意味ではありません。むしろ、試験スイート内で明確に区分されることになります。"
+    },
+    {
+      "sentence_index": 261,
+      "english_text": "Like, we we keep track of, like, which feature like, which test is related to which feature, and then, we publish, like, this adapter supports all features, like, a for VPR, for example, or, like, it doesn't have, like, some other feature.",
+      "japanese_text": "例えば、どの機能がどのテストケースに対応しているかを管理し、特定のアダプターがVPR用にどのような特徴をサポートしているかを明示します。また、例えば他に実装されていない別の仕様などがある場合も同様です。"
+    },
+    {
+      "sentence_index": 262,
+      "english_text": "And, then it will like, then you can choose for yourself, like, if I if you want to use the adapter or not.",
+      "japanese_text": "そして最後に、アダプターを使用するかどうかを自分で選択できるようになります。"
+    },
+    {
+      "sentence_index": 263,
+      "english_text": "Okay.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 264,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 265,
+      "english_text": "So that's, like, basically, like, how, we set it up.",
+      "japanese_text": "つまり、基本的にこういう風に設定したわけです。"
+    },
+    {
+      "sentence_index": 266,
+      "english_text": "Like, everyone in the in the working group is already working towards, Like, they either published a adapter already or they are working on an adapter because they want to roll it out, gradually as well.",
+      "japanese_text": "ワーキンググループのメンバーはすでにそれぞれ取り組んでいます。すでにアダプターを公開した人もいれば、段階的に展開するためにアダプタ開発を進めている人たちもいます。同様に、徐々に導入を進めたいと考えているからです。"
+    },
+    {
+      "sentence_index": 267,
+      "english_text": "And and the that set of adapters will be part of the this, this set that we're, going to call out in in the docs.",
+      "japanese_text": "そして、このアダプター群は、このドキュメントで言及するこのセットの一部となります。"
+    },
+    {
+      "sentence_index": 268,
+      "english_text": "And if there's, like, other, platforms that want to do the same, like, we we have, like, a clear set of, like, this is what you have to do to set up the test suite and, how you can,\n\nlike, get your adapter part of this Wes as well.",
+      "japanese_text": "他のプラットフォームも同様のことを行いたい場合、テストスイートを設定する方法や、アダプター部分を実装する方法について、明確なガイドラインを用意しています。"
+    },
+    {
+      "sentence_index": 269,
+      "english_text": "And this is not just for, like, different hosting pod providers as well.",
+      "japanese_text": "これは異なるホスティングポッドプロバイダーにも当てはまることです。"
+    },
+    {
+      "sentence_index": 270,
+      "english_text": "It's it's also for for different runtimes as well.",
+      "japanese_text": "異なるランタイム環境にも対応しています。"
+    },
+    {
+      "sentence_index": 271,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 272,
+      "english_text": "Like, there's a already a BUN adapter, which will then allow you to kick out, like, obviously, work with BUNs in I think it uses BUNs internal server.",
+      "japanese_text": "例えば、すでに存在する BUNDLEアダプターを使えば、当然ながら内部サーバーとして BUNDLESの機能を活用できます。この場合もBIND（DNS）システムが利用されます。"
+    },
+    {
+      "sentence_index": 273,
+      "english_text": "It has a BUN SQLite database for caching, things like that.",
+      "japanese_text": "キャッシュ用の BUNDLE_SQLITEデータベースを備えており、このような機能を実現しています。"
+    },
+    {
+      "sentence_index": 274,
+      "english_text": "So this is not just, like, different like, only to run on Netlify or whatever, but it's also, like, if you're if you literally have, like, a BUN server sitting in your closet, you can use this.",
+      "japanese_text": "つまり、これは単にNetlifyなどで動作させるためのものではなく、例えばクローゼットに設置したBunサーバーを実際に使用する場合にも活用できるということです。"
+    },
+    {
+      "sentence_index": 275,
+      "english_text": "Yep.",
+      "japanese_text": "Yes indeedy-doody!"
+    },
+    {
+      "sentence_index": 276,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 277,
+      "english_text": "And so that's one case.",
+      "japanese_text": "これが一つの事例です。"
+    },
+    {
+      "sentence_index": 278,
+      "english_text": "The Node that is really interesting to me as well is the Kubernetes one that, Google is right now.",
+      "japanese_text": "特に興味深いのは、現在Googleが力を入れている「kubernetes」に関するものです。"
+    },
+    {
+      "sentence_index": 279,
+      "english_text": "Like, basically, that would allow you to to scale the, like, the Nexus server, like, as is using Kubernetes.",
+      "japanese_text": "つまり、基本的にこれにより、例えばKubernetsを使用した場合と同様に、ネクサスサーバーを拡張できるようになるということです。"
+    },
+    {
+      "sentence_index": 280,
+      "english_text": "Node.",
+      "japanese_text": "ノード。"
+    },
+    {
+      "sentence_index": 281,
+      "english_text": "We built together with Jared from, from BUN, just like BUN adapter also to prove out, like, that that you can use the adapter's API, like, for something different than just, like, a a specific platform per se.",
+      "japanese_text": "私たちはBUUのJaredと共に、Bunアダプターと同様に、このアダプタAPIを別用途でも活用できることを実証するため、共同で開発を行いました。つまり、特定プラットフォーム専用という枠を超えた使い方が可能であることを証明するためでした。"
+    },
+    {
+      "sentence_index": 282,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 283,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 284,
+      "english_text": "I'm curious to see what, what, like, people built, using this.",
+      "japanese_text": "これを使って人々が実際に何を作ったのか、とても興味があります。"
+    },
+    {
+      "sentence_index": 285,
+      "english_text": "Because, like, you can do, like, more like, I saw someone tried to, use the adapter's API, like, right after it came out to to, like, create, like, single, like, single file executables,\n\nthat move up the server and things like that.",
+      "japanese_text": "なぜなら、例えばアダプターのAPIを使って、製品発売直後に単一ファイル形式の実行可能プログラムを作成しようとした人がいるからです。\n\nつまり、サーバー上で動作するアプリケーションなどを作成しようとするようなケースです。"
+    },
+    {
+      "sentence_index": 286,
+      "english_text": "Part of, like, why I was pretty excited about, like, pushing for the adapter's API is that we we kinda want to give you almost, like, full control over, like, everything NextGen can do and then what it allows you to do, like, so that at first, you know, that that is targeted toward, like, platforms.",
+      "japanese_text": "このアダプターのAPI開発に私が特に力を入れていた理由は、Next.jsが実現可能な機能全般について、ほぼ完全な制御権限を提供したいと考えていたからです。具体的には、プラットフォーム向けに設計されたこれらのツールを使ってユーザーが何を実現できるかという点を重視していました。つまり、最初の段階では――これは主に基盤技術を対象としています。"
+    },
+    {
+      "sentence_index": 287,
+      "english_text": "But one of the things, for example, that we are planning on working on next with the the Cloud for folks is, yeah, going deeper into the runtime story.",
+      "japanese_text": "しかし私たちが次にクラウド環境で取り組む予定の重要な課題の一つに、ランタイム環境に関するより詳細な検討があります。具体的には："
+    },
+    {
+      "sentence_index": 288,
+      "english_text": "Right now, it it works currently mostly for build.",
+      "japanese_text": "現時点では、主にビルド目的で使用されています。"
+    },
+    {
+      "sentence_index": 289,
+      "english_text": "But when you're working on, like, something like well, with worker d, for example, there's a bunch of APIs that are Scott not necessarily available from like, based on based on node.",
+      "japanese_text": "しかし例えば、worker-dのようなケースでは、nodeベースではない基盤からアクセス可能なAPIが多数存在します。"
+    },
+    {
+      "sentence_index": 290,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 291,
+      "english_text": "And so we wanna, I think Vite has done something similar with their environment API.",
+      "japanese_text": "そしてViteも、おそらく環境APIで同様の機能を実装していると考えられます。"
+    },
+    {
+      "sentence_index": 292,
+      "english_text": "We kinda wanna do something.",
+      "japanese_text": "何かやりたいんだよね。"
+    },
+    {
+      "sentence_index": 293,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 294,
+      "english_text": "Allow you to to have in dev as close of an experience as possible as what you're gonna get when you deploy it.",
+      "japanese_text": "デプロイ時に得られるものと可能な限り近い開発環境を提供できます。"
+    },
+    {
+      "sentence_index": 295,
+      "english_text": "So that's planned.",
+      "japanese_text": "それが計画されています。"
+    },
+    {
+      "sentence_index": 296,
+      "english_text": "Because that was my next question of, like like, one of the hugest pain in the butt with CloudFlare is that, like, if you are running Node locally and then you deploy the thing to Cloudflare, there's always this pain in the ass little things that come up.",
+      "japanese_text": "というのも、Cloudflareを使用する際の最大の難点は、まさにこの点にあるからです。ローカル環境でノードを実行している場合、それをクラウドフレアにデプロイすると、必ず小さな厄介な問題が発生するんです。"
+    },
+    {
+      "sentence_index": 297,
+      "english_text": "And and the solution to that JS, like, debugging it sucks because you gotta, like, sit there, commit, deploy, wait for the thing to build.",
+      "japanese_text": "そしてこのJSのデバッグは最悪です。コードを書いてコミットし、デプロイして、ビルドが完了するまで待たなければならないからです。"
+    },
+    {
+      "sentence_index": 298,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 299,
+      "english_text": "And they've solved a lot of that by allowing you to run, like, WorkerD locally, which means you can hit those issues right away before you deploy the thing.",
+      "japanese_text": "そしてWorkerをローカル環境で直接実行できるようにしたことで、デプロイ前にこれらの問題をすぐに解決できるようになりました」"
+    },
+    {
+      "sentence_index": 300,
+      "english_text": "But you're saying so that eventually will come to this Wes you can use it different run times in dev as well?",
+      "japanese_text": "しかし、最終的には本番環境と同じ実行環境で開発時にも異なるランタイムを使用できるようにしたいということですか？"
+    },
+    {
+      "sentence_index": 301,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 302,
+      "english_text": "That's the idea.",
+      "japanese_text": "それが要点だ。"
+    },
+    {
+      "sentence_index": 303,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 304,
+      "english_text": "Because as a as a user, I also also hate this.",
+      "japanese_text": "ユーザーとしても、これは本当に嫌なんです。"
+    },
+    {
+      "sentence_index": 305,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 306,
+      "english_text": "Like,\n\nlike, what we're driving really hard within experience is that, like, dev start, and when you push it on Vercel JS you know, behaves exactly the the the same.",
+      "japanese_text": "例えば：\n\n私たちが開発で経験していることは、VercelのJS環境でデプロイすると、まさに同じ動作をするということです。つまり、Devモードで実行した場合とまったく同じように機能するのです。"
+    },
+    {
+      "sentence_index": 307,
+      "english_text": "Like, debugging capacities are the same.",
+      "japanese_text": "デバッグ機能も同じです。"
+    },
+    {
+      "sentence_index": 308,
+      "english_text": "And, like like, I just I just kinda want to push that forward, and and that too.",
+      "japanese_text": "そして私も、ただその流れをさらに推し進めたいという気持ちがあります。それもまた。"
+    },
+    {
+      "sentence_index": 309,
+      "english_text": "Like, it's what we're selling, you know, with with NetJest by itself is not like I'm not I'm not married to the idea of, like, Node.",
+      "japanese_text": "つまり、NetJet単体では売れないってこと。単に「ノード」そのものに固執しているわけではないんです。"
+    },
+    {
+      "sentence_index": 310,
+      "english_text": "I'm not married to, like, WorkerD or, like, BUNT JS a runtime itself.",
+      "japanese_text": "私はWorker DやBUNTJSそのもの（ランタイム）と結婚しているわけではないんです。あくまでフレームワークとして使っているだけです。"
+    },
+    {
+      "sentence_index": 311,
+      "english_text": "Like, what we're selling is APIs just just Yeah.",
+      "japanese_text": "つまり、私たちが提供しているのはAPIそのものです ただそれだけです。"
+    },
+    {
+      "sentence_index": 312,
+      "english_text": "Nicely Yeah.",
+      "japanese_text": "いい感じだね。うん。"
+    },
+    {
+      "sentence_index": 313,
+      "english_text": "Then APIs and, like, if, like, hopefully, we don't, like, like, we don't like, a lot of the stuff we do, obviously, is very targeted towards Node.",
+      "japanese_text": "APIに関しては、理想的には、私たちが開発する多くの機能が明確にNode.js向けに最適化されているはずです。もちろんこれは当然のことですが。"
+    },
+    {
+      "sentence_index": 314,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 315,
+      "english_text": "Just because that's the main default.",
+      "japanese_text": "単にそれがデフォルト設定だからというだけで。"
+    },
+    {
+      "sentence_index": 316,
+      "english_text": "But, like, if it came a point where, like, BONE becomes, like, you know, the the natural, like, the the natural, like, platform to to which to build on JavaScript apps, then I would want to I would want Next to support that\n\nYeah.",
+      "japanese_text": "でも、もし将来的にBONEがJavaScriptアプリ開発の標準的な基盤として定着するような状況になったら、Next.jsがそれをサポートしてくれるようにしてほしいなと思いますね\n\nそうですね"
+    },
+    {
+      "sentence_index": 317,
+      "english_text": "As well.",
+      "japanese_text": "同様に。"
+    },
+    {
+      "sentence_index": 318,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 319,
+      "english_text": "Does that mean you have to have all of Turbo Pack running on these other runtimes as well?",
+      "japanese_text": "つまり、これらの他のランタイムでもターボパック全体を動作させる必要があるのでしょうか？"
+    },
+    {
+      "sentence_index": 320,
+      "english_text": "I've Node.",
+      "japanese_text": "私はノードを持っています。"
+    },
+    {
+      "sentence_index": 321,
+      "english_text": "Depends on, like, there there might be some some limitations there, right, in in terms of, like, obviously, if you run, like, on a on a crazy OS that just doesn't support, like, like, our build of, like, Turbo Pack, then then then we do we do still kinda need, some things.",
+      "japanese_text": "状況によっては制約が生じる可能性もあります。例えば、TurboPackをサポートしていない異常なOS環境で動作させる場合など、やはり一定の制限は存在します。"
+    },
+    {
+      "sentence_index": 322,
+      "english_text": "But TurboPac also TurboPac is mostly written in in Wes.",
+      "japanese_text": "しかしターボパックもターボパクも、主にウェスによって書かれたものだ。"
+    },
+    {
+      "sentence_index": 323,
+      "english_text": "Oh, yeah.",
+      "japanese_text": "ああ、そうだ。"
+    },
+    {
+      "sentence_index": 324,
+      "english_text": "So fully Doesn't matter.",
+      "japanese_text": "だから完全に関係ない。"
+    },
+    {
+      "sentence_index": 325,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 326,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 327,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 328,
+      "english_text": "So TurboPac,\n\nlike, itself is, you can see that as, like, a separate binary that we're running, and we're compiling it to every, like, mostly supported, like, OS, basically.",
+      "japanese_text": "つまりTurbo Pacは、独立したバイナリとして実行されるもので、基本的にはサポートされている主要なOSすべてに対してコンパイルされています。要するに、各プラットフォーム向けに個別にビルドしているわけです。"
+    },
+    {
+      "sentence_index": 329,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 330,
+      "english_text": "So if you're using, like, a convoluted OS, then, like, that that might be a problem, like, for, like, like, every, like, majorly used operating systems.",
+      "japanese_text": "つまり、複雑なOSを使用している場合、主要なオペレーティングシステムでは問題が生じる可能性があるということです。"
+    },
+    {
+      "sentence_index": 331,
+      "english_text": "Like, we're only, like, operating system.",
+      "japanese_text": "つまり、私たちはただのオペレーティングシステムみたいなものだよ。"
+    },
+    {
+      "sentence_index": 332,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 333,
+      "english_text": "Like, runtime, like, for example, like, BUN, like, you can you can use BUN for for next dev, today because you replace it with Node, with note.",
+      "japanese_text": "例えば、ランタイム環境では、例えば「Bun」を次の開発用に使用できます。なぜなら、これをノードの代わりに使用できるからです。ノートと一緒に使えばいいだけです。"
+    },
+    {
+      "sentence_index": 334,
+      "english_text": "And that knows how to run this.",
+      "japanese_text": "そしてそれを実行する方法を知っている。"
+    },
+    {
+      "sentence_index": 335,
+      "english_text": "Like, it has the Node JS APIs to, like, interface with, an API.",
+      "japanese_text": "つまり、APIと連携するための Node.js（JavaScript）用のインターフェースを備えているということです。"
+    },
+    {
+      "sentence_index": 336,
+      "english_text": "So we can just, like, run everything as is.",
+      "japanese_text": "つまり、そのまますべてを実行できるわけです。"
+    },
+    {
+      "sentence_index": 337,
+      "english_text": "If that needed something slightly different or anything like that, we could still run it.",
+      "japanese_text": "もし何か少し異なるものが必要だったり、そういった要望があれば、それでも問題なく運用できます。"
+    },
+    {
+      "sentence_index": 338,
+      "english_text": "That that's not a, not an issue.",
+      "japanese_text": "それは問題ではありません。"
+    },
+    {
+      "sentence_index": 339,
+      "english_text": "But, yeah, Nexus, like, Nexus itself, it's all mostly TypeScript, some JavaScript, and then, the the bundle is basically a 100% Wes at this point.",
+      "japanese_text": "でも実際のところ、ネクサス、つまり「ネクサ」自体はほとんどTypeScriptで、JavaScriptも少しあって、最終的にはウェスが100％担当している感じだね。"
+    },
+    {
+      "sentence_index": 340,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 341,
+      "english_text": "But, yeah, to to be clear, do Wes do rely on, like, pretty Scott of Node bearing APIs to, like, anything local storage, for example?",
+      "japanese_text": "ただし、明確にしておきたいのは、Weave がローカルストレージなどの比較的シンプルなノードベースAPIに依存しているかどうかという点です。"
+    },
+    {
+      "sentence_index": 342,
+      "english_text": "And those things were potentially either, like, they're, like, you know, supported pretty well or they might not be supported fully sometimes.",
+      "japanese_text": "そしてそれらの機能は、十分にサポートされていた場合もあれば、場合によっては完全には対応されていないこともあった。"
+    },
+    {
+      "sentence_index": 343,
+      "english_text": "And so in those cases, like, that's where we need to do some work to either, like, try to obstruct away some of our usage so that, like, then a platform could then plug in their equivalent or something.",
+      "japanese_text": "こうしたケースでは、例えばプラットフォーム側が同等の機能を実装できるよう、何らかの形で利用を制限するなどの対応が必要になります。"
+    },
+    {
+      "sentence_index": 344,
+      "english_text": "Oh, okay.",
+      "japanese_text": "ああ、わかった。"
+    },
+    {
+      "sentence_index": 345,
+      "english_text": "I see.",
+      "japanese_text": "なるほど。"
+    },
+    {
+      "sentence_index": 346,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 347,
+      "english_text": "I I that's I think, you know, as we work with, like, Cloudflare, on on supporting it supporting cache components better, I think we'll obviously run into Scott of that kind of issues.",
+      "japanese_text": "私は次のように考えています。Cloudflareのようなサービスと連携し、キャッシュコンポーネントをより適切にサポートするようになれば、当然ながら同様の問題に直面することになると思います。"
+    },
+    {
+      "sentence_index": 348,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 349,
+      "english_text": "Oh, yeah.",
+      "japanese_text": "ああ、そうだ。"
+    },
+    {
+      "sentence_index": 350,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 351,
+      "english_text": "There was Node weird thing with Cloudflare.",
+      "japanese_text": "Cloudflareに関して奇妙な問題がありました。"
+    },
+    {
+      "sentence_index": 352,
+      "english_text": "Like, their implementation of a sync local storage doesn't I'm just looking it up.",
+      "japanese_text": "例えば、同期ローカルストレージの実装方法とか、今調べているところなんだけど。"
+    },
+    {
+      "sentence_index": 353,
+      "english_text": "Enter width you can't use or something weird where you can't, like, bootstrap something with an existing object, which is kind of a bummer.",
+      "japanese_text": "使用できない幅や、既存のオブジェクトにブートストラップするような奇妙なケースに遭遇すると、ちょっと困りますね。これは少し残念です。"
+    },
+    {
+      "sentence_index": 354,
+      "english_text": "But, like, that's also not really next.",
+      "japanese_text": "でもそれもちょっと違うんだよな。"
+    },
+    {
+      "sentence_index": 355,
+      "english_text": "It it it is next problem, but also, like, that's that's more of a CloudFlare problem, you know, if they don't support those APIs.",
+      "japanese_text": "これは次の課題ですが、これもCloudflare側の問題です。つまり、彼らがこれらのAPIをサポートしていない場合です。"
+    },
+    {
+      "sentence_index": 356,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 357,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 358,
+      "english_text": "The idea is that we make, you know, as much as possible as we can on our end.",
+      "japanese_text": "要するに、私たちの側で可能な限りのことをできる限り行うということです。"
+    },
+    {
+      "sentence_index": 359,
+      "english_text": "But in the end, like, it's still up to the platform to, you know, choose to invest into making the warp.",
+      "japanese_text": "でも結局のところ、プラットフォーム側がワープ機能に投資するかどうかを決めることになるんだよね。"
+    },
+    {
+      "sentence_index": 360,
+      "english_text": "They they control the runtime.",
+      "japanese_text": "彼らはランタイムを制御する。"
+    },
+    {
+      "sentence_index": 361,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 362,
+      "english_text": "So they really can also,\n\ndo some work in advance here.",
+      "japanese_text": "だから彼らもまた、ここで前もって準備ができるのです。"
+    },
+    {
+      "sentence_index": 363,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 364,
+      "english_text": "It is similar across frameworks as Wes.",
+      "japanese_text": "これはWesleyと同様にフレームワーク間で共通しています。"
+    },
+    {
+      "sentence_index": 365,
+      "english_text": "Because, like, if other frameworks use async local storage, they, you know, you run into the same problem.",
+      "japanese_text": "なぜなら、他のフレームワークが非同期ローカルストレージを使用している場合、結局同じ問題に直面することになるからです。"
+    },
+    {
+      "sentence_index": 366,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 367,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 368,
+      "english_text": "One question everybody has, and I'm sure you're sick of hearing this right now, so feel free to to punch me.",
+      "japanese_text": "誰もが抱く疑問ですよね。今この質問を何度も聞かされてうんざりしているでしょうから、遠慮なく聞いてください。遠慮はいりません。"
+    },
+    {
+      "sentence_index": 369,
+      "english_text": "But everybody's like, why doesn't Node just run on Vite?",
+      "japanese_text": "でもみんな「なんでViteじゃなくて普通にノードで動かさないの？」って言ってるんだよね…"
+    },
+    {
+      "sentence_index": 370,
+      "english_text": "And do do you have any any response to that?",
+      "japanese_text": "そして、その件について何かご意見はありますか？"
+    },
+    {
+      "sentence_index": 371,
+      "english_text": "Because, like, I know making turbo pack was was a huge feat, and I know it's edge cases all the way down, and that's a very frustrating I'm sure people think you can just boop, boop, boop, add Vite to it.",
+      "japanese_text": "だって、ターボパックの作成なんて大仕事だったわけだし、エッジケースだらけなのは明らかでしょ？「ポチッとな」ってViteをくっつければ済むと思ってる人がいるなんて、本当にイライラするわ。"
+    },
+    {
+      "sentence_index": 372,
+      "english_text": "But, like, what what are your opinions on that or your responses to that?",
+      "japanese_text": "でも、それについてのあなたなりの見解や意見はどうですか？"
+    },
+    {
+      "sentence_index": 373,
+      "english_text": "If you're not watching, I just set up straighter.",
+      "japanese_text": "見てないなら、すぐに片付けるよ。"
+    },
+    {
+      "sentence_index": 374,
+      "english_text": "The yeah.",
+      "japanese_text": "その通りです。"
+    },
+    {
+      "sentence_index": 375,
+      "english_text": "So we started building TurboPack.",
+      "japanese_text": "そこで私たちはTurbo Packの開発に着手しました。"
+    },
+    {
+      "sentence_index": 376,
+      "english_text": "I can't remember which year.",
+      "japanese_text": "何年だったか思い出せない。"
+    },
+    {
+      "sentence_index": 377,
+      "english_text": "It's been some time.",
+      "japanese_text": "しばらくぶりですね。"
+    },
+    {
+      "sentence_index": 378,
+      "english_text": "The reason we started building it, is, like, for context, like, we were we were using Webpack before, like most other frameworks at the time.",
+      "japanese_text": "このツールの開発を始めたきっかけは、当時他のフレームワークで主流だったWebpackと同様の機能を提供するためでした。つまり、多くの既存ソリューションが採用していたアプローチを踏襲したわけです。"
+    },
+    {
+      "sentence_index": 379,
+      "english_text": "And, basically, Webpack, it has some limitations.",
+      "japanese_text": "そして基本的に、Webpackにはいくつかの制約があります。"
+    },
+    {
+      "sentence_index": 380,
+      "english_text": "The main thing that the the main limitation it has is that it's, single threaded.",
+      "japanese_text": "このシステムの主な制約は、シングルスレッドで動作するという点です。"
+    },
+    {
+      "sentence_index": 381,
+      "english_text": "So it runs in, it's mostly JavaScript, not TypeScript.",
+      "japanese_text": "つまりこれは主にJavaScriptで書かれており、TypeScriptではありません（一部にJSが使われています）。"
+    },
+    {
+      "sentence_index": 382,
+      "english_text": "It has a very extensive plug in API, but really the biggest, like, problem that we ran into as applications kept scaling.",
+      "japanese_text": "非常に広範なプラグインAPIを備えていますが、実際にアプリケーションの拡張を進める中で直面した最大の課題は、スケーラビリティに関する問題でした。"
+    },
+    {
+      "sentence_index": 383,
+      "english_text": "So, like, the, like, think about it this way.",
+      "japanese_text": "つまり、こう考えてみてください。"
+    },
+    {
+      "sentence_index": 384,
+      "english_text": "Like, if, like, Wes or Scott starts building a a new application today, they're probably, like, pulling in, like, 10 x more code than they were ten years ago when we start Nextiva.",
+      "japanese_text": "例えば、ウェスやスコットが今日新しいアプリケーションの開発を始めたとしたら、おそらく10年前（Nextivaを立ち上げた頃）と比べて約10倍もコードを書いているはずです。"
+    },
+    {
+      "sentence_index": 385,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 386,
+      "english_text": "So over time, like, basically, you you start hitting this, this problem of, like, there's so much code to compile.",
+      "japanese_text": "時間が経つにつれ、基本的にコンパイルすべきコード量が膨大になっていくという問題に直面することになる。"
+    },
+    {
+      "sentence_index": 387,
+      "english_text": "Now everything gets slower and slower.",
+      "japanese_text": "今やすべてがどんどん遅くなる一方だ。"
+    },
+    {
+      "sentence_index": 388,
+      "english_text": "There were some takes on how to solve that problem, which included, and then, like, Next itself, also made this, like, this problem ish two x Vercel by having two competitors.",
+      "japanese_text": "この問題を解決するためのいくつかのアプローチが提案されましたが、その中にはNext.js自体が、競合する2つのソリューションを同時に提供するという方法も含まれていました。具体的にはVercelがこの問題を「Problem Is: 2x Velocity」（速度×ベロシティ＝倍のパフォーマンス）として捉えたものです。"
+    },
+    {
+      "sentence_index": 389,
+      "english_text": "So you're not running one Webpack.",
+      "japanese_text": "つまり、あなたはWebPackを1つしか実行していないということですね。"
+    },
+    {
+      "sentence_index": 390,
+      "english_text": "You're running two Webpacks.",
+      "japanese_text": "あなたは2つのWebpackインスタンスを実行しています。"
+    },
+    {
+      "sentence_index": 391,
+      "english_text": "Like, one Webpack for the browser, like, your browser Node, and one Webpack for your server code.",
+      "japanese_text": "例えば、ブラウザ用のWebPack（つまりあなたのウェブブラウザーで使うバージョン）とサーバーサイドコード向けの別インスタンスを用意するといった具合です。"
+    },
+    {
+      "sentence_index": 392,
+      "english_text": "So for, like, the server side rendering and all of that.",
+      "japanese_text": "つまりサーバーサイドレンダリングやその他の機能についてですね。"
+    },
+    {
+      "sentence_index": 393,
+      "english_text": "Like, we had to do that because, like, otherwise, you can't you can't run browser Node.",
+      "japanese_text": "つまり、そうしないとブラウザ版のノードを実行できないからだよ。"
+    },
+    {
+      "sentence_index": 394,
+      "english_text": "That's, like, been all for the browser in the Vercel.",
+      "japanese_text": "つまり、Vercelのブラウザ環境ではこれで完了ってことです。"
+    },
+    {
+      "sentence_index": 395,
+      "english_text": "Like, your, like, type of window would be replaced or things like that.",
+      "japanese_text": "例えば、あなたの窓の種類やその交換方法などについてです。"
+    },
+    {
+      "sentence_index": 396,
+      "english_text": "You couldn't do as many optimizations, like, all of that.",
+      "japanese_text": "以前のように多くの最適化ができませんでした。例えば...そういったことが一切できなかったんです。"
+    },
+    {
+      "sentence_index": 397,
+      "english_text": "So you were basically, like, what Nexus was doing was, like, it was, like, trying to orchestrate multiple instances of Webpack and trying to make sure that they compile at the same time.",
+      "japanese_text": "つまり、基本的にネクサスが行っていたのは、複数インスタンスのWebpackを連携させ、同時にコンパイルできるように調整する機能だったわけです。"
+    },
+    {
+      "sentence_index": 398,
+      "english_text": "They finish at the same time.",
+      "japanese_text": "彼らは同時に終わる。"
+    },
+    {
+      "sentence_index": 399,
+      "english_text": "They run-in parallel as much as possible.",
+      "japanese_text": "それらはできるだけ並行して走る。"
+    },
+    {
+      "sentence_index": 400,
+      "english_text": "But in practice, like, you can't really do that because, like, one might depend on the other.",
+      "japanese_text": "しかし実際には、例えば一方が他方に依存している場合が多いので、そう簡単にはいかないものです。"
+    },
+    {
+      "sentence_index": 401,
+      "english_text": "And then when you have, rec server components, now you have this, like, it's a scheduling problem, basically.",
+      "japanese_text": "そしてレシーバー側のコンポーネントがある場合、これは基本的にスケジューリング問題となります。"
+    },
+    {
+      "sentence_index": 402,
+      "english_text": "Like, you have used ESLint, and used client could import a used server, like a server action.",
+      "japanese_text": "例えば、ESlintを使用してクライアント側でサーバーアクション（例えばAPIコール）を呼び出す場合などです。"
+    },
+    {
+      "sentence_index": 403,
+      "english_text": "And this, like the first file that you find is a, server component.",
+      "japanese_text": "そしてこれは、最初に見つけたファイルと同様に、サーバーコンポーネントです。"
+    },
+    {
+      "sentence_index": 404,
+      "english_text": "So, like, that Vercel Node, so that's running in the server compiler.",
+      "japanese_text": "つまり、Vercelのノード環境では、サーバーサイドコンパイラで動作しているわけです。"
+    },
+    {
+      "sentence_index": 405,
+      "english_text": "But the moment it, finishes compiling, it has found all the like, it collects all the used client, and then it injects it into the this, like, second Wes instance.",
+      "japanese_text": "しかしコンパイルが完了するとすぐに、使用されたすべてのクライアントを検出し、それらをこの場合では2番目のWesleyインスタンスに注入します。"
+    },
+    {
+      "sentence_index": 406,
+      "english_text": "And it's like, hey.",
+      "japanese_text": "そして「ねえ、聞いてよ」って感じ。"
+    },
+    {
+      "sentence_index": 407,
+      "english_text": "You know what?",
+      "japanese_text": "知ってる？"
+    },
+    {
+      "sentence_index": 408,
+      "english_text": "Now we're going to compile that.",
+      "japanese_text": "次にそれをコンパイルします。"
+    },
+    {
+      "sentence_index": 409,
+      "english_text": "And then when that second instance runs, and it finds all the user server, it now has to run, the comp like, the comp the the first compiler that we, like, triggered again to then, like, compile all this new code that we found.",
+      "japanese_text": "そして2番目のインスタンスが実行され、すべてのユーザーサーバーを発見すると、再び最初と同じコンパイラを起動して、先ほど見つけた新しいコードをコンパイルする必要があります。"
+    },
+    {
+      "sentence_index": 410,
+      "english_text": "And, basically, like, that means that you're going from, like, server ESLint, server client, and and it can effectively recursively go through more than that, but we we blocked you from doing that.",
+      "japanese_text": "つまり、基本的には、サーバー側のESlintからクライアントサイドまで適用範囲を広げられるということですが、私たちはそのような使い方を制限しています。"
+    },
+    {
+      "sentence_index": 411,
+      "english_text": "In practice, you should be able to do that, though.",
+      "japanese_text": "実際には、それで十分対応できるはずです。"
+    },
+    {
+      "sentence_index": 412,
+      "english_text": "Like, you should be able to import more client components that have more server actions and and, like, and so forth.",
+      "japanese_text": "例えば、サーバー側のアクション機能を備えたクライアントコンポーネントをより多くインポートできるようにしたり、その他諸々のことが可能になるはずです。"
+    },
+    {
+      "sentence_index": 413,
+      "english_text": "And this might be, like this the other thing that we want is to have, server components that you can, like, import and render from, like, using your server, for example, in the future.",
+      "japanese_text": "そして将来的には、サーバー側で生成したコンポーネントをインポートしてレンダリングできるような機能も必要になるかもしれません。例えば、将来的にこのような形で利用できるようになる可能性があります。"
+    },
+    {
+      "sentence_index": 414,
+      "english_text": "And, like, this would may basically make that, like, a a compilation problem.",
+      "japanese_text": "つまり、これは基本的にコンパイル時の問題を引き起こす可能性があるということです。"
+    },
+    {
+      "sentence_index": 415,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 416,
+      "english_text": "So, like, we had this kind of, like, slowness problem, and it it got it, like, got worse, like, as we added more, like, compilation, work to it and, like, this this orchestration, basically.",
+      "japanese_text": "つまり、当初は処理速度の問題があり、コンパイル作業が増えるにつれて（特にオーケストレーション部分で）状況が悪化していったわけです。"
+    },
+    {
+      "sentence_index": 417,
+      "english_text": "So, So, like, that was the like, really quick, that was, like, the problem that we had besides, like, the application getting a lot larger and, like, that also being problem.",
+      "japanese_text": "つまり、要するに、アプリケーションが大幅に肥大化したことと、それが問題の一つだったわけです。"
+    },
+    {
+      "sentence_index": 418,
+      "english_text": "So Mhmm.",
+      "japanese_text": "そう、うんうん。"
+    },
+    {
+      "sentence_index": 419,
+      "english_text": "You said really quick that you gave a whole explanation\n\nof, of this Vercel of the server component architecture.",
+      "japanese_text": "あなたはこのVercelのサーバーコンポーネントアーキテクチャについて非常に簡潔に説明されましたね。"
+    },
+    {
+      "sentence_index": 420,
+      "english_text": "I know.",
+      "japanese_text": "I do know."
+    },
+    {
+      "sentence_index": 421,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 422,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 423,
+      "english_text": "So so that's, like, the problem or or, like, where we came from.",
+      "japanese_text": "つまり、それが問題の核心、あるいは私たちがどこからやってきたかという根源的な問いなのです。"
+    },
+    {
+      "sentence_index": 424,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 425,
+      "english_text": "I just want to clear that up because, like, it might sound very simple to say, like, oh, yeah.",
+      "japanese_text": "この件をはっきりさせておきたいのは、例えば「ああ、簡単そう」と言うような単純な話ではないからです。"
+    },
+    {
+      "sentence_index": 426,
+      "english_text": "Just, like, drop the bundler and do something else.",
+      "japanese_text": "バンドルャーは置いておいて、他のことをやろうよ。"
+    },
+    {
+      "sentence_index": 427,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 428,
+      "english_text": "So at that point, like, Wes were like, okay.",
+      "japanese_text": "その時点で、ウェスたちは「よし、わかった」って感じで。"
+    },
+    {
+      "sentence_index": 429,
+      "english_text": "Let's have a look at, like, where things are at in the overall ecosystem.",
+      "japanese_text": "全体的なエコシステムの現状を見てみましょう。"
+    },
+    {
+      "sentence_index": 430,
+      "english_text": "Like, what is everyone else doing?",
+      "japanese_text": "他のみんなは今何してる？"
+    },
+    {
+      "sentence_index": 431,
+      "english_text": "And what we find is, like, effectively, every other framework was doing the same thing that we were doing, which is, regardless of what vendor you were using, even if you were using more modern ones, like, like feet or, roll up or, like, anything else Mhmm.",
+      "japanese_text": "そして明らかになったのは、他のすべてのフレームワークがまさに私たちが行っていたこと、つまり使用するベンダーやプラットフォームにかかわらず、よりモダンなソリューション（feet、rollupなど）を採用していた場合でも、実質的に同じアプローチを取っていたという事実です。"
+    },
+    {
+      "sentence_index": 432,
+      "english_text": "Effectively, they were all like, if you're building a a a framework that have multiple layers, so, like, server and client or things like that, they were all doing this orchestration issue.",
+      "japanese_text": "要するに、複数のレイヤーを持つフレームワークを構築する場合――例えばサーバーサイドとクライアント側があるようなケースでは、いずれもこのオーケストレーション問題に直面していたわけです。"
+    },
+    {
+      "sentence_index": 433,
+      "english_text": "Like, they were all Yeah.",
+      "japanese_text": "みんな「そうだよ」って言ってたよ。"
+    },
+    {
+      "sentence_index": 434,
+      "english_text": "Compiling like like, you had two feed instances instead of two Wes instances or things like that.",
+      "japanese_text": "コンパイル時に、2つのWeaveインスタンスではなく1つだけのフィード・インスタンスが生成される、といった問題がありました。"
+    },
+    {
+      "sentence_index": 435,
+      "english_text": "I have my personal\n\nWeKu website, which is React Server Components, I think it has four VIT instances.",
+      "japanese_text": "私の個人用ウェブサイトである Weku サイトには、React Server Component（VIT）インスタンスが4つ存在しています。"
+    },
+    {
+      "sentence_index": 436,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 437,
+      "english_text": "It works in the same like, like, everyone did the same thing because, like, that makes sense.",
+      "japanese_text": "みんな同じように行動したのは当然だよね、だってそれが理にかなってるから。"
+    },
+    {
+      "sentence_index": 438,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 439,
+      "english_text": "Like, if you, like, if you're not building the builder yourself, like, you you hit this thing where you're like, oh, yeah.",
+      "japanese_text": "例えば、自分でビルダーを構築していない場合、つまり「ああ、なるほど」という段階に達した時のことです。"
+    },
+    {
+      "sentence_index": 440,
+      "english_text": "I need to run multiple of these because, like, I have multiple output targets or things like that.",
+      "japanese_text": "複数実行する必要があるんです。出力先が複数あったり、その他の理由で。"
+    },
+    {
+      "sentence_index": 441,
+      "english_text": "Wes I explained this, like, I was only talking about server and browser, but you could also think about, like, at run time or, like, all these other, like, output targets.",
+      "japanese_text": "ウェス：説明したように、これは主にサーバーとブラウザの話でしたが、実行時やその他さまざまな出力先についても考慮できます。例えば..."
+    },
+    {
+      "sentence_index": 442,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 443,
+      "english_text": "Button maybe or things like that.",
+      "japanese_text": "ボタンやそういったものかもしれません。"
+    },
+    {
+      "sentence_index": 444,
+      "english_text": "You would have to, like, like, basically, we got some problem where you're running, like, many instances.",
+      "japanese_text": "つまり、基本的に、複数のインスタンスを稼働させている状況で問題が発生するわけです。"
+    },
+    {
+      "sentence_index": 445,
+      "english_text": "So yeah.",
+      "japanese_text": "そう、そんな感じ。"
+    },
+    {
+      "sentence_index": 446,
+      "english_text": "So we looked at it at the time, which, is is multiple years ago now before there was, like, any like, the the only other, I I will give credit to Parcel.",
+      "japanese_text": "そこで私たちは当時それを検討しましたが、その頃はまだ他に選択肢がほとんどありませんでした。この点についてはParcelに感謝しています。"
+    },
+    {
+      "sentence_index": 447,
+      "english_text": "Parcel had this API where they could do server ESLint, server client, server client.",
+      "japanese_text": "Parcelにはサーバー側のESlint、クライアントサイド用、およびサーバ・ブラウザ向けそれぞれに対応したAPIが用意されていました。"
+    },
+    {
+      "sentence_index": 448,
+      "english_text": "Like, that that was a thing that they already added.",
+      "japanese_text": "つまり、すでに追加済みの機能だったんですよ。"
+    },
+    {
+      "sentence_index": 449,
+      "english_text": "You have a Webex application.",
+      "japanese_text": "WebExアプリケーションをお持ちです。"
+    },
+    {
+      "sentence_index": 450,
+      "english_text": "Like, your your, like, existing Nexus application is, like, completely geared towards, like, you have all the Webex specific API.",
+      "japanese_text": "つまり、既存のネクサスアプリケーションは、WebEx専用APIに特化した設計になっているんです。"
+    },
+    {
+      "sentence_index": 451,
+      "english_text": "So this means, like, their name works in a certain way, new URL works in a certain way.",
+      "japanese_text": "つまり、彼らの名前がある特定の法則に従って機能し、新しいURLが一定の方法で動作するということです。"
+    },
+    {
+      "sentence_index": 452,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 453,
+      "english_text": "Like, import meta works in a certain way, like, all of these things.",
+      "japanese_text": "例えば、メタインポートが特定の方法で機能するように、これらすべてのものがそうであるようにね。"
+    },
+    {
+      "sentence_index": 454,
+      "english_text": "All the resolvers of all the files work the same way.",
+      "japanese_text": "すべてのファイル内リゾルバは同じ方法で動作します。"
+    },
+    {
+      "sentence_index": 455,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 456,
+      "english_text": "You've probably hit this thing, like, in the past where, like, like, Feed, for example, like, they introduced, we're gonna use these modules for everything.",
+      "japanese_text": "おそらく過去に似たような経験がおありでしょう。例えばFeedのように、すべての機能にモジュール方式を採用するといったケースです。"
+    },
+    {
+      "sentence_index": 457,
+      "english_text": "So now when you're migrating, like, a, like, a, app that was built using Webpack and you're migrating to Feed, like, you would have the same problem.",
+      "japanese_text": "つまり、Webpackで構築されたアプリケーションをFeedに移行する場合、同様の問題が発生することになります。"
+    },
+    {
+      "sentence_index": 458,
+      "english_text": "You had to rewrite some of your code or things like that.",
+      "japanese_text": "コードの一部を書き直す必要があったり、そういった作業がありました。"
+    },
+    {
+      "sentence_index": 459,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 460,
+      "english_text": "There are more reasons for this, but, like, feel like the the problem that we had was, like, there's multiple binders.",
+      "japanese_text": "これには様々な理由がありますが、要するに、私たちが直面していた問題は、複数のバインダーが関係しているということです。"
+    },
+    {
+      "sentence_index": 461,
+      "english_text": "There's, like, combat with the, like, the previous Nexus apps that Wes, like and we had millions at the time already.",
+      "japanese_text": "当時すでに何百万ものユーザーが使っていた旧ネクサスアプリと競合するような形で...ウェスが開発していたんです。"
+    },
+    {
+      "sentence_index": 462,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 463,
+      "english_text": "So Mhmm.",
+      "japanese_text": "そう、うんうん。"
+    },
+    {
+      "sentence_index": 464,
+      "english_text": "This isn't, like, a small scale problem.",
+      "japanese_text": "これは単なる小規模な問題ではない。"
+    },
+    {
+      "sentence_index": 465,
+      "english_text": "Like, we like, if we give you a lot of breaking changes, like, now, like, millions of people have to do work to actually get to the latest version or, like, to use the this, like, improvements.",
+      "japanese_text": "例えば、大幅な仕様変更を行うと、何百万人ものユーザーが最新バージョンに移行するために多大な労力を強いられることになります。こうした改善を活用するには、多くの作業が必要になります。"
+    },
+    {
+      "sentence_index": 466,
+      "english_text": "There were, like, no solutions out there at the time.",
+      "japanese_text": "当時は本当に解決策がなかったんだ。"
+    },
+    {
+      "sentence_index": 467,
+      "english_text": "So, effectively, it it was a question of, like, do we take existing bundlers and try to cram this, like, new features into them to make it work in this way?",
+      "japanese_text": "つまり、既存のバンドルツールをそのまま利用し、この新しい機能を無理やり組み込もうとするのが解決策だったのでしょうか？"
+    },
+    {
+      "sentence_index": 468,
+      "english_text": "And then, like, work with this, like, like, other bundlers or things like that?",
+      "japanese_text": "そしてその後、他のバンドルツールや類似したソリューションと連携させるのでしょうか？"
+    },
+    {
+      "sentence_index": 469,
+      "english_text": "Or do Wes, start from like, take everything that we've learned from all these, like, the other bundlers?",
+      "japanese_text": "それとも、これまでのすべての経験――他のバンドルツールから得た知見を土台にすべきでしょうか？"
+    },
+    {
+      "sentence_index": 470,
+      "english_text": "Because, like, the like, a lot of the, like, Sanity just, like, built on, like, a lot of this, like, knowledge of, like, mistakes that were made for Webex, for example.",
+      "japanese_text": "なぜなら、SanityはWebExなどで生じた多くの誤りを基に構築されているからです。例えば..."
+    },
+    {
+      "sentence_index": 471,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 472,
+      "english_text": "Or Yeah.",
+      "japanese_text": "あるいはそうだね。"
+    },
+    {
+      "sentence_index": 473,
+      "english_text": "Or things like that.",
+      "japanese_text": "あるいはそういったものです。"
+    },
+    {
+      "sentence_index": 474,
+      "english_text": "So can we take, like, all of these learnings from building all these different platforms and then, like, a lot of people that that came into Vercel, like, people that came from Svelte and, and all of that?",
+      "japanese_text": "つまり、これらの多様なプラットフォーム構築から得られた知見を統合し、Vercelに参画したSvelte出身者たち――彼らがもたらす知識や経験も含めて活用できるのでしょうか？"
+    },
+    {
+      "sentence_index": 475,
+      "english_text": "Like, take all of this knowledge and then build something new that, takes, like, learnings from from everything that came before, similar to how most new, opens up projects are built.",
+      "japanese_text": "つまり、これまでのすべての知識を統合し、それらから得られた知見を活かして、既存のものを土台に全く新しいものを創造する――これは多くの新規プロジェクトが構築される典型的なパターンです。"
+    },
+    {
+      "sentence_index": 476,
+      "english_text": "So that's, like, where we started, and that's how we started building, TurboPack.",
+      "japanese_text": "これが私たちの出発点であり、Turbo Pack開発が始まった経緯です。"
+    },
+    {
+      "sentence_index": 477,
+      "english_text": "And then, we had this like, pretty quickly, we had, like, a a fully functional blender.",
+      "japanese_text": "そしてあっという間に、完全に機能するブレンダーが完成しました。"
+    },
+    {
+      "sentence_index": 478,
+      "english_text": "You take inputs to create outputs.",
+      "japanese_text": "入力データを受け取り、出力を生成します。"
+    },
+    {
+      "sentence_index": 479,
+      "english_text": "It runs transforms, like, all of this.",
+      "japanese_text": "これは変換処理を実行します - 要するにこういうことです。"
+    },
+    {
+      "sentence_index": 480,
+      "english_text": "That was actually not the hard part.",
+      "japanese_text": "実はそこが一番難しい部分ではなかった。"
+    },
+    {
+      "sentence_index": 481,
+      "english_text": "Like, building a a a, like, Bundler, like, we we know how to do this and, yeah, we we we hired all the right people to work on it, and and we we had that pretty quickly.",
+      "japanese_text": "例えば、Bundlerのようなツールを構築する場合、私たちはこの種の作業をどう進めるべきかを理解しており、適切な人材をすぐに確保できました。そして実際にそれを迅速に実現できたんです。"
+    },
+    {
+      "sentence_index": 482,
+      "english_text": "So a, like, create create react app type app was, was, like, we we got to that point pretty quickly.",
+      "japanese_text": "つまり、「create-react-app」を使ったアプリ作成は非常に迅速に完了しました。私たちはその段階にあっという間に到達したのです。"
+    },
+    {
+      "sentence_index": 483,
+      "english_text": "The problem was that, why it took, like, quite some time to to get, like, fully to, like, 100% of NexSys Wes passing JS that, NexSys has a lot of Wes.",
+      "japanese_text": "問題は、NeXsys WebがJSを完全に処理して100%のパフォーマンスを発揮するまでに、かなり時間がかかったことです。このシステムには多くのWeS（Webサービス）が含まれていました。"
+    },
+    {
+      "sentence_index": 484,
+      "english_text": "Like like, I think, like, 11 to 13,000 tests if you take, like, both that and those.",
+      "japanese_text": "おそらくその検査とその他のテストを含めると、合計で約1万～1.3千回程度になるのではないでしょうか。"
+    },
+    {
+      "sentence_index": 485,
+      "english_text": "Knows about those tests.",
+      "japanese_text": "それらのテストについて知っている。"
+    },
+    {
+      "sentence_index": 486,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 487,
+      "english_text": "So, like, this test suite is super large, but it tests all edge cases.",
+      "japanese_text": "つまり、このテストスイートは非常に大規模ですが、すべての境界条件を網羅しているんです。"
+    },
+    {
+      "sentence_index": 488,
+      "english_text": "That includes things that vendors would usually be testing.",
+      "japanese_text": "これには通常ベンダーが実施するテスト項目も含まれます。"
+    },
+    {
+      "sentence_index": 489,
+      "english_text": "So it includes HMR.",
+      "japanese_text": "そのためHMRも含まれています。"
+    },
+    {
+      "sentence_index": 490,
+      "english_text": "It includes, Bos refresh.",
+      "japanese_text": "これには、ボスリフレッシュも含まれます。"
+    },
+    {
+      "sentence_index": 491,
+      "english_text": "It includes, like, all of these edge cases, every bundle feature.",
+      "japanese_text": "これには、エッジケースやバンドル機能のあらゆる側面が含まれています。"
+    },
+    {
+      "sentence_index": 492,
+      "english_text": "Because, when, like, when I was building Nexius, like, very early on, we were just, like, every single edge case that we ran into, like, instead of, just, like, upstreaming every, like, test that we have for that, we also added a test just in general to make sure that it keeps working in Nextiva's because, like, we were doing this orchestration thing, like I explained.",
+      "japanese_text": "なぜなら、Nexiusを開発していた初期段階では、例えばあらゆるエッジケースに遭遇するたびに、単にそのテストをすべて上流に流すだけでなく、Nextivaで確実に動作し続けることを確認するため、一般的な検証用の追加試験も実装したからです。先ほど説明したようなオーケストレーション機能を実装していたので。"
+    },
+    {
+      "sentence_index": 493,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 494,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 495,
+      "english_text": "And we you would hit issues with the orchestration itself, which means that it's not a bundler issue.",
+      "japanese_text": "また、オーケストレーション自体に問題が発生している場合、これはバンドルラーの不具合ではありません。"
+    },
+    {
+      "sentence_index": 496,
+      "english_text": "It's actually an actual issue.",
+      "japanese_text": "これは実際に存在する問題です。"
+    },
+    {
+      "sentence_index": 497,
+      "english_text": "So we already had this, like, very extensive test suite of, like, how a bundler should behave.",
+      "japanese_text": "つまり、バンドル処理の動作に関する非常に包括的なテストスイートがすでに存在していたわけです。"
+    },
+    {
+      "sentence_index": 498,
+      "english_text": "We we basically have to go through and, like, fix every single edge case so that it behaves in the same way or super close to what it was doing before Mhmm.",
+      "japanese_text": "基本的には、すべてのエッジケースを精査し、以前の動作と完全に一致するか、少なくとも非常に近くなるように修正する必要があります。うーん。"
+    },
+    {
+      "sentence_index": 499,
+      "english_text": "Including a lot of the behaviors that Webpack has.",
+      "japanese_text": "Webpackが持つ多くの機能を網羅しています。"
+    },
+    {
+      "sentence_index": 500,
+      "english_text": "So an example here is there's a comment called Webpack ignore true that you can add into an import.",
+      "japanese_text": "具体例を挙げると、import文に追加できる「Webpack 無視」というコメントがあります。これは特定のインポートを処理対象から除外するために使用されます。"
+    },
+    {
+      "sentence_index": 501,
+      "english_text": "I'm not sure if you ever seen it.",
+      "japanese_text": "あなたがそれを見たことがあるかどうか確信がありません。"
+    },
+    {
+      "sentence_index": 502,
+      "english_text": "That makes it, like, ignore the import when, when bundling.",
+      "japanese_text": "つまり、バンドル時にインポートを無視するような感じです。"
+    },
+    {
+      "sentence_index": 503,
+      "english_text": "A lot of Npm packages have that, for example.",
+      "japanese_text": "多くのNPMパッケージでそのような問題が見られます。"
+    },
+    {
+      "sentence_index": 504,
+      "english_text": "I Yeah.",
+      "japanese_text": "ああ。"
+    },
+    {
+      "sentence_index": 505,
+      "english_text": "Never seen it before myself, but as Wes Scott building this, like, obviously, we're into it because, like, Turbo Pack would start building it, for example.",
+      "japanese_text": "私自身はこれまで見たことがありませんが、ウェス・スコットがこれを作っているのを見ると、例えばターボパックで構築し始めるなど、明らかに興味をそそられます。"
+    },
+    {
+      "sentence_index": 506,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 507,
+      "english_text": "I found out, like, other frameworks also start or, like, other vendors also start building it.",
+      "japanese_text": "他のフレームワークも動き始めていることに気づきました。つまり、他社も同様のものを開発し始めたんです。"
+    },
+    {
+      "sentence_index": 508,
+      "english_text": "But then in Webpack, it would, like, just ignore it and, like, there would be no compiler error whatsoever.",
+      "japanese_text": "でもWebpackだと、無視されてコンパイラエラーも一切出なかったんだよね」"
+    },
+    {
+      "sentence_index": 509,
+      "english_text": "So we have, like, interrupt.",
+      "japanese_text": "つまり割り込みが発生するわけです。"
+    },
+    {
+      "sentence_index": 510,
+      "english_text": "Like, we have support for, like, a lot of these, like, Wes specific, APIs as well.",
+      "japanese_text": "例えば、Wesley特有のAPIも多数サポートしています。"
+    },
+    {
+      "sentence_index": 511,
+      "english_text": "And we make sure that, like, for the most part, your application, like, you'd have to rewrite, like, a lot of, things to to get to this newer version.",
+      "japanese_text": "そして私たちは、ほとんどの場合、あなたのアプリケーションを、例えば新しいバージョンに移行するには、多くの部分を書き換えなければならないように設計しています。"
+    },
+    {
+      "sentence_index": 512,
+      "english_text": "So that covers this, like, millions of people case.",
+      "japanese_text": "これで何百万人もの人々に関するケースを網羅したことになります。"
+    },
+    {
+      "sentence_index": 513,
+      "english_text": "At the same time, what we've seen, like, while we were building this, like like, other, like, vendors, they they kept innovating as well.",
+      "japanese_text": "同時に、私たちがこれを構築している間にも、他のベンダーたちは同様に革新を続けていました。例えば...競合他社も次々と新しいソリューションを開発していたんです。"
+    },
+    {
+      "sentence_index": 514,
+      "english_text": "There was RS pnpm that, tries to, like, implement, the whole, like, Webpack API, interface Yeah.",
+      "japanese_text": "RS PnPというプロジェクトがあって、これはWebpackのAPIやインターフェースを完全に実装しようとするものでしたよね。その通りです。"
+    },
+    {
+      "sentence_index": 515,
+      "english_text": "While giving you, this, like, parallelization and, like, better, like, like, slightly better bundling and, like, parallelization.",
+      "japanese_text": "これと同時に、並列処理や最適化を行い、より優れたバンドル機能や、例えば並行実行などの改善も実現しています。"
+    },
+    {
+      "sentence_index": 516,
+      "english_text": "And, at the same time, also, you saw the feed team build rollout, which is really cool as well, which has, like, a lot of the, like, it takes a lot of the same learnings that we had for for TurboPacks.",
+      "japanese_text": "同時に、フィードチームによるロールアウトも実施されました。これは非常に興味深い取り組みで、Turbo Packで得られた多くの知見が活かされています。"
+    },
+    {
+      "sentence_index": 517,
+      "english_text": "So, like, in practice, like, the the way I feel about it today is, like, that all of these vendors have started to Scott of, like, converge onto a similar type of feature set, and the way they work is actually very similar.",
+      "japanese_text": "つまり、実際には、今日の状況としては、これらすべてのベンダーが次第に類似した機能セットへと収束しつつあり、その動作原理も驚くほど似通っているということです。"
+    },
+    {
+      "sentence_index": 518,
+      "english_text": "The only difference is, like, trade offs that you make around, like, gushing, like, incremental compilation, like, things like that.",
+      "japanese_text": "唯一の違いは、例えば漸進的なコンパイル処理など、特定の最適化に関するトレードオフをどう扱うかという点です。"
+    },
+    {
+      "sentence_index": 519,
+      "english_text": "So for something I didn't talk about for Pnpm specifically is, like, we went all in on this, like, incremental compilation architecture.",
+      "japanese_text": "Pnpmで特に強調したいのは、私たちが全面的に採用した漸進的コンパイルアーキテクチャについてです。"
+    },
+    {
+      "sentence_index": 520,
+      "english_text": "So similar to, like, salsa and roast or or things like that, which is, like, you can annotate functions that are cached automatically and, paralyzed automatically.",
+      "japanese_text": "これはサルサやロースト料理などに似ていて、自動的にキャッシュされる関数を注釈付けでき、さらに自動で最適化まで行われるのです。"
+    },
+    {
+      "sentence_index": 521,
+      "english_text": "And this Wes especially important for us because, like, we were also seeing besides just, like, the new apps are 10 x larger, the existing apps are 10 x larger as Wes.",
+      "japanese_text": "特にウェスにとって重要なのは、新規アプリが10倍大きいだけでなく、既存のアプリケーションもWesと比較して約10倍大きくなっている点です。"
+    },
+    {
+      "sentence_index": 522,
+      "english_text": "And we want this incremental compilation.",
+      "japanese_text": "そして、この増分コンパイルを実現したいのです。"
+    },
+    {
+      "sentence_index": 523,
+      "english_text": "Like, basically, you want everything to be incremental compilation.",
+      "japanese_text": "つまり、基本的にはすべてを増分コンパイルで行いたいわけです。"
+    },
+    {
+      "sentence_index": 524,
+      "english_text": "So this means if you're in a build, like, the first build, like, the very first time might be slow or slower, than, than, like, any other vendor, for example.",
+      "japanese_text": "つまり、ビルド中の場合、例えば最初の構築時などは、他のベンダーに比べて処理が遅くなったり時間がかかる可能性があるということです。"
+    },
+    {
+      "sentence_index": 525,
+      "english_text": "But after that, we have every single thing that it did cached.",
+      "japanese_text": "しかしその後、私たちはその操作で生成されたすべてのものをキャッシュとして保持しています。"
+    },
+    {
+      "sentence_index": 526,
+      "english_text": "And if you make another build, it's a lot faster.",
+      "japanese_text": "そして再度ビルドする場合、さらに高速になります。"
+    },
+    {
+      "sentence_index": 527,
+      "english_text": "So it's, for example, like, if you have an application that's, like, super large, like, like, 100,000 plus modules or things like that, and it it might take, like, a minute to build or something like that, the incremental, compilation would be a few seconds to get to, like, this, the the, like, the next build after that, basically.",
+      "japanese_text": "つまり、例えば非常に大規模なアプリケーション――10万以上のモジュールで構成されるような場合を考えてみてください（実際にはそれ以上かもしれません）。そのビルドに数分かかるとします。このようなケースでは、次のコンパイル作業は数秒程度で完了するようになります。これが基本的な考え方です。"
+    },
+    {
+      "sentence_index": 528,
+      "english_text": "And And it would be, like, every build after that is just faster than the very first Node, and you, like, rarely hit the just, like, I'm starting from scratch case.",
+      "japanese_text": "そしてそれ以降のビルドはすべて、最初期バージョンよりも高速になり、「最初から構築する」というケースはほとんど発生しなくなるでしょう。"
+    },
+    {
+      "sentence_index": 529,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 530,
+      "english_text": "And, similarly, we want that to be the same for development.",
+      "japanese_text": "同様に、開発プロセスにおいても同様の一貫性が求められます。"
+    },
+    {
+      "sentence_index": 531,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 532,
+      "english_text": "So, like, if you boot development, you, make your changes, you do, like, hundreds of HMRs, you quit the server, and then the next day you boot it up again, it should be as fast as, it was, like getting an HMR, for example, like a a fast refresh.",
+      "japanese_text": "つまり、開発モードで起動して変更を加え、何百回もHMRを実行した後、サーバーを再起動しても、翌日再び立ち上げれば、HMRC（Hot Module Replacement）のように瞬時に反映されるはずです。例えば、高速なリフレッシュ操作と同じように。"
+    },
+    {
+      "sentence_index": 533,
+      "english_text": "That always drives me nuts when people post, like, oh, it took booted up in, like, three milliseconds, and the first load of my Next app took, like, twenty seconds or something.",
+      "japanese_text": "こういうの見ると本当にイライラするんだよね - 例えば「起動に3ミリ秒しかかからなかった」とか言ってるくせに、Nextアプリがロードするのに20秒もかかったとか言い出すやつとか。マジで。"
+    },
+    {
+      "sentence_index": 534,
+      "english_text": "Like like, that always drives me nuts when people don't understand how how that works.",
+      "japanese_text": "こういうのって、仕組みを理解していない人が多くて本当にイライラするんだよね。"
+    },
+    {
+      "sentence_index": 535,
+      "english_text": "Like like, my own personal Waco website takes, like, thirty seconds before I can actually they even Yeah.",
+      "japanese_text": "私の個人サイト（Wacoみたいなやつ）だと、実際に表示されるまでに30秒くらいかかるんだよね...。"
+    },
+    {
+      "sentence_index": 536,
+      "english_text": "Console log the URL.",
+      "japanese_text": "コンソールにURLを出力します。"
+    },
+    {
+      "sentence_index": 537,
+      "english_text": "And then after that, it's fine.",
+      "japanese_text": "そしてその後は大丈夫です。"
+    },
+    {
+      "sentence_index": 538,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 539,
+      "english_text": "But, that that always drives me nuts.",
+      "japanese_text": "でも、それがいつも私をイライラさせるんだ。"
+    },
+    {
+      "sentence_index": 540,
+      "english_text": "I'm sure it drives you nuts as well when when people post stuff like that.",
+      "japanese_text": "そういう投稿を見ると、あなたもイライラするでしょう？"
+    },
+    {
+      "sentence_index": 541,
+      "english_text": "If you compare frameworks, if you're looking at the you boot up and you see a, URL.",
+      "japanese_text": "フレームワークを比較する場合、起動時にURLが表示されるのを確認すると良いでしょう。"
+    },
+    {
+      "sentence_index": 542,
+      "english_text": "So for example, you you boot up, like, any other, framework, and and it says Yeah.",
+      "japanese_text": "例えば他のフレームワークを起動すると、「はい」と表示されるでしょう。"
+    },
+    {
+      "sentence_index": 543,
+      "english_text": "Like, local host 3,000.",
+      "japanese_text": "例えば、ローカルホスト3,000とか。"
+    },
+    {
+      "sentence_index": 544,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 545,
+      "english_text": "And then it says, like, ready in, like, sometime, for example, like, like, twelve milliseconds or fifty milliseconds or something like that.",
+      "japanese_text": "そして「準備完了」の信号は、例えば12ミリ秒や50ミリ秒といった極めて短い時間間隔で送信されます。"
+    },
+    {
+      "sentence_index": 546,
+      "english_text": "In Nextiva's, it would say 500 or, like, one second or something like that.",
+      "japanese_text": "Nextivaの場合、500エラーや1秒程度の遅延が発生することがあります。そんな感じです。"
+    },
+    {
+      "sentence_index": 547,
+      "english_text": "What we found is, or, like, what I found, like, looking into this because I was, like, confused about, like, those those, like, no other work happened.",
+      "japanese_text": "私たちが発見したのは、つまり、私がこの問題を調査した理由は、他の研究ではこのような現象がまったく報告されていなかったからです。"
+    },
+    {
+      "sentence_index": 548,
+      "english_text": "It's just just, like, for us, it Wes, like, a timing issue.",
+      "japanese_text": "要するに、私たちにとっては、タイミングの問題なんです。"
+    },
+    {
+      "sentence_index": 549,
+      "english_text": "Like, we would load the Nextiva's config, for example, which which might be including, like, all your, like like, external plug ins, like, Sanity or or things like that.",
+      "japanese_text": "例えば、Nextivaの設定を読み込む場合、Sanity and その他外部プラグインなどが含まれます。"
+    },
+    {
+      "sentence_index": 550,
+      "english_text": "It would be requiring all of those before it actually set, like, hey.",
+      "japanese_text": "実際に設定されるまでは無効のままってことだよ。つまり「おいおい」って話だ。"
+    },
+    {
+      "sentence_index": 551,
+      "english_text": "Let's like, the server is ready.",
+      "japanese_text": "サーバーは準備完了です。"
+    },
+    {
+      "sentence_index": 552,
+      "english_text": "It took this much milliseconds.",
+      "japanese_text": "これに〇ミリ秒かかりました。"
+    },
+    {
+      "sentence_index": 553,
+      "english_text": "So recently, we, we optimized that by first logging out all of this, like, the the server is ready type, like, logging, and then, like, requiring the config and things like that in in parallel, basically.",
+      "japanese_text": "そこで最近、私たちはこのプロセスを最適化しました。具体的には、サーバーの準備完了通知や設定ファイル読み込みなどの処理をすべて並行して実行するように変更したのです。基本的に。"
+    },
+    {
+      "sentence_index": 554,
+      "english_text": "And we're, like, some of, like, interesting optimizations of, yeah, how does, like, perceived performance is is there as well.",
+      "japanese_text": "そして私たちは、知覚されるパフォーマンスを向上させるための興味深い最適化もいくつか実装しています。"
+    },
+    {
+      "sentence_index": 555,
+      "english_text": "And then Have you considered just faking the numbers?",
+      "japanese_text": "それから数字を捏造するって選択肢は考えた？"
+    },
+    {
+      "sentence_index": 556,
+      "english_text": "Just, never.",
+      "japanese_text": "決して、絶対に。"
+    },
+    {
+      "sentence_index": 557,
+      "english_text": "No. I would have guessed it.",
+      "japanese_text": "いいえ。予想はついていました。"
+    },
+    {
+      "sentence_index": 558,
+      "english_text": "Dot j s?",
+      "japanese_text": "ドットjエス？"
+    },
+    {
+      "sentence_index": 559,
+      "english_text": "I think that was.",
+      "japanese_text": "私はそれがそうだったと思うわ。"
+    },
+    {
+      "sentence_index": 560,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 561,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 562,
+      "english_text": "That's great.",
+      "japanese_text": "それは素晴らしいですね。"
+    },
+    {
+      "sentence_index": 563,
+      "english_text": "By the way, I just looked it up, and, that Webpack magic comments was me.",
+      "japanese_text": "ところで調べてみたんだけど、あのWebpackの魔法のようなコメントを書いたのは僕だったんだ。"
+    },
+    {
+      "sentence_index": 564,
+      "english_text": "I opened the issue, on on that.",
+      "japanese_text": "私はその問題を開き、それに関して議論した。"
+    },
+    {
+      "sentence_index": 565,
+      "english_text": "I was running into a weird issue where I have, like, a dynamic import.",
+      "japanese_text": "奇妙な問題に遭遇しているんです。動的インポートを使っているのですが、どうもうまく動作しなくて...。"
+    },
+    {
+      "sentence_index": 566,
+      "english_text": "And in Webpack, when you have dynamic imports, it Yeah.",
+      "japanese_text": "Webpackでは、動的インポートを使用すると、確かにそうですね。"
+    },
+    {
+      "sentence_index": 567,
+      "english_text": "It gets everything.",
+      "japanese_text": "それはすべてを手に入れます。"
+    },
+    {
+      "sentence_index": 568,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 569,
+      "english_text": "And I have, like, a a a video in the same folder, and it was, like, loading the entire video and and then crashing.",
+      "japanese_text": "同じフォルダに動画ファイルもあったんですが、それも再生中に完全にフリーズして落ちちゃって。"
+    },
+    {
+      "sentence_index": 570,
+      "english_text": "That was a a weird one.",
+      "japanese_text": "あれは奇妙な事件だった。"
+    },
+    {
+      "sentence_index": 571,
+      "english_text": "I'm sure you run into all people doing stupid stuff.",
+      "japanese_text": "きっとあなたは愚かなことをしている人たちにしょっちゅう出会うでしょうね。"
+    },
+    {
+      "sentence_index": 572,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 573,
+      "english_text": "And there were on top of that, it was just, like, the test suite had a lot of these cases already.",
+      "japanese_text": "さらに加えて、テストスイートにはすでにこうしたケースが多く含まれていたんです。"
+    },
+    {
+      "sentence_index": 574,
+      "english_text": "So, like, it might be that, like, West from, like, eight years ago, had already reported this issue, and, like, we had a test for it.",
+      "japanese_text": "つまり、8年くらい前のウェストが、すでにこの問題を報告していて、それに対するテストも実施されていた可能性があるってことです。"
+    },
+    {
+      "sentence_index": 575,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 576,
+      "english_text": "Like, there was a lot of cases like that as well.",
+      "japanese_text": "そういうケースもたくさんありました。"
+    },
+    {
+      "sentence_index": 577,
+      "english_text": "Things that we would have never caught,\n\nwithout this test suite.",
+      "japanese_text": "このテストスイートがなければ、\n\n決して発見できなかったであろう問題。"
+    },
+    {
+      "sentence_index": 578,
+      "english_text": "People using it in weird ways.",
+      "japanese_text": "奇妙な使い方をしている人たち。"
+    },
+    {
+      "sentence_index": 579,
+      "english_text": "There JS a bit of pros and cons of, like, you know, sort of, like, maintaining a framework for so long JS that, like, the the battle tested, sort of features that we have, they're in a way, they're, like, the things that are almost, like, slowing us down.",
+      "japanese_text": "JSフレームワークを長期間維持することには、メリットとデメリットがあります。例えば、長年にわたってテストされてきた機能群は、いわば私たちの足を引っ張るような存在になっている面もあるのです。"
+    },
+    {
+      "sentence_index": 580,
+      "english_text": "Because you could start, like, a new framework today.",
+      "japanese_text": "今日から始めても新しいフレームワークを作れるくらいの余裕があったんです。"
+    },
+    {
+      "sentence_index": 581,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 582,
+      "english_text": "And then you go to kind of eat, and it would look like it works, and then you kinda don't have, like, the the burden of, like, Scott of maintaining too much.",
+      "japanese_text": "そして実際に食べてみると、うまく機能しているように見えて、過剰な管理の負担から解放されたような気分になるんです。"
+    },
+    {
+      "sentence_index": 583,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 584,
+      "english_text": "But eventually, at scale, like, what we what we found over the years is just that there there are sort of many cases that kinda tend, to pile up there.",
+      "japanese_text": "しかし大規模になると、長年の経験から明らかになったことは、こうした問題が蓄積していくケースが多いということです。"
+    },
+    {
+      "sentence_index": 585,
+      "english_text": "And, I feel like the the big TLDR of, like, what we have gone for to Rebecca first is just, like, like, what's what's really important for our team is that we just keep, you know, shipping as fast as possible.",
+      "japanese_text": "そして私がレベッカに最初に伝えたい要点はこうです：私たちのチームにとって最も重要なことは、可能な限り迅速に開発を進めることです。つまり、とにかくできるだけ早くリリースし続けることが重要なのです。"
+    },
+    {
+      "sentence_index": 586,
+      "english_text": "And so, you know, it could be like a symptom.",
+      "japanese_text": "つまり、これは症状の一つかもしれないということです。"
+    },
+    {
+      "sentence_index": 587,
+      "english_text": "Like, it could be I don't know if you heard about the term of, like, like, Scott of, like, not invented here, kind of problem where, if you go at Google or Meta, you know, they they have, like, every version of, like, what you use externally, but, like, built purpose made for their own system because it's just actually if you have the resources, it is just always the fastest solution.",
+      "japanese_text": "例えば、「スコット問題」と呼ばれる現象があります。これは特定の用語が社内では一般的に使われているものの、外部では知られていない状況を指します。GoogleやMetaのような企業では、自社システム専用に設計されたソリューションが存在することがあります。適切なリソースがあれば、常に最も効率的な解決策となるからです。"
+    },
+    {
+      "sentence_index": 588,
+      "english_text": "And and kinda like what we're saying earlier, right, is like Nextiva JS on its own, somewhat somewhat simple.",
+      "japanese_text": "先ほど述べたように、NextivaのJSライブラリ単体では、ある程度シンプルな機能しか提供していません。"
+    },
+    {
+      "sentence_index": 589,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 590,
+      "english_text": "You could take our test suite and try to recreate it some some parts of it, and and and you could get, you know, somewhat somewhat somewhat pretty pretty far, on on on your own.",
+      "japanese_text": "当社のテストスイートを利用して、その一部を再現することも可能です。そうすれば、ある程度までは自力で進めることができるでしょう。"
+    },
+    {
+      "sentence_index": 591,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 592,
+      "english_text": "And like Tim said, we spent, like, just an insane amount of time just trying to make sure it wasn't like a breaking change.",
+      "japanese_text": "ティムが言ったように、私たちはこの変更が「破壊的」にならないよう、膨大な時間を費やして検証を繰り返しました。"
+    },
+    {
+      "sentence_index": 593,
+      "english_text": "Now maybe the the juicy part I I can share here is, like, you know, like, we're not married to Node or Node or anything.",
+      "japanese_text": "ここで共有できる興味深い点は、私たちは特に「ノード」や「ノーダル」といった特定のフレームワークに縛られているわけではないということです。"
+    },
+    {
+      "sentence_index": 594,
+      "english_text": "Like, what matters more is the experience that we cannot provide to our users in the same way.",
+      "japanese_text": "つまり、私たちがユーザーに同じ形で提供できない体験こそが重要なのです。"
+    },
+    {
+      "sentence_index": 595,
+      "english_text": "Like, for example, we used to ship with, like, ESLint commands, that used to kinda just, like, bundle because that was, like, the, you know, the the industry standard at the time.",
+      "japanese_text": "例えば以前は、ESlintコマンドを使ってバンドルしていました。当時はそれが業界標準だったからです。"
+    },
+    {
+      "sentence_index": 596,
+      "english_text": "Yep.",
+      "japanese_text": "Yes indeedy-doody!"
+    },
+    {
+      "sentence_index": 597,
+      "english_text": "We've kind of reconsidered and, like, we now we're we're just not doing anything, but we might, you know, consider a word where maybe we should run and run, like, Biome or something like this.",
+      "japanese_text": "考え直した結果、現時点では特に何もしていませんが、例えばBiomeやそれに類する言葉を検討する価値はあるかもしれません。"
+    },
+    {
+      "sentence_index": 598,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 599,
+      "english_text": "And, in the same vein, transparently, like, every Yarn, we ask ourselves, you know, like, do we do we wanna sort of, like, try exploring Veid?",
+      "japanese_text": "そして同様に、透明性を持って言うと、あらゆるヤーンと同様、「ヴェイドを探求してみたい」という思いがあるのです。"
+    },
+    {
+      "sentence_index": 600,
+      "english_text": "Do we wanna sort of continue in TurboPag?",
+      "japanese_text": "ターボページで引き続き作業を進めますか？"
+    },
+    {
+      "sentence_index": 601,
+      "english_text": "Node we're working with the RSVPG folks.",
+      "japanese_text": "現在RSVPWGの方々と一緒に作業を進めています。"
+    },
+    {
+      "sentence_index": 602,
+      "english_text": "Like, what's the what's the best end result, right, for our reserves?",
+      "japanese_text": "つまり、我々の予備戦力にとって最良の最終目標は何なのか、ということです？"
+    },
+    {
+      "sentence_index": 603,
+      "english_text": "And, the big blocker was really just the amount of work that it would take to kinda make this, like, a non breaking change.",
+      "japanese_text": "そして大きな障壁となったのは、この変更を「非破壊的」な形で実現するために必要な作業量でした。"
+    },
+    {
+      "sentence_index": 604,
+      "english_text": "There was also just the fact that, like, there's there's nothing, I think, that, like, pushes a a a bundler as much as, like, Nextiva Wes today because we we talked about, like, you know, server components, server actions, cache components.",
+      "japanese_text": "また、Next.jsが今日のバンドルツール（例えばWess）と同じくらい強力な理由として、サーバーコンポーネントやサーバアクション、キャッシュ機能などの要素も挙げられます。これらはすべて重要な要素です。"
+    },
+    {
+      "sentence_index": 605,
+      "english_text": "Like you said, there's, like, why could you do some stuff today?",
+      "japanese_text": "あなたが言ったように、今日なぜ特定のことができたのでしょうか？"
+    },
+    {
+      "sentence_index": 606,
+      "english_text": "But, like, I don't think there's quite something that is quite that has to support quite, like, you know, as as many sort of, like, larger, websites there.",
+      "japanese_text": "でも、正直なところ、そこまで大規模なウェブサイトを支えるほどの本格的なシステムはまだ存在しないんじゃないかなと思います。"
+    },
+    {
+      "sentence_index": 607,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 608,
+      "english_text": "Yep.",
+      "japanese_text": "Yes indeedy-doody!"
+    },
+    {
+      "sentence_index": 609,
+      "english_text": "And so if we wanted to find out, I think we kinda need to spend, like, a lot of time into exploring this ourselves.",
+      "japanese_text": "ですから、もし私たちがこれを理解したいのであれば、自分たちでじっくりと時間をかけて探求する必要があると思います。"
+    },
+    {
+      "sentence_index": 610,
+      "english_text": "And, and I think the very latest here is just, like, maybe in the age of AI.",
+      "japanese_text": "そしておそらく最新の傾向として、AI時代ならではの現象があると思います。"
+    },
+    {
+      "sentence_index": 611,
+      "english_text": "Maybe this is, like, very doable.",
+      "japanese_text": "もしかしたらこれは実現可能なのかもしれないね。"
+    },
+    {
+      "sentence_index": 612,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 613,
+      "english_text": "Maybe we can, like, finally have, like, an answer to the with, like, next work better Node.",
+      "japanese_text": "もしかしたらついに、次のバージョンでより優れたノードベースAPIに関する答えが得られるかもしれませんね。"
+    },
+    {
+      "sentence_index": 614,
+      "english_text": "I think I think it's, definitely still, like, an open question\n\nOh, cool.",
+      "japanese_text": "確かに、まだ完全には解明されていない問題だと思いますよ\n\nへえ、そうなんだ。"
+    },
+    {
+      "sentence_index": 615,
+      "english_text": "On our end.",
+      "japanese_text": "こちら側では。"
+    },
+    {
+      "sentence_index": 616,
+      "english_text": "Well, that that's good.",
+      "japanese_text": "まあ、それはいいことだ。"
+    },
+    {
+      "sentence_index": 617,
+      "english_text": "That's good.",
+      "japanese_text": "それはいいですね。"
+    },
+    {
+      "sentence_index": 618,
+      "english_text": "And is TurboPack part of, like, the next repo now?",
+      "japanese_text": "Turbopackは現在、次のリポジトリに含まれているのでしょうか？それとも別扱いですか？"
+    },
+    {
+      "sentence_index": 619,
+      "english_text": "Like, are are other projects using TurboPac, or is this just just a next thing now?",
+      "japanese_text": "他のプロジェクトでTurboPACを採用している例はありますか？それともこれは単なる一時的なトレンドなのでしょうか？"
+    },
+    {
+      "sentence_index": 620,
+      "english_text": "Right now, it's part of the Nexus repository.",
+      "japanese_text": "現在はネクサスリポジトリの一部として提供されています。"
+    },
+    {
+      "sentence_index": 621,
+      "english_text": "It it is a fully, standalone tool that you can run.",
+      "japanese_text": "これは完全に独立したスタンドアロン・ツールで、直接実行可能です。"
+    },
+    {
+      "sentence_index": 622,
+      "english_text": "The only thing is that, we we don't have added like, we haven't added a public API API for this yet.",
+      "japanese_text": "唯一の問題点は、現時点では公開用のAPIをまだ実装していない点です。"
+    },
+    {
+      "sentence_index": 623,
+      "english_text": "The reason for that is that we wanted to really, like, prove out that, like, this vendor has a right to exist, that it can, like, run on these, like, Nexus applications, and, that doesn't have, like, any, like, bugs on bundling, like, Npm packages and things like that.",
+      "japanese_text": "その理由は、私たちがこのベンダーが真に存在意義があることを実証したかったからです。つまり、これらの『ネクサス』アプリケーション上で動作可能であること、そしてNPMパッケージなどのバンドル処理において一切不具合がないことを確認したいと考えたからなのです。"
+    },
+    {
+      "sentence_index": 624,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 625,
+      "english_text": "We're past that point at this point, and we do have, like, a CLI for right now.",
+      "japanese_text": "現時点ではすでにその段階を超えており、現在はCLIも利用可能です。"
+    },
+    {
+      "sentence_index": 626,
+      "english_text": "The the only thing is, like, figuring out, like, how to like, what the public API looks like.",
+      "japanese_text": "唯一の課題は、パブリックAPIの具体的な仕様をどう設計するかという点ですね。"
+    },
+    {
+      "sentence_index": 627,
+      "english_text": "And then, especially, like, one of the things that's that's missing is, like, we can run, like, Webex loaders, for example, and things like that.",
+      "japanese_text": "特に、例えばWebExのローダーなどが動作しないなど、いくつかの重要な機能が欠けています。"
+    },
+    {
+      "sentence_index": 628,
+      "english_text": "Like, we don't have a plug in API specifically for TurboPack right Node.",
+      "japanese_text": "つまり、Turbopack専用のプラグインAPIは用意されていないんですよね？"
+    },
+    {
+      "sentence_index": 629,
+      "english_text": "And that's, like, what we're currently, exploring as well, like, what that will look like.",
+      "japanese_text": "そしてこれはまさに私たちが現在探求しているテーマでもあり、その具体的な形がどのようなものになるかについても検討しているところです。"
+    },
+    {
+      "sentence_index": 630,
+      "english_text": "Then there shouldn't be a reason that you can't run, Throwback.",
+      "japanese_text": "それなら走ることができない理由なんてないはずだ、Throwback。"
+    },
+    {
+      "sentence_index": 631,
+      "english_text": "But right now, the like, if you wanted to use it, for example, like, there there is, like, another, bundler called, YouTube, like, u t o o. So UTOO, is, like, another, like, framework slash bundler that's built on top of the Terra Pak core.",
+      "japanese_text": "しかし現状では、例えばYouTubeのような別のバンドルツールを使いたい場合、UTOOOというTerraPakコアの上に構築されたフレームワーク/バンドラーが存在します。"
+    },
+    {
+      "sentence_index": 632,
+      "english_text": "And they, they're like, using it very successfully.",
+      "japanese_text": "そして彼らは非常に効果的にそれを活用しています。"
+    },
+    {
+      "sentence_index": 633,
+      "english_text": "They're converting back to, TerraPack as well, because they're using it in in this way.",
+      "japanese_text": "彼らはTerrapackにも戻しています。なぜならこの方法で使用しているためです。"
+    },
+    {
+      "sentence_index": 634,
+      "english_text": "And they're building, like, pretty, like, large applications on this.",
+      "japanese_text": "そして実際に、この基盤上に比較的大規模なアプリケーションを構築しています。"
+    },
+    {
+      "sentence_index": 635,
+      "english_text": "And it's, yeah.",
+      "japanese_text": "そしてそう、その通りだ。"
+    },
+    {
+      "sentence_index": 636,
+      "english_text": "So, like, there's no reason that you shouldn't, like, that you wouldn't be able to use this, as a as a standalone vendor, like, in the same way that you would use is built or feed or anything like that.",
+      "japanese_text": "つまり、スタンドアローンのベンダーとして、例えばビルドシステムやフィードなどと同じように、このツールを利用できない理由はないということです。"
+    },
+    {
+      "sentence_index": 637,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 638,
+      "english_text": "Really, the, like, it's on us to add, like, a public API for this.",
+      "japanese_text": "実際のところ、これは私たちが公開APIを用意するべき課題だと思います。"
+    },
+    {
+      "sentence_index": 639,
+      "english_text": "And, really, the only reason that we haven't yet is, like, we want to be really intentional about it.",
+      "japanese_text": "そして実際のところ、まだ実現していない唯一の理由は、単に意図的に取り組みたいと考えているからです。"
+    },
+    {
+      "sentence_index": 640,
+      "english_text": "Like, we want to support that thing if you put it out, and, and give the right level of support there.",
+      "japanese_text": "つまり、その製品を発売するのであれば私たちは支援したいと考えており、適切なレベルのサポートを提供するつもりです。"
+    },
+    {
+      "sentence_index": 641,
+      "english_text": "Cool.",
+      "japanese_text": "かっこいい。"
+    },
+    {
+      "sentence_index": 642,
+      "english_text": "You should make the API just the vD API.",
+      "japanese_text": "APIはv1.0の仕様に準拠させるべきです。"
+    },
+    {
+      "sentence_index": 643,
+      "english_text": "Do you have us with your view on them?",
+      "japanese_text": "それらについてあなたの見解をお持ちですか？"
+    },
+    {
+      "sentence_index": 644,
+      "english_text": "We've been talking about that as well because, like, Pete has a a pretty decent API.",
+      "japanese_text": "この点についても議論してきました。ピートのAPIはかなり完成度が高いですからね。"
+    },
+    {
+      "sentence_index": 645,
+      "english_text": "The only, like, the only thing that we we've been, like, thinking about there is, like, there there are some, like, fertilization, concern as well, regarding that.",
+      "japanese_text": "唯一、私たちが真剣に考えているのは、例えば受精に関する懸念事項もいくつかあるということです。その点についても。"
+    },
+    {
+      "sentence_index": 646,
+      "english_text": "But it should be doable.",
+      "japanese_text": "しかし可能であるべきだ。"
+    },
+    {
+      "sentence_index": 647,
+      "english_text": "Like, it's it's not like, the the individual pieces are very similar.",
+      "japanese_text": "つまり、個々の部品は非常に似ているんです。"
+    },
+    {
+      "sentence_index": 648,
+      "english_text": "There's also the, like, unplug in, like, API.",
+      "japanese_text": "API経由で接続するタイプのもありますよ（いわゆる「プラグイン」方式）。"
+    },
+    {
+      "sentence_index": 649,
+      "english_text": "That that might be good as well because there there's a lot of, like, plugins that are already written using using unplug in, which is, like it basically bridges.",
+      "japanese_text": "これは良いアイデアかもしれません。なぜなら、unplugged-inを使用する既存のプラグインが多数存在しており、これらは本質的にブリッジとして機能するからです。"
+    },
+    {
+      "sentence_index": 650,
+      "english_text": "You can basically think of unplugging, like, OpenNext for, like, like, Webpack loaders and plug ins, or, like, like, similar, API.",
+      "japanese_text": "基本的に、UnpluginはOpenNextのWebpackローダーやプラグイン、あるいは類似したAPIとして捉えることができます。つまり、同様のインターフェースを提供しているということです。"
+    },
+    {
+      "sentence_index": 651,
+      "english_text": "Because it bridges like this, like,\n\nevery adapter to, like, one single unified API.",
+      "japanese_text": "このようにブリッジ機能を備えているため、例えば以下のような単一の統一APIにアクセスできるようになっています：\n\nあらゆるアダプターを、1つの統合されたインターフェースにまとめることができます。"
+    },
+    {
+      "sentence_index": 652,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 653,
+      "english_text": "That would that'd be Node do you think we'll ever see that, like, you know, like like, web Wes and whatever has been fairly standardized across everything?",
+      "japanese_text": "将来的には、ウェブブラウザやWesなどの標準があらゆるプラットフォームでほぼ統一されるようになると思いますか？"
+    },
+    {
+      "sentence_index": 654,
+      "english_text": "Do you think we'll ever see that for, like, bundler tools?",
+      "japanese_text": "バンドルツールのような機能が将来的に実装されると思いますか？"
+    },
+    {
+      "sentence_index": 655,
+      "english_text": "It kinda depends because, like, the the builders themselves\n\nare, quite different.",
+      "japanese_text": "これはちょっと複雑で、なぜなら建築業者自体が...実に多様だからです。"
+    },
+    {
+      "sentence_index": 656,
+      "english_text": "But as I just told you, like, they're a lot more aligned at this point in in the the way that they work.",
+      "japanese_text": "しかし先ほど説明した通り、現在では彼らの業務方法はより整合性が取れている状態になっています。"
+    },
+    {
+      "sentence_index": 657,
+      "english_text": "I think for, like, transforms, for example, like, transforms are are really, like, basic, like, source input, some metadata, and then, like, return an output.",
+      "japanese_text": "例えば変換処理の場合、基本的な流れとしては、ソース入力、メタデータ、そして最終的に出力を生成するという形になると思います。"
+    },
+    {
+      "sentence_index": 658,
+      "english_text": "Like Mhmm.",
+      "japanese_text": "ムムッ。"
+    },
+    {
+      "sentence_index": 659,
+      "english_text": "Pnpm and plug in, like, gives you, like, a a standardized API for that.",
+      "japanese_text": "pnp とプラグインを使えば、標準化されたAPIが提供されます。"
+    },
+    {
+      "sentence_index": 660,
+      "english_text": "Like, having, like, one standardized API across, like, all, banners would be possible there.",
+      "japanese_text": "たとえば、すべてのバナーに適用できる統一されたAPIがあれば、そこで実現できるでしょう。"
+    },
+    {
+      "sentence_index": 661,
+      "english_text": "The only question is, like, getting it to like, to everyone to agree on, like, this is the one thing that you should do.",
+      "japanese_text": "唯一の問題は、これを全員に合意させる方法、つまり「これが絶対にやるべきことだ」と納得させることです。"
+    },
+    {
+      "sentence_index": 662,
+      "english_text": "Yarn standards.",
+      "japanese_text": "ヤーンの規格。"
+    },
+    {
+      "sentence_index": 663,
+      "english_text": "And Never heard about web components?",
+      "japanese_text": "ウェブコンポーネントについて聞いたことがない？"
+    },
+    {
+      "sentence_index": 664,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 665,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 666,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 667,
+      "english_text": "Exactly.",
+      "japanese_text": "まさにその通りです。"
+    },
+    {
+      "sentence_index": 668,
+      "english_text": "Good point.",
+      "japanese_text": "いい指摘だ。"
+    },
+    {
+      "sentence_index": 669,
+      "english_text": "So it's really yeah.",
+      "japanese_text": "つまり本当にそうなんです。"
+    },
+    {
+      "sentence_index": 670,
+      "english_text": "It's it's that.",
+      "japanese_text": "それはそれです。"
+    },
+    {
+      "sentence_index": 671,
+      "english_text": "And then plug ins is slightly different because, like, the the way that the vendors work under the hood is, like, very different.",
+      "japanese_text": "そしてプラグインの仕組みは若干異なります。というのも、ベンダーが内部で動作する仕組み自体が根本的に異なるからです。"
+    },
+    {
+      "sentence_index": 672,
+      "english_text": "Like like, Throwback is nothing like Webpack under the hood.",
+      "japanese_text": "内部的には、ThrowbackはWebpackとは全く異なる仕組みを採用している。"
+    },
+    {
+      "sentence_index": 673,
+      "english_text": "Like, it's, it works completely different.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 674,
+      "english_text": "There's different phases.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 675,
+      "english_text": "There's, like, the the way that it works is is just completely different.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 676,
+      "english_text": "Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 677,
+      "english_text": "So, like, for plug ins, like, for example, you could write a plug in in Webpack, today that, like, re like, reorders chunks or something like that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 678,
+      "english_text": "Like, it gets, like, access to all your modules, and you can put the modules in different chunks or create, like, extra chunks or things like that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 679,
+      "english_text": "Like, having a like, an inter like, Wes want to have, like, a more intentional API for this because otherwise, like, it's very easy to introduce, like, very large slowdowns or, like like, single point of failure bottlenecks, basically, where where things get a lot slower.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 680,
+      "english_text": "And then, like, naturally, because, like, having a plug in API, it's it allows everyone to like, add these plug ins, like, it would very quickly become, like, everything gets a lot slower for every app or things like that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 681,
+      "english_text": "So Wes want to be very intentional about, like, what are the APIs, how are they surfaced.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 682,
+      "english_text": "Like, similar to, like, we didn't talk about this, but adapters has a specific log line in the the build that will show you how long the adapter took instead of, like, that time being attributed to to Nextiva's internals or things like that.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 683,
+      "english_text": "You got me diving into this u two.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 684,
+      "english_text": "It's it's from Alipay Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 685,
+      "english_text": "By the way.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 686,
+      "english_text": "Thank you.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 687,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 688,
+      "english_text": "I I forgot, which company built it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 689,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 690,
+      "english_text": "That's really interesting.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 691,
+      "english_text": "That's\n\nChinese JavaScript JS, like, a whole different world.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 692,
+      "english_text": "You know?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 693,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 694,
+      "english_text": "It's crazy.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 695,
+      "english_text": "They have some pretty cool tools.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 696,
+      "english_text": "This is kinda why we, had started working with, pnpm year to, like, and it was like this we we had the same realization.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 697,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 698,
+      "english_text": "They they they just kinda introduced us to how, like, how Biden's gonna compose their own apps internally.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 699,
+      "english_text": "And in in some ways, they have the they they might even have, like, the the largest set of, like, Nextiva apps, the and that, like, the world we'll never see.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 700,
+      "english_text": "That that I don't I don't know how many engineers that they have over there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 701,
+      "english_text": "They they kinda showed us, like, the other sort of frameworks, and it turns out there was, like, another, framework that was also, like, very much, like, very similar to to ESLint internally.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 702,
+      "english_text": "And those companies are so big that they have, like, they can have, like, four web infrastructure teams.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 703,
+      "english_text": "It's always really fascinating, to see.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 704,
+      "english_text": "I wish I wish we we shared more there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 705,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 706,
+      "english_text": "It's\n\none of the best talks I've I've had, or I watched was Zach Jackson.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 707,
+      "english_text": "He's one of the devs on Wes pack, and he works for ByteDance.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 708,
+      "english_text": "We had him on on the podcast as well.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 709,
+      "english_text": "And, like, man, that was fascinating to just to get a peek into how some of these big companies work and and their infrastructure.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 710,
+      "english_text": "And I'm sure you guys hear from it as well JS, like, if you can save them, like, 1%, that's sometimes just, like, millions of dollars a year in productivity and and compute and server time, all that stuff.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 711,
+      "english_text": "For sure.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 712,
+      "english_text": "There's also, the something that Wes, didn't didn't touch on is, like, this this whole strategy of, like, building Turbo Pack and, giving it out to, to everyone using Nextiva's, as as the default, and and, like, very compatible has actually paid off.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 713,
+      "english_text": "Because, like, on Nexus 16, there's, like, 92% of the, like, development sessions are actually using Turbo Pack.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 714,
+      "english_text": "Awesome.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 715,
+      "english_text": "It's like the the rest is, is like Webpack customization, basically.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 716,
+      "english_text": "Like, people that have, like, customized their Webpack config, and they they might still be able to use it today.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 717,
+      "english_text": "Because, like, if you're only using WIPAC, loaders, you can already add them to TurboPack, and they will just run for like, I I wanna say, like, every loader runs, but, like, like, most of these, like, simple input output transforms, they, they they work, for sure.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 718,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 719,
+      "english_text": "Beautiful.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 720,
+      "english_text": "Cool.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 721,
+      "english_text": "Anything else we didn't cover before we I know we're running up on an hour here, but I wanna make sure if we covered everything you wanted to touch on.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 722,
+      "english_text": "No. No. I think we're good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 723,
+      "english_text": "So now is the part of the show where we get into sick picks.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 724,
+      "english_text": "Tim, I know you've been on the show before, so you you know what a sick pick is.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 725,
+      "english_text": "Jimmy, it's really just anything you're enjoying in life right now.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 726,
+      "english_text": "Could be as, like, a podcast or a YouTube channel or any type of product, a phone charger, a a hula hoop, whatever you want.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 727,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 728,
+      "english_text": "I should have I should have asked for sponsors before.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 729,
+      "english_text": "I, I really like, I don't know if you guys are, like, much into, like, coffee beans or not.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 730,
+      "english_text": "I feel like a lot of, like, engineers are Oh, yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 731,
+      "english_text": "Vercel.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 732,
+      "english_text": "But there's this this service.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 733,
+      "english_text": "I think it's based in California.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 734,
+      "english_text": "It's called, like, ad adrangea, but their coffee beans are amazing.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 735,
+      "english_text": "If you like, you know, sort of, like, really, really light, almost like experimental kind of coffee.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 736,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 737,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 738,
+      "english_text": "Very crudy.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 739,
+      "english_text": "Unrecommended.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 740,
+      "english_text": "Oh, hide it's like the hydrangea coffee roasters.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 741,
+      "english_text": "They're like the flower.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 742,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 743,
+      "english_text": "Cool.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 744,
+      "english_text": "This looks great.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 745,
+      "english_text": "Beautiful back there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 746,
+      "english_text": "Tim, what do you got for us?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 747,
+      "english_text": "I still remember this section from last time.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 748,
+      "english_text": "Last time, I I called out Apple TV, because, of sci fi mostly.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 749,
+      "english_text": "Oh, yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 750,
+      "english_text": "I will I will call it out again.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 751,
+      "english_text": "If you're into sci fi, Apple TV is such a like, so good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 752,
+      "english_text": "But that's not the one I want to call out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 753,
+      "english_text": "So, I'll I'll do two.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 754,
+      "english_text": "So the second one is choir podcast.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 755,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 756,
+      "english_text": "I I think y'all at, Century are are also sponsoring it, because I hear you hear the the ESLint, every time.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 757,
+      "english_text": "Is this Scott?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 758,
+      "english_text": "If you haven't heard about it, it's pretty popular.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 759,
+      "english_text": "So you might have heard about it if you're into podcasts, but, they they do, like, four hour, five hour to, like, even longer, podcasts.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 760,
+      "english_text": "They talk through the history of companies and how they started, where they're at now, like, the whole, thing, that if you're into any of the history of, like, Microsoft or Google or, like, any other company, it's it's definitely a a nice listen.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 761,
+      "english_text": "And I usually, like, put it on when doing chores or whatever, and then, yeah, time just ESLint by.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 762,
+      "english_text": "The the one that I found super interesting is the interview with, Steve Ballmer.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 763,
+      "english_text": "Because, like, Steve Ballmer has such a, like, crazy and, like, I've never, like, listened to anyone who has that much energy, like, for Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 764,
+      "english_text": "For, like, two two, three hours straight just, like, talking about everything.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 765,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 766,
+      "english_text": "Acquired is true.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 767,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 768,
+      "english_text": "Watch this.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 769,
+      "english_text": "This looks awesome.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 770,
+      "english_text": "I really like the Hermes episode and the, what was another one?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 771,
+      "english_text": "The Costco episode.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 772,
+      "english_text": "And the Porsche one was really good, Wes, if you haven't listened to that because Doug Demuro JS a guest on it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 773,
+      "english_text": "So Oh, cool.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 774,
+      "english_text": "No. I'm Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 775,
+      "english_text": "Definitely gonna check that out.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 776,
+      "english_text": "Sick.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 777,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 778,
+      "english_text": "Really good.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 779,
+      "english_text": "Awesome.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 780,
+      "english_text": "Seamus plugs, anything you'd like to plug to the audience before we headways?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 781,
+      "english_text": "I kinda would like, for the audience to kinda read the the blog post about, like that we we're gonna publish about the adapters.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 782,
+      "english_text": "Yep.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 783,
+      "english_text": "Because I feel like not a lot of people kinda read those kinds of, like, blog Bos.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 784,
+      "english_text": "And we put a lot of efforts into it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 785,
+      "english_text": "But also, I think it's really interesting about, like, kinda how we how Wes came together.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 786,
+      "english_text": "Right?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 787,
+      "english_text": "Like, because Mhmm.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 788,
+      "english_text": "Because it does Scott of, like, you know, it establish a little timeline about how we work.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 789,
+      "english_text": "And, like, more importantly, I think, like, kinda the the game the engagements that that we're kinda, you know, having with the the group.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 790,
+      "english_text": "Like, what are the exact roles that we wanna have, like, around the adapters and, like, just just, you know, sort of, like, how we do kind of care, like like, actually care about, like, making Nextiva's work well everywhere.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 791,
+      "english_text": "And, yeah, like, I think I think it's a nice web Bos.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 792,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 793,
+      "english_text": "Definitely.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 794,
+      "english_text": "We'll link it up in the show notes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 795,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 796,
+      "english_text": "Awesome.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 797,
+      "english_text": "For me, it's an actual 16.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 798,
+      "english_text": "2, jokingly called Node Leopard by a lot of people.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 799,
+      "english_text": "So it's this new release that we did, two weeks ago.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 800,
+      "english_text": "It includes adapters, but, it includes so much other things.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 801,
+      "english_text": "Like, it includes, like, up to 60% faster rendering, like, like, this is faster dev starter that we talked about.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 802,
+      "english_text": "The server actions are now logged when you call them in development, to to make it easier to see what's happening there.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 803,
+      "english_text": "Like, we we added so many things into this that we had to write three blog posts to cover it.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 804,
+      "english_text": "So,\n\nhydration diff indicator.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 805,
+      "english_text": "Yes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 806,
+      "english_text": "So if you like, we already have a hydration diff, but now it includes the the text of, like, what is server and client.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 807,
+      "english_text": "But, it was good to call it out again because, like, apparently, Node everyone had seen it before.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 808,
+      "english_text": "It's basically, like, if you have a hydration error, it will show you exactly what was the cause of the hydration error or, like, at least, like, the the the place where where it happens in your code.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 809,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 810,
+      "english_text": "And then what else?",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 811,
+      "english_text": "Oh, yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 812,
+      "english_text": "So we're we're doing a lot of research into what do frameworks look like with AI.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 813,
+      "english_text": "As it's probably on your mind as Wes.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 814,
+      "english_text": "Like, you're you're using, like, AI agents and, like, things keep improving quite rapidly and, like, like, we we built this, like, first version that was, like, an access MCP.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 815,
+      "english_text": "But now we're also looking at this, like, agent browser.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 816,
+      "english_text": "And If you haven't seen that yet, like, look up agent browser, it's, it's really interesting as well.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 817,
+      "english_text": "And, basically, like, you wrote a separate blog post called Nexa 16.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 818,
+      "english_text": "2 AI improvements, and that talks about, like, a bunch of learnings that we had from, like, building, like, frameworks for, like, AI agents next to, humans building on, on access.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 819,
+      "english_text": "And and includes, like, one of the learnings is that, like, if you add an agents that MD that has, like, a like, a small snippet that knows where to look for the docs, that it will suddenly become, like, significantly better at figuring out, like, where it had to await your search brands or how to, like, write a an extra structure or, like, some code that it was previously adding use client to.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 820,
+      "english_text": "We didn't add use client to anymore, and and we've been doing a lot of research into that,\n\nwhich is super interesting.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 821,
+      "english_text": "We should probably talk about it, like, another time.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 822,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 823,
+      "english_text": "But it's, yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 824,
+      "english_text": "That that was my, shameless plug.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 825,
+      "english_text": "Yep.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 826,
+      "english_text": "Sick.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 827,
+      "english_text": "Awesome.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 828,
+      "english_text": "Well, thank you guys both for coming on.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 829,
+      "english_text": "Thank you for all your work on Next, and I'm pretty excited about this.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 830,
+      "english_text": "Appreciate all your time.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 831,
+      "english_text": "Thank you for for having us.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 832,
+      "english_text": "Peace.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 833,
+      "english_text": "Yeah.",
+      "japanese_text": null
+    },
+    {
+      "sentence_index": 834,
+      "english_text": "Thank you so much.",
+      "japanese_text": null
+    }
+  ]
+}

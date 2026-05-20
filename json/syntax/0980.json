@@ -1,0 +1,4038 @@
+{
+  "id": "syntax/0980",
+  "title": "#980 AI Coding Explained",
+  "source": "SYNTAX",
+  "source_url": "https://www.youtube.com/watch?v=8jbQZxMgIVs",
+  "sentences": [
+    {
+      "sentence_index": 0,
+      "english_text": "If you're new to AI coding or you think you know AI coding, we are going to break down all of the different types of files, techniques, and then jargon that you're gonna need to be effective at AI coding.",
+      "japanese_text": "AIコーディングに初めて取り組む方や、基本的な知識はあるけれどさらに理解を深めたい方のために、さまざまな種類のファイル形式、手法、そしてこの分野で効果的に作業するために必要な専門用語を詳しく解説していきます。"
+    },
+    {
+      "sentence_index": 1,
+      "english_text": "But mostly, what the heck is all this stuff?",
+      "japanese_text": "でも実際のところ、これは一体何なの？"
+    },
+    {
+      "sentence_index": 2,
+      "english_text": "Where does it go?",
+      "japanese_text": "どこへ行くのですか？"
+    },
+    {
+      "sentence_index": 3,
+      "english_text": "How do I use it?",
+      "japanese_text": "どうやって使えばいいですか？"
+    },
+    {
+      "sentence_index": 4,
+      "english_text": "And how do you become effective?",
+      "japanese_text": "では、どうすれば効果的になれるのでしょうか？"
+    },
+    {
+      "sentence_index": 5,
+      "english_text": "My name is Scott Tolinski.",
+      "japanese_text": "私の名前はスコット・トリンスキーです。"
+    },
+    {
+      "sentence_index": 6,
+      "english_text": "I'm a developer from Denver.",
+      "japanese_text": "私はデンバー出身の開発者です。"
+    },
+    {
+      "sentence_index": 7,
+      "english_text": "With me today is Wes Bos.",
+      "japanese_text": "今日はウェス・ボスがゲストです。"
+    },
+    {
+      "sentence_index": 8,
+      "english_text": "What's up, Wes?",
+      "japanese_text": "やあ、ウェス？"
+    },
+    {
+      "sentence_index": 9,
+      "english_text": "I'm doing doing great, and, like, there's a lot to unpack here.",
+      "japanese_text": "私は元気にやっています。そしてここには多くの重要な点が含まれています。"
+    },
+    {
+      "sentence_index": 10,
+      "english_text": "There's it seems like every single day, there's some sort of new file or some sort of new Yeah.",
+      "japanese_text": "毎日のように新しいファイルや何らかのアップデートがあるみたいだね。本当に。"
+    },
+    {
+      "sentence_index": 11,
+      "english_text": "Word that we're trying to learn.",
+      "japanese_text": "私たちが学ぼうとしている言葉。"
+    },
+    {
+      "sentence_index": 12,
+      "english_text": "Like, we were talking about cursor rules many months ago, and and now nobody talks about rules files.",
+      "japanese_text": "例えば数ヶ月前までカーソル移動のルールについて議論していたはずなのに、今では誰も設定ファイルの話をしなくなった。"
+    },
+    {
+      "sentence_index": 13,
+      "english_text": "It's all agents. md, and there's also, what, skills and sub agents and hooks and MCPs and plugins, and there's all kinds of stuff.",
+      "japanese_text": "すべてがエージェントです。MD、スキルセットやサブエージェント、さらにフック機能（hooks）、MCP、そしてプラグインなどがあり、実に多様な構成要素が含まれています。"
+    },
+    {
+      "sentence_index": 14,
+      "english_text": "And we gotta break it all down for everyone.",
+      "japanese_text": "そしてそれをみんなに分かりやすく説明しなきゃ。"
+    },
+    {
+      "sentence_index": 15,
+      "english_text": "What happened to us?",
+      "japanese_text": "私たちに何が起こったのですか？"
+    },
+    {
+      "sentence_index": 16,
+      "english_text": "We used to talk about cursor rules, and now it's all agents. md.",
+      "japanese_text": "以前はカーソル規則について議論していましたが、今ではすべてがエージェントの話ばかりです。 md。"
+    },
+    {
+      "sentence_index": 17,
+      "english_text": "We got we used to sit and talk about slash commands.",
+      "japanese_text": "私たちは昔、スラッシュコマンドについて座って話し合うものだった。"
+    },
+    {
+      "sentence_index": 18,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 19,
+      "english_text": "Let's so let's get into it first and foremost.",
+      "japanese_text": "まず何よりも先に、核心に迫りましょう。"
+    },
+    {
+      "sentence_index": 20,
+      "english_text": "I think what we wanna do is we wanna start off talking about, some of the different types of tools.",
+      "japanese_text": "私たちが話したいことの一つは、さまざまな種類のツールについてだと思います。まずは基本的なところから始めましょう。"
+    },
+    {
+      "sentence_index": 21,
+      "english_text": "Then we wanna get into what all the stuff is in terms of, like we said, whether that is models and agents and sub agents and those types of things.",
+      "japanese_text": "次に、モデルやエージェント、さらにサブ・エージェンシーなど、具体的な構成要素について詳しく説明したいと思います。"
+    },
+    {
+      "sentence_index": 22,
+      "english_text": "And it's mostly going to be breaking down, like, what are all the pieces here?",
+      "japanese_text": "そして主に分解していく作業になります - ここでの構成要素は何でしょうか？"
+    },
+    {
+      "sentence_index": 23,
+      "english_text": "What do you need to know?",
+      "japanese_text": "何を知る必要がありますか？"
+    },
+    {
+      "sentence_index": 24,
+      "english_text": "What is actually important?",
+      "japanese_text": "実際に重要なのは何か？"
+    },
+    {
+      "sentence_index": 25,
+      "english_text": "What is effective?",
+      "japanese_text": "効果的なのは何ですか？"
+    },
+    {
+      "sentence_index": 26,
+      "english_text": "You know, in another video, what we'll do is really break down our real detailed tips on being effective with these tools, once you know what everything is, where it all goes, but we're gonna do our best to make sure that you know where the stuff is.",
+      "japanese_text": "別の動画では、これらツールを効果的に活用するための具体的なテクニックを詳しく解説します。各機能がどこにあるかをしっかり理解できるよう、丁寧に説明していきますからご安心ください。"
+    },
+    {
+      "sentence_index": 27,
+      "english_text": "So first and foremost, the the tools that you're using for AI coding, the primary ways that people are interacting with their code these days are via their text editor.",
+      "japanese_text": "まず第一に、AIコーディングで使用するツール、つまり現代の開発者がコードとやり取りする主要な手段は、テキストエディタを通じたものです。"
+    },
+    {
+      "sentence_index": 28,
+      "english_text": "So something like, Versus Code Copilot.",
+      "japanese_text": "つまり、VsCodeのCoPilotのようなものです。"
+    },
+    {
+      "sentence_index": 29,
+      "english_text": "You have Zed.",
+      "japanese_text": "あなたはゼッドを持っています。"
+    },
+    {
+      "sentence_index": 30,
+      "english_text": "You have a cursor.",
+      "japanese_text": "カーソルがあります。"
+    },
+    {
+      "sentence_index": 31,
+      "english_text": "You have something like Hero.",
+      "japanese_text": "あなたにはヒーローのような存在がいるようですね。"
+    },
+    {
+      "sentence_index": 32,
+      "english_text": "You have these normal text editors with AI features.",
+      "japanese_text": "これらは通常のテキストエディタにAI機能を追加したものです。"
+    },
+    {
+      "sentence_index": 33,
+      "english_text": "Then you have the terminal based ones, which are either CLI based or TUI, which is like a terminal UI.",
+      "japanese_text": "次に、ターミナルベースのものがあります。これらはコマンドラインインターフェース（CLI）かテキストユーザーインターフェイス（TUI）で、端末のような操作感を提供します。"
+    },
+    {
+      "sentence_index": 34,
+      "english_text": "Things something like Claude Node or Open Node, TUI, where It is in your terminal, and you're typing into a text box.",
+      "japanese_text": "クロード・ノードやOpen NodesのようなTUI（テキストベースのユーザーインターフェース）を考えてみてください。ターミナル上で動作し、文字入力ボックスにコマンドを入力する形式です。"
+    },
+    {
+      "sentence_index": 35,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 36,
+      "english_text": "And then you have something that is like a full on GUI, which is like a desktop app, something like the the new Node app or OpenCode has an app.",
+      "japanese_text": "そして完全なGUI環境、つまりデスクトップアプリケーションのようなインターフェースを持つものもあります - 例えば新しい Node.jsアプリやOpenCodeが提供するようなタイプです。"
+    },
+    {
+      "sentence_index": 37,
+      "english_text": "And these things are much more like a a chat box, like a chat GPT inside of your, your app in an app that you can, you know, drag files ESLint, and it has more information in a nicer UI typically than the TUI.",
+      "japanese_text": "これらの機能は、チャットGPTのようなインターフェースで、アプリ内に組み込まれた会話型アシスタントとして提供されます。ファイルやESlintなどのツールをドラッグ＆ドロップでき、通常TUIよりも洗練されたユーザーインターフェイスを備えています。"
+    },
+    {
+      "sentence_index": 38,
+      "english_text": "So, Wes, what are you using as your main tool for AI coding these days?",
+      "japanese_text": "ウェス、最近AIコーディングでメインに使っているツールは何ですか？"
+    },
+    {
+      "sentence_index": 39,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 40,
+      "english_text": "The tools I'm using for AI coding right now are are constantly changing because I'm trying to learn them all, but I find myself migrating to when I'm, like, working on existing application, I find myself migrating to Cursor and and mostly agents.",
+      "japanese_text": "現在AIコーディングで使用しているツールは絶えず変化しています。すべてを習得しようとしているため、既存アプリケーションの開発に取り組む中で、最終的にはカーソルとエージェントを主に使うようになっています。"
+    },
+    {
+      "sentence_index": 41,
+      "english_text": "If I'm trying to fix something in the CLI, I find myself going for either cloud code or open code and just saying, like, hey.",
+      "japanese_text": "CLIで何かを修正しようとするとき、私はいつもクラウドコードかオープンソースコードを参照して、「えーっと...」と言いながら作業を始めます。"
+    },
+    {
+      "sentence_index": 42,
+      "english_text": "I'm working on x, y, and z just for, like, short little spurts.",
+      "japanese_text": "私はx、y、そしてzについて、ほんの短い期間だけ集中して取り組んでいる感じです。"
+    },
+    {
+      "sentence_index": 43,
+      "english_text": "And then, like, the TUI itself.",
+      "japanese_text": "そしてTUIそのものについてだ。"
+    },
+    {
+      "sentence_index": 44,
+      "english_text": "I I'm curious if you think this way as Wes.",
+      "japanese_text": "ウェスとしても同じ考えなのか気になります。"
+    },
+    {
+      "sentence_index": 45,
+      "english_text": "It's like, I do love a good TUI, but not for, like, long running things.",
+      "japanese_text": "つまりね、私はTUIが大好きなんだけど、長時間使うような用途には向いてないと思うの。"
+    },
+    {
+      "sentence_index": 46,
+      "english_text": "I a GUI is just so much more flexible, and I I don't think you can ever replicate the the experience that you're getting with a GUI.",
+      "japanese_text": "GUIははるかに柔軟性が高く、グラフィカル・ユーザーインターフェースで得られる体験を再現するのは不可能だと思います。"
+    },
+    {
+      "sentence_index": 47,
+      "english_text": "So I I always try to go a little more on the GUI side.",
+      "japanese_text": "だから私はいつもGUI側に少し重点を置くようにしています。"
+    },
+    {
+      "sentence_index": 48,
+      "english_text": "Yeah, man.",
+      "japanese_text": "ああ、そうだよ。"
+    },
+    {
+      "sentence_index": 49,
+      "english_text": "So the tools that I use for AI coding right now are specifically GUI based.",
+      "japanese_text": "現在私がAIコーディングに使用しているツールは、すべてGUIベースのものです。"
+    },
+    {
+      "sentence_index": 50,
+      "english_text": "I am a GUI man.",
+      "japanese_text": "私はGUI派です。"
+    },
+    {
+      "sentence_index": 51,
+      "english_text": "I I use a GUI over a two way.",
+      "japanese_text": "私は双方向通信でGUIを使用しています。"
+    },
+    {
+      "sentence_index": 52,
+      "english_text": "I've I've stated as such, but I like, me personally, Node, I use the desktop app or the OpenCode Wes interface because I can run OpenCodeWeb on my Mac mini, visit it in the browser, and it's a GUI.",
+      "japanese_text": "そのように説明しましたが、個人的にはデスクトップアプリやOpenColaのWeSインターフェースを好んで使っています。Mac MiniでOpenCollab Webを実行でき、ブラウザ経由で操作できるGUI環境が気に入っているからです。"
+    },
+    {
+      "sentence_index": 53,
+      "english_text": "And then I'm connecting to my app in my normal text editor to Node and read the code, etcetera, but I'm the tools that I'm using to do the AI coding themselves is pretty much exclusively OpenCode's GUI.",
+      "japanese_text": "そして通常のテキストエディタでノードベースアプリに接続し、コードを読み込んだりしています。使用するAIコーディングツールは、ほぼ完全にOpenCoder'sグラフィカルインターフェースに依存しています。"
+    },
+    {
+      "sentence_index": 54,
+      "english_text": "Reasons why I like it, I think GUIs offer things like when you drag an image, it shows the image.",
+      "japanese_text": "私が気に入っている理由は、GUIでは画像をドラッグするとその画像が表示されるなど、直感的な操作が可能な点です。"
+    },
+    {
+      "sentence_index": 55,
+      "english_text": "Stuff like that.",
+      "japanese_text": "そんな感じのもんだ。"
+    },
+    {
+      "sentence_index": 56,
+      "english_text": "It shows better diffs.",
+      "japanese_text": "より良い差分表示が可能です。"
+    },
+    {
+      "sentence_index": 57,
+      "english_text": "The diffs are nice.",
+      "japanese_text": "差分はいい感じですね。"
+    },
+    {
+      "sentence_index": 58,
+      "english_text": "The UI, you can click on something and it flies open and closed, and it's more shortcuts.",
+      "japanese_text": "UIでは、何かをクリックするだけでメニューが瞬時に開閉でき、ショートカットキーも充実しています。"
+    },
+    {
+      "sentence_index": 59,
+      "english_text": "Better.",
+      "japanese_text": "より良い。"
+    },
+    {
+      "sentence_index": 60,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 61,
+      "english_text": "I I see the terminal when it's running.",
+      "japanese_text": "実行中のターミナルが見えます。"
+    },
+    {
+      "sentence_index": 62,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 63,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 64,
+      "english_text": "I greatly prefer it.",
+      "japanese_text": "私はずっとそれが好きだ。"
+    },
+    {
+      "sentence_index": 65,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 66,
+      "english_text": "I agree as well.",
+      "japanese_text": "私も同意見です。"
+    },
+    {
+      "sentence_index": 67,
+      "english_text": "Plus, like, I find one thing with the dedicated GUI apps that are not code editors.",
+      "japanese_text": "それに、コードエディタ以外の専用GUIアプリには一つ気になる点があるんだよね。"
+    },
+    {
+      "sentence_index": 68,
+      "english_text": "So we're talking codecs, open code desktop.",
+      "japanese_text": "つまりコーデックやオープンなデスクトップ環境の話です。"
+    },
+    {
+      "sentence_index": 69,
+      "english_text": "I find the dance between the code and going back to the app kind of weird, and that's why I still prefer, like, a cursor, or like a Versus Node fork because that dance between the agent did something and, Node, I wanna correct something.",
+      "japanese_text": "コードとアプリ間のやり取りがちょっと不自然に感じられ、だからこそ今でもカーソル操作やVersusノードフォークの方が好きなんです。エージェントが何か動作した後に、何か修正したい場合などに。"
+    },
+    {
+      "sentence_index": 70,
+      "english_text": "I wanna see how it's done.",
+      "japanese_text": "どうやってやるのか見てみたい。"
+    },
+    {
+      "sentence_index": 71,
+      "english_text": "I just feel a lot more comfortable in that space, at least at the moment right now.",
+      "japanese_text": "少なくとも今のところは、その空間の方がずっと居心地がいいと感じるんです。"
+    },
+    {
+      "sentence_index": 72,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 73,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 74,
+      "english_text": "I I I do think it's interesting.",
+      "japanese_text": "私はそれが面白いと思う。"
+    },
+    {
+      "sentence_index": 75,
+      "english_text": "I think it's, as long as I I can track what's going on and I'm able to monitor it, it it also depends on the application.",
+      "japanese_text": "重要なのは、自分が状況を把握でき、監視できる範囲であれば、それはアプリケーションの性質にもよると思います。"
+    },
+    {
+      "sentence_index": 76,
+      "english_text": "What am I building?",
+      "japanese_text": "私は何を構築しているのか？"
+    },
+    {
+      "sentence_index": 77,
+      "english_text": "Is this something I care about?",
+      "japanese_text": "これは私が気にすべきことなのか？"
+    },
+    {
+      "sentence_index": 78,
+      "english_text": "Is this something I don't care about?",
+      "japanese_text": "これは私が気にしないことなのか？"
+    },
+    {
+      "sentence_index": 79,
+      "english_text": "Is this just, you know, quick and easy, get it done kinda stuff?",
+      "japanese_text": "これは単に、急いで簡単に終わらせるタイプの仕事ですか？"
+    },
+    {
+      "sentence_index": 80,
+      "english_text": "So for me, that that's just how it goes.",
+      "japanese_text": "私にとって、それが自然な流れなのです。"
+    },
+    {
+      "sentence_index": 81,
+      "english_text": "So let me ask you a question.",
+      "japanese_text": "それでは質問させてください。"
+    },
+    {
+      "sentence_index": 82,
+      "english_text": "You're working in OpenCode desktop, and it it did something for you.",
+      "japanese_text": "OpenOffice.org デスクトップ環境で作業していて、何か便利な機能が動作したとします。"
+    },
+    {
+      "sentence_index": 83,
+      "english_text": "And you're like, that's not really what I want, but it's just Yep.",
+      "japanese_text": "「いや、それはちょっと違うけど、まあいいか」って感じ。"
+    },
+    {
+      "sentence_index": 84,
+      "english_text": "It's like a quick fix.",
+      "japanese_text": "それは一時的な解決策のようなものだ。"
+    },
+    {
+      "sentence_index": 85,
+      "english_text": "Like, it's it's faster for me just to, like, go in there and move it.",
+      "japanese_text": "つまり、直接行って動かした方が私にとっては早いんです。"
+    },
+    {
+      "sentence_index": 86,
+      "english_text": "What's your process for that, like, that you need to open pnpm decoder?",
+      "japanese_text": "そのプロセスについて教えてください。具体的には、pnpmデコーダを開く必要がある場合の手順は？"
+    },
+    {
+      "sentence_index": 87,
+      "english_text": "A lot of people just jump into VIM because they're in the terminal.",
+      "japanese_text": "多くの人がターミナルを使っているからという理由でVIMを使い始める。"
+    },
+    {
+      "sentence_index": 88,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 89,
+      "english_text": "But you're in, like, a GUI.",
+      "japanese_text": "でも君はGUIの世界にいるんだろ？"
+    },
+    {
+      "sentence_index": 90,
+      "english_text": "So what's your your process for that?",
+      "japanese_text": "では、そのプロセスについて詳しく教えてください。"
+    },
+    {
+      "sentence_index": 91,
+      "english_text": "If I wanna go back and forth between my code and my AI coder, using open code using the GUI, the the thing I do is I put the open code on one side.",
+      "japanese_text": "コードとAIコーダーを行き来しながらGUIでオープンソースコードを使用する場合、私は通常一方の側に開いた状態のまま保持しておきます。"
+    },
+    {
+      "sentence_index": 92,
+      "english_text": "I put my zed, my text editor on the other side, and I'm following it.",
+      "japanese_text": "私はテキストエディタを反対側に置き、それに従って作業しています。"
+    },
+    {
+      "sentence_index": 93,
+      "english_text": "I'm watching the commits.",
+      "japanese_text": "私はコミットを監視しています。"
+    },
+    {
+      "sentence_index": 94,
+      "english_text": "I'm looking at diffs.",
+      "japanese_text": "差分を確認しているところです。"
+    },
+    {
+      "sentence_index": 95,
+      "english_text": "I'm moving to files.",
+      "japanese_text": "私はファイルを移動しています。"
+    },
+    {
+      "sentence_index": 96,
+      "english_text": "If it's doing something I don't like and I can correct easily, it's so easy in that way for me to just tab over and and make changes and then go back and forth with it like that.",
+      "japanese_text": "気に入らない部分があっても、簡単に修正できるなら、タブを切り替えてその場で変更を加え、自由に調整できるのがとても便利です。"
+    },
+    {
+      "sentence_index": 97,
+      "english_text": "So, that's how I do it, and I find it to be, decent.",
+      "japanese_text": "これが私のやり方で、妥当な方法だと思っています。"
+    },
+    {
+      "sentence_index": 98,
+      "english_text": "It's obviously not as nice as something that's built directly into the text editor.",
+      "japanese_text": "テキストエディタに直接組み込まれたものと比べると、やはり見劣りしますね。"
+    },
+    {
+      "sentence_index": 99,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 100,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 101,
+      "english_text": "But I just like my tools the way they are.",
+      "japanese_text": "でも私は道具はそのままの状態が好きなんだ。"
+    },
+    {
+      "sentence_index": 102,
+      "english_text": "And because I have them all set up and configured to my liking, it's it's a nicer experience for me to have those split app experiences here.",
+      "japanese_text": "また、すべてを自分の好みに合わせて設定・構成済みなので、ここでアプリを分けて使える方が私にとっては快適な環境なのです。"
+    },
+    {
+      "sentence_index": 103,
+      "english_text": "So in addition to this, inside of editors, there's usually, like, a chat window.",
+      "japanese_text": "さらに、エディタには通常、チャットウィンドウが組み込まれています。"
+    },
+    {
+      "sentence_index": 104,
+      "english_text": "So Versus Code has Copilot chat.",
+      "japanese_text": "つまり、VersusCodeにはCoPilotチャット機能が搭載されているということです。"
+    },
+    {
+      "sentence_index": 105,
+      "english_text": "I believe you can install many other extensions to do an inline chat window.",
+      "japanese_text": "インラインチャットウィンドウを実現するには、他にも多くの拡張機能をインストールできるはずです。"
+    },
+    {
+      "sentence_index": 106,
+      "english_text": "And this flow of working in the inline chat is going to be very similar to how what we're describing with any of these other terminal tools or even GUI tools Wes you're talking back and forth with the AI.",
+      "japanese_text": "そして、このインラインチャットでのやり取りは、他のターミナルツールやGUIベースのAIインターフェースと同様に、人間と人工知能の間で交わされる対話と非常に似たものになるでしょう。"
+    },
+    {
+      "sentence_index": 107,
+      "english_text": "Hey.",
+      "japanese_text": "おい。"
+    },
+    {
+      "sentence_index": 108,
+      "english_text": "Can you make these changes?",
+      "japanese_text": "これらの変更を加えることができますか？"
+    },
+    {
+      "sentence_index": 109,
+      "english_text": "Can you do this?",
+      "japanese_text": "これできますか？"
+    },
+    {
+      "sentence_index": 110,
+      "english_text": "Can you do that?",
+      "japanese_text": "それはできますか？"
+    },
+    {
+      "sentence_index": 111,
+      "english_text": "Reference these files, those types of things.",
+      "japanese_text": "これらのファイルを参照してください、こういった類のことです。"
+    },
+    {
+      "sentence_index": 112,
+      "english_text": "But there's also tab completion where you're typing, and it's like a fancy autocomplete.",
+      "japanese_text": "ただし、タブ補完機能もあり、入力中に自動的に候補が表示されるスマートなオートコンプリートも搭載されています。"
+    },
+    {
+      "sentence_index": 113,
+      "english_text": "So the tab completion is usually for a a little bit like the AI agents often are are doing way more.",
+      "japanese_text": "したがって、タブ補完機能は通常、AIエージェントが実行するタスクよりもはるかに高度な処理を行っています。"
+    },
+    {
+      "sentence_index": 114,
+      "english_text": "They're going off.",
+      "japanese_text": "彼らは出発するところだ。"
+    },
+    {
+      "sentence_index": 115,
+      "english_text": "They're creating files.",
+      "japanese_text": "彼らはファイルを作成しています。"
+    },
+    {
+      "sentence_index": 116,
+      "english_text": "They're making big changes, where the tab completion is usually for spot updates and and, like, I need to change this and edit this, and it is kind of predicting what I need or writing you by.",
+      "japanese_text": "大幅な変更が行われており、通常はタブ補完機能がスポット更新用に使われていますが、例えばこれを修正してここを編集する必要がある場合など、必要な操作や次に行うべき作業をある程度予測してくれます。"
+    },
+    {
+      "sentence_index": 117,
+      "english_text": "Some people prefer to completely stay in the realm of tab completions, but I have really moved away from doing tab completions as I go and because I've gotten more effective with the chat based flow of things Yeah.",
+      "japanese_text": "タブ補完だけで完全に済ませたいという人もいますが、私は次第にそのスタイルから脱却し、チャットベースの操作フローに移行しました。その方がはるかに効率的だと気づいたからです。確かに。"
+    },
+    {
+      "sentence_index": 118,
+      "english_text": "And then manually just editing things instead of relying on the I Wes I was the same way as well as as the, like like, the the way that you puppeteer your chat JS you get better as that at that and as the models get better and and oh, that's actually what I wanted.",
+      "japanese_text": "そして手動で編集するようになり、PuppeteerでチャットJSを操作する方法も習得しました。モデルが改善されるにつれて、そのスキルもどんどん向上していきました - まさにこれこそが私が求めていたものでした。"
+    },
+    {
+      "sentence_index": 119,
+      "english_text": "I find myself moving a little bit away from the tab completion more into, into the agent.",
+      "japanese_text": "私はタブ補完から少し離れ、エージェントの方に重点を置くようになってきていることに気付きました。"
+    },
+    {
+      "sentence_index": 120,
+      "english_text": "And then the tab completion is more just like, I need to fix this thing one by one or, like like, especially CSS.",
+      "japanese_text": "そしてタブ補完については、一つ一つ修正していくか、あるいは特にCSSの場合のように、より細かな調整が必要になることが多いです。"
+    },
+    {
+      "sentence_index": 121,
+      "english_text": "I find myself using tab completion in CSS so much because so much of the AI CSS that get gets kicked out is is awful.",
+      "japanese_text": "CSSではタブ補完を多用してしまうのですが、生成されるAIコードの多くが実にひどい出来なので...。"
+    },
+    {
+      "sentence_index": 122,
+      "english_text": "Or, like, that's not what I want.",
+      "japanese_text": "いや、そういうのは求めてないんだよね。"
+    },
+    {
+      "sentence_index": 123,
+      "english_text": "That's what like, I'm just trying to, like, design something that looks nice or feels good.",
+      "japanese_text": "つまり私は、見た目が美しいとか、心地よいと感じるようなものを作ろうとしているんです。"
+    },
+    {
+      "sentence_index": 124,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 125,
+      "english_text": "Typing what I want into a box and then hoping it pops out and it just added a whole bunch of, like, hover opacities to everything is is not it.",
+      "japanese_text": "ボックスに入力したものが瞬時に反映され、すべての要素に「ホバー時不透明度」が自動的に適用されるなんて、そんな都合の良い話はないよ。"
+    },
+    {
+      "sentence_index": 126,
+      "english_text": "So I I use the hack completion tons in the CSS, more design design y things.",
+      "japanese_text": "そこでCSSではハック的な補完機能を多用し、デザイン関連の処理を実装しています。"
+    },
+    {
+      "sentence_index": 127,
+      "english_text": "And then the more, like, logic based, flow based stuff, like, writing back end JavaScript code, that's way more doing in the agents.",
+      "japanese_text": "そして論理ベースのフロー重視型、つまりバックエンドJavaScriptコードを書くような作業は、エージェント側で行う方がはるかに適している。"
+    },
+    {
+      "sentence_index": 128,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 129,
+      "english_text": "I think about things like your mad CSS website, because it is so like, it's it's so deeply designed.",
+      "japanese_text": "あなたのCSSを使った素晴らしいウェブサイトについてよく考えます。なぜなら、そのデザインは本当に細部までこだわって作られているからです。"
+    },
+    {
+      "sentence_index": 130,
+      "english_text": "You put craft into that design.",
+      "japanese_text": "そのデザインには工夫が凝らされている。"
+    },
+    {
+      "sentence_index": 131,
+      "english_text": "That design, if you didn't have that done in Photoshop and just say, hey.",
+      "japanese_text": "そのデザイン、Photoshopで加工せずにそのまま使うつもりですか？ちょっと待ってください。"
+    },
+    {
+      "sentence_index": 132,
+      "english_text": "Go make this, I feel like that design would be impossible to dictate to an AI to do today, at least with my skill level.",
+      "japanese_text": "これを作ってみてください。少なくとも今の私のスキルレベルでは、AIに正確に指示を出すことは不可能だと思います。"
+    },
+    {
+      "sentence_index": 133,
+      "english_text": "Can you I I Sanity imagine being, like, nailing that design aesthetic or or being able to experiment with that, and really nailing it.",
+      "japanese_text": "そのデザイン美学を完璧に再現したり、あるいは実験的に試みたりして、真に極められると思いますか？"
+    },
+    {
+      "sentence_index": 134,
+      "english_text": "So I I I totally get that, especially because, like, the things that we're good at, we're good at.",
+      "japanese_text": "だからその気持ちはよく分かるんだ。特に、自分たちが得意なことに関してはね。"
+    },
+    {
+      "sentence_index": 135,
+      "english_text": "And and I oftentimes am like, what are you doing here with this CSS move?",
+      "japanese_text": "そして時々思うんだ、「このCSSの動き、一体何のためにやってるんだ？」ってね。"
+    },
+    {
+      "sentence_index": 136,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 137,
+      "english_text": "Let me do it.",
+      "japanese_text": "私にやらせてください。"
+    },
+    {
+      "sentence_index": 138,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 139,
+      "english_text": "Oh, man.",
+      "japanese_text": "ああ、もう。"
+    },
+    {
+      "sentence_index": 140,
+      "english_text": "That that drives me nuts.",
+      "japanese_text": "それが私をイライラさせるんだ。"
+    },
+    {
+      "sentence_index": 141,
+      "english_text": "It's true.",
+      "japanese_text": "それは本当です。"
+    },
+    {
+      "sentence_index": 142,
+      "english_text": "Like, even the last two sites I worked on, the mad CSS one and the the Synhax one, I was battling it to stop writing BEM selectors, like, nine times.",
+      "japanese_text": "例えば、最近関わった2つのプロジェクト――あの狂ったCSSのサイトとSynHaXさんのところでも、BEMセレクタを書かないように必死に抵抗してたんだ。9回もね。"
+    },
+    {
+      "sentence_index": 143,
+      "english_text": "Like like, can you I I eventually had to throw it into, like, the agent's file because, like, it was searching for a way to make structured repeatable CSS, and I don't think it understood, like, the scoping that I was using.",
+      "japanese_text": "最終的には、エージェントのファイルに直接書き込むしかありませんでした。というのも、構造化された再現性のあるCSSを作成する方法を探していたからです。おそらく、私が使用していたスコープ設定を理解していなかったようです。"
+    },
+    {
+      "sentence_index": 144,
+      "english_text": "And, it just kept going back to making BEM selectors for everything and not using nesting.",
+      "japanese_text": "そして結局すべての要素にBEMセレクタを使い続け、ネスト構造を採用しなかったんです。"
+    },
+    {
+      "sentence_index": 145,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 146,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 147,
+      "english_text": "There's so much there too in terms of, like, even, like, context when you get into AI has to keep all this stuff in context.",
+      "japanese_text": "AIがこれらすべての要素を文脈に沿って理解しなければならないという点でも、かなり複雑な課題があります。"
+    },
+    {
+      "sentence_index": 148,
+      "english_text": "And still, like, when you're dealing with big projects with reusable CSS and re like, the more you add there, the harder of a challenge it gets for the AI.",
+      "japanese_text": "そして実際、再利用可能なCSSを備えた大規模なプロジェクトでは、AIにとって処理すべき課題が増えるほど難易度が上昇します。"
+    },
+    {
+      "sentence_index": 149,
+      "english_text": "So because of that, you know, dry CSS and dry things like that, I think, are are definitely still a challenge for it.",
+      "japanese_text": "そのため、ドライなCSSや簡潔で機能的なコードといった手法は、依然として大きな課題と言えるでしょう。"
+    },
+    {
+      "sentence_index": 150,
+      "english_text": "And and I I wonder, like, what the exploration into that space looks like in terms of, clearing some of that up.",
+      "japanese_text": "そして私は、そのような空間を探求する行為がどのようなものか――つまりその混乱を整理していく過程について、ふと考えてしまいました。"
+    },
+    {
+      "sentence_index": 151,
+      "english_text": "So that is the tools here.",
+      "japanese_text": "これがここで使用するツールです。"
+    },
+    {
+      "sentence_index": 152,
+      "english_text": "Again, you can use many of these tools just by installing them.",
+      "japanese_text": "これらのツールの多くはインストールするだけですぐに使用できます。"
+    },
+    {
+      "sentence_index": 153,
+      "english_text": "Like, Cloud Node, again, is a CLI.",
+      "japanese_text": "Cloudflare Workersと同様に、これもコマンドラインインターフェース（CLI）です。"
+    },
+    {
+      "sentence_index": 154,
+      "english_text": "Now people really like Cloud Code.",
+      "japanese_text": "今や多くの人がクラウドコードを高く評価しています。"
+    },
+    {
+      "sentence_index": 155,
+      "english_text": "I do find it to be less featured than something like, Node OpenCode, CLI, and it is directly attached to using Anthropic and a Cloud Code subscription.",
+      "japanese_text": "ただし、「Anthora」のようなツールと比較すると機能が限られており、主にアントロピックのAPIとクラウドコードサブスクリプションとの連携に特化している点が特徴です。"
+    },
+    {
+      "sentence_index": 156,
+      "english_text": "So for me, if I'm the type of person who is using some of these tools, I personally invest my time in learning tools where they're not tied to one specific subscription or model because the models change so rapidly these days that my tool should sit in front of the model choice.",
+      "japanese_text": "つまり、こうしたツールを活用するタイプの人間としては、個人的には特定のサブスクリプションやモデルに縛られない学習方法を重視しています。というのも、近年のAI技術は進化が極めて速く、使用する道具は常に最新のモデリング手法に対応できる状態にしておくべきだからです。"
+    },
+    {
+      "sentence_index": 157,
+      "english_text": "So I personally am not investing a lot of time into Cloud Code as a tool because I would much rather have a tool that lets me use what model I want to use Wes I want to use it.",
+      "japanese_text": "私自身としては、Cloud9のツール群としてクラウドコードに多くの時間を割くつもりはありません。なぜなら、自分が使いたいモデルを自由に選択して使えるような別のソリューションの方がはるかに魅力的だからです。"
+    },
+    {
+      "sentence_index": 158,
+      "english_text": "And, therefore, that's why I use OpenCode, but there's other great choices for this.",
+      "japanese_text": "したがって、私はOpenCoreを使用していますが、他にも優れた選択肢は存在します。"
+    },
+    {
+      "sentence_index": 159,
+      "english_text": "Py, and we just had, Mario on from Py.",
+      "japanese_text": "そして私たちはマリオをパイから呼びました。"
+    },
+    {
+      "sentence_index": 160,
+      "english_text": "Py JS a great choice for this.",
+      "japanese_text": "この用途には PyJS が最適な選択肢です。"
+    },
+    {
+      "sentence_index": 161,
+      "english_text": "Have you seen charm, westwards?",
+      "japanese_text": "チャームを西の方で見ましたか？"
+    },
+    {
+      "sentence_index": 162,
+      "english_text": "I I believe it's it's it's not charm.",
+      "japanese_text": "私はそれは魅力ではないと思います。"
+    },
+    {
+      "sentence_index": 163,
+      "english_text": "Charm is the overarching I've heard of it.",
+      "japanese_text": "チャームは私がそれについて聞いた全体的な印象です。"
+    },
+    {
+      "sentence_index": 164,
+      "english_text": "Have not used it.",
+      "japanese_text": "使ったことがない。"
+    },
+    {
+      "sentence_index": 165,
+      "english_text": "Charm Crush.",
+      "japanese_text": "チャームクラッシュ。"
+    },
+    {
+      "sentence_index": 166,
+      "english_text": "Charm is like a bunch of, terminal utilities, and Charm Crush is their AI, CLI tool.",
+      "japanese_text": "チャームはターミナルユーティリティの集合体であり、チャーミングクラッシュはそのAI機能を提供するCLIツールです。"
+    },
+    {
+      "sentence_index": 167,
+      "english_text": "It's beautiful.",
+      "japanese_text": "美しい。"
+    },
+    {
+      "sentence_index": 168,
+      "english_text": "It's cool.",
+      "japanese_text": "涼しい。"
+    },
+    {
+      "sentence_index": 169,
+      "english_text": "It looks great.",
+      "japanese_text": "とても素敵です。"
+    },
+    {
+      "sentence_index": 170,
+      "english_text": "As far as go, this is top tier stuff, and it it looks really super cool.",
+      "japanese_text": "ここまでは素晴らしい出来で、見た目も非常にかっこいい。"
+    },
+    {
+      "sentence_index": 171,
+      "english_text": "It's got a lot of personality.",
+      "japanese_text": "個性が豊かだ。"
+    },
+    {
+      "sentence_index": 172,
+      "english_text": "I'll say that.",
+      "japanese_text": "そう言おう。"
+    },
+    {
+      "sentence_index": 173,
+      "english_text": "But, again, same kind of thing.",
+      "japanese_text": "しかし、またしても同じような状況だ。"
+    },
+    {
+      "sentence_index": 174,
+      "english_text": "I think it's a great choice to give this stuff a try.",
+      "japanese_text": "これを試してみるのは素晴らしい選択だと思います。"
+    },
+    {
+      "sentence_index": 175,
+      "english_text": "And, folks, if we if we don't talk about your favorite tool in here, there's too many of these things.",
+      "japanese_text": "そして皆さん、もしここでお気に入りのツールについて触れなければ、話題が尽きてしまうかもしれませんよ。"
+    },
+    {
+      "sentence_index": 176,
+      "english_text": "They're changing all the time.",
+      "japanese_text": "彼らは常に変化している。"
+    },
+    {
+      "sentence_index": 177,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 178,
+      "english_text": "I agree with you as well, like, being able to switch between models.",
+      "japanese_text": "私も同意見です。モデルを切り替えられるのは素晴らしい機能ですよね。"
+    },
+    {
+      "sentence_index": 179,
+      "english_text": "Obviously, Anthropics had the the lead for for so long, but OpenAI just came out with their new codex model, which in my testing is is actually pretty good.",
+      "japanese_text": "当然ながらAnthropicは長年リードを保っていたが、OpenAIが先日発表した新しいCodexモデルは、私のテストでは実際にかなり優れた性能を示している。"
+    },
+    {
+      "sentence_index": 180,
+      "english_text": "It actually beat it out.",
+      "japanese_text": "実際にそれを打ち破ったのです。"
+    },
+    {
+      "sentence_index": 181,
+      "english_text": "I was trying to make it make some some three d printed gears that would mesh together.",
+      "japanese_text": "私は3Dプリントした歯車同士が噛み合うようにしようと試みていました。"
+    },
+    {
+      "sentence_index": 182,
+      "english_text": "So there's quite a bit of math to that, and it did a fantastic job.",
+      "japanese_text": "数学的な要素もかなり含まれていますが、非常にうまく機能しています。"
+    },
+    {
+      "sentence_index": 183,
+      "english_text": "But I wanna be able to switch, and I wanna be able to, like, use somewhat standards based.",
+      "japanese_text": "でも切り替えられるようにしたいし、ある程度標準規格に準拠した使い方もできるようにしておきたいんだ。"
+    },
+    {
+      "sentence_index": 184,
+      "english_text": "A lot of things we're talking about today, like agents. md and and skills and whatever, these things are starting to become, like, standards.",
+      "japanese_text": "今日議論している多くの事柄――エージェントやスキルなど―これらは徐々に標準的な要件となりつつあります。"
+    },
+    {
+      "sentence_index": 185,
+      "english_text": "They're all a little bit different, sort of a whole ideas that you're using between all of these tools are starting to become the the similar.",
+      "japanese_text": "それぞれ微妙に異なり、これらのツール間で使用されている概念が徐々に類似したものになりつつあるようです。"
+    },
+    {
+      "sentence_index": 186,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 187,
+      "english_text": "I I mean, I want my tools to be able to flip it and reverse it.",
+      "japanese_text": "つまり、工具でひっくり返したり反転させたりできるようにしたいんです。"
+    },
+    {
+      "sentence_index": 188,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 189,
+      "english_text": "I I wanna be able to choose what I want with what I want and still have my tools adjust.",
+      "japanese_text": "私は自分の望むものを自由に選びつつ、ツールもそれに合わせて調整できるようになりたい。"
+    },
+    {
+      "sentence_index": 190,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 191,
+      "english_text": "It's just like text editors.",
+      "japanese_text": "テキストエディタと同じです。"
+    },
+    {
+      "sentence_index": 192,
+      "english_text": "Like, I I would hate if my text editor was like, this text editor only allows React files.",
+      "japanese_text": "例えば、テキストエディタがReactファイルしか開けないなんて絶対嫌だわ。"
+    },
+    {
+      "sentence_index": 193,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 194,
+      "english_text": "I would not use that tool.",
+      "japanese_text": "私はその道具は使わないだろう。"
+    },
+    {
+      "sentence_index": 195,
+      "english_text": "So that that to me is the distinction there in terms of these tools.",
+      "japanese_text": "つまり、私にとってこれらのツールにおける本質的な違いはそこにあります。"
+    },
+    {
+      "sentence_index": 196,
+      "english_text": "Okay.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 197,
+      "english_text": "Cool.",
+      "japanese_text": "かっこいい。"
+    },
+    {
+      "sentence_index": 198,
+      "english_text": "So let's talk about the stuff, all of the stuff.",
+      "japanese_text": "では、すべての事柄について話しましょうか。"
+    },
+    {
+      "sentence_index": 199,
+      "english_text": "I think the the most logical place to start with is the models.",
+      "japanese_text": "まず取り組むべきはモデルの定義から始めるべきだと思う。"
+    },
+    {
+      "sentence_index": 200,
+      "english_text": "Now we don't need to get into what AI models are specifically.",
+      "japanese_text": "ここで具体的にどのようなAIモデルを使用しているかについては詳しく説明しません。"
+    },
+    {
+      "sentence_index": 201,
+      "english_text": "But as far as coding goes, I personally believe the model that you choose will drastically change your experience with AI coding in 2026 because they all function very differently.",
+      "japanese_text": "ただし、コーディングに関しては、使用するモデルによってAIプログラミングの体験が大きく変わると考えています。なぜなら、それぞれが全く異なる方法で動作するからです。"
+    },
+    {
+      "sentence_index": 202,
+      "english_text": "Even the best ones that are very good still function very differently, and you need to interact with them in a different different way, at least in my experience.",
+      "japanese_text": "たとえ非常に高性能なモデルであっても、その動作原理は大きく異なり、少なくとも私の経験では、異なる方法で操作する必要がある。"
+    },
+    {
+      "sentence_index": 203,
+      "english_text": "So, Wes, what model are you using to code with primarily in 2026?",
+      "japanese_text": "では、ウェスさん、2026年時点で主にコーディングに使用しているプログラミング言語は何ですか？"
+    },
+    {
+      "sentence_index": 204,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 205,
+      "english_text": "I've been on the, like, Opus models for a long time, and I've been right now, I'm on Opus four six for everything, and then I have been dipping a little bit into GPT five three codecs.",
+      "japanese_text": "私は長年「Opus」モデルを使用してきましたが、現在はすべての用途でOPUS 4.6を使用しています。最近ではGPT-5.3コーデックにも少しずつ移行し始めています。"
+    },
+    {
+      "sentence_index": 206,
+      "english_text": "And then, also, every now and then, I'll just try a random one.",
+      "japanese_text": "そして時々、適当に選んで試してみることもあるんだ。"
+    },
+    {
+      "sentence_index": 207,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 208,
+      "english_text": "I'll try the grok one and see how it is.",
+      "japanese_text": "グロク版を試してみて、どんな感じか確かめてみよう。"
+    },
+    {
+      "sentence_index": 209,
+      "english_text": "And it's it's really funny to see the, like, the tells that they have of of every single model.",
+      "japanese_text": "そして各モデルが持つ独特のクセを観察するのがとても面白いんです。"
+    },
+    {
+      "sentence_index": 210,
+      "english_text": "Like, one obviously, the purple thing was was really big for a long time, and, Anthropic and, OpenAI have tried to beat the purple out of these models in their training.",
+      "japanese_text": "例えば、明らかに紫色の物体は長期間にわたって非常に大きなサイズで表示され、AnthropicやOpenAIもトレーニング段階でこれらモデルから最大限の特徴を引き出し出そうとしてきました。"
+    },
+    {
+      "sentence_index": 211,
+      "english_text": "It still sort of ekes up.",
+      "japanese_text": "それでもなんとかやりくりしている。"
+    },
+    {
+      "sentence_index": 212,
+      "english_text": "But now bad gradients.",
+      "japanese_text": "しかし今は勾配が悪すぎる。"
+    },
+    {
+      "sentence_index": 213,
+      "english_text": "The bad gradients.",
+      "japanese_text": "悪い勾配。"
+    },
+    {
+      "sentence_index": 214,
+      "english_text": "Now you're seeing, like, in code, you're seeing the, like, the comment with where it does three line comments, and it does a bunch equal signs on the bottom and the top.",
+      "japanese_text": "現在のコードでは、コメント部分に3行にわたる説明があり、下部と上部に等号が並んでいる状態です。"
+    },
+    {
+      "sentence_index": 215,
+      "english_text": "That's like an Opus tell.",
+      "japanese_text": "それはまるでオペラのアリアみたいだね。"
+    },
+    {
+      "sentence_index": 216,
+      "english_text": "And then, like, I think another anthropic one that's happening is it it just, like, these makes these little pill icons for everything with rounded corners on it.",
+      "japanese_text": "そしてもう一つ注目すべき傾向として、あらゆるものに丸みを帯びた角のついた小さな錠剤型アイコンが多用されるようになっている点があります。"
+    },
+    {
+      "sentence_index": 217,
+      "english_text": "It loves to do, like, a hover and then slightly scale up and then and then make the opacity.",
+      "japanese_text": "ホバー時にまず浮遊感を出し、その後わずかに拡大してから透明度を調整するのが好きです。"
+    },
+    {
+      "sentence_index": 218,
+      "english_text": "There's all these, like, little tells.",
+      "japanese_text": "ちょっとした仕草とか、そういうのがたくさんあるんだよ。"
+    },
+    {
+      "sentence_index": 219,
+      "english_text": "Every time I look at some code, I can almost tell which model it's been using.",
+      "japanese_text": "どんなコードを見ても、使われているモデルがほぼ瞬時にわかるくらいになった。"
+    },
+    {
+      "sentence_index": 220,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 221,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 222,
+      "english_text": "I know it is very funny.",
+      "japanese_text": "それはとても面白いと知っている。"
+    },
+    {
+      "sentence_index": 223,
+      "english_text": "The AI model that I'm using today to code is currently, I use Node 5.",
+      "japanese_text": "現在コーディングに使用しているAIモデルは現在、バージョン5を使用しています。"
+    },
+    {
+      "sentence_index": 224,
+      "english_text": "3 for detailed JavaScript work.",
+      "japanese_text": "詳細なJavaScript作業用に 3 個。"
+    },
+    {
+      "sentence_index": 225,
+      "english_text": "I do that because I find it to be way more precise.",
+      "japanese_text": "なぜならその方がずっと正確だと感じるからです。"
+    },
+    {
+      "sentence_index": 226,
+      "english_text": "I find it to be way more reliable in its output.",
+      "japanese_text": "出力の信頼性がはるかに高いと感じます。"
+    },
+    {
+      "sentence_index": 227,
+      "english_text": "Now it follies a little bit on Svelte five code, but using the Svelte five tools I have, like the Svelte five agent from the OpenCode plug in that I use, Those things, it doesn't it's not a problem.",
+      "japanese_text": "現在はSvelte 5のコードを少しいじっていますが、使用しているOpenCodeプラグインに含まれる「Svelte5エージェント」などのツールを使えば、特に問題なく動作しています。"
+    },
+    {
+      "sentence_index": 228,
+      "english_text": "Without that, it is a problem.",
+      "japanese_text": "それがなければ、問題がある。"
+    },
+    {
+      "sentence_index": 229,
+      "english_text": "But I I find codecs to be more exact, and even though sometimes it requires me to yell at it to, hey.",
+      "japanese_text": "でもコーデックの方が正確だと思うし、たまに「おい！」と怒鳴らないと動かないこともあるけどね（笑）。"
+    },
+    {
+      "sentence_index": 230,
+      "english_text": "Actually, do the thing instead of you telling me to do it.",
+      "japanese_text": "実は、私にそれをするように言う代わりに、その行為をやってほしいんだ。"
+    },
+    {
+      "sentence_index": 231,
+      "english_text": "Because sometimes I'll be like, you should install this plug in.",
+      "japanese_text": "だって、「このプラグイン入れた方がいいよ」って勧めることもあるし。"
+    },
+    {
+      "sentence_index": 232,
+      "english_text": "I'm like, well, you can do it.",
+      "japanese_text": "「まあ、あなたならできるわよ」\nと私は言いました。"
+    },
+    {
+      "sentence_index": 233,
+      "english_text": "Why don't you do it?",
+      "japanese_text": "なぜそれをやらないのですか？"
+    },
+    {
+      "sentence_index": 234,
+      "english_text": "And then I use Opus 4.",
+      "japanese_text": "そして最後にOp.4を使います。"
+    },
+    {
+      "sentence_index": 235,
+      "english_text": "6 for, more exploratory work, more creative work, brainstorming work, those types of things, and I find it to be better at those tasks.",
+      "japanese_text": "特に、より探索的な作業や創造的な業務、あるいはブレインストーミングのような活動においては、このタイプの方が適していると感じています。"
+    },
+    {
+      "sentence_index": 236,
+      "english_text": "I find it to be more creative, more less exact in those types of ways.",
+      "japanese_text": "私はそうした方法の方がより創造的で、より厳密なアプローチだと感じています。"
+    },
+    {
+      "sentence_index": 237,
+      "english_text": "And because of that distinction, I am using both of those two models as my primaries.",
+      "japanese_text": "その違いを考慮して、私はこれら2つのモデルを主要な分析手法として採用しています。"
+    },
+    {
+      "sentence_index": 238,
+      "english_text": "It just depends on the task at hand.",
+      "japanese_text": "それはその時の課題次第だ。"
+    },
+    {
+      "sentence_index": 239,
+      "english_text": "And I know people out there get way more in-depth with that Wes they they know, like, I'm using this model for this and this model for this and this model for that.",
+      "japanese_text": "そして私は、人々が特定の用途に合わせてモデルを微調整している実例を数多く知っています。例えば、ある人は画像分類にこのアーキテクチャを使い、別のある人は別のタスクに同じフレームワークを適用しています。"
+    },
+    {
+      "sentence_index": 240,
+      "english_text": "Like, that JS too much for me personally.",
+      "japanese_text": "個人的にはJSはちょっと複雑すぎるかな。"
+    },
+    {
+      "sentence_index": 241,
+      "english_text": "There's also, like, benchmarks, tests, evals, all of this stuff that warp, like, you can actually get scores from it because I I think a lot of this like, you listen to me being, like, yeah.",
+      "japanese_text": "ベンチマークやテスト、評価指標なども存在します。これらの結果から実際のスコアを得ることも可能です。なぜなら、私がよく言及している内容の多くが――そうですね、まさにこうしたものに基づいているからです。"
+    },
+    {
+      "sentence_index": 242,
+      "english_text": "It's a little bit better on x, y, and z. A lot of this is just touchy feely type of stuff.",
+      "japanese_text": "x、y、およびzでは若干改善されています。これらの多くは主観的な要素が強い部分です。"
+    },
+    {
+      "sentence_index": 243,
+      "english_text": "Vibes.",
+      "japanese_text": "バイブス。"
+    },
+    {
+      "sentence_index": 244,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 245,
+      "english_text": "It's all it's all vibes.",
+      "japanese_text": "すべては雰囲気次第さ。"
+    },
+    {
+      "sentence_index": 246,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 247,
+      "english_text": "I think, there's a lot of experimenting that needs to happen.",
+      "japanese_text": "多くの実験が必要だと思う。"
+    },
+    {
+      "sentence_index": 248,
+      "english_text": "But if you're out there and you you haven't really tried AI coding or you tried it last year and you found the results to be frustrating, I would say give the latest codex a spin, and I think the there's a world of difference.",
+      "japanese_text": "ただし、もしあなたがAIコーディングをまだ試していない、あるいは昨年試して結果に不満を感じたのであれば、最新バージョンをぜひ試してみることをお勧めします。間違いなく大きな違いがあるはずです。"
+    },
+    {
+      "sentence_index": 249,
+      "english_text": "I think it it feels incredibly different than it used to.",
+      "japanese_text": "以前とは驚くほど違うように感じます。"
+    },
+    {
+      "sentence_index": 250,
+      "english_text": "Anthropic also released this fast mode.",
+      "japanese_text": "アンソロピックはこの高速モードも公開している。"
+    },
+    {
+      "sentence_index": 251,
+      "english_text": "Did you see this?",
+      "japanese_text": "これ見ましたか？"
+    },
+    {
+      "sentence_index": 252,
+      "english_text": "Where it's two and a half times faster, and then it's six times the Scott, which is That's crazy.",
+      "japanese_text": "速度は2.5倍速く、スコットの6倍速い。――これは驚異的だ。"
+    },
+    {
+      "sentence_index": 253,
+      "english_text": "Deno.",
+      "japanese_text": "デノ。"
+    },
+    {
+      "sentence_index": 254,
+      "english_text": "Not for me.",
+      "japanese_text": "私には合わない。"
+    },
+    {
+      "sentence_index": 255,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 256,
+      "english_text": "Well, like I'd rather wait.",
+      "japanese_text": "まあ、私は待つ方がいいかな。"
+    },
+    {
+      "sentence_index": 257,
+      "english_text": "It's it's crazy to think, like, it can get two and a half times faster at at what cost?",
+      "japanese_text": "信じられないことに、これは処理速度が2.5倍も向上するんです。その代償は？"
+    },
+    {
+      "sentence_index": 258,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 259,
+      "english_text": "Like, I'm sure they're even losing money on that.",
+      "japanese_text": "まあ、あれでも赤字なんじゃないかと思うよ。"
+    },
+    {
+      "sentence_index": 260,
+      "english_text": "They're probably sticking a whole bunch of GPUs on it, but kinda neat that it it might get that fast at some point once we can catch up with all this hardware.",
+      "japanese_text": "おそらく多数のグラフィックカードを搭載しているだろうが、このハードウェアに追いつくことができれば、いつかこれほど高速に動作するようになるかもしれないというのは興味深い。"
+    },
+    {
+      "sentence_index": 261,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 262,
+      "english_text": "I know it's already shocking.",
+      "japanese_text": "すでに衝撃的であることは承知しています。"
+    },
+    {
+      "sentence_index": 263,
+      "english_text": "Even the speed right now, I, oh, I will say back to the models thing, codecs, in my experience, even though it's gotten better as of late, it was way slower.",
+      "japanese_text": "現在の速度でさえ、私が言うまでもありませんが、モデルやコーデックに関しては、最近は多少改善されたものの、それでもまだかなり遅いと感じています。"
+    },
+    {
+      "sentence_index": 264,
+      "english_text": "So, like, when I first moved from Opus 4.",
+      "japanese_text": "つまり、Op.4から移ってきた時のことなんだけど。"
+    },
+    {
+      "sentence_index": 265,
+      "english_text": "6 to codecs, I was like, this sucks.",
+      "japanese_text": "コーデックが 6 つしかないなんて、これじゃダメだって思ったよ。"
+    },
+    {
+      "sentence_index": 266,
+      "english_text": "This takes forever.",
+      "japanese_text": "これは永遠に終わらない。"
+    },
+    {
+      "sentence_index": 267,
+      "english_text": "I I'm gonna come back after lunch to see the results for this.",
+      "japanese_text": "私は昼食後に結果を見に戻ってきます。"
+    },
+    {
+      "sentence_index": 268,
+      "english_text": "But in in reality, I I think the the results ended up being that much better.",
+      "japanese_text": "しかし実際には、結果は予想をはるかに上回るものとなりました。"
+    },
+    {
+      "sentence_index": 269,
+      "english_text": "I had to go less back and forth of it.",
+      "japanese_text": "私はそれについてあまり議論を重ねることができなかった。"
+    },
+    {
+      "sentence_index": 270,
+      "english_text": "So the time, it kinda evened out at the end of the day, but now they have made it faster.",
+      "japanese_text": "その結果、最終的にはバランスが取れたものの、現在ではさらに処理速度が向上しています。"
+    },
+    {
+      "sentence_index": 271,
+      "english_text": "A lot of the speed also has to do with the the tool that you're using.",
+      "japanese_text": "速度の多くは、使用しているツールにも依存します。"
+    },
+    {
+      "sentence_index": 272,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 273,
+      "english_text": "Like, if you use the same model in in several different, like, earlier on, I'm not sure if it's still still the case, but Copilot in Versus Node was significantly slower than Cursor with the exact same model.",
+      "japanese_text": "たとえば、同じモデルを複数の異なるプロジェクトで使用する場合、以前はCopilot in Visual Studioが同一のアーキテクチャでもカーソルベースよりも大幅に遅かったことがあります（現在は改善されているかもしれませんが）。"
+    },
+    {
+      "sentence_index": 274,
+      "english_text": "And it's just the way that these tools are doing things like like the tool still has to figure out what pieces to shove into context and and to figure out what what to go along with it.",
+      "japanese_text": "これらのツールが機能する仕組みは、まさにこの部分にあります - つまり、どの要素をコンテキストに組み込むべきかを判断するだけでなく、それらがどのように相互補完し合うかを理解する必要があるということです。"
+    },
+    {
+      "sentence_index": 275,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 276,
+      "english_text": "Is it is it gonna use the TypeScript server to grab all the types?",
+      "japanese_text": "TypeScriptサーバーを使ってすべての型情報を取得するのでしょうか？"
+    },
+    {
+      "sentence_index": 277,
+      "english_text": "Is it gonna look at your clipboard, stuff that you recently deleted?",
+      "japanese_text": "最近削除したクリップボードの内容を表示しますか？"
+    },
+    {
+      "sentence_index": 278,
+      "english_text": "All of that stuff is is sort of sent along with the with the request and to figure it out.",
+      "japanese_text": "これらすべての情報は、リクエストとともに送信され、処理されることになります。"
+    },
+    {
+      "sentence_index": 279,
+      "english_text": "And, also, there's there's also, like, local models as part of this as well.",
+      "japanese_text": "さらに、地域特有のモデルもこの枠組みに含まれています。"
+    },
+    {
+      "sentence_index": 280,
+      "english_text": "Some of the tab completion stuff might not be using the model that you have selected.",
+      "japanese_text": "タブ補完機能の一部が、選択したモデルを使用していない可能性があります。"
+    },
+    {
+      "sentence_index": 281,
+      "english_text": "It might just be have it happening locally.",
+      "japanese_text": "おそらくそれは局所的な現象かもしれません。"
+    },
+    {
+      "sentence_index": 282,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 283,
+      "english_text": "Totally.",
+      "japanese_text": "完全に。"
+    },
+    {
+      "sentence_index": 284,
+      "english_text": "Cool.",
+      "japanese_text": "クールだね。"
+    },
+    {
+      "sentence_index": 285,
+      "english_text": "So let's move off of models and into some of the language that you hear.",
+      "japanese_text": "それではモデルの話は一旦置いて、実際に耳にする表現に移りましょう。"
+    },
+    {
+      "sentence_index": 286,
+      "english_text": "One of which, the words that you hear is agents.",
+      "japanese_text": "その中の一つが、耳にする言葉が「エージェント」である。"
+    },
+    {
+      "sentence_index": 287,
+      "english_text": "And, to me, I know a lot of people, especially people who are used to using just chat g p t or whatever, they hear the word agents, and they think it's something special.",
+      "japanese_text": "そして私にとって、特にチャットGPTなどの生成AIに慣れている人たちは、「エージェント」という言葉を聞くと、それが特別なものだと思いがちです。"
+    },
+    {
+      "sentence_index": 288,
+      "english_text": "But, ultimately, the agent is basically the AI that's going off and changing the files and doing stuff for you.",
+      "japanese_text": "しかし本質的には、このエージェントは最終的にファイルを操作し、あなたに代わって作業を行うAIシステムなのです。"
+    },
+    {
+      "sentence_index": 289,
+      "english_text": "So if you're in a chat and you say, hey.",
+      "japanese_text": "だからチャットでこう言ったとしよう、「ねえ」"
+    },
+    {
+      "sentence_index": 290,
+      "english_text": "Go modify this file.",
+      "japanese_text": "このファイルを編集してください。"
+    },
+    {
+      "sentence_index": 291,
+      "english_text": "That is the agent going and the agent is going and and modifying the file.",
+      "japanese_text": "これはエージェントが実行中であり、同時にそのファイルを変更していることを意味します。"
+    },
+    {
+      "sentence_index": 292,
+      "english_text": "That's really all it is at a high level.",
+      "japanese_text": "要するに、大まかに言えばそういうことです。"
+    },
+    {
+      "sentence_index": 293,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 294,
+      "english_text": "Ultimately, though, agents can have different configurations to them.",
+      "japanese_text": "ただし、最終的にはエージェントごとに異なる設定が可能である。"
+    },
+    {
+      "sentence_index": 295,
+      "english_text": "You can have custom agents that have default context embedded in them.",
+      "japanese_text": "デフォルトのコンテキストが組み込まれたカスタムエージェントを作成できます。"
+    },
+    {
+      "sentence_index": 296,
+      "english_text": "So, therefore, that agent is uniquely equipped to handle certain problems, So, therefore, that agent is uniquely equipped to handle certain problems because it JS brings in its own context.",
+      "japanese_text": "したがって、そのエージェントは特定の問題に対処する独自の能力を備えていると言える。つまり、この代理人が一定レベル以上の文脈情報を持っているからこそ、ある種の課題に対して他とは異なる形で対応できるわけだ。"
+    },
+    {
+      "sentence_index": 297,
+      "english_text": "Agents can be, scoped to tools sometimes.",
+      "japanese_text": "エージェントは、場合によっては特定のツールに限定して設定することも可能です。"
+    },
+    {
+      "sentence_index": 298,
+      "english_text": "So that way, you can, like, have an agent that only has access to some tools very specifically and not access to other tools.",
+      "japanese_text": "このようにすれば、特定のツールにのみアクセスできるエージェントを作成し、他の機能には触れないように制限することが可能です。"
+    },
+    {
+      "sentence_index": 299,
+      "english_text": "And then you can have an agents that are, like, scoped to specific models.",
+      "japanese_text": "そして、特定のモデルに限定されたエージェントを作成できるようになります。"
+    },
+    {
+      "sentence_index": 300,
+      "english_text": "So we mentioned that some people get really deep into using very specific models for specific tasks, and you could have an agent that is really good at one task.",
+      "japanese_text": "つまり、特定のタスクに対して非常に特化されたモデルを極めて活用するユーザーも存在し、あるエージェントは一つの作業において卓越した能力を発揮することがあるということです。"
+    },
+    {
+      "sentence_index": 301,
+      "english_text": "It's scoped to that specific model that's good at that task, and it is scoped to the tools that used to complete that task and has the the context there as well.",
+      "japanese_text": "その特定のモデルに特化した機能であり、そのタスクを完了するために必要なツール群と連携し、適切なコンテキストも保持しています。"
+    },
+    {
+      "sentence_index": 302,
+      "english_text": "You might have a code review agent.",
+      "japanese_text": "コードレビュー用のエージェントが設定されている可能性があります。"
+    },
+    {
+      "sentence_index": 303,
+      "english_text": "Anthropic in in Cloud Code has a web design agent where they specifically try to beat the purple out of the prompt.",
+      "japanese_text": "CloudCodeの「アンソロピック」には、プロンプトから可能な限り多くの紫色を抽出しようとするウェブデザインエージェントが存在します。"
+    },
+    {
+      "sentence_index": 304,
+      "english_text": "I think it says something like don't use, like, overused AI things, like like, gradients and overly you know, like, it it it tells it to do that stuff.",
+      "japanese_text": "「使い古されたAI生成っぽい表現は避けるべき」といった内容が書かれているようです。具体的にはグラデーションや過度に派手なエフェクトなど、いかにも機械が作りましたという感じのものを避けるようにと。"
+    },
+    {
+      "sentence_index": 305,
+      "english_text": "So if you're if you're constantly finding yourself telling it to do, like like, that BEM example I had.",
+      "japanese_text": "つまり、常に「BEMの例で示したような」操作を繰り返しているとしたら、それは...。"
+    },
+    {
+      "sentence_index": 306,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 307,
+      "english_text": "I was like, stop using BEM.",
+      "japanese_text": "「BEM使うのやめなよ」って言ったんだ"
+    },
+    {
+      "sentence_index": 308,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 309,
+      "english_text": "Like, that's probably something that you should be sticking in your agents where you're telling it exactly what type of of coding you like to use rather than just having to put that into your prompt every single time.",
+      "japanese_text": "つまり、エージェントに毎回プロンプトで指定するのではなく、設定ファイルに直接好みのコーディングスタイルを定義しておくべきでしょう。"
+    },
+    {
+      "sentence_index": 310,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 311,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 312,
+      "english_text": "And a good example of this, I've mentioned before JS the the Svelte Node plug in has a specialized Svelte file editor that, again, has access to the Svelte MCP stuff.",
+      "japanese_text": "この好例としては、以前紹介したSvelte用のJavaScriptプラグインが挙げられます。これもやはり、Vue.jsと同様に専用のエディタコンポーネントを備えており、直接的にSvelteマクロを操作できるようになっています。"
+    },
+    {
+      "sentence_index": 313,
+      "english_text": "It is always looking only at Svelte Svelte TS or Svelte dot JS files.",
+      "japanese_text": "常にSvelte、Svelte、またはTypeScript/JavaScriptファイルのみを処理します。"
+    },
+    {
+      "sentence_index": 314,
+      "english_text": "It automatically knows to, you know, fetch documentation and validate the code.",
+      "japanese_text": "自動的にドキュメントを取得してコードを検証してくれます。"
+    },
+    {
+      "sentence_index": 315,
+      "english_text": "So it's been given specific instructions on how to interact with those files in the best way to get you the best results.",
+      "japanese_text": "そのため、最適な結果を得られるよう、それらのファイルと適切にやり取りするための具体的な指示が与えられています。"
+    },
+    {
+      "sentence_index": 316,
+      "english_text": "And you might be out there and feeling like this is too much.",
+      "japanese_text": "そしてあなたは「これは多すぎる」と感じるかもしれません。"
+    },
+    {
+      "sentence_index": 317,
+      "english_text": "Like, oh, I just tell the thing to do the thing, and it does it.",
+      "japanese_text": "ほら、私はただ「これをして」って指示するだけで、ちゃんとやってくれるんだよ。"
+    },
+    {
+      "sentence_index": 318,
+      "english_text": "Once you get into some of these things, I do think that specialized agents do make an impact.",
+      "japanese_text": "こうした分野に深く関わるようになると、専門のエージェントが確かに効果を発揮すると私は思います。"
+    },
+    {
+      "sentence_index": 319,
+      "english_text": "Personally, I have found that this is something that makes an impact for me personally.",
+      "japanese_text": "個人的には、これが個人的に大きな影響を与える要素だと感じています。"
+    },
+    {
+      "sentence_index": 320,
+      "english_text": "Cloud Node has this thing called output styles, and, like, I've never used this.",
+      "japanese_text": "クラウドノードには「出力スタイル」という機能があって、実は今まで一度も使ったことがないんだ。"
+    },
+    {
+      "sentence_index": 321,
+      "english_text": "This is typically something I would put in the agents where it's like, don't yap, basically.",
+      "japanese_text": "これは通常、エージェントの設定項目として定義するもので、要するに「余計なおしゃべりはしないように」という意味です。"
+    },
+    {
+      "sentence_index": 322,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 323,
+      "english_text": "When you're when you're telling me what you did Yeah.",
+      "japanese_text": "君がやったことを話してくれる時だね ああ。"
+    },
+    {
+      "sentence_index": 324,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 325,
+      "english_text": "You make me, like, this, like, whole book report.",
+      "japanese_text": "あなたのおかげで、まるで本のレポートを全部書いたみたいになっちゃうよ。"
+    },
+    {
+      "sentence_index": 326,
+      "english_text": "I ain't reading that.",
+      "japanese_text": "そんなの読むわけないだろ。"
+    },
+    {
+      "sentence_index": 327,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 328,
+      "english_text": "Like and, like, you don't have to be nice.",
+      "japanese_text": "「いいね」とか、無理に愛想よくする必要はないよ。"
+    },
+    {
+      "sentence_index": 329,
+      "english_text": "You don't have to use a whole bunch of flowery words.",
+      "japanese_text": "大げさな言葉をたくさん使う必要はない。"
+    },
+    {
+      "sentence_index": 330,
+      "english_text": "Like, just like you said, keep it terse.",
+      "japanese_text": "ほら、さっき言ったように、簡潔に頼むよ。"
+    },
+    {
+      "sentence_index": 331,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 332,
+      "english_text": "I have mine.",
+      "japanese_text": "私のはあります。"
+    },
+    {
+      "sentence_index": 333,
+      "english_text": "Mine mine, especially, I like that about my Cloudbot.",
+      "japanese_text": "特に、私のCloudBotにはその機能が気に入ってるんだよね。"
+    },
+    {
+      "sentence_index": 334,
+      "english_text": "My OpenClaw setup was that, like, when you're creating it, it asks you to like, how would you like me to to respond to you?",
+      "japanese_text": "私のOpenClaws設定はこんな感じでした：作成時に、「どのように対応すればよいですか？」と尋ねられるんです。例えば、あなたから連絡があった場合、どのように返信すればいいかと聞いてくるんですよ。"
+    },
+    {
+      "sentence_index": 335,
+      "english_text": "And I said, like, bulleted lists.",
+      "japanese_text": "「箇条書きリストだよ」って説明したんです"
+    },
+    {
+      "sentence_index": 336,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 337,
+      "english_text": "You Node, keep keep it minimal language to express your your topics.",
+      "japanese_text": "あなたのノードでは、トピックを表現するために最小限かつ明確な言語を使用してください。"
+    },
+    {
+      "sentence_index": 338,
+      "english_text": "I don't need any extras and stuff like that.",
+      "japanese_text": "余分なものは一切いらないし、そんなものは要らない。"
+    },
+    {
+      "sentence_index": 339,
+      "english_text": "And I do think that that makes a big impact for sure.",
+      "japanese_text": "そして確かに、それは大きな影響を与えると私は確信しています。"
+    },
+    {
+      "sentence_index": 340,
+      "english_text": "Because, man, I hate it when it gives me a giant paragraph.",
+      "japanese_text": "だってさ、男のくせにデカい段落で書かれるとマジでウザいんすよ俺。"
+    },
+    {
+      "sentence_index": 341,
+      "english_text": "Like, just tell me what you did or didn't do and what needs to happen next.",
+      "japanese_text": "つまり、あなたがしたことやしなかったこと、そして次に何をすべきかを簡潔に教えてほしいんです。"
+    },
+    {
+      "sentence_index": 342,
+      "english_text": "Alright.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 343,
+      "english_text": "Next up, we have sub agents, which is I'll Wes and I'll say, I haven't used sub agents a whole lot.",
+      "japanese_text": "次にサブエージェントについて説明します。私はWesleyですが、正直なところ、これまでにあまりsub agentを活用していません。"
+    },
+    {
+      "sentence_index": 344,
+      "english_text": "But from what I understand and and maybe Scott will will tell us what he uses them for.",
+      "japanese_text": "ただ、私の理解するところでは、スコットがこれらをどのように使用しているのかについては、彼が後で説明してくれるでしょう。"
+    },
+    {
+      "sentence_index": 345,
+      "english_text": "But, like, basically, you have parallel processes.",
+      "japanese_text": "でも要するに、基本的には並行処理が行われているわけですよね。"
+    },
+    {
+      "sentence_index": 346,
+      "english_text": "You want you want some specific agent to go off and do one thing and and sort of come back to you, delegate one specific part of it, then you can you're basically puppeteering a whole bunch of stuff.",
+      "japanese_text": "特定のエージェントに別タスクを実行させ、その一部を委任したい場合、実質的に複数の異なる処理全体を操作していることになります。"
+    },
+    {
+      "sentence_index": 347,
+      "english_text": "So what are you using for?",
+      "japanese_text": "それで、具体的に何に使っているのですか？"
+    },
+    {
+      "sentence_index": 348,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 349,
+      "english_text": "And that that's really it.",
+      "japanese_text": "そしてそれがすべてだ。"
+    },
+    {
+      "sentence_index": 350,
+      "english_text": "So, like, the the agent is the one that you're talking to.",
+      "japanese_text": "つまり、エージェントとはあなたが話している相手のことです。"
+    },
+    {
+      "sentence_index": 351,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 352,
+      "english_text": "It's the one that you're going back and forth with.",
+      "japanese_text": "それはあなたが行ったり来たりしているものです。"
+    },
+    {
+      "sentence_index": 353,
+      "english_text": "And the sub agent is oftentimes when you need to spawn off a process to go and do a task.",
+      "japanese_text": "また、サブエージェントは、特定のタスクを実行するためにプロセスを新規に生成する必要がある場合にも頻繁に使用されます。"
+    },
+    {
+      "sentence_index": 354,
+      "english_text": "Like, hey.",
+      "japanese_text": "ほら、見てよ。"
+    },
+    {
+      "sentence_index": 355,
+      "english_text": "Go and review this Svelte file.",
+      "japanese_text": "このSvelteファイルをレビューしてください。"
+    },
+    {
+      "sentence_index": 356,
+      "english_text": "It is going to spawn the Svelte sub agent to go and work on it.",
+      "japanese_text": "Svelteサブエージェントを起動して処理を実行します。"
+    },
+    {
+      "sentence_index": 357,
+      "english_text": "And that's going to have its own thing, and it's gonna go off and do that.",
+      "japanese_text": "そしてそれは独自の機能を持ち、独立して動作するようになるだろう。"
+    },
+    {
+      "sentence_index": 358,
+      "english_text": "Meanwhile, I can continue interacting with the main agent to do other things and then tell it to go spawn off other sub agents.",
+      "japanese_text": "その間、私はメインエージェントとやり取りを続けながら他の作業を行い、必要に応じて別のサブエージェントを起動させることができます。"
+    },
+    {
+      "sentence_index": 359,
+      "english_text": "So that's the big thing there.",
+      "japanese_text": "それがまさに核心的なポイントだ。"
+    },
+    {
+      "sentence_index": 360,
+      "english_text": "And and sub agents, in the same way as agents can be tuned, you're giving them default context.",
+      "japanese_text": "また、エージェントと同様に、サブ代理人にもデフォルトのコンテキストを設定できます。つまり、彼らに標準的な文脈を提供しているということです。"
+    },
+    {
+      "sentence_index": 361,
+      "english_text": "You're potentially giving them, you know, scoped tool access, or you're giving them specific models or, again, MCP instructions and stuff like that.",
+      "japanese_text": "つまり、スコープ付きのツールアクセス権を付与したり、特定モデルやMCPコマンドなどの具体的な指示を与えているわけです。"
+    },
+    {
+      "sentence_index": 362,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 363,
+      "english_text": "So when you are defining an an agent and a subagent, those are those are essentially the same thing?",
+      "japanese_text": "つまり、エージェントとサブエージェントを定義する場合、これらは本質的に同じものを指すのでしょうか？"
+    },
+    {
+      "sentence_index": 364,
+      "english_text": "In many ways, they are.",
+      "japanese_text": "多くの点で、彼らはそうです。"
+    },
+    {
+      "sentence_index": 365,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 366,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 367,
+      "english_text": "They they in many ways, they are.",
+      "japanese_text": "彼らは多くの点でそうである。"
+    },
+    {
+      "sentence_index": 368,
+      "english_text": "Create an agent, you don't then decide whether it's a sub agent or an agent.",
+      "japanese_text": "エージェントを作成する際、それがサブ代理店なのか代理人なのかを最初に決める必要はありません。"
+    },
+    {
+      "sentence_index": 369,
+      "english_text": "Oh, no. It's how you do.",
+      "japanese_text": "ああ、違う。それはどうやるかだ。"
+    },
+    {
+      "sentence_index": 370,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 371,
+      "english_text": "Just an agent.",
+      "japanese_text": "ただのエージェントです。"
+    },
+    {
+      "sentence_index": 372,
+      "english_text": "It this fact that it is sub is because it just goes off and does it for you while you continue on.",
+      "japanese_text": "この事実が重要なのは、自動的に処理を実行してくれるため、あなたはその間他のことを続けられるからです。"
+    },
+    {
+      "sentence_index": 373,
+      "english_text": "No. My understanding in different platforms, they treat this differently.",
+      "japanese_text": "いいえ。異なるプラットフォームでは、それぞれの取り扱いが異なります。"
+    },
+    {
+      "sentence_index": 374,
+      "english_text": "But in in Node, specifically, you define if something is a sub agent or not.",
+      "japanese_text": "しかし Node.js では、具体的に何かがサブエージェントであるかどうかを明示的に定義する必要があります。"
+    },
+    {
+      "sentence_index": 375,
+      "english_text": "Okay.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 376,
+      "english_text": "Like, in many of these chats, they give you access to, like, have a drop down of which agent you're talking to.",
+      "japanese_text": "例えば、これらのチャットの多くは、どのエージェントと話しているかを確認できるドロップダウンメニューが用意されています。"
+    },
+    {
+      "sentence_index": 377,
+      "english_text": "I'm talking to the build agent, the plan agent, the the Svelte agent, whatever.",
+      "japanese_text": "ビルドエージェントとも、プランエージェントとも、あるいはSvelteのAgentとでも呼んでおこう。何であれ。"
+    },
+    {
+      "sentence_index": 378,
+      "english_text": "Those are your agents, and then the sub agents do not show up in that list.",
+      "japanese_text": "これらは貴社のエージェントであり、サブ代理店はそのリストには表示されません。"
+    },
+    {
+      "sentence_index": 379,
+      "english_text": "They're not something you're going back and forth with.",
+      "japanese_text": "それらは行ったり来たりするようなものではありません。"
+    },
+    {
+      "sentence_index": 380,
+      "english_text": "They're going, just specifically, so you are defining them as sub agents specifically.",
+      "japanese_text": "彼らは具体的にサブエージェントとして定義しているのですから、明確にそのように指定しているのです。"
+    },
+    {
+      "sentence_index": 381,
+      "english_text": "And if you want to see all of the errors in your application, you'll want to check out Sentry at century. io/syntax.",
+      "japanese_text": "アプリケーション内のすべてのエラーを確認したい場合は、century.io/syntax でSentryをチェックすることをお勧めします。"
+    },
+    {
+      "sentence_index": 382,
+      "english_text": "You don't want a production application out there that, well, you have no visibility into in case something is blowing up, and you might not even know it.",
+      "japanese_text": "本番環境で稼働するアプリケーションでは、何か問題が発生しても検知できず、気づかないまま放置されるリスクは避けなければなりません。"
+    },
+    {
+      "sentence_index": 383,
+      "english_text": "So head on over to century. io/syntax.",
+      "japanese_text": "century.io/syntax にアクセスしてください。"
+    },
+    {
+      "sentence_index": 384,
+      "english_text": "Again, we've been using this tool for a long time, and it totally rules.",
+      "japanese_text": "繰り返しになりますが、私たちはこのツールを長年愛用しており、本当に素晴らしいです。"
+    },
+    {
+      "sentence_index": 385,
+      "english_text": "Alright.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 386,
+      "english_text": "So the first file that many people are, introduced to when working in AI is the thing that's usually created when you initialize a project.",
+      "japanese_text": "AIプロジェクトで最初に目にするファイルは、通常、新規プロジェクトを初期化する際に生成されるものです。"
+    },
+    {
+      "sentence_index": 387,
+      "english_text": "This is often now referred to as the agents dot m d file, which is just a markdown file that is going to prime the AI with context in every new session.",
+      "japanese_text": "これは現在、エージェントの .mdファイルとして一般的に知られており、各新規セッションごとにAIにコンテキストを提供するマークダウン形式の文書です。"
+    },
+    {
+      "sentence_index": 388,
+      "english_text": "So this file, I'm actually so annoyed that they nobody's come up with the standard yet.",
+      "japanese_text": "このファイルに関しては、いまだに標準的なフォーマットが確立されていないことに本当にイライラしています。"
+    },
+    {
+      "sentence_index": 389,
+      "english_text": "It seems like we're kind of standardizing on agents. md, but, like, there's cursor rules.",
+      "japanese_text": "エージェントの標準化を進めているようですね。MDですが、カーソル操作に関するルールがあるようです。"
+    },
+    {
+      "sentence_index": 390,
+      "english_text": "Kiro has its own thing.",
+      "japanese_text": "キロには独自のスタイルがある。"
+    },
+    {
+      "sentence_index": 391,
+      "english_text": "Claude dot m d, Copilot instructions dot m d. And, like, some platforms allow you to customize and configure what these files are and where they live.",
+      "japanese_text": "「claude-dot/m.d」（Copilotの指示）です。一部プラットフォームでは、これらのファイルの内容や保存場所をカスタマイズ・設定できるようになっています。"
+    },
+    {
+      "sentence_index": 392,
+      "english_text": "If we could just all standardize on one, that would be awesome.",
+      "japanese_text": "みんなが一つの規格に統一できたら、本当に素晴らしいことなのに。"
+    },
+    {
+      "sentence_index": 393,
+      "english_text": "But, again, this is a dedicated place to put context that should be there in every session Node matter which agent you're using, no matter what you're doing.",
+      "japanese_text": "ただし、これはどのエージェントを使用する場合でも、セッションごとに必ず設定すべき重要なコンテキスト情報です。"
+    },
+    {
+      "sentence_index": 394,
+      "english_text": "This is like this is a TypeScript only code Bos.",
+      "japanese_text": "これはTypeScript専用のコードブロックです。"
+    },
+    {
+      "sentence_index": 395,
+      "english_text": "This uses Svelte five.",
+      "japanese_text": "これはSvelte 5を使用しています。"
+    },
+    {
+      "sentence_index": 396,
+      "english_text": "Like, this is a SvelteKit app.",
+      "japanese_text": "例えば、これはSvelteKitアプリケーションです。"
+    },
+    {
+      "sentence_index": 397,
+      "english_text": "Whatever.",
+      "japanese_text": "どうでもいいよ。"
+    },
+    {
+      "sentence_index": 398,
+      "english_text": "The stuff that every single session and anything should have at the top of it, this is it.",
+      "japanese_text": "あらゆるセッションや項目の冒頭に必ず記載すべき内容、これがそれです。"
+    },
+    {
+      "sentence_index": 399,
+      "english_text": "Now the one thing that I think Wes this first came out, this was, like, the only tool that you had in your tool belt to, like, steer your code base.",
+      "japanese_text": "ウェスが初めて登場した当時、これはまさにコードベースを方向づけるために使える唯一のツールだったと言えるでしょう。開発者の道具箱の中で。"
+    },
+    {
+      "sentence_index": 400,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 401,
+      "english_text": "And so because of that, people just threw the entire kitchen sink into here.",
+      "japanese_text": "そのためこのアルバムには、ありとあらゆる要素が詰め込まれている。"
+    },
+    {
+      "sentence_index": 402,
+      "english_text": "I think that the more you put in here, you know, again, that is additional context that is being set in every single chat.",
+      "japanese_text": "ここで入力する内容が多いほど、各チャットごとに追加の文脈が設定されていくように思います。"
+    },
+    {
+      "sentence_index": 403,
+      "english_text": "And we've all had the experience that the longer you go back and forth with the chat, the worse it gets because that context just keeps getting bigger.",
+      "japanese_text": "また、チャットでやり取りを重ねるほど、文脈がどんどん複雑化していくため、事態が悪化するという経験は誰もがしているはずです。"
+    },
+    {
+      "sentence_index": 404,
+      "english_text": "So you're probably going to wanna put just the stuff that you need in here for it to be effective at its job, and, like, that's it.",
+      "japanese_text": "つまり、その機能を効果的に発揮させるためには、本当に必要なものだけをここに記載すべきで、それ以外は不要だということです。"
+    },
+    {
+      "sentence_index": 405,
+      "english_text": "You're not gonna wanna put, like, just, you know, 10,000 lines of of text in here about your project because that's probably going to have the opposite effect for you.",
+      "japanese_text": "プロジェクトについて1万行ものテキストをここに直接入力するのは避けた方が良いでしょう。おそらく逆効果になるはずです。"
+    },
+    {
+      "sentence_index": 406,
+      "english_text": "Alright.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 407,
+      "english_text": "So let's talk about skills then.",
+      "japanese_text": "では次にスキルについて話しましょう。"
+    },
+    {
+      "sentence_index": 408,
+      "english_text": "And, like, quite honestly, a lot of this stuff overlaps each other, and you might not be sure where to put it.",
+      "japanese_text": "そして正直言って、これらの多くは互いに重複していて、どこに分類すべきか迷うこともあるかもしれません。"
+    },
+    {
+      "sentence_index": 409,
+      "english_text": "But another idea that we have here, and and and probably one of the more popular ones aside from that, like agents. md, is is giving your agent more skills.",
+      "japanese_text": "しかしここで提案したいもう一つのアイデア――おそらく上記のエージェント機能と並んで最も注目されているものですが――それはあなたの代理人にさらなるスキルを追加することです。"
+    },
+    {
+      "sentence_index": 410,
+      "english_text": "And these skills are the skills are a set of, like, capabilities that will extend the functionality of the the AI tool that you have.",
+      "japanese_text": "そしてこれらのスキルは、AIツールが持つ機能を拡張する一連の能力と言えます。"
+    },
+    {
+      "sentence_index": 411,
+      "english_text": "So this is where you can teach it how to do something specific.",
+      "japanese_text": "ここで特定の動作を教えることができます。"
+    },
+    {
+      "sentence_index": 412,
+      "english_text": "And before we get into, like like, what you can make it do, I think one of the the key things here is that a the AI won't necessarily reach for a skill unless it needs it.",
+      "japanese_text": "そして、この技術の本質について考える前に、まず理解しておくべき重要な点は、AIは必要と判断しない限り特定のスキルを使おうとしないということです。"
+    },
+    {
+      "sentence_index": 413,
+      "english_text": "And that means it's not stuffing all of the stuff into context unless it absolutely needs it.",
+      "japanese_text": "つまり、本当に必要な場合を除いて、文脈に無理やり詰め込まないということです。"
+    },
+    {
+      "sentence_index": 414,
+      "english_text": "So it's it's able to figure out what skills it has.",
+      "japanese_text": "つまり、自分が持っているスキルを把握できるのです。"
+    },
+    {
+      "sentence_index": 415,
+      "english_text": "And then if it thinks that one of those is is helpful, it will sort of bring that into context and and give it a little bit more information.",
+      "japanese_text": "そして有用と判断した場合は、その情報を文脈に組み込んで、さらに詳細な情報を提供します。"
+    },
+    {
+      "sentence_index": 416,
+      "english_text": "I find that to be really helpful as well because the, like, context stuffing, giving it too much can certainly it's it's expensive.",
+      "japanese_text": "この点も非常に有用だと感じます。コンテキスト情報を与えすぎると確かにコストがかかりますから。"
+    },
+    {
+      "sentence_index": 417,
+      "english_text": "It It makes it slow.",
+      "japanese_text": "それは動作を遅くする。"
+    },
+    {
+      "sentence_index": 418,
+      "english_text": "And then it once you have too much stuff, then everything gets kinda muddied.",
+      "japanese_text": "そして物が増えすぎると、すべてが曖昧になってしまうんだ。"
+    },
+    {
+      "sentence_index": 419,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 420,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 421,
+      "english_text": "Totally.",
+      "japanese_text": "完全に。"
+    },
+    {
+      "sentence_index": 422,
+      "english_text": "And that's a that's a problem, I think, that, people experience when they're getting into this.",
+      "japanese_text": "これはおそらく、この分野に踏み込もうとする人々が直面する典型的な課題だと思います。"
+    },
+    {
+      "sentence_index": 423,
+      "english_text": "And and normal normal use normal people experience that context issue.",
+      "japanese_text": "そして普通の人々が日常的に経験する文脈問題です。"
+    },
+    {
+      "sentence_index": 424,
+      "english_text": "Again, like I said, they're just using chat GPT.",
+      "japanese_text": "繰り返しになりますが、彼らが使っているのは単なるChatGPTです。"
+    },
+    {
+      "sentence_index": 425,
+      "english_text": "My wife was just lamenting about Gemini being, like I just been going back and forth with and it's doing so many, like, weird things in these ways.",
+      "japanese_text": "妻はジェミニの性格について嘆いていたんだ。まるで私が何度も繰り返してばかりいて、いろいろな奇妙な行動をとっているみたいにね。"
+    },
+    {
+      "sentence_index": 426,
+      "english_text": "I'm like, you gotta start a new chat.",
+      "japanese_text": "「新しいチャット始めないと」\nって言ってるの。"
+    },
+    {
+      "sentence_index": 427,
+      "english_text": "Like, the context is is shot at this point.",
+      "japanese_text": "つまり、この時点で文脈は完結しているわけです。"
+    },
+    {
+      "sentence_index": 428,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 429,
+      "english_text": "So skills to me was one thing that I didn't I had a hard time, like, kind of grokking what, skills were useful for, but it's really just a a way to, like, instruct the AI how to do a thing.",
+      "japanese_text": "私にとってスキルとは、ある種の「理解」が必要なものでした。つまり、どの能力が具体的に何に役立つかを把握すること自体が難しかったわけです。本質的には、AIに特定のタスクを実行する方法を教える手段に過ぎないと言えます。"
+    },
+    {
+      "sentence_index": 430,
+      "english_text": "I got hung up on, like, Node, JS this being along in a slash command or a skill, or is this, like, better suited for an agent?",
+      "japanese_text": "私は混乱しています - これはスラッシュコマンドやスキルとして実装すべきものなのか、それともエージェント向けにより適しているのでしょうか？"
+    },
+    {
+      "sentence_index": 431,
+      "english_text": "And we can talk about some of that.",
+      "japanese_text": "その一部について話し合うことができます。"
+    },
+    {
+      "sentence_index": 432,
+      "english_text": "But, ultimately, like, skills are a way to define your set of instructions or best practices for doing one specific task.",
+      "japanese_text": "しかし本質的には、スキルとは特定のタスクを実行するための一連の指示やベストプラクティスを定義する方法なのです。"
+    },
+    {
+      "sentence_index": 433,
+      "english_text": "And I I think, if it's something that you go back and forth with and on this task, maybe that's more appropriate for, like, an agent definition.",
+      "japanese_text": "そしてもしこのタスクについて何度も検討を重ねる必要があるのであれば、エージェント定義の方がより適切かもしれません。"
+    },
+    {
+      "sentence_index": 434,
+      "english_text": "I'll talk more about that later.",
+      "japanese_text": "それについては後でもっと詳しく説明します。"
+    },
+    {
+      "sentence_index": 435,
+      "english_text": "But have you dove really deep into any specific skills, or is there any skills that you're liking?",
+      "japanese_text": "でも、特定のスキルを深く掘り下げたことはありますか？特に気に入っている技術はありますか？"
+    },
+    {
+      "sentence_index": 436,
+      "english_text": "The skills is something that I have been using more than the agents.",
+      "japanese_text": "このスキルは、エージェントよりも私自身が多く活用しているものです。"
+    },
+    {
+      "sentence_index": 437,
+      "english_text": "And quite honestly, I don't know the difference between an agent that is preloaded with all of the stuff and just a whole bunch of of skills that you can load up into a project.",
+      "japanese_text": "正直なところ、プリセットされた機能がすべて搭載されているエージェントと、プロジェクトに個別に追加できるスキルの集合体との違いがよく分かりません。"
+    },
+    {
+      "sentence_index": 438,
+      "english_text": "Because so Vercel has this website skills. sh, and, essentially, you can use their little CLI, and it just downloads a markdown file in into your project and puts it there.",
+      "japanese_text": "Vercelはこの種のサイト構築に長けています。基本的に彼らの小さなCLIツールを使えば、Markdownファイルをプロジェクトディレクトリに直接ダウンロードして配置してくれます。"
+    },
+    {
+      "sentence_index": 439,
+      "english_text": "And then and then your AI will pick up that markdown file.",
+      "japanese_text": "その後、AIがそのマークダウンファイルを読み込みます。"
+    },
+    {
+      "sentence_index": 440,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 441,
+      "english_text": "Just a set of instructions of how to do things.",
+      "japanese_text": "これは単に物事のやり方を示した指示書に過ぎない。"
+    },
+    {
+      "sentence_index": 442,
+      "english_text": "So I was, like, going through it, and the one of the most popular ones Wes, like, a Remotion one.",
+      "japanese_text": "それでいろいろ見てたら、ウェスの『ReMotion』みたいな人気作があったんだ。"
+    },
+    {
+      "sentence_index": 443,
+      "english_text": "Like, here's how to use Remotion to make a video with code.",
+      "japanese_text": "例えば、ReMotionを使ってコードで動画を作成する方法をご紹介します。"
+    },
+    {
+      "sentence_index": 444,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 445,
+      "english_text": "That absolutely blew up, and everybody started using it.",
+      "japanese_text": "それが爆発的に広まり、誰もが使い始めたんだ。"
+    },
+    {
+      "sentence_index": 446,
+      "english_text": "And it also will it's not just one markdown.",
+      "japanese_text": "また、単一のMarkdown形式に限定されません。"
+    },
+    {
+      "sentence_index": 447,
+      "english_text": "It's it can be multiple markdown files, meaning that, like, you don't have to stuff everything in context.",
+      "japanese_text": "複数のMarkdownファイルを扱うことができ、つまりすべての内容を単一のコンテキストに詰め込む必要がないということです。"
+    },
+    {
+      "sentence_index": 448,
+      "english_text": "But if it if it thinks, oh, I need the docs for three d or I need to know how to do something for three d, then it will download go ahead and and download the markdown for that one.",
+      "japanese_text": "ただし、3Dドキュメントが必要な場合や、特定のタスクを処理する方法を知りたい場合は、該当するMarkdownファイルを自動的にダウンロードして表示します。"
+    },
+    {
+      "sentence_index": 449,
+      "english_text": "So one skill that I used, and this is something that everybody was saying as, like, the best skill ever, is this thing called superpowers.",
+      "japanese_text": "そこで私が特に活用したスキルの一つ――誰もが「最高の能力」と評していた手法が「スーパーパワー」と呼ばれるものです。"
+    },
+    {
+      "sentence_index": 450,
+      "english_text": "And this is a GitHub repo that you can download and put it in.",
+      "japanese_text": "こちらはダウンロードして使用できるリポジトリです。"
+    },
+    {
+      "sentence_index": 451,
+      "english_text": "It's it's it's superpowers is a complete software development workflow for your coding agent built on top of a set of composable skills and some initial instructions that make sure your agent uses them.",
+      "japanese_text": "そのスーパーパワーとは、組み合わせ可能なスキルセットと基本的な指示群の上に構築された、コーディングエージェント向けの完全なソフトウェア開発ワークフローであり、これによりあなたのアシスタントがこれらを効果的に活用できるようになります。"
+    },
+    {
+      "sentence_index": 452,
+      "english_text": "So I installed this thing, and, essentially, it gives it the workflow of building out an app.",
+      "japanese_text": "そこでこのツールをインストールしたところ、基本的にはアプリ開発のワークフローが構築される仕組みになっていました。"
+    },
+    {
+      "sentence_index": 453,
+      "english_text": "It it brainstorms.",
+      "japanese_text": "それはブレインストーミングです。"
+    },
+    {
+      "sentence_index": 454,
+      "english_text": "It uses Git work trees.",
+      "japanese_text": "Gitのワークツリーを使用しています。"
+    },
+    {
+      "sentence_index": 455,
+      "english_text": "It it writes a plan.",
+      "japanese_text": "それは計画を書きます。"
+    },
+    {
+      "sentence_index": 456,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 457,
+      "english_text": "It queues up all your sub agents.",
+      "japanese_text": "すべてのサブエージェントをキューに追加します。"
+    },
+    {
+      "sentence_index": 458,
+      "english_text": "You've got test driven development.",
+      "japanese_text": "テスト駆動開発を実践しているんですね。"
+    },
+    {
+      "sentence_index": 459,
+      "english_text": "It does code review and then finishes the development branch.",
+      "japanese_text": "コードレビューを実施し、その後開発ブランチを完成させます。"
+    },
+    {
+      "sentence_index": 460,
+      "english_text": "And it says, like, anytime you are gonna go and work on something, follow this very rigid workflow, and and here are all the skills that you have to do that.",
+      "japanese_text": "つまり、何かに取り組む際には必ずこの厳格なワークフローに従い、必要なスキルセットも明確に定義されているということです。"
+    },
+    {
+      "sentence_index": 461,
+      "english_text": "So I I installed it, and I I loaded it up with Cloud Code.",
+      "japanese_text": "そこで私はインストールし、CloudCodeで設定しました。"
+    },
+    {
+      "sentence_index": 462,
+      "english_text": "You can, like, you can install it with with Cloud Code or or any of these these tools.",
+      "japanese_text": "例えば、CloudCodeやこれらのツールのいずれかを使用してインストールできます。"
+    },
+    {
+      "sentence_index": 463,
+      "english_text": "And I said, like, go and make me a website.",
+      "japanese_text": "「ウェブサイトを作ってほしい」と頼んだんだ。"
+    },
+    {
+      "sentence_index": 464,
+      "english_text": "I I gave it, like, a a Word document with all of the details about our cottage.",
+      "japanese_text": "私は彼らに、コテージに関する詳細な情報が記載されたWord文書を渡したんです。"
+    },
+    {
+      "sentence_index": 465,
+      "english_text": "And I was like, make a website for our Scott.",
+      "japanese_text": "そして私は「スコットのためのウェブサイトを作ろう」と思ったのです。"
+    },
+    {
+      "sentence_index": 466,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 467,
+      "english_text": "Because every now and then, we, let a friend stay at the cottage, and and they wanna know all the information.",
+      "japanese_text": "時々友人をコテージに泊めるので、彼らはできるだけ多くの情報を知りたがるんです。"
+    },
+    {
+      "sentence_index": 468,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 469,
+      "english_text": "Like, what do you do with the water?",
+      "japanese_text": "それで、その水はどうするんですか？"
+    },
+    {
+      "sentence_index": 470,
+      "english_text": "And and, like, where where are the keys?",
+      "japanese_text": "そして鍵はどこだ？"
+    },
+    {
+      "sentence_index": 471,
+      "english_text": "And all of this information.",
+      "japanese_text": "そしてこれらすべての情報。"
+    },
+    {
+      "sentence_index": 472,
+      "english_text": "I was like, it would be nice to have it as a website with the with the images and everything.",
+      "japanese_text": "「画像とか全部入ったウェブサイトがあったらいいのにな」って思ったんです。"
+    },
+    {
+      "sentence_index": 473,
+      "english_text": "So I gave it that document.",
+      "japanese_text": "そこで私はその書類を渡した。"
+    },
+    {
+      "sentence_index": 474,
+      "english_text": "I gave it all the images, and then I let it I let it rip.",
+      "japanese_text": "私はすべての画像をアップロードし、それから一気に放出した。"
+    },
+    {
+      "sentence_index": 475,
+      "english_text": "And it worked for three and a half hours.",
+      "japanese_text": "そしてそれは3時間半もの間持続した。"
+    },
+    {
+      "sentence_index": 476,
+      "english_text": "Made a plan.",
+      "japanese_text": "計画を立てた。"
+    },
+    {
+      "sentence_index": 477,
+      "english_text": "Mhmm.",
+      "japanese_text": "Hmm-hm."
+    },
+    {
+      "sentence_index": 478,
+      "english_text": "TDD, get work trees.",
+      "japanese_text": "テスト駆動開発を行い、作業用ツリーを取得します。"
+    },
+    {
+      "sentence_index": 479,
+      "english_text": "Three and a half hours later, it kicked out a two page HTML website, and it was $26 in anthropic thing.",
+      "japanese_text": "3時間半後、彼はついにHTML形式のウェブサイトを完成させた。その費用はアンソロピックな手法で総額$26だった。"
+    },
+    {
+      "sentence_index": 480,
+      "english_text": "And I was like, this is not good.",
+      "japanese_text": "「これはまずい」と気づきました。"
+    },
+    {
+      "sentence_index": 481,
+      "english_text": "This is not good.",
+      "japanese_text": "これは良くない。"
+    },
+    {
+      "sentence_index": 482,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 483,
+      "english_text": "It feels like you just did a whole bunch of nothing work.",
+      "japanese_text": "まるで何もしていないような気分になるね。"
+    },
+    {
+      "sentence_index": 484,
+      "english_text": "You know, you sometimes meet these people.",
+      "japanese_text": "こういう人って、たまにいるよね。"
+    },
+    {
+      "sentence_index": 485,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 486,
+      "english_text": "Well, they just love the structure, and they love all the, like, the process of everything.",
+      "japanese_text": "まあ、彼らは構造そのものが大好きで、あらゆるプロセスを楽しんでいるんですよ。"
+    },
+    {
+      "sentence_index": 487,
+      "english_text": "And then the output of your beautiful process sucks.",
+      "japanese_text": "そして美しいプロセスの出力が汚くなるんだ。"
+    },
+    {
+      "sentence_index": 488,
+      "english_text": "So I spent I'd let this thing run forever.",
+      "japanese_text": "だから私はこれを永遠に走らせ続けたんだ。"
+    },
+    {
+      "sentence_index": 489,
+      "english_text": "$26 later, a very mediocre website that I probably coulda, jab GPT'd in in three or four minutes or or, like, any of these other things.",
+      "japanese_text": "さらに26ドルを費やした結果、おそらく3～4分もあればGPTで簡単に作成できたような、ごく平凡なウェブサイトが完成した。あるいは、これら他の選択肢のいずれかで十分な場合もあった。"
+    },
+    {
+      "sentence_index": 490,
+      "english_text": "So I think a lot of this, like, people getting obsessed over getting the perfect AI thing dialed in, you know, all your different agents and sub agents and skills, I think they're really handy, and I use them quite a bit.",
+      "japanese_text": "つまり、多くの人が「完璧なAIシステム」の構築に過度に集中しているように感じるんです。さまざまなエージェントやサブ・エージェント、スキルなどがありますが、これらは非常に便利で、私自身もかなり活用しています。"
+    },
+    {
+      "sentence_index": 491,
+      "english_text": "But I think you can certainly go overboard Totally.",
+      "japanese_text": "でも完全にやりすぎてると思うよ。マジで。"
+    },
+    {
+      "sentence_index": 492,
+      "english_text": "And end end up costing yourself in money and time.",
+      "japanese_text": "そして最終的にはお金と時間を無駄にすることになる。"
+    },
+    {
+      "sentence_index": 493,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 494,
+      "english_text": "Totally.",
+      "japanese_text": "完全に。"
+    },
+    {
+      "sentence_index": 495,
+      "english_text": "I money and time.",
+      "japanese_text": "お金と時間。"
+    },
+    {
+      "sentence_index": 496,
+      "english_text": "That's for sure.",
+      "japanese_text": "それは間違いない。"
+    },
+    {
+      "sentence_index": 497,
+      "english_text": "And I I find the same thing.",
+      "japanese_text": "そして私も同じことを感じます。"
+    },
+    {
+      "sentence_index": 498,
+      "english_text": "The eighty twenty is, like, largely that, like, that 80, percent of it you can get with very minimal amount of tools.",
+      "japanese_text": "82％というのは、要するに、非常に少ないツールセットで達成可能な範囲の話なんです。"
+    },
+    {
+      "sentence_index": 499,
+      "english_text": "Like, again, like, if I'm working in Svelte files, I need that Svelte thing so that the output is good.",
+      "japanese_text": "つまり、Svelteファイルで作業している場合、出力結果が適切になるようにそのコンポーネントが必要なんです。"
+    },
+    {
+      "sentence_index": 500,
+      "english_text": "So, like, for me, just straight up YOLO ing it without that is a less effective thing.",
+      "japanese_text": "だから私にとって、何も考えずに「とりあえずやってみよう」ってやるのは、あまり効果的じゃないんだよね。"
+    },
+    {
+      "sentence_index": 501,
+      "english_text": "But the moment that you're adding too much, again, you're just, like, passing compute around, and it it is it is like, what are we doing here?",
+      "japanese_text": "しかし、過剰に追加しすぎると、結局は計算リソースをただ転送しているだけになり、「そもそもここで何を達成しようとしているのか？」という疑問が生じます。"
+    },
+    {
+      "sentence_index": 502,
+      "english_text": "What what is going on?",
+      "japanese_text": "何が起きているんだ？"
+    },
+    {
+      "sentence_index": 503,
+      "english_text": "So I haven't really also gotten into skills that much, either.",
+      "japanese_text": "だからスキル面もあまり力を入れていないんです。"
+    },
+    {
+      "sentence_index": 504,
+      "english_text": "Well, I Wes may not either.",
+      "japanese_text": "まあ、ウェスもそうじゃないかもしれないけど。"
+    },
+    {
+      "sentence_index": 505,
+      "english_text": "I have.",
+      "japanese_text": "私は持っています。"
+    },
+    {
+      "sentence_index": 506,
+      "english_text": "That's the thing.",
+      "japanese_text": "それが問題だ。"
+    },
+    {
+      "sentence_index": 507,
+      "english_text": "I haven't gotten more into the agents.",
+      "japanese_text": "エージェントについてはまだ詳しく調べていません。"
+    },
+    {
+      "sentence_index": 508,
+      "english_text": "I'm into the the skills.",
+      "japanese_text": "私はそのスキルに夢中です。"
+    },
+    {
+      "sentence_index": 509,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 510,
+      "english_text": "I've gotten more into the agents than I have into the skills, personally, but it is something that I'm adding more and more here.",
+      "japanese_text": "個人的にはスキルよりもエージェントの方により深く関わるようになりましたが、ここではますますその要素を充実させています。"
+    },
+    {
+      "sentence_index": 511,
+      "english_text": "But I'm I'm doing so in a more minimal, kind of cautious way rather than, like, oh, let me head to skills. sh and install all these ones.",
+      "japanese_text": "ただし、スキルセット全体を一気にインストールするのではなく、より慎重かつ最小限のアプローチを取っています。例えば「oh-my-zsh」や「install」コマンドで一括導入するような方法ではありません。"
+    },
+    {
+      "sentence_index": 512,
+      "english_text": "Oh, good.",
+      "japanese_text": "ああ、よかった。"
+    },
+    {
+      "sentence_index": 513,
+      "english_text": "Okay.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 514,
+      "english_text": "This one looks like my planning one, my TDD one, all that stuff.",
+      "japanese_text": "これは私の計画用のものと似ています - あのTDDに関するものでしょうか？そんな感じです。"
+    },
+    {
+      "sentence_index": 515,
+      "english_text": "So, yeah, I have not gotten that deep into them.",
+      "japanese_text": "というわけで、私はまだそこまで深くは踏み込んでいません。"
+    },
+    {
+      "sentence_index": 516,
+      "english_text": "But, again, a skill is primarily useful when you wanna accomplish a specific task.",
+      "japanese_text": "ただし、スキルが真に役立つのは、特定のタスクを達成したい時です。"
+    },
+    {
+      "sentence_index": 517,
+      "english_text": "Another thing to accomplish specific tasks would be something like a slash command.",
+      "japanese_text": "特定のタスクを実行するためには、スラッシュコマンドのようなものが必要になるでしょう。"
+    },
+    {
+      "sentence_index": 518,
+      "english_text": "And the slash command is something that, you use manually.",
+      "japanese_text": "スラッシュコマンドは、ユーザーが手動で入力するものです。"
+    },
+    {
+      "sentence_index": 519,
+      "english_text": "So, like, a skill is something that I would say, hey.",
+      "japanese_text": "つまり、スキルっていうのは、こう言うものだと思うんだ。例えばね、「ちょっと聞いてよ」って感じで。"
+    },
+    {
+      "sentence_index": 520,
+      "english_text": "AI, go work on this, and the AI is able to determine and use the skills.",
+      "japanese_text": "このタスクを処理し、人工知能は関連するスキルを適用して活用することができます。"
+    },
+    {
+      "sentence_index": 521,
+      "english_text": "You could tell it to use the skill specifically, but, like, it's it's not like calling a function.",
+      "japanese_text": "スキルを明示的に使用させることは可能ですが、関数を呼び出すようなものではありません。"
+    },
+    {
+      "sentence_index": 522,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 523,
+      "english_text": "Where a slash command is more like calling a function, even to the point where open code slash commands have arguments in them and can have arguments.",
+      "japanese_text": "スラッシュコマンドは関数を呼び出すようなもので、場合によってはオープンコード内のスラッシュコマンドに引数を持たせたり、実際のパラメータを受け付けることもあります。"
+    },
+    {
+      "sentence_index": 524,
+      "english_text": "And those essentially are running a dedicated single prompt that arguments or whatever, that is essentially a snippet.",
+      "japanese_text": "これらは基本的に専用の単一プロンプトを実行しており、引数などは本質的にスニペットとして機能します。"
+    },
+    {
+      "sentence_index": 525,
+      "english_text": "It's the equivalent of copying and pasting a prompt that can have arguments.",
+      "japanese_text": "これは、引数を受け取れるプロンプトの内容をコピー＆ペーストするのと同等の操作です。"
+    },
+    {
+      "sentence_index": 526,
+      "english_text": "It's a calling of function.",
+      "japanese_text": "それは使命感だ。"
+    },
+    {
+      "sentence_index": 527,
+      "english_text": "So that's what a slash command is.",
+      "japanese_text": "これがスラッシュコマンドの仕組みです。"
+    },
+    {
+      "sentence_index": 528,
+      "english_text": "I'm a big fan of these slash commands because, like, I often will have a whole package dot JSON full of all of these different scripts Mhmm.",
+      "japanese_text": "これらのスラッシュコマンドは本当に便利なんです。というのも、よく様々なスクリプトが詰まったパッケージ.jsonファイルを扱うことが多いからです。うんうん。"
+    },
+    {
+      "sentence_index": 529,
+      "english_text": "That I would very rigidly run.",
+      "japanese_text": "とても厳格に実行するだろう。"
+    },
+    {
+      "sentence_index": 530,
+      "english_text": "And it's nice to have have a slash command that doesn't have to be as rigid.",
+      "japanese_text": "そして、あまり厳格ではないスラッシュコマンドがあるのもいいですね。"
+    },
+    {
+      "sentence_index": 531,
+      "english_text": "It can just simply be natural language prompt, where you can do things like add a new page or add a new route, scaffold this this thing ESLint, run the Wes, and and you can just put these reusable prompts under these nice quick slash commands.",
+      "japanese_text": "これは単なる自然言語によるプロンプトとして機能し、新しいページの追加や新規ルート設定、ESlintチェック実行などの操作が可能です。これらの再利用可能なコマンドを、これらの便利なスラッシュ区切りショートカットの下に配置するだけで済みます。"
+    },
+    {
+      "sentence_index": 532,
+      "english_text": "And then as you're using the UI, you just hit your slash command, and it will auto filter them.",
+      "japanese_text": "そして実際にUIを使用している際、スラッシュコマンドを入力するだけで、自動的にフィルタリングが適用されます。"
+    },
+    {
+      "sentence_index": 533,
+      "english_text": "I'm a big fan of that.",
+      "japanese_text": "私はそれの大ファンです。"
+    },
+    {
+      "sentence_index": 534,
+      "english_text": "Like, probably looking at all of these things today, I would probably say skills slash commands and couple MCP plugins are probably my most heavily used.",
+      "japanese_text": "今日これらすべての機能を見ていると、おそらくスキル／コマンドといくつかのMCPプラグインが最も頻繁に使うでしょうね。"
+    },
+    {
+      "sentence_index": 535,
+      "english_text": "I'm kind of stoked to hear you say that because I have a bunch of my slash commands tied directly to my Stream Deck, and I also really like using slash commands.",
+      "japanese_text": "それを聞いてちょっと興奮しました。というのも、私のスラッシュコマンドのほとんどは直接ストリームデッキに紐付けているし、そもそもバックティックを使った操作がとても気に入っているからです。"
+    },
+    {
+      "sentence_index": 536,
+      "english_text": "And when all this stuff comes out, I keep on just, like, wondering, like, this feels like I have a better time doing this with the slash command, but at the same time, like, nobody talks about them.",
+      "japanese_text": "こうした情報が出てくるたびに、私は「スラッシュコマンドを使う方が断然楽しいのに」と感じつつも、なぜか誰も話題にしないんですよね。"
+    },
+    {
+      "sentence_index": 537,
+      "english_text": "And there's no hype around slash commands.",
+      "japanese_text": "スラッシュコマンドには過剰な宣伝もありません。"
+    },
+    {
+      "sentence_index": 538,
+      "english_text": "There's all this hype around skills and whatever.",
+      "japanese_text": "スキルやあれこれについて大騒ぎしてるよね。"
+    },
+    {
+      "sentence_index": 539,
+      "english_text": "So, I do like slash commands myself again because they feel a little bit more like I'm in control, and and I like that.",
+      "japanese_text": "だから、私も再びスラッシュコマンドが好きになりました。自分がコントロールしている感覚が少し強いし、それが気に入っているんです。"
+    },
+    {
+      "sentence_index": 540,
+      "english_text": "Next thing we have is is hooks.",
+      "japanese_text": "次に取り上げるのはフックです。"
+    },
+    {
+      "sentence_index": 541,
+      "english_text": "This is something that Claude Code has.",
+      "japanese_text": "これはクロード・コードが持っているものです。"
+    },
+    {
+      "sentence_index": 542,
+      "english_text": "I know OpenCode has a similar idea in their tools, or plug ins.",
+      "japanese_text": "OpenSourceには同様のコンセプトを持つツールやプラグインが存在します。"
+    },
+    {
+      "sentence_index": 543,
+      "english_text": "Sorry.",
+      "japanese_text": "すみません。"
+    },
+    {
+      "sentence_index": 544,
+      "english_text": "Not tools.",
+      "japanese_text": "それは道具ではありません。"
+    },
+    {
+      "sentence_index": 545,
+      "english_text": "Via plug ins.",
+      "japanese_text": "プラグイン経由。"
+    },
+    {
+      "sentence_index": 546,
+      "english_text": "Essentially, this allows you to run some code on a specific specific ESLint, you know, like save a file before you do something, before you make a change, after you make a change.",
+      "japanese_text": "要するに、特定のファイルに対して何らかの処理を実行する機能です。変更を加える前に、例えばファイルを保存する前にコードを実行できます。何かを変更する前に実行できるわけです。"
+    },
+    {
+      "sentence_index": 547,
+      "english_text": "And this is really helpful for running linting or formatter, TypeScript checking.",
+      "japanese_text": "これはリンターやフォーマッター、TypeScriptのチェックを実行する際に非常に有用です。"
+    },
+    {
+      "sentence_index": 548,
+      "english_text": "A lot of these tools will simply just try to to run TSC after it's done a specific prompt for you.",
+      "japanese_text": "これらのツールの多くは特定のプロンプトが表示された後に自動的にTSCを実行しようとするだけです。"
+    },
+    {
+      "sentence_index": 549,
+      "english_text": "But if you're trying to keep your code quality in check, having these extremely rigid tools that will throw errors is super important.",
+      "japanese_text": "ただし、コード品質を維持したいのであれば、こうした非常に厳格なツールでエラーを指摘してくれる機能は極めて重要です。"
+    },
+    {
+      "sentence_index": 550,
+      "english_text": "Otherwise, it just goes off the rails and and starts making a whole bunch of slop.",
+      "japanese_text": "そうしないと、話が脱線してただの雑な文章になってしまうんだ。"
+    },
+    {
+      "sentence_index": 551,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 552,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 553,
+      "english_text": "Totally.",
+      "japanese_text": "完全に。"
+    },
+    {
+      "sentence_index": 554,
+      "english_text": "And and I first really got into hooks with Kiro because their interface for it was really nice.",
+      "japanese_text": "そして私がフックに本格的に取り組むようになったのは、Kiroというツールに出会ったからです。インターフェースが非常に使いやすかったんです。"
+    },
+    {
+      "sentence_index": 555,
+      "english_text": "Like, you can say, alright.",
+      "japanese_text": "例えば、「オーケー」って感じで。"
+    },
+    {
+      "sentence_index": 556,
+      "english_text": "The package dot JSON updated Node.",
+      "japanese_text": "パッケージdotJSONが更新されました：ノードを更新しました。"
+    },
+    {
+      "sentence_index": 557,
+      "english_text": "Update my README.",
+      "japanese_text": "私のリポジトリ説明を更新してください。"
+    },
+    {
+      "sentence_index": 558,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 559,
+      "english_text": "It's essentially things like that.",
+      "japanese_text": "要するにそういうことです。"
+    },
+    {
+      "sentence_index": 560,
+      "english_text": "And when I was at the Versus Code Insider Summit, that's one of the things I told them I wanted the most Wes a way to do hooks.",
+      "japanese_text": "「Versusコード・インサイダーサミット」に参加した時、私が彼らに最も強く求めたのは、まさにフック機能を実現する方法でした。"
+    },
+    {
+      "sentence_index": 561,
+      "english_text": "They mentioned it was, like, a really tough problem to solve, but I do think that hooks are greatly underutilized.",
+      "japanese_text": "彼らによれば、これは非常に解決が難しい問題だとのことでしたが、個人的にはフック機能が十分に活用されていないと感じています。"
+    },
+    {
+      "sentence_index": 562,
+      "english_text": "But at the same time, since not using Kiro, I haven't been, like, going nuts to to reimplement them in anything.",
+      "japanese_text": "でもその一方で、キロを使わないようになってからは、何かに再実装しようと躍起になったりはしてないかな。"
+    },
+    {
+      "sentence_index": 563,
+      "english_text": "I'm just looking at the list of events from Cloud Code.",
+      "japanese_text": "Cloud Codeからイベントリストを表示しているだけです。"
+    },
+    {
+      "sentence_index": 564,
+      "english_text": "You know?",
+      "japanese_text": "あなたは知っていますか？"
+    },
+    {
+      "sentence_index": 565,
+      "english_text": "Session start, user prompt submit, pre tool use, permission request, post tool use, post tool use failure, notification, sub agent start, sub agent stop.",
+      "japanese_text": "セッション開始、ユーザープロンプト表示（提出）、事前ツール使用確認、権限要求処理、事後ツール使用後の失敗時対応、通知送信、サブエージェント起動停止。"
+    },
+    {
+      "sentence_index": 566,
+      "english_text": "So, like, if you're building out your own little UI for these types of things, you're probably gonna wanna listen to all of these different events.",
+      "japanese_text": "つまり、こうしたタイプの機能用に独自のUIを構築する場合、これらのさまざまなイベントをすべて処理したくなるでしょう。"
+    },
+    {
+      "sentence_index": 567,
+      "english_text": "But I don't know.",
+      "japanese_text": "でも私にはわかりません。"
+    },
+    {
+      "sentence_index": 568,
+      "english_text": "I think the the regular user is probably not building out they're building out these things.",
+      "japanese_text": "一般ユーザーは通常、これらの機能を自分で構築することはないでしょう。"
+    },
+    {
+      "sentence_index": 569,
+      "english_text": "It's the same thing with, like, a lot of our our code quality tools as well.",
+      "japanese_text": "これはコード品質ツールについても同様です。"
+    },
+    {
+      "sentence_index": 570,
+      "english_text": "A lot of us are simply just users of them.",
+      "japanese_text": "私たちの多くは単にそれらの利用者に過ぎない。"
+    },
+    {
+      "sentence_index": 571,
+      "english_text": "And then and people that build ESLint and ESLint or whatever, they're the ones that figure this stuff out for us.",
+      "japanese_text": "そして最終的に、こうしたルールを策定するのはESLintやEslintなどのツールを開発する人々なのです。彼らが私たちのためにこれらの問題を解決してくれるわけです。"
+    },
+    {
+      "sentence_index": 572,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 573,
+      "english_text": "Let's talk about plug ins.",
+      "japanese_text": "プラグインについて話しましょう。"
+    },
+    {
+      "sentence_index": 574,
+      "english_text": "Now a lot of things have the the idea of having plug ins.",
+      "japanese_text": "今や多くの製品がプラグイン機能を備えています。"
+    },
+    {
+      "sentence_index": 575,
+      "english_text": "Specifically, I know OpenCode has plug ins.",
+      "japanese_text": "具体的には、Opencodeにはプラグイン機能があります。"
+    },
+    {
+      "sentence_index": 576,
+      "english_text": "Plug ins and OpenCode can do a number of things where they're adding, like, one of them I've seen.",
+      "japanese_text": "プラグインやOpencodeでは、追加時にさまざまな処理を実行できます。私が見た例の一つがこれです。"
+    },
+    {
+      "sentence_index": 577,
+      "english_text": "I asked on on Twitter the other day, actually.",
+      "japanese_text": "実は先日Twitterで聞いてみたんです。"
+    },
+    {
+      "sentence_index": 578,
+      "english_text": "It was like, what are you even using plug ins for?",
+      "japanese_text": "プラグインって何に使ってるんだ？"
+    },
+    {
+      "sentence_index": 579,
+      "english_text": "Because I'm not using plug ins, that much.",
+      "japanese_text": "プラグインを使用していないので、その程度です。"
+    },
+    {
+      "sentence_index": 580,
+      "english_text": "And and people were saying they use, like, a super memory plug in that gives them access to a specific type of memory.",
+      "japanese_text": "そして人々は、特定の種類の記憶にアクセスできる超高性能メモリプラグインを使用していると言っていました。"
+    },
+    {
+      "sentence_index": 581,
+      "english_text": "There there's a handful of plug ins to make open code, like, use cloud code conventions in various ways and things like that.",
+      "japanese_text": "オープンコードを作成するためのプラグインがいくつか存在します。例えば、クラウドベースのコーディング規約をさまざまな方法で適用したり、その他類似した機能を実現したりするものです。"
+    },
+    {
+      "sentence_index": 582,
+      "english_text": "The only plug in I use personally is the Svelte one that I mentioned.",
+      "japanese_text": "個人的に使用しているプラグインは、先ほど紹介したSvelte用のものだけです。"
+    },
+    {
+      "sentence_index": 583,
+      "english_text": "There's a Svelte open code plug in, and all that's doing is it's adding the MCP, the MCP tools, and it's adding the a the sub agents.",
+      "japanese_text": "Svelte用のオープンソースコードプラグインがあり、これはMCP（Multi-Channel Platform）とMPCツールを追加し、サブエージェントを組み込んでいるだけです。"
+    },
+    {
+      "sentence_index": 584,
+      "english_text": "It's like basically wrapping up a bunch of the the features that we've talked about in this episode into one package.",
+      "japanese_text": "このエピソードで取り上げた主要な機能を一つのパッケージにまとめたようなものです。"
+    },
+    {
+      "sentence_index": 585,
+      "english_text": "That's it.",
+      "japanese_text": "それで終わりです。"
+    },
+    {
+      "sentence_index": 586,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 587,
+      "english_text": "That's it's shareable.",
+      "japanese_text": "それは共有可能です。"
+    },
+    {
+      "sentence_index": 588,
+      "english_text": "You can wrap it up.",
+      "japanese_text": "それを包んであげましょう。"
+    },
+    {
+      "sentence_index": 589,
+      "english_text": "You can put them like, with with Cloud Code, the plugins can contain skills, agents, hooks, MCP servers, all of that type stuff, and and you may want to share that with people that work on your team.",
+      "japanese_text": "CloudCodeと同様に、プラグインにはスキル・エージェント・フック・MCPサーバーなど、さまざまな要素を含めることができます。チームメンバーとこれらの設定を共有したい場合もあるでしょう。"
+    },
+    {
+      "sentence_index": 590,
+      "english_text": "Like, you can share it in your Git Deno, but if you've if you've got multiples, right, or or if you're starting a brand new project or or you're doing anything, you may want to just find a way to bundle this on up.",
+      "japanese_text": "例えば、Gitリポジトリで共有することは可能ですが、複数のプロジェクトがある場合や、全く新しい取り組みを始める場合、あるいは何らかの作業を行う場合には、このツールをバンドルする方法を見つけたくなるかもしれません。"
+    },
+    {
+      "sentence_index": 591,
+      "english_text": "The ESLint can can be plug ins, but they can also contain rules and and all kinds of stuff like that, so very similar.",
+      "japanese_text": "ESlintにはプラグインを追加できますが、同様にルールや各種設定などを含ませることができるため、非常に類似しています。"
+    },
+    {
+      "sentence_index": 592,
+      "english_text": "And then finally, we have MCP.",
+      "japanese_text": "そして最後にMCPです。"
+    },
+    {
+      "sentence_index": 593,
+      "english_text": "MCP, we've we've talked about it many times on on the show, but an MCP is a way to programmatically connect your AI to interact with external apps and external services.",
+      "japanese_text": "McGraw：このテーマについては番組で何度も取り上げてきましたが、MPCとはAIをプログラム的に外部アプリケーションやサービスと連携させるための仕組みです。"
+    },
+    {
+      "sentence_index": 594,
+      "english_text": "So, the way that it works is that you you put an MCP server in your tool that you're using, and then it will call that MCP server and figure out what are the tools that are are available to me.",
+      "japanese_text": "つまり、この仕組みでは、使用しているツールにMCPサーバーを組み込むと、利用可能な各種ユーティリティを自動的に検出してくれるのです。"
+    },
+    {
+      "sentence_index": 595,
+      "english_text": "And and it that might have some like, a very common one is is contact seven.",
+      "japanese_text": "そして非常に一般的なものとして、コンタクト7が挙げられます。"
+    },
+    {
+      "sentence_index": 596,
+      "english_text": "Just looking up docs.",
+      "japanese_text": "ただドキュメントを調べているだけです。"
+    },
+    {
+      "sentence_index": 597,
+      "english_text": "The ability to search for and download documentation for specific libraries.",
+      "japanese_text": "特定のライブラリに関するドキュメントを検索してダウンロードする機能。"
+    },
+    {
+      "sentence_index": 598,
+      "english_text": "You can bring that in.",
+      "japanese_text": "それを持ち込むことができます。"
+    },
+    {
+      "sentence_index": 599,
+      "english_text": "Another MCP would be, using Playwright, the ability to use an external browser and sort of puppeteer it for you.",
+      "japanese_text": "別のアプローチとして、Playwrightを使用して外部ブラウザを操作し、あたかも自分が制御しているかのように振る舞わせる方法もあります。"
+    },
+    {
+      "sentence_index": 600,
+      "english_text": "That's different.",
+      "japanese_text": "それは違う。"
+    },
+    {
+      "sentence_index": 601,
+      "english_text": "Sometimes, it's different than than skills and and agents.",
+      "japanese_text": "時にはスキルやエージェントとは異なる場合もあります。"
+    },
+    {
+      "sentence_index": 602,
+      "english_text": "You Node?",
+      "japanese_text": "あなたのノード？"
+    },
+    {
+      "sentence_index": 603,
+      "english_text": "There there is some overlap between the two.",
+      "japanese_text": "両者の間にはある程度の重複がある。"
+    },
+    {
+      "sentence_index": 604,
+      "english_text": "I think that's what's confusing about all this stuff is the overlap between all of the different pieces.",
+      "japanese_text": "この一連の問題で混乱を招くのは、様々な要素が複雑に絡み合っている点だと思います。"
+    },
+    {
+      "sentence_index": 605,
+      "english_text": "I think it's because everyone's just trying to figure out, like, what this looks like.",
+      "japanese_text": "みんなが「これはどういうものなんだろう？」と考えているからだと思います。"
+    },
+    {
+      "sentence_index": 606,
+      "english_text": "And then the next time, like, one of these new models comes out, they may just be trained.",
+      "japanese_text": "そして次の機会には、例えば新型モデルが登場した時、彼らはすでに学習済みになっているかもしれない。"
+    },
+    {
+      "sentence_index": 607,
+      "english_text": "Some of these things might just be trained away, meaning, like, you don't need x, y, and z anymore because it simply is is way better at figuring out what it is that you wanted.",
+      "japanese_text": "これらの問題の中には、訓練によって完全に克服できるものもあります。つまり、特定のタスクにおいては、もはやxやy、さらにはzすら必要なくなるほど、そのシステムが目的を正確に把握できるようになるということです。"
+    },
+    {
+      "sentence_index": 608,
+      "english_text": "But, like like, even, like like, Sanity, you know, you could Sentry has an MCP server, and you can hook it up to that and say, hey.",
+      "japanese_text": "でも、例えばSentryにはMCPサーバーがあって、それを接続して「これを使って」と指示できるんです。つまり――。"
+    },
+    {
+      "sentence_index": 609,
+      "english_text": "Working on bug x, y, and z or or check my check my century.",
+      "japanese_text": "バグx、y、およびzに取り組んでいるか、それとも私の世紀を確認しているかのどちらかです。"
+    },
+    {
+      "sentence_index": 610,
+      "english_text": "That's one thing we didn't really talk about is this idea of, like, cloud agents Wes I was laughing the other day because I was running something on my computer, and I had to go bring my daughter to ballet.",
+      "japanese_text": "あまり深く話し合わなかったのが、クラウドエージェントという概念についてです。先日、パソコンで何かを処理している最中に、娘をバレエ教室に迎えに行かなければならなかったことがあって。"
+    },
+    {
+      "sentence_index": 611,
+      "english_text": "So I tethered my phone, and I left it open on the passenger seat thing while I was driving.",
+      "japanese_text": "そこでスマホをテザリング接続し、助手席の部分に開いたまま置いて運転していました。"
+    },
+    {
+      "sentence_index": 612,
+      "english_text": "I was like, if this was a cloud agent, then I could've closed my laptop and then opened it up when I got there.",
+      "japanese_text": "「これがクラウドエージェントなら、現地に着いたらノートパソコンを閉じて開けばよかったのに」と思わずにはいられませんでした。"
+    },
+    {
+      "sentence_index": 613,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 614,
+      "english_text": "See my Tailscale video, folks.",
+      "japanese_text": "私のTailscaledビデオをご覧ください、皆さん。"
+    },
+    {
+      "sentence_index": 615,
+      "english_text": "I did a video on Tailscale.",
+      "japanese_text": "Tailscaleに関する動画を制作しました。"
+    },
+    {
+      "sentence_index": 616,
+      "english_text": "I'm running open code on the Mac mini on my dev process.",
+      "japanese_text": "開発プロセスではMac Mini上でオープンコードを実行しています。"
+    },
+    {
+      "sentence_index": 617,
+      "english_text": "If I, on my computer, tell open code to work on a problem, I can shut my laptop.",
+      "japanese_text": "もし私が自分のコンピューターでオープンソースコードに問題を解くよう指示すれば、ノートパソコンを閉じても構わない。"
+    },
+    {
+      "sentence_index": 618,
+      "english_text": "I can do whatever.",
+      "japanese_text": "私は何でもできる。"
+    },
+    {
+      "sentence_index": 619,
+      "english_text": "I can pick it up on my phone later and then, finish it or see what's going on, and it's just gonna be just cranking away on that thing.",
+      "japanese_text": "後でスマホで確認して、進捗状況を見たり、何が起きているか把握できるし、ただひたすら作業を続けるだけだよ。"
+    },
+    {
+      "sentence_index": 620,
+      "english_text": "So, man, it rules.",
+      "japanese_text": "つまり、要するに、最高ってことだよ。"
+    },
+    {
+      "sentence_index": 621,
+      "english_text": "And a lot of these these things will have or do have the ability to have cloud agents.",
+      "japanese_text": "そしてこれらの多くは、クラウドエージェントを搭載しているか、将来的に搭載する能力を備えています。"
+    },
+    {
+      "sentence_index": 622,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 623,
+      "english_text": "Like, I know Cursor has it for sure.",
+      "japanese_text": "例えばカーソルは確かにそうだよね。"
+    },
+    {
+      "sentence_index": 624,
+      "english_text": "Oh, does OpenCode that that's probably their, like, monetization platform, I I'm going to guess, is the way that they're gonna make money.",
+      "japanese_text": "ああ、OpenSourceはおそらく彼らの収益化プラットフォームでしょう。これが彼らが収益を上げる方法だと思います。"
+    },
+    {
+      "sentence_index": 625,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 626,
+      "english_text": "Like, OpenCode is a business, but it their tool is open source.",
+      "japanese_text": "OpenSourceはビジネスですが、彼らのツール自体はオープンソースです。"
+    },
+    {
+      "sentence_index": 627,
+      "english_text": "They have a subscription service for models in in compute specifically.",
+      "japanese_text": "特に計算機モデル向けのサブスクリプションサービスを提供しています。"
+    },
+    {
+      "sentence_index": 628,
+      "english_text": "So if you wanted to say, like, I wanna subscribe to all of the models, you would, it's called OpenCodeBlack maybe JS the the new one they've changed.",
+      "japanese_text": "つまり、すべてのモデルを購読したい場合、おそらく「OpenCore Black」ではなく新しいバージョンであるJSを使用する必要があるということです。"
+    },
+    {
+      "sentence_index": 629,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 630,
+      "english_text": "But the the being able to serve it over the web, one line command, open code Wes, or open code serve, bingo, bango.",
+      "japanese_text": "しかしウェブ上でこれを提供し、1行のコマンドで実行可能で、Wesleyが作成したOpen Code Serveを使えば、あっという間に完成です。"
+    },
+    {
+      "sentence_index": 631,
+      "english_text": "You got it on your IP.",
+      "japanese_text": "あなたのIPアドレスに記録されています。"
+    },
+    {
+      "sentence_index": 632,
+      "english_text": "If you're on a Tailscale network, you just log in to that, and you're there.",
+      "japanese_text": "Tailscaledネットワークに接続していれば、その環境に自動的にアクセスできます。"
+    },
+    {
+      "sentence_index": 633,
+      "english_text": "I don't think that most people are going to do that, though.",
+      "japanese_text": "しかし、ほとんどの人がそうするとは思えない。"
+    },
+    {
+      "sentence_index": 634,
+      "english_text": "I think that most people Man.",
+      "japanese_text": "ほとんどの人はそう思うと思う。"
+    },
+    {
+      "sentence_index": 635,
+      "english_text": "I don't think so.",
+      "japanese_text": "そうは思いません。"
+    },
+    {
+      "sentence_index": 636,
+      "english_text": "I I lazy.",
+      "japanese_text": "私は怠け者です。"
+    },
+    {
+      "sentence_index": 637,
+      "english_text": "I will put money on it that OpenCode is gonna roll out OpenCode cloud Sure.",
+      "japanese_text": "OpenSourceがクラウド版の「Opencode」をリリースするのは間違いないだろう。間違いなくね。"
+    },
+    {
+      "sentence_index": 638,
+      "english_text": "Where you can just run it in their sandbox on their their cloud and and Not me.",
+      "japanese_text": "彼らのクラウド上にあるサンドボックス環境で実行でき、しかも私には何も表示されない。"
+    },
+    {
+      "sentence_index": 639,
+      "english_text": "That that will be great.",
+      "japanese_text": "それは素晴らしいですね。"
+    },
+    {
+      "sentence_index": 640,
+      "english_text": "Right?",
+      "japanese_text": "そうでしょう？"
+    },
+    {
+      "sentence_index": 641,
+      "english_text": "Because Not me.",
+      "japanese_text": "なぜなら私じゃないから。"
+    },
+    {
+      "sentence_index": 642,
+      "english_text": "One thing, like, Sanity can do JS, like, I hooked it up to my cursor cloud.",
+      "japanese_text": "一つ、SanityはJavaScriptが使えるんだ。カーソルクラウドと連携させてみたよ。"
+    },
+    {
+      "sentence_index": 643,
+      "english_text": "And then, like, if there is is a problem, I can just, like, sic, ChryssrCloud on it right from my phone.",
+      "japanese_text": "そして問題が発生したら、スマホから直接ChyrssRcloudを起動して対処できるんです。"
+    },
+    {
+      "sentence_index": 644,
+      "english_text": "And then it will submit a pull Wes, and and you can merge it.",
+      "japanese_text": "その後、プルリクエストが作成され、承認後にマージできます。"
+    },
+    {
+      "sentence_index": 645,
+      "english_text": "That's got that's that's a really neat workflow.",
+      "japanese_text": "これは本当に素晴らしいワークフローですね。"
+    },
+    {
+      "sentence_index": 646,
+      "english_text": "And I I think that I bet they they will be going that way.",
+      "japanese_text": "そして私は、彼らはおそらくその方向へ向かうだろうと思う。"
+    },
+    {
+      "sentence_index": 647,
+      "english_text": "I bet that's a big, like, I don't know that a lot of these big model providers are gonna be making a ton of money on these models because, they're eventually, we're gonna get a lot of these open source models that come out that are are good enough or just as good.",
+      "japanese_text": "おそらく大手モデルプロバイダーは、これらの大規模言語モデルから多大な収益を上げるでしょう。最終的には、オープンソースで十分な性能を持つ、あるいは同等の品質を備えた多くのバージョンが登場するでしょうから。"
+    },
+    {
+      "sentence_index": 648,
+      "english_text": "And then all of a sudden, someone says, well, either I host it myself because I have some, like, 10,000 supercomputer or, like, the I think I think the, like, profit that they're making on these models is going to be, like, razor thin, and there's gonna need to be other things like paying for whatever cloud at the end of the day.",
+      "japanese_text": "そして突然、誰かがこう言うんです――「それなら自分でホストすればいいじゃないか。例えば1万台のスーパーコンピューターを持っているとか、まあそんな感じで。このモデルから得られる利益なんて微々たるものだし、最終的にはクラウド利用料とか他にいろいろコストがかかるはずだ」ってね。"
+    },
+    {
+      "sentence_index": 649,
+      "english_text": "So let's go back real quick to some of this because we were talking just about, like, the confusion on overlap.",
+      "japanese_text": "では、この点についてもう少し詳しく見ていきましょう。重複部分に関する混乱が生じた経緯についてです。"
+    },
+    {
+      "sentence_index": 650,
+      "english_text": "And one of the questions I posed was, like, is this better as an agent or a skill, or what is this better as?",
+      "japanese_text": "私が提起した質問の一つは、「これはエージェントとして、あるいはスキルとして、どちらがより適しているのか？」というもので、この概念を別の観点から捉えるとどうなるかというものでした。"
+    },
+    {
+      "sentence_index": 651,
+      "english_text": "I do wanna just, like, touch on that because I did a little bit of of diving into that for my own personal ideas here.",
+      "japanese_text": "この話題について少し触れておきたいのですが、私自身がいくつか個人的なアイデアを検討していたからです。"
+    },
+    {
+      "sentence_index": 652,
+      "english_text": "So, like, the here's here's a a a question, that I had personally.",
+      "japanese_text": "つまり、これは私自身が個人的に持っていた質問なのですが。"
+    },
+    {
+      "sentence_index": 653,
+      "english_text": "Is it better to have an accessibility agent for completing accessibility tasks or an accessibility skill that any agent can use, or is it better to have an accessibility skill that an accessibility agent can use?",
+      "japanese_text": "アクセシビリティ関連のタスクを処理するには、エージェントが使用できるアクセス性アシスタント機能を設けるべきか、それとも代理人が利用できる特定の支援スキルを持たせる方が有効でしょうか？"
+    },
+    {
+      "sentence_index": 654,
+      "english_text": "So skill, agent, or agent plus skill.",
+      "japanese_text": "つまり技能、代理人、またはエージェントにプラスしてスキルが加わるのです。"
+    },
+    {
+      "sentence_index": 655,
+      "english_text": "Like, what is the ideal combination there?",
+      "japanese_text": "そこでの理想的な組み合わせって何だろう？"
+    },
+    {
+      "sentence_index": 656,
+      "english_text": "And and the answer that I personally landed on is it basically depends on what you're doing.",
+      "japanese_text": "そして私が最終的にたどり着いた結論は、基本的には状況次第だということです。"
+    },
+    {
+      "sentence_index": 657,
+      "english_text": "Like, if this is a one off thing and you're saying, I wanna I yeah.",
+      "japanese_text": "例えば、これが一度きりの出来事で「私は～したい」と言う場合なら：「I'd like to...」"
+    },
+    {
+      "sentence_index": 658,
+      "english_text": "Hey.",
+      "japanese_text": "おい。"
+    },
+    {
+      "sentence_index": 659,
+      "english_text": "Go fix accessibility issues, then an accessibility skill is more than appropriate for that.",
+      "japanese_text": "アクセシビリティの問題を解決すれば、そのスキルはその役割に十分適しています。"
+    },
+    {
+      "sentence_index": 660,
+      "english_text": "And that for the most part, that is the answer.",
+      "japanese_text": "そしてほとんどの場合、それが答えなのです。"
+    },
+    {
+      "sentence_index": 661,
+      "english_text": "The answer is, hey.",
+      "japanese_text": "答えはね、ほら。"
+    },
+    {
+      "sentence_index": 662,
+      "english_text": "Just go off and fix these issues.",
+      "japanese_text": "ただ行ってこれらの問題を解決してきてください。"
+    },
+    {
+      "sentence_index": 663,
+      "english_text": "But if this is a longer running thing where you're, like, gonna go back and forth with it, like, hey.",
+      "japanese_text": "でも、これが継続的なやり取りになる場合――つまり、「ねえ、ちょっと」"
+    },
+    {
+      "sentence_index": 664,
+      "english_text": "I want you to go and do a full audit.",
+      "japanese_text": "徹底的な監査を行ってほしい。"
+    },
+    {
+      "sentence_index": 665,
+      "english_text": "I wanna then talk about that audit.",
+      "japanese_text": "その監査について話したいんだ。"
+    },
+    {
+      "sentence_index": 666,
+      "english_text": "I wanna then go maybe potentially fix things based on that audit, or I wanna dive into that more or go back and forth.",
+      "japanese_text": "その監査結果に基づいて、必要に応じて修正を加えたい、あるいはさらに深く掘り下げたり議論したりしたい。"
+    },
+    {
+      "sentence_index": 667,
+      "english_text": "Then you're in the land of, like, oh, this should be an agent, right, that is taking care of this.",
+      "japanese_text": "つまり、これはエージェントが担当すべき案件ですよね？"
+    },
+    {
+      "sentence_index": 668,
+      "english_text": "So it depends on what you want there.",
+      "japanese_text": "つまり、何を求めるかによるということです。"
+    },
+    {
+      "sentence_index": 669,
+      "english_text": "And then that third thing of a ally skill and an ally agent, that actually could work, and it could work well where the skill might be run these specific tools.",
+      "japanese_text": "そして3つ目の要素として、味方のスキルと同盟エージェントを組み合わせることで、実際に効果を発揮し、特定ツール群を効果的に運用できる可能性があります。"
+    },
+    {
+      "sentence_index": 670,
+      "english_text": "And then the agent could have instructions to run those specific tools as a part of your process or as a part of its fixing process.",
+      "japanese_text": "その後、エージェントは特定のツールを、プロセスの一環として、あるいは修復処理の一部として実行する指示を受けることができます。"
+    },
+    {
+      "sentence_index": 671,
+      "english_text": "But that does feel like you're getting into potentially overkill territory, but it really depends on what you're trying to do.",
+      "japanese_text": "ただし、これは過剰な対策になる可能性もあるため、具体的な用途次第と言えるでしょう。"
+    },
+    {
+      "sentence_index": 672,
+      "english_text": "So if you're feeling like there is overlap here again, specifically for me, skills was always one of those things.",
+      "japanese_text": "つまり、ここでも重複があると感じるなら、特に私にとって「スキル」は常に重要な要素だったのです。"
+    },
+    {
+      "sentence_index": 673,
+      "english_text": "I just had a hard time, like, really latching on.",
+      "japanese_text": "本当にうまく乗りこなせなかったんです。"
+    },
+    {
+      "sentence_index": 674,
+      "english_text": "I but I have an agent for this.",
+      "japanese_text": "私はエージェントを持っています。"
+    },
+    {
+      "sentence_index": 675,
+      "english_text": "Why would I need a skill?",
+      "japanese_text": "なぜスキルが必要なのでしょうか？"
+    },
+    {
+      "sentence_index": 676,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 677,
+      "english_text": "And that's really it.",
+      "japanese_text": "それがすべてです。"
+    },
+    {
+      "sentence_index": 678,
+      "english_text": "If you need to go back and forth, agent makes sense.",
+      "japanese_text": "行き来する必要があるなら、エージェントを使うのが理にかなっています。"
+    },
+    {
+      "sentence_index": 679,
+      "english_text": "If it's a one off thing, a skill makes sense.",
+      "japanese_text": "一度きりの作業なら、スキルがあっても意味はある。"
+    },
+    {
+      "sentence_index": 680,
+      "english_text": "If the agent can use a skill, like, that is also something that absolutely can work.",
+      "japanese_text": "エージェントがスキルを使用できる場合、それも有効な解決策となり得ます。"
+    },
+    {
+      "sentence_index": 681,
+      "english_text": "At the end of the day, experiment with this stuff, and I think that is a, a decent answer.",
+      "japanese_text": "結局のところ、この手法を実際に試してみて、自分なりの答えを見つけるのが最善だと思います。これが妥当な結論でしょう。"
+    },
+    {
+      "sentence_index": 682,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 683,
+      "english_text": "The I think the decent answer is nobody totally knows.",
+      "japanese_text": "私の考えでは、正解を知っている人は誰もいません。完全には。"
+    },
+    {
+      "sentence_index": 684,
+      "english_text": "No. I know.",
+      "japanese_text": "No. Yes I do."
+    },
+    {
+      "sentence_index": 685,
+      "english_text": "I know everything.",
+      "japanese_text": "私はすべてを知っている。"
+    },
+    {
+      "sentence_index": 686,
+      "english_text": "You know?",
+      "japanese_text": "わかりますか？"
+    },
+    {
+      "sentence_index": 687,
+      "english_text": "And we're we're all figuring it out in what makes sense.",
+      "japanese_text": "そして私たちは皆、それぞれに意味を見出しているのです。"
+    },
+    {
+      "sentence_index": 688,
+      "english_text": "And I bet we come back to this in six months.",
+      "japanese_text": "そして半年後にまた同じ議論を繰り返すことになるだろう。"
+    },
+    {
+      "sentence_index": 689,
+      "english_text": "We'll have a bit more of a solid answer as to how these things can work.",
+      "japanese_text": "これらの仕組みがどのように機能するかについて、より具体的な回答が得られるでしょう。"
+    },
+    {
+      "sentence_index": 690,
+      "english_text": "And and maybe even a lot of these things will be distilled down into some sort of smaller piece of information that you can just load in.",
+      "japanese_text": "そしておそらく、これらの多くの情報は、さらに簡潔な形式に凝縮され、直接読み込めるようになるでしょう。"
+    },
+    {
+      "sentence_index": 691,
+      "english_text": "You don't have to worry about whether it's a hook, a plug in, a skill, etcetera.",
+      "japanese_text": "フックなのか、プラグインなのか、それともスキルなのかといった点を気にする必要はありません。"
+    },
+    {
+      "sentence_index": 692,
+      "english_text": "You can be effective with these tools without having to go down all of these Wes, but it is, honestly, it's kinda fun to experiment with.",
+      "japanese_text": "これらのツールをすべて習得しなくても、ある程度の効果は得られますが、正直言って試行錯誤しながら試す過程自体が結構楽しいものです。"
+    },
+    {
+      "sentence_index": 693,
+      "english_text": "So I I've been I've been having a good time, like, exploring this stuff, and it makes me feel, like, excited for the tech.",
+      "japanese_text": "だから私はこれまで、こうした技術を探求する中で、テクノロジーに対する期待感がどんどん高まってきているんです。"
+    },
+    {
+      "sentence_index": 694,
+      "english_text": "I know people get down on AI or aggressive towards AI.",
+      "japanese_text": "AIに対して否定的になったり、攻撃的な態度を取る人がいるのは知っている。"
+    },
+    {
+      "sentence_index": 695,
+      "english_text": "We see it in the comments and stuff like that.",
+      "japanese_text": "それはコメントなどで明らかです。"
+    },
+    {
+      "sentence_index": 696,
+      "english_text": "But these Yarn technical, interesting computer science problems, and I do think that there's they're fun to work on.",
+      "japanese_text": "しかしこれらのYarnに関する技術的で興味深いコンピュータサイエンス問題は、取り組む価値があると私は考えています。"
+    },
+    {
+      "sentence_index": 697,
+      "english_text": "The same thing with, like, all the the Claude Bos stuff.",
+      "japanese_text": "クラウデ・ボスの作品なんかもそうだけど。"
+    },
+    {
+      "sentence_index": 698,
+      "english_text": "Like, everyone's mad about, it's, it's hype and whatever.",
+      "japanese_text": "みんな夢中になってるやつ、あれってただの宣伝文句だろ？"
+    },
+    {
+      "sentence_index": 699,
+      "english_text": "And, of course, of course, it's stupid.",
+      "japanese_text": "そしてもちろん、言うまでもなくそれは愚かなことだ。"
+    },
+    {
+      "sentence_index": 700,
+      "english_text": "Of course, people are losing all kinds of money on it, and, of course, it is very hyped up.",
+      "japanese_text": "もちろん、多くの人が様々な金額を失っており、当然ながら非常に注目を集めている。"
+    },
+    {
+      "sentence_index": 701,
+      "english_text": "But all of that is that people are figuring a lot of stuff out.",
+      "japanese_text": "しかし全体として、人々は多くのことを解明しつつある。"
+    },
+    {
+      "sentence_index": 702,
+      "english_text": "They're figuring out what works.",
+      "japanese_text": "彼らは何が有効かを見極めているところだ。"
+    },
+    {
+      "sentence_index": 703,
+      "english_text": "They're figuring out how to actually interact.",
+      "japanese_text": "彼らは実際にどのように相互作用すべきかを検討中だ。"
+    },
+    {
+      "sentence_index": 704,
+      "english_text": "They're figuring out security.",
+      "japanese_text": "彼らはセキュリティについて検討している。"
+    },
+    {
+      "sentence_index": 705,
+      "english_text": "And, like, this Claude Bos or what's it called?",
+      "japanese_text": "それに、クロード・ボスとかいう人の...何て言うんだっけ？"
+    },
+    {
+      "sentence_index": 706,
+      "english_text": "OpenClaw Node?",
+      "japanese_text": "オープンクロー型ノード？"
+    },
+    {
+      "sentence_index": 707,
+      "english_text": "Like, we might not have this in in a year, but I guarantee you the lessons that we have learned from this whole thing are going to be put into all of the products that we're we're using today.",
+      "japanese_text": "今すぐに実現するとは限らないが、今回の経験から得た教訓は、現在使用しているすべての製品に反映されると確信している。"
+    },
+    {
+      "sentence_index": 708,
+      "english_text": "Heck.",
+      "japanese_text": "ヘック。"
+    },
+    {
+      "sentence_index": 709,
+      "english_text": "Yes.",
+      "japanese_text": "はい。"
+    },
+    {
+      "sentence_index": 710,
+      "english_text": "Cool.",
+      "japanese_text": "かっこいい。"
+    },
+    {
+      "sentence_index": 711,
+      "english_text": "Well, let's get into the part about sick picks and shameless plugs.",
+      "japanese_text": "では、本題の「病みつきになる選曲」と「露骨な宣伝」に移りましょう。"
+    },
+    {
+      "sentence_index": 712,
+      "english_text": "This is stuff that we're liking, enjoying products that we like, podcasts that we like, YouTube channels, whatever we're feeling at this given point in time.",
+      "japanese_text": "これは私たちが気に入っているもの――好きな商品、楽しんでいるポッドキャスト、ある時点で特に気になっているYouTubeチャンネルなど、その時の気分に合ったコンテンツです。"
+    },
+    {
+      "sentence_index": 713,
+      "english_text": "Wes, is there anything in your life that has been nice for you?",
+      "japanese_text": "ウェス、あなたの中で何か良いことはありましたか？"
+    },
+    {
+      "sentence_index": 714,
+      "english_text": "I got Node.",
+      "japanese_text": "私はノードを手に入れた。"
+    },
+    {
+      "sentence_index": 715,
+      "english_text": "Real quick.",
+      "japanese_text": "ちょっと待って。"
+    },
+    {
+      "sentence_index": 716,
+      "english_text": "TV show, St.",
+      "japanese_text": "テレビ番組、セント。"
+    },
+    {
+      "sentence_index": 717,
+      "english_text": "Dennis Medical.",
+      "japanese_text": "デニス・メディカル。"
+    },
+    {
+      "sentence_index": 718,
+      "english_text": "If you like, like, The Office and, like, Parks and Rec, my first recommendation to everybody JS if they like that type of stuff is to watch the paper because it's it's literally half of The Office characters, and it's I think it's made by the same people.",
+      "japanese_text": "『ザ・オフィス』や『パークス・アンド・レクリエーション』がお好きなら、まずおすすめするのは「ペーパー・タウン」です。この作品はまさに『ジ・オフィス』と共通のキャストが出演しており、制作陣も同じチームです。"
+    },
+    {
+      "sentence_index": 719,
+      "english_text": "It's fantastic.",
+      "japanese_text": "素晴らしいです。"
+    },
+    {
+      "sentence_index": 720,
+      "english_text": "But if you also like that sort of vibe of The Office, ESLint Deno Medical is a very good show.",
+      "japanese_text": "もし『The Office』のような雰囲気が好きなら、ぜひ「ESlintデンオメディカル」もおすすめですよ。とても面白い番組です。"
+    },
+    {
+      "sentence_index": 721,
+      "english_text": "Me and my wife love it.",
+      "japanese_text": "私と妻はそれが大好きです。"
+    },
+    {
+      "sentence_index": 722,
+      "english_text": "They just really sit, the second season, and we've been thoroughly enjoying it.",
+      "japanese_text": "第2シーズンも本当に素晴らしく、私たちはすっかり楽しんでいます。"
+    },
+    {
+      "sentence_index": 723,
+      "english_text": "Nice.",
+      "japanese_text": "素敵。"
+    },
+    {
+      "sentence_index": 724,
+      "english_text": "I I've been out on I I I watched The Office, but I didn't get into Parks and Rec.",
+      "japanese_text": "私は『The Office』は見たけど、残念ながら「パークス・アンド・レクリエーション」にはハマれなかった。"
+    },
+    {
+      "sentence_index": 725,
+      "english_text": "I have noticed that, like, every single show on TV nowadays is like, what if we did The Office but for, but for a grocery store?",
+      "japanese_text": "最近気づいたんだけど、今のテレビでやってる番組って、だいたい「オフィス」風にアレンジしたネタばっかりじゃない？ ただ舞台をスーパーに変えただけみたいな？"
+    },
+    {
+      "sentence_index": 726,
+      "english_text": "What if we did The Office but for cheerleading or whatever?",
+      "japanese_text": "『ザ・オフィス』をチアリーディングとかをテーマにやったらどうなるだろう？"
+    },
+    {
+      "sentence_index": 727,
+      "english_text": "This is The Office but for hospitals.",
+      "japanese_text": "これは病院版の『ザ・オフィス』だ。"
+    },
+    {
+      "sentence_index": 728,
+      "english_text": "So yeah.",
+      "japanese_text": "そう、そんな感じ。"
+    },
+    {
+      "sentence_index": 729,
+      "english_text": "They got a formula.",
+      "japanese_text": "彼らは公式を発見した。"
+    },
+    {
+      "sentence_index": 730,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 731,
+      "english_text": "They got a formula.",
+      "japanese_text": "彼らは公式を発見した。"
+    },
+    {
+      "sentence_index": 732,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 733,
+      "english_text": "The Burt and Rec is by far the best.",
+      "japanese_text": "バートとレックは間違いなく最高だよ。"
+    },
+    {
+      "sentence_index": 734,
+      "english_text": "The paper, also, I would say maybe even better than The Office.",
+      "japanese_text": "この番組は、『ザ・オフィス』よりもさらに優れているとさえ言えるかもしれない。"
+    },
+    {
+      "sentence_index": 735,
+      "english_text": "Interesting.",
+      "japanese_text": "興味深い。"
+    },
+    {
+      "sentence_index": 736,
+      "english_text": "Maybe, but very good.",
+      "japanese_text": "そうかもしれませんが、とても素晴らしいです。"
+    },
+    {
+      "sentence_index": 737,
+      "english_text": "Interesting.",
+      "japanese_text": "興味深い。"
+    },
+    {
+      "sentence_index": 738,
+      "english_text": "Okay.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 739,
+      "english_text": "Cool.",
+      "japanese_text": "クールだね。"
+    },
+    {
+      "sentence_index": 740,
+      "english_text": "I'll check it.",
+      "japanese_text": "確認します。"
+    },
+    {
+      "sentence_index": 741,
+      "english_text": "I have a a sick pick JS a smart lock.",
+      "japanese_text": "私はスマートロック用の新しいピックツールを持っています。"
+    },
+    {
+      "sentence_index": 742,
+      "english_text": "I hate smart locks.",
+      "japanese_text": "スマートロックは嫌いだ。"
+    },
+    {
+      "sentence_index": 743,
+      "english_text": "I have tried so many of them.",
+      "japanese_text": "私はそれらの多くを試した。"
+    },
+    {
+      "sentence_index": 744,
+      "english_text": "I had an Acara one that my I had I had to have a locksmith, like, destroy it, and that locksmith was like, I am furious at this company for designing this lock this way.",
+      "japanese_text": "私はアカラ製の鍵を持っていましたが、結局錠前屋に破壊してもらうしかありませんでした。その業者は「こんな設計をしたメーカーに対して本当に腹が立っています」"
+    },
+    {
+      "sentence_index": 745,
+      "english_text": "So I I had an Ultra Lock on on one of my doors that I really like, And I I, since then, for some reason, have for my office door, have, like, gone through different locks, the Aqara one.",
+      "japanese_text": "そこで私はあるドアにウルトラロックを取り付けたのですが、これが非常に気に入っています。それ以来、なぜかオフィスの扉にはAkara（アカラ）社製の異なるタイプを試してきました。"
+    },
+    {
+      "sentence_index": 746,
+      "english_text": "I had a Vercel lock, man.",
+      "japanese_text": "Vercelのロックがかかってたんだよ、まったく。"
+    },
+    {
+      "sentence_index": 747,
+      "english_text": "The level lock sucks.",
+      "japanese_text": "レベルロックはクソゲーだ。"
+    },
+    {
+      "sentence_index": 748,
+      "english_text": "I hate it.",
+      "japanese_text": "私はそれが嫌いだ。"
+    },
+    {
+      "sentence_index": 749,
+      "english_text": "And so I was finally like, I'm so sick and tired of dealing with this thing, and I bit the bullet.",
+      "japanese_text": "そしてついに、「もうこれ以上この問題に対処するのはうんざりだ」と思い、覚悟を決めました。"
+    },
+    {
+      "sentence_index": 750,
+      "english_text": "I was like, you know what?",
+      "japanese_text": "私は心の中でこう思った、「ねえ、聞いてよ」ってね。"
+    },
+    {
+      "sentence_index": 751,
+      "english_text": "I'm just gonna buy the latest Ultra Lock, whatever it is.",
+      "japanese_text": "最新のウルトラロックを何でも買うつもりだよ。それが何であれね。"
+    },
+    {
+      "sentence_index": 752,
+      "english_text": "And so I got the latest fingerprint Wi Fi Ultra Lock Bolt fingerprint Wi Fi smart lock works with Apple Node, Siri, Alexa keyless entry with fingerprint ID, app remote control, keypad, deadbolt, BH m a cert easy install I p six five black.",
+      "japanese_text": "そして最新の指紋認証Wi-Fiウルトラロックボルトが登場しました。Apple HomeKit対応、Siri/Alexa連携による鍵なしアクセスが可能で、アプリ操作やキーパッド入力にも対応。デッドボルト機構を採用し、BPMA認定済みで設置も簡単です。IP65等級ブラックモデルです。"
+    },
+    {
+      "sentence_index": 753,
+      "english_text": "I got that one, and it's nice.",
+      "japanese_text": "それを手に入れたけど、いい感じだよ。"
+    },
+    {
+      "sentence_index": 754,
+      "english_text": "It's great.",
+      "japanese_text": "素晴らしいです。"
+    },
+    {
+      "sentence_index": 755,
+      "english_text": "For Scott locks go, it's a $130 or whatever.",
+      "japanese_text": "スコット製の錠前なら、価格は$130程度です。"
+    },
+    {
+      "sentence_index": 756,
+      "english_text": "It's got fingerprint.",
+      "japanese_text": "指紋がついている。"
+    },
+    {
+      "sentence_index": 757,
+      "english_text": "It's got number pad.",
+      "japanese_text": "テンキーが付いています。"
+    },
+    {
+      "sentence_index": 758,
+      "english_text": "I don't have to pull out my phone to use it.",
+      "japanese_text": "それを使うのに取り出す必要はない。"
+    },
+    {
+      "sentence_index": 759,
+      "english_text": "I do do do do do do or I fingerprint it, and it works, and it's reliable.",
+      "japanese_text": "私は指紋認証を使うか、それとも従来の方法を取るかのどちらかです。どちらも機能しますし、信頼性も高いです。"
+    },
+    {
+      "sentence_index": 760,
+      "english_text": "It has auto lock.",
+      "japanese_text": "自動ロック機能を備えています。"
+    },
+    {
+      "sentence_index": 761,
+      "english_text": "I can connect it to home assistant.",
+      "japanese_text": "ホームアシスタントに接続できます。"
+    },
+    {
+      "sentence_index": 762,
+      "english_text": "Oh, that's great.",
+      "japanese_text": "ああ、それは素晴らしい。"
+    },
+    {
+      "sentence_index": 763,
+      "english_text": "So Ultra Lock.",
+      "japanese_text": "ウルトラ・ロックです。"
+    },
+    {
+      "sentence_index": 764,
+      "english_text": "Shout out to Ultra Lock.",
+      "japanese_text": "UltraLockに拍手を送ろう。"
+    },
+    {
+      "sentence_index": 765,
+      "english_text": "I I I should have never left you.",
+      "japanese_text": "私はあなたを置いていくべきではなかった。"
+    },
+    {
+      "sentence_index": 766,
+      "english_text": "You.",
+      "japanese_text": "あなた。"
+    },
+    {
+      "sentence_index": 767,
+      "english_text": "I should never have doubted you and just, bought you for the first place on my office door.",
+      "japanese_text": "あなたを疑って、最初にオフィスのドアに貼ったポスターを外しておくべきではなかった。"
+    },
+    {
+      "sentence_index": 768,
+      "english_text": "I've been wanting to get one of these forever, but our front door is like a weird has a lock and handle and Ours is two.",
+      "japanese_text": "ずっとこういうのが欲しかったんだけど、うちの玄関ドアは変なロックと取っ手がついてて、しかも2つあるんだよね。"
+    },
+    {
+      "sentence_index": 769,
+      "english_text": "All in one.",
+      "japanese_text": "オールインワン。"
+    },
+    {
+      "sentence_index": 770,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 771,
+      "english_text": "That's why I don't have one there.",
+      "japanese_text": "だから私はそこに持ってないのです。"
+    },
+    {
+      "sentence_index": 772,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 773,
+      "english_text": "No. No. I don't have one there.",
+      "japanese_text": "いいえ。そこには置いていません。"
+    },
+    {
+      "sentence_index": 774,
+      "english_text": "This is for my office, and then we have, like, a backdoor because, yeah.",
+      "japanese_text": "これはオフィス用で、あと裏口もあるんですよ、まあそんな感じで。"
+    },
+    {
+      "sentence_index": 775,
+      "english_text": "There's a backdoor.",
+      "japanese_text": "裏口がある。"
+    },
+    {
+      "sentence_index": 776,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 777,
+      "english_text": "We have one on our back our backdoor as well, but it always runs out of battery.",
+      "japanese_text": "裏口にも一つありますが、いつもバッテリーが切れてしまいます。"
+    },
+    {
+      "sentence_index": 778,
+      "english_text": "And, like, you need to put you gotta put double a's in it, like, probably every forty five days.",
+      "japanese_text": "それにね、45日ごとにダブルの「a」を入れなきゃいけないんだよ、たぶん。"
+    },
+    {
+      "sentence_index": 779,
+      "english_text": "And because of that, we just never replace the batteries on it, and it just, like, stops working.",
+      "japanese_text": "その結果、結局バッテリーを交換しないまま放置してしまい、最終的には動かなくなってしまうんです。"
+    },
+    {
+      "sentence_index": 780,
+      "english_text": "So I need to get something that is better than that.",
+      "japanese_text": "だから、それよりも優れたものを手に入れなければならない。"
+    },
+    {
+      "sentence_index": 781,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 782,
+      "english_text": "I would say that's what I hated about the Vercel lock.",
+      "japanese_text": "これがVercelのロック機能に対する私の強い不満点ですね。"
+    },
+    {
+      "sentence_index": 783,
+      "english_text": "You had one of those little batteries, just a single one of them, and it died, like, every 14.",
+      "japanese_text": "小さな電池が1個だけ入っていて、それがちょうど14日ごとに切れるタイプだったんだよ。"
+    },
+    {
+      "sentence_index": 784,
+      "english_text": "And I was ready to, like when it died, I was ready to lose my mind.",
+      "japanese_text": "そして実際に死んだ時、私は気が狂いそうになるくらい動揺していたわ。"
+    },
+    {
+      "sentence_index": 785,
+      "english_text": "This one takes eight double a batteries, and it supposedly will last for many, many, many months, like, six plus months on a a battery set.",
+      "japanese_text": "このモデルは単三電池8本を使用し、バッテリー1セットでなんと6ヶ月以上も持続するとされています。"
+    },
+    {
+      "sentence_index": 786,
+      "english_text": "And I will say from personal experience on the other one, we, like, never change the batteries on that one, and it's only four batteries.",
+      "japanese_text": "個人的な経験から言えば、後者の機種は一度もバッテリーを交換したことがありません。たった4本しか電池が入ってないんですからね。"
+    },
+    {
+      "sentence_index": 787,
+      "english_text": "So yeah.",
+      "japanese_text": "そう、そんな感じ。"
+    },
+    {
+      "sentence_index": 788,
+      "english_text": "Hey.",
+      "japanese_text": "おい。"
+    },
+    {
+      "sentence_index": 789,
+      "english_text": "It JS very effective.",
+      "japanese_text": "これは非常に効果的です。"
+    },
+    {
+      "sentence_index": 790,
+      "english_text": "Yeah.",
+      "japanese_text": "Yes."
+    },
+    {
+      "sentence_index": 791,
+      "english_text": "I've been looking at, like, hacking mine to put, like, a, like, a lithium battery in it.",
+      "japanese_text": "私は自分の車にリチウムイオンバッテリーを搭載できないかといろいろ調べているんだ。例えば...そういうタイプのものをね。"
+    },
+    {
+      "sentence_index": 792,
+      "english_text": "Somebody's done it because that would last Returnable.",
+      "japanese_text": "誰かがそれをやったに違いない。なぜならそれは返却可能なものだったから。"
+    },
+    {
+      "sentence_index": 793,
+      "english_text": "Probably four or five months, which would be way longer.",
+      "japanese_text": "おそらく4～5か月くらいでしょう。かなり長い期間になりますね。"
+    },
+    {
+      "sentence_index": 794,
+      "english_text": "There's also, like, wireless charging locks now Wes you put this thing, like, 10 feet away, and it somehow puts a little bit of power through the air That freaks me out.",
+      "japanese_text": "最近はワイヤレス充電のロックもあるんだ - これを1メートルくらい離して置いても、空気中に微弱な電力を送れるんだよ。それ、マジでビビるんだよね。"
+    },
+    {
+      "sentence_index": 795,
+      "english_text": "Which is wild.",
+      "japanese_text": "それは野生的だ。"
+    },
+    {
+      "sentence_index": 796,
+      "english_text": "But yeah.",
+      "japanese_text": "でもまあね。"
+    },
+    {
+      "sentence_index": 797,
+      "english_text": "I don't want that.",
+      "japanese_text": "私はそれを欲しくない。"
+    },
+    {
+      "sentence_index": 798,
+      "english_text": "I don't want laser I don't want them to Yeah.",
+      "japanese_text": "レーザーは欲しくない。いや、いらない。"
+    },
+    {
+      "sentence_index": 799,
+      "english_text": "Stand in front of it and have it fry my balls or something.",
+      "japanese_text": "その前に立って俺の玉を揚げてくれよ、そんな感じでさ。"
+    },
+    {
+      "sentence_index": 800,
+      "english_text": "Yes.",
+      "japanese_text": "はい。"
+    },
+    {
+      "sentence_index": 801,
+      "english_text": "Alright.",
+      "japanese_text": "わかった。"
+    },
+    {
+      "sentence_index": 802,
+      "english_text": "That's all we have today.",
+      "japanese_text": "今日はこれで終わりです。"
+    },
+    {
+      "sentence_index": 803,
+      "english_text": "Let us know what your skills and agents and tools and all of your things are down below that you're using.",
+      "japanese_text": "使用しているスキルやエージェント、ツールなどについて、その詳細を以下にご記入ください。"
+    },
+    {
+      "sentence_index": 804,
+      "english_text": "We'd love to hear it.",
+      "japanese_text": "ぜひ聞かせてください。"
+    },
+    {
+      "sentence_index": 805,
+      "english_text": "Peace.",
+      "japanese_text": "peace."
+    }
+  ]
+}
