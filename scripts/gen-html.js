@@ -107,6 +107,7 @@ const html = `<!DOCTYPE html>
 <body>
   <h1>${titleText}</h1>
   ${sentencesHtml}
+  <footer style="text-align:center;padding:24px 16px;color:#999;font-size:.78rem;border-top:1px solid #eee;margin-top:40px">本サイトは個人学習目的のみで使用し、商用利用・公開配布はしていません。</footer>
 </body>
 </html>`;
 
