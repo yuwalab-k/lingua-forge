@@ -16,6 +16,7 @@ const fs = require('fs');
 const path = require('path');
 
 const FONT_SRC = path.join(__dirname, '../assets/BIZUDPGothic-Regular.ttf');
+const FONT_SIZES = { 大: 20, 中: 13, 小: 10 };
 const SIZE = { basePt: 13, gap: 20 };
 
 const args = process.argv.slice(2);
@@ -55,7 +56,8 @@ if (!fs.existsSync(fontDest)) {
 }
 
 const s = SIZE;
-const jpnPt = Math.round(s.basePt * 0.65);
+const bodyPt = FONT_SIZES[content.fontSize] ?? SIZE.basePt;
+const jpnPt = Math.round(bodyPt * 0.65);
 
 const titleText = content.source
   ? `【${escapeHtml(content.source)}】${escapeHtml(content.title)}`
@@ -66,7 +68,7 @@ const sentencesHtml = content.sentences.map(sentence => {
   const jpn = showJapanese && sentence.japanese_text ? toRubyHtml(sentence.japanese_text) : '';
   return `
     <div style="margin-bottom:${s.gap}pt; page-break-inside:avoid;">
-      <div style="font-size:${s.basePt}pt; line-height:1.6; color:#111;">${eng}</div>
+      <div style="font-size:${bodyPt}pt; line-height:1.6; color:#111;">${eng}</div>
       ${jpn ? `<div style="font-size:${jpnPt}pt; line-height:2.4; color:#888; margin-top:1pt;">${jpn}</div>` : ''}
     </div>`;
 }).join('');
@@ -81,7 +83,7 @@ const html = `<!DOCTYPE html>
       font-family: 'BIZUDP';
       src: url('../assets/BIZUDPGothic-Regular.ttf') format('truetype');
     }
-    @page { size: A4; margin: 20mm; }
+    @page { size: A4; margin: 20mm 20mm 20mm 30mm; }
     body {
       font-family: 'BIZUDP', "Hiragino Sans", "Hiragino Kaku Gothic ProN",
                    "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
