@@ -83,7 +83,7 @@ const html = `<!DOCTYPE html>
       font-family: 'BIZUDP';
       src: url('../assets/BIZUDPGothic-Regular.ttf') format('truetype');
     }
-    @page { size: A4; margin: 20mm 20mm 20mm 30mm; }
+    @page {margin: 20mm 20mm 20mm 30mm; }
     body {
       font-family: 'BIZUDP', "Hiragino Sans", "Hiragino Kaku Gothic ProN",
                    "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
